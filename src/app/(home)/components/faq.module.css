@@ -1,0 +1,12 @@
+.faq h3 {
+  @apply font-bold text-lg leading-tight;
+  @apply mb-1;
+}
+
+.faq h3 a {
+  @apply italic underline;
+}
+
+.faq p a {
+  @apply text-accent;
+}

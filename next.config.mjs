@@ -52,6 +52,11 @@ const nextConfig = {
       source: '/qr/ee4',
       destination: 'https://2024.wsaf.org.uk/schedule?utm_campaign=slides&utm_medium=ds&utm_source=tv',
       permanent: true,
+    },
+    {
+      source: '/submit',
+      destination: 'https://submit.wsaf.org.uk/2025/cfp',
+      permanent: true,
     }
   ])
 };

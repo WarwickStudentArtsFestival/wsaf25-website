@@ -31,8 +31,8 @@ export default function About() {
           Every day will feature a morning-to-evening programme of events
           including theatre, dance, music, film, literature, comedy and art held
           across the entirety of campus. If you have a show, some art, a dance,
-          a poem or anything in-between that you want to show, we'd love to see
-          you there!
+          a poem or anything in-between that you want to show, we&#39;d love to
+          see you there!
         </p>
 
         <a

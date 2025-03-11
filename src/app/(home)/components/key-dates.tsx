@@ -6,7 +6,7 @@ const keyDates: KeyDateProps[] = [
     date: 'Mon 10th March',
     dateTime: '2025-03-10',
     description: 'WSAF performance submissions open.',
-    warwickWeek: 'Term 3 Week 10',
+    warwickWeek: 'Term 2 Week 10',
   },
   {
     name: 'Submissions Close',

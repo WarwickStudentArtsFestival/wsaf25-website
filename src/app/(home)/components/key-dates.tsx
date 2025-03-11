@@ -21,7 +21,7 @@ const keyDates: KeyDateProps[] = [
     date: 'Fri 13th - Mon 16th June',
     dateTime: '2025-06-13',
     description:
-      'The festival itself - a 3 day showcase and celebration of all aspects of the arts.',
+      'The festival itself - a 4 day showcase and celebration of all aspects of the arts.',
     warwickWeek: 'Term 3, Week 8/9',
   },
 ];

@@ -36,7 +36,7 @@ export default function About() {
         </p>
 
         <a
-          href="https://wsaf.org.uk/submit"
+          href="https://submit.wsaf.org.uk/2025/cfp"
           className="inline-block bg-secondary px-4 py-1 rounded-sm drop-shadow-sm hover:scale-105 mt-4"
           target="_blank"
         >

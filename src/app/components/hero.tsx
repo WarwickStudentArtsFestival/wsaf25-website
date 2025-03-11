@@ -29,10 +29,10 @@ export default function Hero() {
               Warwick Student Arts Festival
             </span>
           </h1>
-          {/*<span className="text-xs 2xs:text-md lg:text-lg pb-2 px-4 block bg-primary text-accent font-bold">
-            <time dateTime="2024-06-08T10:00:00.000">Sat 8th</time> -{' '}
-            <time dateTime="2024-06-10T22:00:00.000">Mon 10th June</time>
-          </span>*/}
+          <span className="text-xs 2xs:text-md lg:text-lg pb-2 px-4 block bg-primary text-accent font-bold">
+            <time dateTime="2025-06-13T10:00:00.000">Fri 13th</time> -{' '}
+            <time dateTime="2025-06-16T22:00:00.000">Mon 16th June</time>
+          </span>
         </div>
       </div>
     </header>

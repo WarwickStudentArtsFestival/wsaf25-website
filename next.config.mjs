@@ -54,6 +54,11 @@ const nextConfig = {
       permanent: true,
     },
     {
+      source: '/qr/a2d',
+      destination: 'https://wsaf.org.uk?utm_campaign=slides25&utm_medium=ds&utm_source=bigscreen',
+      permanent: true,
+    },
+    {
       source: '/submit',
       destination: 'https://submit.wsaf.org.uk/2025/cfp',
       permanent: true,

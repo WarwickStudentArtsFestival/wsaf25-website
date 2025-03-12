@@ -46,6 +46,26 @@ export default function About() {
           <FiExternalLink className="inline-block mb-2 ml-2" />
           <span className="text-sm block">Closes Friday 2nd May</span>
         </a>
+
+        <p className="flex gap-2 justify-center mt-2">
+          <a
+            href="https://www.instagram.com/wsaf25/"
+            target="_blank"
+            className="flex items-center justify-center hover:scale-105"
+          >
+            <FiInstagram className="inline mr-0.5 mt-1" />
+            @wsaf25
+          </a>
+          <span className="font-light">•</span>
+          <a
+            href="/discord"
+            target="_blank"
+            className="flex items-center justify-center hover:scale-105"
+          >
+            <FaDiscord className="inline mr-0.5 mt-0.5" />
+            Discord
+          </a>
+        </p>
       </div>
     </section>
   );

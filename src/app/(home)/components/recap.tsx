@@ -69,25 +69,6 @@ export default function Recap() {
             className="object-contain h-32 md:h-40 w-auto max-w-1/3 hidden lg:block"
           />
         </div>
-        <p className="flex gap-2 justify-center mt-2">
-          <a
-            href="/instagram"
-            target="_blank"
-            className="flex items-center justify-center hover:scale-105"
-          >
-            <FiInstagram className="inline mr-0.5 mt-1" />
-            @wsaf24
-          </a>
-          <span className="font-light">•</span>
-          <a
-            href="/discord"
-            target="_blank"
-            className="flex items-center justify-center hover:scale-105"
-          >
-            <FaDiscord className="inline mr-0.5 mt-0.5" />
-            Discord
-          </a>
-        </p>
         <a
           href="https://2024.wsaf.org.uk"
           className="inline-block bg-secondary px-4 py-1 rounded-sm drop-shadow-sm hover:scale-105 mt-2"

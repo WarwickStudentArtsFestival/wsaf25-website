@@ -149,8 +149,8 @@ export default function Faq() {
               info@wsaf.org.uk
             </a>{' '}
             or on Instagram at{' '}
-            <a href="https://www.instagram.com/wsaf24/" target="_blank">
-              @wsaf24
+            <a href="https://www.instagram.com/wsaf25/" target="_blank">
+              @wsaf25
             </a>
             .
           </p>

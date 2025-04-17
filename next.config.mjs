@@ -69,6 +69,12 @@ const nextConfig = {
       permanent: true,
     },
     {
+      source: '/qr/d2g',
+      destination:
+        'https://wsaf.org.uk?utm_campaign=join_wsaf&utm_medium=print&utm_source=a3',
+      permanent: true,
+    },
+    {
       source: '/submit',
       destination: 'https://submit.wsaf.org.uk/2025/cfp',
       permanent: true,

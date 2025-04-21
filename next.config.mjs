@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // output: 'standalone',
-  output: 'export',
+  output: process.env.NEXTJS_OUTPUT || 'export',
   images: {
     unoptimized: true, // For export
     remotePatterns: process.env.WSAF_ASSETS_BASE_URL

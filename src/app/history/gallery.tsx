@@ -96,7 +96,7 @@ export default function Gallery() {
               href={image.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent"
+              className="text-yellow"
             >
               {image.name}
             </a>

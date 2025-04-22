@@ -11,11 +11,14 @@ import FabTerrace2 from '@/assets/images/fab-terrace-2.jpg';
 import Theatre from '@/assets/images/theatre.jpg';
 import TshirtMaking from '@/assets/images/tshirt-making.jpg';
 import WsafClosingSpeech from '@/assets/images/wsaf-closing-speech.jpg';
+import HighlightedHeading from '@/app/components/highlighted-heading';
 
 export default function Recap() {
   return (
-    <section className="-top-8 relative">
-      <h2 className="mb-4">WSAF 2024 Recap</h2>
+    <section className="bg-teal text-white px-4 py-8">
+      <HighlightedHeading text="History" />
+      <h2 className="text-white text-2xl font-semibold mb-4">WSAF 2024 Recap</h2>
+
       <div className="px-8 lg:text-lg max-w-5xl mx-auto">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 mt-2 w-max mx-auto">
           <Image

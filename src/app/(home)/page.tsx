@@ -1,4 +1,4 @@
-import Hero from '@/app/components/hero';
+import Hero from './components/hero';
 import WhoInvolved from './components/who-involved';
 import Faq from './components/faq';
 import React from 'react';

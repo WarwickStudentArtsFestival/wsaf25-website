@@ -8,15 +8,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: '#087F8C',
+        teal: '#087F8C',
         secondary: '#4F1D75',
         tertiary: '#FF0054',
-        accent: '#FFBD00',
+        yellow: '#FFBD00',
         white: '#FFFFFF',
         dark: '#000000',
         orange: '#FF5400',
         'event-pink': '#B82458',
         'event-orange': '#F5722F',
+        'text-dark': '#737373'
       },
       fontSize: {
         '2xs': '0.6rem',

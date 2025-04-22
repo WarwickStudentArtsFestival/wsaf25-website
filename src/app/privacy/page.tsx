@@ -21,7 +21,7 @@ export default function Privacy() {
           <a
             href="https://www.warwicktechcrew.co.uk/"
             target="_blank"
-            className="text-accent"
+            className="text-yellow"
           >
             Warwick Tech Crew
           </a>{' '}
@@ -29,7 +29,7 @@ export default function Privacy() {
           <a
             href="https://www.warwicksu.com/"
             target="_blank"
-            className="text-accent"
+            className="text-yellow"
           >
             Warwick Students&apos; Union
           </a>
@@ -37,7 +37,7 @@ export default function Privacy() {
           <a
             href="mailto:info@wsaf.org.uk"
             target="_blank"
-            className="text-accent"
+            className="text-yellow"
           >
             info@wsaf.org.uk
           </a>
@@ -59,7 +59,7 @@ export default function Privacy() {
           <a
             href="mailto:info@wsaf.org.uk"
             target="_blank"
-            className="text-accent"
+            className="text-yellow"
           >
             info@wsaf.org.uk
           </a>{' '}

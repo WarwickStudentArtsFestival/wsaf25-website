@@ -28,7 +28,7 @@ export default function KeyDate({
       <div className="relative bg-secondary h-full lg:h-auto md:w-72 p-4 mx-4 flex flex-col group-even:mt-auto">
         <header>
           <h3 className="uppercase font-bold text-2xl">{name}</h3>
-          <time className="text-accent font-bold text-lg" dateTime={dateTime}>
+          <time className="text-yellow font-bold text-lg" dateTime={dateTime}>
             {date}
             {warwickWeek && (
               <span className="block font-normal text-xs -mt-1 mb-1">

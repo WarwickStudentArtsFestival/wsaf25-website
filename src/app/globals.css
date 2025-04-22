@@ -21,13 +21,9 @@
 }
 
 html {
-  @apply font-lexend text-white;
+  @apply font-lexend text-slate-500;
 }
 
 body {
-  @apply bg-primary text-center;
-}
-
-h2, .heading {
-  @apply uppercase text-3xl font-bold text-black bg-accent py-1 px-8 m-2 inline-block;
+  @apply text-center;
 }

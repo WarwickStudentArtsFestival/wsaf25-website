@@ -1,7 +1,7 @@
 @reference "../../globals.css";
 
 .faq h3 {
-  @apply font-bold text-lg leading-tight;
+  @apply font-semibold text-black leading-tight;
   @apply mb-1;
 }
 
@@ -9,6 +9,10 @@
   @apply italic underline;
 }
 
+.faq p {
+  @apply text-sm;
+}
+
 .faq p a {
-  @apply text-accent;
+  @apply text-teal;
 }

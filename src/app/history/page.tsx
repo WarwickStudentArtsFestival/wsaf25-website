@@ -29,7 +29,7 @@ export default function History() {
           its{' '}
           <a
             href="https://web.archive.org/web/20050506042341/http://www.wsaf.org.uk:80/"
-            className="text-accent"
+            className="text-yellow"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -53,7 +53,7 @@ export default function History() {
             href="mailto:info@wsaf.org.uk"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-accent"
+            className="text-yellow"
           >
             info@wsaf.org.uk
           </a>
@@ -74,7 +74,7 @@ export default function History() {
               The{' '}
               <a
                 href="https://web.archive.org/web/20050506042341/http://www.wsaf.org.uk:80/"
-                className="text-accent"
+                className="text-yellow"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -93,7 +93,7 @@ export default function History() {
               Style Percussion&apos;.{' '}
               <a
                 href="https://www.bbc.co.uk/coventry/features/student/break-dancing-at-warwick-uni.shtml"
-                className="text-accent"
+                className="text-yellow"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -106,7 +106,7 @@ export default function History() {
               The next year,{' '}
               <a
                 href="https://web.archive.org/web/20210918050951/https://blogs.warwick.ac.uk/wsaf/?num=10&start=10"
-                className="text-accent"
+                className="text-yellow"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -132,7 +132,7 @@ export default function History() {
                 href="https://web.archive.org/web/20050506042341/http://www.wsaf.org.uk:80/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF 2004 Poster
               </a>
@@ -166,7 +166,7 @@ export default function History() {
               href="https://www.bbc.co.uk/coventry/features/student/break-dancing-at-warwick-uni.shtml"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent"
+              className="text-yellow"
             >
               WSAF &apos;04 Images from BBC News
             </a>
@@ -191,7 +191,7 @@ export default function History() {
                 href="https://www.youtube.com/watch?v=zdXN7Y-Flxo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF Amarillo Music Video
               </a>
@@ -204,7 +204,7 @@ export default function History() {
                 href="https://www.youtube.com/watch?v=zdXN7Y-Flxo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF Amarillo Music Video Trailer
               </a>
@@ -221,7 +221,7 @@ export default function History() {
                 href="https://web.archive.org/web/20070630063134/http://www.wsaf.org.uk/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF &apos;07
               </a>
@@ -241,7 +241,7 @@ export default function History() {
               href="https://web.archive.org/web/20081007200600/http://www.wsaf.org.uk/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent"
+              className="text-yellow"
             >
               WSAF &apos;08
             </a>{' '}
@@ -258,7 +258,7 @@ export default function History() {
               href="https://warwick.ac.uk/newsandevents/news-old/get_set_for/wsaf_prog_08_190608_print.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent"
+              className="text-yellow"
             >
               16-page printed programme
             </a>{' '}
@@ -284,7 +284,7 @@ export default function History() {
                 href="https://www.youtube.com/watch?v=NETIyo4Uc_o"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF &apos;08 Trailer
               </a>
@@ -301,7 +301,7 @@ export default function History() {
                 href="https://warwick.ac.uk/newsandevents/news-old/get_set_for/wsaf_prog_08_190608_print.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF &apos;08 Schedule
               </a>
@@ -321,7 +321,7 @@ export default function History() {
                 href="https://warwick.ac.uk/newsandevents/news-old/wsaf2010"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF 2010 Logo
               </a>
@@ -334,7 +334,7 @@ export default function History() {
                 href="http://web.archive.org/web/20090524043909/http://wsaf.org.uk/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 SPLAT-Fest
               </a>
@@ -349,7 +349,7 @@ export default function History() {
                 href="https://warwick.ac.uk/newsandevents/pressreleases/award-winning_author_to/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF-related press release from Warwick University
               </a>
@@ -361,7 +361,7 @@ export default function History() {
                 href="https://warwick.ac.uk/newsandevents/news-old/wsaf2010"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF 2010
               </a>{' '}
@@ -379,7 +379,7 @@ export default function History() {
                 href="https://warwick.ac.uk/newsandevents/news-old/wsaf2010"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF 2011
               </a>{' '}
@@ -390,7 +390,7 @@ export default function History() {
                 href="https://warwick.ac.uk/newsandevents/news-old/wsaf2010"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF 2012
               </a>
@@ -407,7 +407,7 @@ export default function History() {
                 href="http://web.archive.org/web/20130810135711/http://wsaf.co.uk/whatiswsaf.php"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 2013
               </a>{' '}
@@ -426,7 +426,7 @@ export default function History() {
                 href="https://warwick.ac.uk/newsandevents/news-old/wsaf_2012/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF 2012 Poster
               </a>
@@ -448,7 +448,7 @@ export default function History() {
                 href="https://warwick.ac.uk/insite/news/intnews2/wsaf2014"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF 2014 Logo
               </a>
@@ -465,7 +465,7 @@ export default function History() {
                 href="https://www.facebook.com/photo/?fbid=158415133533661&set=pb.100080955263187.-2207520000"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent"
+                className="text-yellow"
               >
                 WSAF 2015 Logo
               </a>
@@ -479,7 +479,7 @@ export default function History() {
               href="https://warwick.ac.uk/insite/news/intnews2/wsaf2014"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent"
+              className="text-yellow"
             >
               WSAF 2014
             </a>{' '}
@@ -488,7 +488,7 @@ export default function History() {
               href="https://www.facebook.com/warwickstudentartsfest/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent"
+              className="text-yellow"
             >
               2015
             </a>{' '}
@@ -499,7 +499,7 @@ export default function History() {
               href="https://www.facebook.com/warwickstudentartsfest/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent"
+              className="text-yellow"
             >
               Facebook page
             </a>{' '}
@@ -511,7 +511,7 @@ export default function History() {
             being launched by a completely new team, and we hope that this can
             continue for many years into the future. As you excited as we are,
             or has this page inspired you to help?{' '}
-            <a href="/team" className="text-accent">
+            <a href="/team" className="text-yellow">
               Join our team!
             </a>
           </p>

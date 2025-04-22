@@ -18,7 +18,7 @@ export default function History() {
             href="https://www.facebook.com/photo/?fbid=495940720558871&set=a.287594771393468"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-accent"
+            className="text-yellow"
           >
             WSAF 2014 Help Desk
           </a>
@@ -30,7 +30,7 @@ export default function History() {
         completely new concept to Warwick - it used to be yearly event from 2004
         to 2015. We&apos;ve done a bit of research into the lore and history of
         WSAF, which can be found{' '}
-        <a href="/history" className="text-accent">
+        <a href="/history" className="text-yellow">
           here
         </a>
         .

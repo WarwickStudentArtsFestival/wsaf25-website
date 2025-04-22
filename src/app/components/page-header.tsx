@@ -15,7 +15,7 @@ export default function PageHeader({
   return (
     <header>
       <div
-        className={`relative border-b-8 bg-accent mb-8 ${borderClass || 'border-b-accent'}`}
+        className={`relative border-b-8 bg-yellow mb-8 ${borderClass || 'border-b-yellow'}`}
       >
         <Image
           src={HeroImage}
@@ -38,13 +38,13 @@ export default function PageHeader({
               priority
             />
             <div className="my-2 flex flex-col items-end text-right mr-2 sm:mr-6">
-              <h2 className="text-left bg-primary font-bold py-1 sm:py-2 px-2 sm:px-4 text-white m-0">
+              <h2 className="text-left bg-teal font-bold py-1 sm:py-2 px-2 sm:px-4 text-white m-0">
                 <span className="block text-2xl sm:text-4xl">WSAF 2025</span>
                 <span className="block text-sm sm:text-xl normal-case -mt-1 sm:mt-0">
                   Warwick Student Arts Festival
                 </span>
               </h2>
-              {/* <span className="text-xs sm:text-sm pb-1 px-2 sm:px-3 -mt-1 sm:-mt-2 block bg-primary text-accent font-bold">
+              {/* <span className="text-xs sm:text-sm pb-1 px-2 sm:px-3 -mt-1 sm:-mt-2 block bg-primary text-yellow font-bold">
                 <time dateTime="2024-06-08T10:00:00.000">Sat 8th</time> -{' '}
                 <time dateTime="2024-06-10T22:00:00.000">Mon 10th June</time>
               </span>*/}

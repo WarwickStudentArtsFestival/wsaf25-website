@@ -34,7 +34,7 @@ export default function PageHeader({
               src={Logo}
               alt="WSAF 2025 logo"
               placeholder="blur"
-              className="my-2 mr-2 sm:mr-6 h-16 sm:h-24 w-auto object-contain drop-shadow-sm"
+              className="my-2 mr-2 sm:mr-6 h-16 sm:h-24 w-auto object-contain drop-shadow-xs"
               priority
             />
             <div className="my-2 flex flex-col items-end text-right mr-2 sm:mr-6">

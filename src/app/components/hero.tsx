@@ -17,7 +17,7 @@ export default function Hero() {
           src={Logo}
           alt="WSAF 2025 logo"
           placeholder="blur"
-          className="my-6 mr-8 h-32 lg:h-36 w-auto object-contain drop-shadow-sm"
+          className="my-6 mr-8 h-32 lg:h-36 w-auto object-contain drop-shadow-xs"
           priority
         />
         <div className="my-6 flex flex-col items-end text-right">

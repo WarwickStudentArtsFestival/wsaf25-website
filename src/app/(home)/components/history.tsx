@@ -38,7 +38,7 @@ export default function History() {
 
       <a
         href="/history"
-        className="inline-block bg-tertiary px-4 py-1 rounded-sm drop-shadow-sm hover:scale-105 mb-4 mx-4"
+        className="inline-block bg-tertiary px-4 py-1 rounded-xs drop-shadow-xs hover:scale-105 mb-4 mx-4"
       >
         <span className="text-xl uppercase font-bold">
           <FiArrowRight className="inline mr-2 mb-1" />

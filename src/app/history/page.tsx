@@ -69,7 +69,7 @@ export default function History() {
         <h2>The Beginning</h2>
 
         <div className="flex-col-reverse sm:flex-row flex gap-2 sm:gap-4 mb-2">
-          <div className="sm:w-96 flex-grow sm:text-right">
+          <div className="sm:w-96 grow sm:text-right">
             <p className="mb-2">
               The{' '}
               <a
@@ -197,7 +197,7 @@ export default function History() {
               </a>
             </figcaption>
           </figure>
-          <div className="sm:w-96 flex-grow">
+          <div className="sm:w-96 grow">
             <p className="mb-2">
               Perhaps one of the most notable relics of WSAF &apos;05 was the{' '}
               <a
@@ -327,7 +327,7 @@ export default function History() {
               </a>
             </figcaption>
           </figure>
-          <div className="sm:w-96 flex-grow sm:text-left">
+          <div className="sm:w-96 grow sm:text-left">
             <p className="mb-2">
               In 2009, Warwick Student Arts Festival was temporarily renamed to{' '}
               <a
@@ -373,7 +373,7 @@ export default function History() {
         </div>
 
         <div className="flex-col-reverse sm:flex-row flex gap-2 sm:gap-4 mb-4">
-          <div className="sm:w-96 flex-grow sm:text-right">
+          <div className="sm:w-96 grow sm:text-right">
             <p className="mb-2">
               <a
                 href="https://warwick.ac.uk/newsandevents/news-old/wsaf2010"

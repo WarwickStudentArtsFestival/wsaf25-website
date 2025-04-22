@@ -30,7 +30,7 @@ export default function IdCard({
       <header className="bg-secondary h-6 sm:h-8 flex justify-center items-center">
         <div className="rounded-2xl w-12 h-2 sm:h-3 mt-1 bg-accent" />
       </header>
-      <div className="flex-grow flex flex-col px-4 py-1 sm:py-2 text-black">
+      <div className="grow flex flex-col px-4 py-1 sm:py-2 text-black">
         {image && (
           <Image
             src={image}

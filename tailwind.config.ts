@@ -3,9 +3,7 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx,css}',
   ],
   theme: {
     extend: {
@@ -38,17 +36,5 @@ const config: Config = {
     },
   },
   plugins: [],
-  safelist: [
-    '!bg-accent',
-    '!bg-secondary',
-    '!bg-event-pink',
-    '!bg-event-orange',
-    '!text-white',
-    '!text-black',
-    'border-b-accent',
-    'border-b-event-orange',
-    'border-b-event-pink',
-    'border-b-secondary',
-  ],
 };
 export default config;

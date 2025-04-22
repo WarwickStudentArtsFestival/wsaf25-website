@@ -1,3 +1,5 @@
+@reference "../../globals.css";
+
 .faq h3 {
   @apply font-bold text-lg leading-tight;
   @apply mb-1;

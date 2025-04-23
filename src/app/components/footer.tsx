@@ -60,7 +60,7 @@ export default function Footer() {
           Source Code
         </a>
         <span className="font-light mx-1">•</span>
-        <a href="/privacy">Privacy Policy</a>
+        <Link href="/privacy">Privacy Policy</Link>
       </p>
 
       <p className="font-bold mt-2 flex gap-2 justify-center">
@@ -69,7 +69,7 @@ export default function Footer() {
         </a>
         <span className="font-light">•</span>
         <a
-          href="/instagram"
+          href="https://www.instagram.com/wsaf25/"
           target="_blank"
           className="flex items-center justify-center"
         >
@@ -78,7 +78,7 @@ export default function Footer() {
         </a>
         <span className="font-light">•</span>
         <a
-          href="/discord"
+          href="https://discord.gg/TuFwJX4GKM"
           target="_blank"
           className="flex items-center justify-center"
         >

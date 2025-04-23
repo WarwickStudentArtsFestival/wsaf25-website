@@ -12,6 +12,7 @@ import Wsaf2015Logo from '@/assets/history/wsaf-2015-logo.jpg';
 import Image from 'next/image';
 import Gallery from '@/app/history/gallery';
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'The History of WSAF | Warwick Student Arts Festival 2025',
@@ -511,9 +512,9 @@ export default function History() {
             being launched by a completely new team, and we hope that this can
             continue for many years into the future. As you excited as we are,
             or has this page inspired you to help?{' '}
-            <a href="/team" className="text-yellow">
+            <Link href="/team" className="text-yellow">
               Join our team!
-            </a>
+            </Link>
           </p>
         </div>
 

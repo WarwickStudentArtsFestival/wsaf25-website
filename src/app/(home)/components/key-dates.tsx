@@ -31,7 +31,9 @@ export default function KeyDates() {
   return (
     <section className="mb-12 bg-teal text-white px-4 py-8">
       <HighlightedHeading text="When is WSAF?" />
-      <h2 className="text-white text-2xl font-semibold mb-4">Key Festival Dates</h2>
+      <h2 className="text-white text-2xl font-semibold mb-4">
+        Key Festival Dates
+      </h2>
 
       <div className="relative">
         <hr className="hidden lg:block border-purple border-b-8 absolute top-1/2 w-full" />

@@ -15,17 +15,17 @@ export default function Hero() {
           />
           <div className="my-6 flex flex-col items-end text-right">
             <h1 className="text-left bg-teal font-bold py-2 px-4">
-          <span className="block text-4xl sm:text-5xl lg:text-6xl">
-            WSAF <span className="text-yellow">2025</span>
-          </span>
-          <span className="block text-sm xs:text-xl lg:text-3xl">
-            Warwick Student Arts Festival
-          </span>
+              <span className="block text-4xl sm:text-5xl lg:text-6xl">
+                WSAF <span className="text-yellow">2025</span>
+              </span>
+              <span className="block text-sm xs:text-xl lg:text-3xl">
+                Warwick Student Arts Festival
+              </span>
             </h1>
             <span className="text-xs 2xs:text-md lg:text-lg pb-2 px-4 block bg-teal text-yellow font-bold">
-          <time dateTime="2025-06-13T10:00:00.000">Fri 13th</time> -{' '}
+              <time dateTime="2025-06-13T10:00:00.000">Fri 13th</time> -{' '}
               <time dateTime="2025-06-16T22:00:00.000">Mon 16th June</time>
-        </span>
+            </span>
           </div>
         </div>
 
@@ -48,7 +48,6 @@ export default function Hero() {
           priority
         />
       </div>
-
     </section>
   );
 }

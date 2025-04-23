@@ -5,7 +5,9 @@ export default function Faq() {
   return (
     <section className="mb-16">
       <HighlightedHeading text="FAQ" />
-      <h2 className="text-teal text-2xl font-semibold mb-4">Frequently Asked Questions</h2>
+      <h2 className="text-teal text-2xl font-semibold mb-4">
+        Frequently Asked Questions
+      </h2>
 
       <div
         className={`max-w-7xl mx-auto px-8 my-2 leading-tight space-y-6 ${styles.faq}`}

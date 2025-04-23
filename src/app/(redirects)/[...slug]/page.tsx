@@ -24,16 +24,12 @@ export async function generateStaticParams() {
   return redirects.map(({ path }) => ({ slug: path.split('/') }));
 }
 
-export default async function Redirect(
-  props: {
-    params: Promise<{ slug: string[] }>;
-  }
-) {
+export default async function Redirect(props: {
+  params: Promise<{ slug: string[] }>;
+}) {
   const params = await props.params;
 
-  const {
-    slug
-  } = params;
+  const { slug } = params;
 
   const redirects = await getRedirects();
   if (!redirects) return notFound();

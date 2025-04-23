@@ -1,5 +1,11 @@
 import { FiArrowRight, FiBookOpen, FiInstagram } from 'react-icons/fi';
-import {FaDiscord, FaHourglass, FaHourglassEnd, FaHourglassStart, FaRegHourglass} from 'react-icons/fa';
+import {
+  FaDiscord,
+  FaHourglass,
+  FaHourglassEnd,
+  FaHourglassStart,
+  FaRegHourglass,
+} from 'react-icons/fa';
 import Image from 'next/image';
 import PiazzaStage from '@/assets/images/stage.jpg';
 import Dance from '@/assets/images/dance.jpg';
@@ -13,12 +19,15 @@ import TshirtMaking from '@/assets/images/tshirt-making.jpg';
 import WsafClosingSpeech from '@/assets/images/wsaf-closing-speech.jpg';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import Wsaf2015StandImage from '@/assets/history/wsaf-2015-stand.jpg';
+import Link from 'next/link';
 
 export default function History() {
   return (
     <section className="bg-teal text-slate-200 px-4 py-8 mb-4">
-      <HighlightedHeading text="History"/>
-      <h2 className="text-white text-2xl font-semibold mb-2">The History of WSAF</h2>
+      <HighlightedHeading text="History" />
+      <h2 className="text-white text-2xl font-semibold mb-2">
+        The History of WSAF
+      </h2>
 
       <figure className="mx-4 mb-4">
         <Image
@@ -39,11 +48,14 @@ export default function History() {
       </figure>
 
       <p>
-        The Warwick Student Arts Festival used to be a yearly event from 2004 to 2015.
+        The Warwick Student Arts Festival used to be a yearly event from 2004 to
+        2015.
       </p>
-      <p>Last year, a group of students
-        decided to bring it back, and it was a huge success! We saw 2,500+ people celebrate the arts at Warwick across
-        70+ events and 9 venues.</p>
+      <p>
+        Last year, a group of students decided to bring it back, and it was a
+        huge success! We saw 2,500+ people celebrate the arts at Warwick across
+        70+ events and 9 venues.
+      </p>
 
       <div className="flex items-center justify-center gap-2 my-2 text-white">
         <a
@@ -52,19 +64,19 @@ export default function History() {
           target="_blank"
         >
           <span className="text-xl uppercase font-bold">
-            <FiBookOpen className="inline-block mb-1 mr-2"/>
+            <FiBookOpen className="inline-block mb-1 mr-2" />
             WSAF 2024
           </span>
         </a>
-        <a
+        <Link
           href="/history"
           className="inline-block bg-purple px-4 py-1 rounded-xs drop-shadow-xs hover:scale-105"
         >
-        <span className="text-xl uppercase font-bold">
-          <FaRegHourglass className="inline mr-2 mb-1"/>
-          WSAF History
-        </span>
-        </a>
+          <span className="text-xl uppercase font-bold">
+            <FaRegHourglass className="inline mr-2 mb-1" />
+            WSAF History
+          </span>
+        </Link>
       </div>
 
       <p className="mt-4 mb-0.5 text-white text-sm">WSAF 2024 Photos</p>

@@ -6,8 +6,10 @@ import HighlightedHeading from '@/app/components/highlighted-heading';
 export default function KeyDates() {
   return (
     <section className="mb-4 md:mb-8">
-      <HighlightedHeading text="Who is WSAF?"/>
-      <h2 className="text-teal text-2xl font-semibold">The Team Behind The Warwick Student Arts Festival</h2>
+      <HighlightedHeading text="Who is WSAF?" />
+      <h2 className="text-teal text-2xl font-semibold">
+        The Team Behind The Warwick Student Arts Festival
+      </h2>
       <p className="mt-2 mb-1 mx-4">
         WSAF 2024 was organised by a team of over 30 volunteers in roles such as
         organisation, marketing, tech and logistics.

@@ -180,7 +180,7 @@ const festivalList: {
 export default function FestivalsTable() {
   return (
     <figure className="m-4">
-      <table className="mx-auto table-auto bg-secondary border-2 border-yellow text-sm sm:text-base">
+      <table className="mx-auto table-auto bg-purple border-2 border-yellow text-sm sm:text-base">
         <thead>
           <tr className="uppercase sm:text-lg">
             <th className="px-2 sm:px-4 py-0.5">Name</th>

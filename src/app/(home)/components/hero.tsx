@@ -16,7 +16,7 @@ export default function Hero() {
           <div className="my-6 flex flex-col items-end text-right">
             <h1 className="text-left bg-teal font-bold py-2 px-4">
           <span className="block text-4xl sm:text-5xl lg:text-6xl">
-            WSAF 2025
+            WSAF <span className="text-yellow">2025</span>
           </span>
           <span className="block text-sm xs:text-xl lg:text-3xl">
             Warwick Student Arts Festival
@@ -30,8 +30,8 @@ export default function Hero() {
         </div>
 
         <iframe
-          className="mx-auto border-yellow border-8 w-[32rem] h-[18rem] bg-black"
-          src="https://www.youtube.com/embed/31Wp-S3dqGE&autoplay=1&mute=1"
+          className="mx-auto border-yellow border-8 w-[32rem] h-[18.4rem] bg-yellow"
+          src="https://www.youtube.com/embed/31Wp-S3dqGE?autoplay=1&mute=1&loop=1"
           title="WSAF Trailer"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"

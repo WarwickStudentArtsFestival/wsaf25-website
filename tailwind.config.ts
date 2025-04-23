@@ -9,7 +9,7 @@ const config: Config = {
     extend: {
       colors: {
         teal: '#087F8C',
-        secondary: '#4F1D75',
+        purple: '#4F1D75',
         tertiary: '#FF0054',
         yellow: '#FFBD00',
         white: '#FFFFFF',

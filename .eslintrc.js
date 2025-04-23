@@ -1,10 +1,10 @@
-{
-  "plugins": ["prettier"],
-  "extends": [
+module.exports = {
+  plugins: ["prettier"],
+  extends: [
     "next/core-web-vitals",
     "plugin:prettier/recommended"
   ],
-  "rules": {
+  rules: {
     "prettier/prettier": "error"
   }
-}
+};

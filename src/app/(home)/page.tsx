@@ -1,6 +1,6 @@
 import Hero from './components/hero';
 import WhoInvolved from './components/who-involved';
-import Faq from './components/faq';
+import Faq from '../components/faq/faq';
 import React from 'react';
 import About from './components/about';
 import History from './components/history';
@@ -16,7 +16,7 @@ export default function Home() {
       <KeyDates />
       <WhoInvolved />
       <History />
-      <Faq />
+      <Faq defaultTab="General" />
     </main>
   );
 }

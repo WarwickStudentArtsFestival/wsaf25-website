@@ -1,18 +1,23 @@
 import { FiCalendar } from 'react-icons/fi';
+import Link from 'next/link';
 
 export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-teal h-16 border-b border-b-white flex justify-between items-center text-white px-4">
       <div className="w-48 text-left">
-        <p className="text-xl font-semibold">
+        <Link href="/" className="text-xl font-semibold">
           WSAF <span className="text-yellow">2025</span>
-        </p>
+        </Link>
       </div>
       <div>
         <nav>
           <ul className="flex gap-8 font-semibold uppercase">
-            <li>Perform or Exhibit</li>
-            <li>Join the Crew</li>
+            <li>
+              <Link href="/perform">Perform or Exhibit</Link>
+            </li>
+            <li>
+              <Link href="/crew">Join the Crew</Link>
+            </li>
           </ul>
         </nav>
       </div>

@@ -1,3 +1,12 @@
+import Faq from '@/app/components/faq/faq';
+import React from 'react';
+
 export default function Crew() {
-  return <p>Crew</p>;
+  return (
+    <main>
+      <h1>Crew</h1>
+
+      <Faq defaultTab="Crew" />
+    </main>
+  );
 }

@@ -1,9 +1,5 @@
-import { FiArrowRight, FiBookOpen, FiInstagram } from 'react-icons/fi';
+import { FiBookOpen } from 'react-icons/fi';
 import {
-  FaDiscord,
-  FaHourglass,
-  FaHourglassEnd,
-  FaHourglassStart,
   FaRegHourglass,
 } from 'react-icons/fa';
 import Image from 'next/image';

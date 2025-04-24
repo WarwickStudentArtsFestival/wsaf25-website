@@ -9,6 +9,12 @@ export default function Faq() {
         Frequently Asked Questions
       </h2>
 
+      <div>
+        <p>General</p>
+        <p>Submissions</p>
+        <p>Crew</p>
+      </div>
+
       <div
         className={`max-w-7xl mx-auto px-8 my-2 leading-tight space-y-6 ${styles.faq}`}
       >

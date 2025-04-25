@@ -22,7 +22,7 @@ export default function Header() {
         <NavLinks />
       </nav>
 
-      <div className="hidden md:block w-48 text-right">
+      <div className="md:block w-48 mr-4 text-right">
         <SubmitButton />
       </div>
 

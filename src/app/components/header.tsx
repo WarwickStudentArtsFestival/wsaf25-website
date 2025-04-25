@@ -42,9 +42,6 @@ export default function Header() {
           <nav role="navigation">
             <NavLinks onClick={() => setMobileMenuOpen(false)} />
           </nav>
-          <div className="mt-4">
-            <SubmitButton />
-          </div>
         </div>
       )}
     </header>

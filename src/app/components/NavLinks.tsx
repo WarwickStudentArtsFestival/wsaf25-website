@@ -17,6 +17,11 @@ export default function NavLinks({ onClick }: Props) {
           Join the Crew
         </Link>
       </li>
+      <li>
+        <Link href="/press" onClick={onClick}>
+          Press Kit
+        </Link>
+      </li>
     </ul>
   );
 }

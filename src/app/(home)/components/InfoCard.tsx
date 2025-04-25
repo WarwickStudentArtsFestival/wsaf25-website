@@ -1,11 +1,6 @@
 import Link from 'next/link';
 import Image, { StaticImageData } from 'next/image';
 import { FiArrowRight } from 'react-icons/fi';
-import { ReactNode } from 'react';
-
-interface LinkWrapperProps {
-  children: ReactNode;
-}
 
 interface InfoCardProps {
   image: StaticImageData | string;
@@ -14,7 +9,7 @@ interface InfoCardProps {
   description: string[];
   footer: string;
   link: string;
-  isExternalLink: boolean;
+  isExternalLink?: boolean;
 }
 
 export default function InfoCard({
@@ -26,32 +21,11 @@ export default function InfoCard({
   link,
   isExternalLink = false,
 }: InfoCardProps) {
-  const LinkWrapper = ({ children }: LinkWrapperProps) => {
-    if (isExternalLink) {
-      return (
-        <a
-          href={link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="border border-slate-300 rounded-md overflow-hidden w-full md:max-w-96 hover:scale-105 transition duration-75 ease-in-out"
-        >
-          {children}
-        </a>
-      );
-    } else {
-      return (
-        <Link
-          href={link}
-          className="border border-slate-300 rounded-md overflow-hidden w-full md:max-w-96 hover:scale-105 transition duration-75 ease-in-out"
-        >
-          {children}
-        </Link>
-      );
-    }
-  };
+  const cardClasses =
+    'border border-slate-300 rounded-md overflow-hidden w-full md:max-w-96 hover:scale-105 transition duration-75 ease-in-out';
 
-  return (
-    <LinkWrapper>
+  const cardContent = (
+    <>
       <Image src={image} alt={imageAlt} className="object-contain w-full" />
       <div className="p-4">
         <h3 className="text-teal text-xl font-semibold">{title}</h3>
@@ -65,6 +39,21 @@ export default function InfoCard({
           {footer}
         </p>
       </div>
-    </LinkWrapper>
+    </>
+  );
+
+  return isExternalLink ? (
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={cardClasses}
+    >
+      {cardContent}
+    </a>
+  ) : (
+    <Link href={link} className={cardClasses}>
+      {cardContent}
+    </Link>
   );
 }

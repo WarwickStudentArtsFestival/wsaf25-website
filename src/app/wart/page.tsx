@@ -8,10 +8,12 @@ import ColourPicker from './ColourPicker';
 import BrushSizePicker from './BrushSizePicker';
 import Paintbrush from '@/assets/icons/paintbrush.png';
 import Image from 'next/image';
+import { FiX, FiSave } from 'react-icons/fi';
+import ActionButton from './ActionButton';
 
 const PaintApp = () => {
   const [color, setColor] = useState<string>('#4f1d75');
-  const [brushSize, setBrushSize] = useState<number>(10);
+  const [brushSize, setBrushSize] = useState<number>(40);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
 
   const saveCanvas = () => {
@@ -41,7 +43,7 @@ const PaintApp = () => {
   }, []);
 
   return (
-    <div className="text-center relative cursor-none">
+    <div className="text-center relative sm:cursor-none">
       <PageHeader />
       <HighlightedHeading text="Create your own W-ARTWORK !" />
       <div>
@@ -52,25 +54,28 @@ const PaintApp = () => {
         />
       </div>
       <Canvas color={color} brushSize={brushSize} />
-      <button
-        onClick={clearCanvas}
-        className="mt-4 ml-4 px-5 py-2.5 rounded-xl bg-red-100 text-red-800 font-medium shadow-sm hover:bg-red-200 transition-colors"
-      >
-        Clear
-      </button>
-      <button
-        onClick={saveCanvas}
-        className="mt-4 ml-4 px-5 py-2.5 rounded-xl bg-green-100 text-green-800 font-medium shadow-sm hover:bg-green-200 transition-colors"
-      >
-        Save
-      </button>
+
+      <div className="p-4 justify-center flex gap-4 mx-auto">
+        <ActionButton
+          onClick={clearCanvas}
+          icon={FiX}
+          text="Clear Canvas"
+          bgColor="bg-[#ff0054]"
+        />
+        <ActionButton
+          onClick={saveCanvas}
+          icon={FiSave}
+          text="Save Image"
+          bgColor="bg-[#087f8c]"
+        />
+      </div>
 
       <Image
         src={Paintbrush}
         alt="Paintbrush"
         width={300}
         height={300}
-        className="pointer-events-none fixed z-50"
+        className="pointer-events-none fixed z-50 hidden md:block"
         style={{
           left: cursorPos.x,
           top: cursorPos.y,

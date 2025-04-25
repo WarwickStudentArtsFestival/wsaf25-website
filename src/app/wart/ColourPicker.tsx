@@ -23,7 +23,7 @@ const ColourPicker: React.FC<ColourPickerProps> = ({
     <div className="flex flex-row sm:flex-wrap items-center justify-center">
       <label
         htmlFor="brush-colour"
-        className="block p-4 text-xl font-medium text-teal"
+        className="block p-4 text-xl font-medium text-black"
       >
         Brush Colour:
       </label>

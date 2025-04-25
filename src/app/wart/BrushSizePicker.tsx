@@ -13,7 +13,7 @@ const BrushSizePicker: React.FC<BrushSizePickerProps> = ({
     <div className="flex flex-row items-center justify-center space-x-4">
       <label
         htmlFor="brush-size"
-        className="block text-xl font-medium text-teal"
+        className="block text-xl font-medium text-black"
       >
         Brush Size:
       </label>
@@ -27,7 +27,7 @@ const BrushSizePicker: React.FC<BrushSizePickerProps> = ({
           onChange={(e) => onBrushSizeChange(Number(e.target.value))}
           className="w-42"
         />
-        <span className="ml-2 w-20 text-xl">{Math.round(brushSize / 2)}%</span>
+        <span className="ml-2 w-20 text-xl text-black">{Math.round(brushSize / 2)}%</span>
       </div>
     </div>
   );

@@ -74,7 +74,7 @@ export default function Footer() {
           className="flex items-center justify-center"
         >
           <FiInstagram className="inline mr-0.5 mt-0.5" />
-          @wsaf24
+          @wsaf25
         </a>
         <span className="font-light">•</span>
         <a

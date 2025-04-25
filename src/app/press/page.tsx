@@ -12,8 +12,12 @@ export default function Press() {
       <PageHeader />
       <h1 className="text-teal text-2xl font-semibold mb-2">Press Kit</h1>
 
+
       <HighlightedHeading text="Colour Palette" />
       <Colours />
+
+      <HighlightedHeading text="Icons" />
+      <Icons />
 
       <HighlightedHeading text="Font" />
       <h3 className="text-black leading-tight">
@@ -26,9 +30,6 @@ export default function Press() {
         </a>{' '}
         for all our text.
       </h3>
-
-      <HighlightedHeading text="Icons" />
-      <Icons />
     </main>
   );
 }

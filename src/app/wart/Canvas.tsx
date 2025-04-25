@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 interface CanvasProps {
   color: string;
@@ -12,6 +12,23 @@ const Canvas: React.FC<CanvasProps> = ({ color, brushSize }) => {
     x: 0,
     y: 0,
   });
+
+  const resizeCanvas = () => {
+    if (canvasRef.current) {
+      const canvas = canvasRef.current;
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+    }
+  };
+
+  useEffect(() => {
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+    };
+  }, []);
 
   const getPosition = (e: React.MouseEvent | React.TouchEvent) => {
     if (!canvasRef.current) return { x: 0, y: 0 };
@@ -64,9 +81,7 @@ const Canvas: React.FC<CanvasProps> = ({ color, brushSize }) => {
   return (
     <canvas
       ref={canvasRef}
-      width={800}
-      height={600}
-      className="border border-black mt-5 mx-auto aspect-square w-full sm:w-auto"
+      className="border border-black mt-5 mx-auto aspect-video w-full sm:w-1/2"
       style={{ touchAction: 'none' }}
       onMouseDown={startDrawing}
       onMouseMove={draw}

@@ -1,9 +1,9 @@
 // Required for Next redirects to work on export
 import nextConfig from '../../../../next.config.mjs';
 import { notFound } from 'next/navigation';
-import Head from 'next/head';
-import { Metadata } from 'next';
 import PageHeader from '@/app/components/page-header';
+import HighlightedHeading from '@/app/components/highlighted-heading';
+import React from 'react';
 
 export const dynamicParams = false;
 export const dynamic = 'force-static';
@@ -45,7 +45,9 @@ export default async function Redirect(props: {
       <meta http-equiv="refresh" content={`0; url=${redirect.destination}`} />
 
       <section className="mb-8 md:mb-16">
-        <PageHeader title="Redirect" />
+        <PageHeader />
+        <HighlightedHeading text="Please Wait" />
+        <h1 className="text-teal text-2xl font-semibold mb-2">Redirecting</h1>
 
         <div className="flex flex-col md:flex-row justify-center items-center md:items-start max-w-5xl mx-auto px-4 gap-4">
           <p>Redirecting to {redirect.destination}...</p>

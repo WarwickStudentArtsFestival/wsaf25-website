@@ -3,7 +3,7 @@ import { Lexend } from 'next/font/google';
 import './globals.css';
 import Footer from '@/app/components/footer';
 import React from 'react';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import { GoogleTagManager } from '@next/third-parties/google';
 import Header from '@/app/components/header';
 
 const lexend = Lexend({
@@ -40,8 +40,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
+      {process.env.NEXT_PUBLIC_GOOGLE_TAG && (
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GOOGLE_TAG} />
       )}
       <body className={`${lexend.className} flex flex-col min-h-screen`}>
         <Header />

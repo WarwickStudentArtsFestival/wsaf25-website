@@ -64,7 +64,7 @@ jobs:
         env:
           NEXTJS_OUTPUT: 'standalone'
           BASE_URL: ${{ vars.BASE_URL }}
-          NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ vars.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID }}
+          NEXT_PUBLIC_GOOGLE_TAG: ${{ vars.NEXT_PUBLIC_GOOGLE_TAG }}
           WSAF_ASSETS_BASE_URL: ${{ vars.WSAF_ASSETS_BASE_URL }}
 
       - name: Upload artifact

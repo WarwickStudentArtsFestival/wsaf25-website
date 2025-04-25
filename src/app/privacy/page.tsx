@@ -1,5 +1,7 @@
 import PageHeader from '@/app/components/page-header';
 import { Metadata } from 'next';
+import HighlightedHeading from '@/app/components/highlighted-heading';
+import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | Warwick Student Arts Festival 2025',
@@ -10,7 +12,9 @@ export const metadata: Metadata = {
 export default function Privacy() {
   return (
     <main>
-      <PageHeader title="Privacy Policy" />
+      <PageHeader />
+      <HighlightedHeading text="Privacy" />
+      <h1 className="text-teal text-2xl font-semibold mb-2">Privacy Policy</h1>
 
       <section className="mx-auto max-w-7xl px-4">
         <p className="mb-2">

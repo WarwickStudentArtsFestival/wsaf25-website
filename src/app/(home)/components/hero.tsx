@@ -30,7 +30,7 @@ export default function Hero() {
         </div>
 
         <iframe
-          className="mx-auto border-yellow border-8 w-[32rem] h-[18.4rem] bg-yellow"
+          className="mx-auto w-full h-auto aspect-video border-yellow border-8 sm:w-[32rem] sm:h-[18.4rem] bg-yellow"
           src="https://www.youtube.com/embed/31Wp-S3dqGE?autoplay=1&mute=1&loop=1"
           title="WSAF Trailer"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

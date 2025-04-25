@@ -1,15 +1,29 @@
 import Question from '@/app/components/faq/question';
 import Answer from '@/app/components/faq/answer';
+import Link from 'next/link';
 
 export default function CrewFaq() {
   return (
     <article className="space-y-6">
       <div>
         <Question>What can I help with?</Question>
+        <Answer>
+          We have many different teams across the festival which can suit your
+          interests and commitment. More information can be found on the{' '}
+          <Link className="text-teal" href="/crew">
+            crew page
+          </Link>
+          .
+        </Answer>
       </div>
 
       <div>
         <Question>What benefits are there?</Question>
+        <Answer>
+          In addition to meeting other people, gaining new skills and having a
+          once-in-a-lifetime experience, you’ll also get a free crew t-shirt and
+          food throughout the event!
+        </Answer>
       </div>
 
       <div>

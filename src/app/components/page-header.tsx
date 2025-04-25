@@ -3,19 +3,11 @@ import HeroImage from '@/assets/hero.jpg';
 import Logo from '@/assets/logo.png';
 import Link from 'next/link';
 
-export default function PageHeader({
-  title,
-  headingClass,
-  borderClass,
-}: {
-  title: string;
-  headingClass?: string;
-  borderClass?: string;
-}) {
+export default function PageHeader({ borderClass }: { borderClass?: string }) {
   return (
     <header>
       <div
-        className={`relative border-b-8 bg-yellow mb-8 ${borderClass || 'border-b-yellow'}`}
+        className={`relative border-b-8 bg-yellow mb-2 ${borderClass || 'border-b-yellow'}`}
       >
         <Image
           src={HeroImage}
@@ -39,22 +31,20 @@ export default function PageHeader({
             />
             <div className="my-2 flex flex-col items-end text-right mr-2 sm:mr-6">
               <h2 className="text-left bg-teal font-bold py-1 sm:py-2 px-2 sm:px-4 text-white m-0">
-                <span className="block text-2xl sm:text-4xl">WSAF 2025</span>
+                <span className="block text-2xl sm:text-4xl">
+                  WSAF <span className="text-yellow">2025</span>
+                </span>
                 <span className="block text-sm sm:text-xl normal-case -mt-1 sm:mt-0">
                   Warwick Student Arts Festival
                 </span>
               </h2>
-              {/* <span className="text-xs sm:text-sm pb-1 px-2 sm:px-3 -mt-1 sm:-mt-2 block bg-primary text-yellow font-bold">
-                <time dateTime="2024-06-08T10:00:00.000">Sat 8th</time> -{' '}
-                <time dateTime="2024-06-10T22:00:00.000">Mon 10th June</time>
-              </span>*/}
+              <span className="bg-teal text-xs sm:text-sm pb-1 px-2 sm:px-3 -mt-1 sm:-mt-2 block bg-primary text-yellow font-semibold">
+                <time dateTime="2024-06-08T10:00:00.000">Fri 13th</time> -{' '}
+                <time dateTime="2024-06-10T22:00:00.000">Mon 16th June</time>
+              </span>
             </div>
           </Link>
         </div>
-      </div>
-
-      <div className="relative -mt-16 text-center">
-        <h1 className={`heading ${headingClass || ''}`}>{title}</h1>
       </div>
     </header>
   );

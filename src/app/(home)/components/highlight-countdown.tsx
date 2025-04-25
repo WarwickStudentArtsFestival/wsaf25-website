@@ -38,10 +38,10 @@ export default function HighlightCountdown() {
       className="inline-block mb-1 bg-purple px-6 py-2 rounded-md drop-shadow-xs hover:scale-105 text-white"
       target="_blank"
     >
-      <FiCalendar className="mx-auto text-3xl text-yellow" />
-      <p className="text-yellow text-xs h-4">{timeLeft}</p>
-      <h3 className="text-xl font-semibold">Event Submissions Closing Soon</h3>
-      <p className="text-sm text-slate-300">
+      <FiCalendar className="mx-auto text-2xl text-yellow" />
+      <p className="text-yellow text-2xs h-3">{timeLeft}</p>
+      <h3 className="text-lg font-semibold">Event Submissions Closing Soon</h3>
+      <p className="text-xs text-slate-300 leading-4">
         Registration for events close on Friday Week 2 (2nd May)
       </p>
     </a>

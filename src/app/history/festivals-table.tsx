@@ -180,7 +180,7 @@ const festivalList: {
 export default function FestivalsTable() {
   return (
     <figure className="m-4">
-      <table className="mx-auto table-auto bg-purple border-2 border-yellow text-sm sm:text-base">
+      <table className="mx-auto table-auto rounded-md bg-slate-100 text-slate-600 border-2 border-teal text-sm sm:text-base">
         <thead>
           <tr className="uppercase sm:text-lg">
             <th className="px-2 sm:px-4 py-0.5">Name</th>
@@ -191,7 +191,7 @@ export default function FestivalsTable() {
         </thead>
         <tbody>
           {festivalList.map((festival) => (
-            <tr key={festival.name} className="border-t border-yellow">
+            <tr key={festival.name} className="border-t border-teal">
               <th className="px-2 sm:px-4 py-0.5">{festival.name}</th>
               <td className="px-2 sm:px-4 py-0.5">{festival.dates || '-'}</td>
               <td className="px-2 sm:px-4 py-0.5">{festival.events || '-'}</td>
@@ -203,7 +203,7 @@ export default function FestivalsTable() {
                         target="_blank"
                         href={link.href}
                         rel="noopener noreferrer"
-                        className="text-yellow block"
+                        className="text-teal block"
                       >
                         {link.name}
                       </a>

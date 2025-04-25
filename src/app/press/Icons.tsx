@@ -19,7 +19,8 @@ const iconList = [
 function Icons() {
   return (
     <div className="relative">
-      <hr className="absolute top-0 left-0 w-full border-t-12 border-white z-10" />
+      {/* white bar is an attempt to hide the clipping above the yellow line */}
+      <hr className="absolute top-0 left-0 w-full border-t-12 border-white z-10" />{' '}
       <hr className="absolute top-2 left-0 w-full border-t-10 border-yellow-400 z-10" />
       <div className="grid mx-auto max-w-7xl grid-cols-5 gap-4 p-4 pt-4 relative z-0">
         {iconList.map((icon, idx) => (

@@ -53,7 +53,7 @@ export default function History() {
         70+ events and 9 venues.
       </p>
 
-      <div className="flex items-center justify-center gap-2 my-2 text-white">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-2 my-2 text-white">
         <a
           href="https://2024.wsaf.org.uk"
           className="inline-block bg-purple px-4 py-1 rounded-xs drop-shadow-xs hover:scale-105"
@@ -77,7 +77,7 @@ export default function History() {
 
       <p className="mt-4 mb-0.5 text-white text-sm">WSAF 2024 Photos</p>
       <div className="px-8 lg:text-lg max-w-5xl mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 w-max mx-auto">
+        <div className="grid grid-cols-2 m-0 sm:grid-cols-3 lg:grid-cols-5 gap-2 w-max mx-auto">
           <Image
             src={PiazzaStage}
             alt="Aerial photo of dance at the WSAF piazza stage"

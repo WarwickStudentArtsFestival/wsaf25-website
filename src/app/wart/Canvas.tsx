@@ -12,12 +12,38 @@ const Canvas: React.FC<CanvasProps> = ({ color, brushSize }) => {
     x: 0,
     y: 0,
   });
+  const [canvasSize, setCanvasSize] = useState<{
+    width: number;
+    height: number;
+  }>({
+    width: 0,
+    height: 0,
+  });
 
   const resizeCanvas = () => {
     if (canvasRef.current) {
       const canvas = canvasRef.current;
-      canvas.width = canvas.clientWidth;
-      canvas.height = canvas.clientHeight;
+      const { clientWidth, clientHeight } = canvas;
+      if (
+        canvasSize.width !== clientWidth ||
+        canvasSize.height !== clientHeight
+      ) {
+        setCanvasSize({ width: clientWidth, height: clientHeight });
+        // Re-scale or re-draw the canvas content here if necessary
+        canvas.width = clientWidth;
+        canvas.height = clientHeight;
+        redrawCanvas();
+      }
+    }
+  };
+
+  const redrawCanvas = () => {
+    if (canvasRef.current) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        // You can re-draw any persistent content here if needed
+      }
     }
   };
 
@@ -28,7 +54,7 @@ const Canvas: React.FC<CanvasProps> = ({ color, brushSize }) => {
     return () => {
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, []);
+  }, [canvasSize]);
 
   const getPosition = (e: React.MouseEvent | React.TouchEvent) => {
     if (!canvasRef.current) return { x: 0, y: 0 };

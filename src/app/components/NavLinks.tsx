@@ -22,6 +22,11 @@ export default function NavLinks({ onClick }: Props) {
           Press Kit
         </Link>
       </li>
+      <li>
+        <Link href="/wpaint" onClick={onClick}>
+          W-PAINT
+        </Link>
+      </li>
     </ul>
   );
 }

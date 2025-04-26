@@ -34,8 +34,7 @@ function Icon({ src, alt }: IconProps) {
     };
   }, [hovered, amplitude]);
 
-  // `src` might be an imported static image or a string URL
-  const href = typeof src === 'string' ? src : src.src;
+  const href = typeof src === 'string' ? src : undefined;
 
   return (
     <div

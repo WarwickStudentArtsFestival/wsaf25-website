@@ -39,17 +39,18 @@ const Canvas: React.FC<CanvasProps> = ({ color, brushSize }) => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
+    const handleMouseUp = () => setIsDrawing(false);
+    window.addEventListener('mouseup', handleMouseUp);
+
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      window.removeEventListener('mouseup', handleMouseUp);
     };
   }, [resizeCanvas]);
 
   const getPosition = (e: React.MouseEvent | React.TouchEvent) => {
     if (!canvasRef.current) return { x: 0, y: 0 };
-
-    const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-
+    const rect = canvasRef.current.getBoundingClientRect();
     if ('touches' in e) {
       const touch = e.touches[0];
       return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
@@ -65,18 +66,10 @@ const Canvas: React.FC<CanvasProps> = ({ color, brushSize }) => {
     e.preventDefault();
   };
 
-  const stopDrawing = (e: React.MouseEvent | React.TouchEvent) => {
-    setIsDrawing(false);
-    e.preventDefault();
-  };
-
   const draw = (e: React.MouseEvent | React.TouchEvent) => {
     if (!isDrawing || !canvasRef.current) return;
-
     const { x, y } = getPosition(e);
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvasRef.current.getContext('2d');
     if (ctx) {
       ctx.beginPath();
       ctx.moveTo(lastPos.x, lastPos.y);
@@ -87,7 +80,6 @@ const Canvas: React.FC<CanvasProps> = ({ color, brushSize }) => {
       ctx.lineCap = 'round';
       ctx.stroke();
     }
-
     setLastPos({ x, y });
     e.preventDefault();
   };
@@ -99,12 +91,10 @@ const Canvas: React.FC<CanvasProps> = ({ color, brushSize }) => {
       style={{ touchAction: 'none' }}
       onMouseDown={startDrawing}
       onMouseMove={draw}
-      onMouseUp={stopDrawing}
-      onMouseLeave={stopDrawing}
       onTouchStart={startDrawing}
       onTouchMove={draw}
-      onTouchEnd={stopDrawing}
-      onTouchCancel={stopDrawing}
+      onTouchEnd={() => setIsDrawing(false)}
+      onTouchCancel={() => setIsDrawing(false)}
     />
   );
 };

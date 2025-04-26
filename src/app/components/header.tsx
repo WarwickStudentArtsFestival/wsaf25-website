@@ -17,12 +17,11 @@ export default function Header() {
           WSAF <span className="text-yellow">2025</span>
         </Link>
       </div>
-
       <nav className="hidden md:block">
         <NavLinks />
       </nav>
 
-      <div className="md:block w-48 mr-4 text-right">
+      <div className="md:block hidden md:visible w-48 mr-4 text-right">
         <SubmitButton />
       </div>
 

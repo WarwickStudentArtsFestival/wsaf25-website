@@ -10,7 +10,7 @@ export default function NavLinks({ onClick }: Props) {
       {[
         { href: '/faq', label: 'FAQ' },
         // { href: '/perform', label: 'Perform or Exhibit' },
-        // { href: '/crew', label: 'Join the Crew' },
+        { href: '/crew', label: 'Join the Crew' },
         { href: '/history', label: 'History' },
         { href: '/press', label: 'Press Kit' },
         { href: '/wpaint', label: 'W-PAINT' },

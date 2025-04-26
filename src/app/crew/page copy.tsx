@@ -1,17 +1,14 @@
-import React from 'react';
 import PageHeader from '@/app/components/page-header';
-import HighlightedHeading from '@/app/components/highlighted-heading';
 import PosteringImage from '@/assets/images/postering.jpg';
 import Image from 'next/image';
-import RoleCard from '@/app/crew/RoleCard';
+import organisers from '@/app/team/organisers';
+import IdCard from '@/app/components/id-card';
+import volunteers from '@/app/team/volunteers';
+import AvatarImage from '@/assets/people/avatar.jpg';
 import { FaDiscord } from 'react-icons/fa';
+import CrewRole from '@/app/team/components/crew-role';
 import { Metadata } from 'next';
-
-import Marketing from '@/assets/crew/marketing.jpg';
-import Stewards from '@/assets/crew/circle-team.jpg';
-import Tech from '@/assets/crew/colourful-stage.jpg';
-import VenueManager from '@/assets/crew/fab-terrace-drone.jpg';
-import Operations from '@/assets/crew/flight-cases.jpg';
+import { FiArrowRight } from 'react-icons/fi';
 
 export const metadata: Metadata = {
   title: 'Team | Warwick Student Arts Festival 2024',
@@ -24,31 +21,26 @@ const crewRoles = [
     name: 'Marketing',
     description:
       'The marketing team ensures that everyone around campus and in the local community knows about WSAF and all of its events. This includes marketing through social media, posters, flyers and T-shirts and taking photos and videos throughout the event.',
-    image: Marketing,
   },
   {
     name: 'Stewards',
     description:
       "Stewards help ensure that all attendees know what's going on and have a great experience. They also check ticket reservations for busy events and distribute stickers and leaflets.",
-    image: Stewards,
   },
   {
     name: 'Tech',
     description:
       'The tech team ensure that everyone can be seen and heard through the use of sound/PA and lighting/LX systems. They are also responsible for livestreaming and recording events, where applicable. All tech operators must be members of Warwick Tech Crew - please contact us for more information.',
-    image: Tech,
   },
   {
     name: 'Venue Managers',
     description:
       'Venue managers are responsible for looking after each venue and its performance schedule throughout WSAF. They ensure that performers, tech operators and stewards are aware of the schedule and any special requirements and that they communicate well with each other.',
-    image: VenueManager,
   },
   {
     name: 'Operations',
     description:
       'The operations and logistics team ensures that the event runs smoothly and are on hand to resolve any issues that can crop up. This can range from transporting equipment between venues to sorting last-minute scheduling issues.',
-    image: Operations,
   },
 ];
 
@@ -56,15 +48,14 @@ export default function Team() {
   return (
     <main>
       <section className="mb-8 md:mb-16">
-        <PageHeader />
-        <HighlightedHeading text="Team" />
+        <PageHeader title="Team" />
 
-        <div className="flex mt-4 flex-col md:flex-row justify-center items-center md:items-start max-w-6xl mx-auto px-4 gap-4">
+        <div className="flex flex-col md:flex-row justify-center items-center md:items-start max-w-5xl mx-auto px-4 gap-4">
           <div className="md:text-right leading-snug">
-            <h2 className="text-teal text-2xl font-semibold mb-4">
+            <p className="text-lg font-semibold mb-1">
               Warwick Student Arts Festival would not be possible without our
               amazing team of volunteers.
-            </h2>
+            </p>
             <p className="mb-4">
               From marketing to catering and from stewarding to tech, our team
               have been working hard since February to make the event the best
@@ -99,7 +90,7 @@ export default function Team() {
                 target="_blank"
                 className="inline-block bg-secondary px-4 py-1 rounded-sm drop-shadow-sm hover:scale-105"
               >
-                <span className="text-xl lg:text-2xl bg-purple text-white p-2 uppercase font-bold">
+                <span className="text-xl lg:text-2xl uppercase font-bold">
                   <FaDiscord className="inline-block mb-1 mr-2" />
                   Join Discord
                 </span>
@@ -127,34 +118,30 @@ export default function Team() {
       </section>
 
       <section className="mb-8 md:mb-16 max-w-8xl mx-auto">
-        <HighlightedHeading text="Crew Roles" />
-        <div className="mt-2 grid w-full px-16 py-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 justify-center">
+        <h2>Crew Roles</h2>
+        <div className="mt-2 flex flex-wrap gap-4 justify-center mx-4">
           {crewRoles.map((role) => (
-            <RoleCard
-              image={role.image}
-              imageAlt="Placeholder"
+            <CrewRole
               key={role.name}
-              title={role.name}
-              footer="placeholder"
-              link='"#"'
-              description={[role.description]}
+              name={role.name}
+              description={role.description}
             />
           ))}
         </div>
 
-        {/* <a
+        <a
           href="/helfertool"
-          className="inline-block px-4 py-1 rounded-sm drop-shadow-sm hover:scale-105 mt-4 mx-4"
+          className="inline-block bg-tertiary px-4 py-1 rounded-sm drop-shadow-sm hover:scale-105 mt-4 mx-4"
           target="_blank"
         >
-          <span className="text-xl lg:text-2xl bg-purple text-white p-2 uppercase font-bold">
+          <span className="text-xl uppercase font-bold">
             <FiArrowRight className="inline mr-2 mb-1" />
             View or Sign Up to a Role
           </span>
-        </a> */}
+        </a>
       </section>
 
-      {/* <section className="md:mb-16">
+      <section className="md:mb-16">
         <h2>Organiser Team</h2>
         <p className="mb-1 max-w-6xl mx-auto px-4">
           Our organiser team, led by the four founders, have been central in the
@@ -214,7 +201,7 @@ export default function Team() {
             emailDescription
           />
         </div>
-      </section> */}
+      </section>
     </main>
   );
 }

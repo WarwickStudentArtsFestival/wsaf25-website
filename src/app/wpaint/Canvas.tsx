@@ -20,7 +20,7 @@ const Canvas: React.FC<CanvasProps> = ({ color, brushSize }) => {
     height: 0,
   });
 
-  const resizeCanvas = () => {
+  const resizeCanvas = React.useCallback(() => {
     if (canvasRef.current) {
       const canvas = canvasRef.current;
       const { clientWidth, clientHeight } = canvas;
@@ -29,23 +29,11 @@ const Canvas: React.FC<CanvasProps> = ({ color, brushSize }) => {
         canvasSize.height !== clientHeight
       ) {
         setCanvasSize({ width: clientWidth, height: clientHeight });
-        // Re-scale or re-draw the canvas content here if necessary
         canvas.width = clientWidth;
         canvas.height = clientHeight;
-        redrawCanvas();
       }
     }
-  };
-
-  const redrawCanvas = () => {
-    if (canvasRef.current) {
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext('2d');
-      if (ctx) {
-        // You can re-draw any persistent content here if needed
-      }
-    }
-  };
+  }, [canvasSize]);
 
   useEffect(() => {
     resizeCanvas();
@@ -54,7 +42,7 @@ const Canvas: React.FC<CanvasProps> = ({ color, brushSize }) => {
     return () => {
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [canvasSize]);
+  }, [resizeCanvas]);
 
   const getPosition = (e: React.MouseEvent | React.TouchEvent) => {
     if (!canvasRef.current) return { x: 0, y: 0 };
@@ -107,7 +95,7 @@ const Canvas: React.FC<CanvasProps> = ({ color, brushSize }) => {
   return (
     <canvas
       ref={canvasRef}
-      className="border border-black mt-5 mx-auto aspect-video w-full sm:w-1/2"
+      className="border border-black aspect-video w-full h-full"
       style={{ touchAction: 'none' }}
       onMouseDown={startDrawing}
       onMouseMove={draw}

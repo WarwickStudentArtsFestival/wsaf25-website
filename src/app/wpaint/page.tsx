@@ -15,6 +15,7 @@ const PaintApp = () => {
   const [color, setColor] = useState<string>('#4f1d75');
   const [brushSize, setBrushSize] = useState<number>(40);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  const [isMouseInside, setIsMouseInside] = useState(false);
 
   const saveCanvas = () => {
     const canvas = document.querySelector('canvas') as HTMLCanvasElement;
@@ -43,7 +44,9 @@ const PaintApp = () => {
   }, []);
 
   return (
-    <div className="text-center relative sm:cursor-none">
+    <div
+      className={`text-center relative ${isMouseInside ? 'cursor-none' : 'cursor-default'}`}
+    >
       <PageHeader />
       <HighlightedHeading text="Create your own W-ARTWORK !" />
       <div>
@@ -53,7 +56,14 @@ const PaintApp = () => {
           onBrushSizeChange={setBrushSize}
         />
       </div>
-      <Canvas color={color} brushSize={brushSize} />
+
+      <div
+        onMouseEnter={() => setIsMouseInside(true)}
+        onMouseLeave={() => setIsMouseInside(false)}
+        className="border border-black mt-5 mx-auto aspect-video w-full sm:w-1/2"
+      >
+        <Canvas color={color} brushSize={brushSize} />
+      </div>
 
       <div className="p-4 justify-center flex gap-4 mx-auto">
         <ActionButton
@@ -70,19 +80,21 @@ const PaintApp = () => {
         />
       </div>
 
-      <Image
-        src={Paintbrush}
-        alt="Paintbrush"
-        width={300}
-        height={300}
-        className="pointer-events-none fixed z-50 hidden md:block"
-        style={{
-          left: cursorPos.x,
-          top: cursorPos.y,
-          translate: '-5% -25%',
-          rotate: '120deg',
-        }}
-      />
+      {isMouseInside && (
+        <Image
+          src={Paintbrush}
+          alt="Paintbrush"
+          width={300}
+          height={300}
+          className="pointer-events-none fixed z-50 hidden md:block"
+          style={{
+            left: cursorPos.x,
+            top: cursorPos.y,
+            translate: '-5% -25%',
+            rotate: '120deg',
+          }}
+        />
+      )}
     </div>
   );
 };

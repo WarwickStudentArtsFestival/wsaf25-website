@@ -34,6 +34,9 @@ function Icon({ src, alt }: IconProps) {
     };
   }, [hovered, amplitude]);
 
+  // `src` might be an imported static image or a string URL
+  const href = typeof src === 'string' ? src : src.src;
+
   return (
     <div
       className="relative aspect-square"
@@ -48,13 +51,15 @@ function Icon({ src, alt }: IconProps) {
         transition: 'transform 0.05s linear',
       }}
     >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        style={{ objectFit: 'contain' }}
-        placeholder="blur"
-      />
+      <a href={href} download>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          style={{ objectFit: 'contain' }}
+          placeholder="blur"
+        />
+      </a>
     </div>
   );
 }

@@ -20,7 +20,7 @@ export default function Press() {
       <Icons />
 
       <HighlightedHeading text="Font" />
-      <h3 className="text-black leading-tight">
+      <h3 className="text-black leading-tight mb-8">
         We use{' '}
         <a
           className="text-purple"

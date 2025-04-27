@@ -26,9 +26,9 @@ export default function Press() {
           className="text-purple"
           href="https://fonts.google.com/specimen/Lexend"
         >
-          Lexend
+          the Lexend variable font
         </a>{' '}
-        for all our text.
+        for all of our text: on our website, in all of our marketing and for doccuments.
       </h3>
     </main>
   );

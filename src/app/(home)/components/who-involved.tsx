@@ -24,7 +24,7 @@ export default function KeyDates() {
         </a>
       </p>
 
-      <div className="flex justify-center flex-wrap mb-4">
+      <div className="flex text-white justify-center flex-wrap mb-4">
         <IdCard
           name="You?"
           role="Volunteer"
@@ -37,7 +37,7 @@ export default function KeyDates() {
         href="https://2024.wsaf.org.uk/team"
         className="inline-block bg-tertiary px-4 py-1 rounded-xs drop-shadow-xs hover:scale-105 mb-4 mx-4"
       >
-        <span className="text-xl uppercase font-bold">
+        <span className="text-xl uppercase text-white font-bold">
           <FiArrowRight className="inline mr-2 mb-1" />
           View the WSAF 2024 Team
         </span>

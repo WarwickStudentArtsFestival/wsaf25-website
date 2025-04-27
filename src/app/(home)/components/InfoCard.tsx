@@ -28,7 +28,7 @@ export default function InfoCard({
     <>
       <Image src={image} alt={imageAlt} className="object-contain w-full" />
       <div className="p-4">
-        <h3 className="text-teal text-xl font-semibold">{title}</h3>
+        <h3 className="text-teal text-2xl font-semibold">{title}</h3>
         {description.map((paragraph, index) => (
           <p key={index} className={index === 0 ? 'mb-2' : ''}>
             {paragraph}

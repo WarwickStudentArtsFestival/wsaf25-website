@@ -50,10 +50,10 @@ export default function About() {
   return (
     <section className="px-4 sm:px-8 mb-4">
       <HighlightedHeading text="What is WSAF?" />
-      <h2 className="text-teal text-xl sm:text-2xl font-semibold">
+      <h2 className="text-teal text-xl pt-2 sm:text-2xl font-semibold">
         The Warwick Student Arts Festival 2025
       </h2>
-      <div className="max-w-screen-lg mx-auto px-2 mb-1">
+      <div className="max-w-screen-lg mx-auto p-4 mb-1">
         <span className="font-semibold">
           We&apos;re back for 2025, putting on a four-day, student-led showcase
           and celebration of the arts at Warwick.
@@ -85,6 +85,7 @@ export default function About() {
         </a>
       </div>
 
+      {/* <HighlightedHeading text="Can I get involved?" /> */}
       <div className="flex flex-col md:flex-row gap-4 p-4 justify-center text-left text-sm">
         {cards.map((card, index) => (
           <InfoCard key={index} {...card} />

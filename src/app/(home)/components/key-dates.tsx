@@ -29,7 +29,7 @@ const keyDates: KeyDateProps[] = [
 
 export default function KeyDates() {
   return (
-    <section className="mb-12 bg-teal text-white px-4 py-8">
+    <section className="bg-teal text-white  py-8">
       <HighlightedHeading text="When is WSAF?" />
       <h2 className="text-white text-2xl font-semibold mb-4">
         Key Festival Dates

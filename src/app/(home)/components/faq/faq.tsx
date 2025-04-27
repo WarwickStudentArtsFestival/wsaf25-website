@@ -1,9 +1,9 @@
 'use client';
 import HighlightedHeading from '@/app/components/highlighted-heading';
-import GeneralFaq from '@/app/components/faq/general-faq';
+import GeneralFaq from '@/app/(home)/components/faq/general-faq';
 import { useState } from 'react';
-import SubmissionsFaq from '@/app/components/faq/submissions-faq';
-import CrewFaq from '@/app/components/faq/crew-faq';
+import SubmissionsFaq from '@/app/(home)/components/faq/submissions-faq';
+import CrewFaq from '@/app/(home)/components/faq/crew-faq';
 
 enum FaqTabs {
   GENERAL = 'General',
@@ -17,7 +17,7 @@ export default function Faq({ defaultTab }: { defaultTab?: string }) {
   );
 
   return (
-    <section className="mb-16">
+    <section className="py-4">
       <HighlightedHeading text="FAQ" />
       <h2 className="text-teal text-2xl font-semibold mb-2">
         Frequently Asked Questions
@@ -35,7 +35,7 @@ export default function Faq({ defaultTab }: { defaultTab?: string }) {
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto px-8 mt-4 mb-2 min-h-[30rem]">
+      <div className="max-w-7xl mx-auto px-8 my-4">
         {selectedTab === FaqTabs.GENERAL && <GeneralFaq />}
         {selectedTab === FaqTabs.SUBMISSIONS && <SubmissionsFaq />}
         {selectedTab === FaqTabs.CREW && <CrewFaq />}

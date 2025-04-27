@@ -1,5 +1,5 @@
-import Question from '@/app/components/faq/question';
-import Answer from '@/app/components/faq/answer';
+import Question from '@/app/(home)/components/faq/question';
+import Answer from '@/app/(home)/components/faq/answer';
 import Link from 'next/link';
 
 export default function GeneralFaq() {

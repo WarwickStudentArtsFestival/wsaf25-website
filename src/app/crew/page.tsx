@@ -6,6 +6,7 @@ import Image from 'next/image';
 import RoleCard from '@/app/crew/RoleCard';
 import { FaDiscord } from 'react-icons/fa';
 import { Metadata } from 'next';
+import CrewFaq from '../(home)/components/faq/crew-faq';
 
 import Marketing from '@/assets/crew/marketing.jpg';
 import Stewards from '@/assets/crew/circle-team.jpg';
@@ -128,7 +129,7 @@ export default function Team() {
         </div>
       </section>
 
-      <section className="my-8 max-w-8xl mx-auto">
+      <section className="my-4 max-w-8xl mx-auto">
         <HighlightedHeading text="Crew Roles" />
         <div className="mt-2 grid w-full px-16 py-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 justify-center">
           {crewRoles.map((role) => (
@@ -217,6 +218,11 @@ export default function Team() {
           />
         </div>
       </section> */}
+
+      <div className="max-w-7xl mx-auto mb-8">
+        <HighlightedHeading text="FAQ" />
+        <CrewFaq />
+      </div>
     </main>
   );
 }

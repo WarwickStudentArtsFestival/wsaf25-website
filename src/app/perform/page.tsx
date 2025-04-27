@@ -7,7 +7,9 @@ export default function Perform() {
   return (
     <main className="mb-4">
       <PageHeader />
-      <HighlightedHeading text="Perform Or Exhibit" />
+      <div className="mt-4">
+        <HighlightedHeading text="Perform Or Exhibit" />
+      </div>
       {/* <h1 className="text-teal text-2xl font-semibold mb-2">
         Something here 
       </h1> */}

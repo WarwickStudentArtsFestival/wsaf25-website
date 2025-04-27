@@ -34,7 +34,8 @@ function Icon({ src, alt }: IconProps) {
     };
   }, [hovered, amplitude]);
 
-  const href = typeof src === 'string' ? src : undefined;
+  const href =
+    typeof src === 'string' ? src : 'src' in src ? src.src : undefined;
 
   return (
     <div

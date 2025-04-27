@@ -62,7 +62,7 @@ export default function Team() {
           <HighlightedHeading text="Team" />
         </div>
 
-        <div className="flex mt-4 flex-col md:flex-row justify-center items-center md:items-start max-w-6xl mx-auto px-4 gap-4">
+        <div className="flex mx-4 mt-4 flex-col md:flex-row justify-center items-center md:items-start max-w-6xl xl:mx-auto px-4 gap-4">
           <div className="md:text-right leading-snug">
             <h2 className="text-teal text-2xl font-semibold mb-4">
               Warwick Student Arts Festival would not be possible without our
@@ -219,7 +219,7 @@ export default function Team() {
         </div>
       </section> */}
 
-      <div className="max-w-7xl mx-auto mb-8">
+      <div className="max-w-7xl xl:mx-auto mb-8 mx-8">
         <HighlightedHeading text="FAQ" />
         <CrewFaq />
       </div>

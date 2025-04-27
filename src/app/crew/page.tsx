@@ -59,7 +59,7 @@ export default function Team() {
       <section>
         <PageHeader />
         <div className="mt-4">
-          <HighlightedHeading text="Team" />
+          <HighlightedHeading text="Join The Crew" />
         </div>
 
         <div className="flex mx-4 mt-4 flex-col md:flex-row justify-center items-center md:items-start max-w-6xl xl:mx-auto px-4 gap-4">

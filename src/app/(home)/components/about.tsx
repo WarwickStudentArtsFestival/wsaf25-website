@@ -65,7 +65,7 @@ export default function About() {
 
       <HighlightCountdown />
 
-      <div className="flex gap-2 justify-center mb-4">
+      <div className="flex gap-2 pt-2 justify-center mb-4">
         <a
           href="https://www.instagram.com/wsaf25/"
           target="_blank"

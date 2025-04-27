@@ -12,7 +12,7 @@ export default function Perform() {
         Perform or Exhibit at WSAF
       </h1>
 
-      <Faq defaultTab="Submissions" />
+      {/* <Faq defaultTab="Submissions" /> */}
     </main>
   );
 }

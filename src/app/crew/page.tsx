@@ -55,9 +55,11 @@ const crewRoles = [
 export default function Team() {
   return (
     <main>
-      <section className="mb-8 md:mb-16">
+      <section>
         <PageHeader />
-        <HighlightedHeading text="Team" />
+        <div className="mt-4">
+          <HighlightedHeading text="Team" />
+        </div>
 
         <div className="flex mt-4 flex-col md:flex-row justify-center items-center md:items-start max-w-6xl mx-auto px-4 gap-4">
           <div className="md:text-right leading-snug">
@@ -126,7 +128,7 @@ export default function Team() {
         </div>
       </section>
 
-      <section className="mb-8 md:mb-16 max-w-8xl mx-auto">
+      <section className="my-8 max-w-8xl mx-auto">
         <HighlightedHeading text="Crew Roles" />
         <div className="mt-2 grid w-full px-16 py-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 justify-center">
           {crewRoles.map((role) => (

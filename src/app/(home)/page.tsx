@@ -16,7 +16,6 @@ export default function Home() {
       <KeyDates />
       <WhoInvolved />
       <History />
-      <Faq defaultTab="General" />
     </main>
   );
 }

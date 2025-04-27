@@ -9,10 +9,21 @@ import Wsaf2010Logo from '@/assets/history/wsaf-2010-logo.jpg';
 import Wsaf2012Poster from '@/assets/history/wsaf-2012-poster.jpg';
 import Wsaf2014Logo from '@/assets/history/wsaf-2014-logo.jpg';
 import Wsaf2015Logo from '@/assets/history/wsaf-2015-logo.jpg';
-import Image from 'next/image';
+import { FiBookOpen } from 'react-icons/fi';
 import Gallery from '@/app/history/gallery';
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
+import PiazzaStage from '@/assets/images/stage.jpg';
+import Dance from '@/assets/images/dance.jpg';
+import Curiositea from '@/assets/images/curiositea.jpg';
+import Art from '@/assets/images/art.jpg';
+import Curiositea2 from '@/assets/images/curiositea-2.jpg';
+import FabTerrace from '@/assets/images/fab-terrace.jpg';
+import FabTerrace2 from '@/assets/images/fab-terrace-2.jpg';
+import Theatre from '@/assets/images/theatre.jpg';
+import TshirtMaking from '@/assets/images/tshirt-making.jpg';
+import WsafClosingSpeech from '@/assets/images/wsaf-closing-speech.jpg';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 
 export const metadata: Metadata = {
@@ -25,51 +36,132 @@ export default function History() {
   return (
     <main>
       <PageHeader />
-      <HighlightedHeading text="History" />
+      <HighlightedHeading text="Last Year" />
+
+      <p>
+        The Warwick Student Arts Festival used to be a yearly event from 2004 to
+        2015.
+      </p>
+      <p>
+        Last year, a group of students decided to bring it back, and it was a
+        huge success! We saw 2,500+ people celebrate the arts at Warwick across
+        70+ events and 9 venues.
+      </p>
       <h1 className="text-teal text-2xl font-semibold mb-2">
-        The History of WSAF
+        WSAF 2024 Photos
       </h1>
 
-      <section className="max-w-6xl mx-auto px-4">
-        <p className="mb-2">
-          Warwick Student Arts Festival is not a completely novel idea - it made
-          its{' '}
-          <a
-            href="https://web.archive.org/web/20050506042341/http://www.wsaf.org.uk:80/"
-            className="text-teal"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            first debut on 20-24 June 2004
-          </a>
-          , with over 50 events. Since then, it ran for 11 further years before
-          it stopped, with more and more success each time.{' '}
-          <strong>
-            Our aim is to bring this event back to campus, reclaiming the title
-            as &quot;Europe&apos;s largest annual student arts festival&quot;.
-          </strong>
-        </p>
-        <p>
-          This page is based from the research of WSAF organisers Adam
-          Skrzymowski and Josh Heng, which is based off what we can find online.
-          Whilst we have made this as accurate as possible, there is likely to
-          be things we&apos;ve missed or got wrong - if you know more about the
-          lore of WSAF or know anything that could be interesting, please
-          contact us at{' '}
-          <a
-            href="mailto:info@wsaf.org.uk"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-teal"
-          >
-            info@wsaf.org.uk
-          </a>
-          !
-        </p>
-      </section>
+      <div className="px-8 lg:text-lg max-w-5xl mx-auto">
+        <div className="grid grid-cols-2 m-0 sm:grid-cols-3 lg:grid-cols-5 gap-2 w-max mx-auto">
+          <Image
+            src={PiazzaStage}
+            alt="Aerial photo of dance at the WSAF piazza stage"
+            className="object-contain h-32 md:h-40 w-auto"
+          />
+          <Image
+            src={Curiositea}
+            alt="The WSAF-mobile at Curiositea"
+            className="object-contain h-32 md:h-40 w-auto"
+          />
+          <Image
+            src={Dance}
+            alt="Dance at the WSAF piazza stage"
+            className="object-contain h-32 md:h-40 w-auto"
+          />
+          <Image
+            src={TshirtMaking}
+            alt="T-shirt making workship in the FAB"
+            className="object-contain h-32 md:h-40 w-auto"
+          />
+          <Image
+            src={FabTerrace}
+            alt="Aerial photo of WSAF at the FAB terrace"
+            className="object-contain h-32 md:h-40 w-auto"
+          />
+          <Image
+            src={Art}
+            alt="The WSAF art gallery"
+            className="object-contain h-32 md:h-40 w-auto hidden sm:block"
+          />
+          <Image
+            src={FabTerrace2}
+            alt="The indoor WSAF FAB terrace"
+            className="object-contain h-32 md:h-40 w-auto"
+          />
+          <Image
+            src={Theatre}
+            alt="Theatre at WSAF"
+            className="object-contain h-32 md:h-40 w-auto"
+          />
+          <Image
+            src={Curiositea2}
+            alt="WSAF comedy night at Curiositea"
+            className="object-contain h-32 md:h-40 w-auto"
+          />
+          <Image
+            src={WsafClosingSpeech}
+            alt="WSAF closing speech"
+            className="object-contain h-32 md:h-40 w-auto hidden lg:block"
+          />
+        </div>
+      </div>
 
-      <section className="mb-6">
-        <FestivalsTable />
+      <div className="flex flex-col mb-4 sm:flex-row items-center justify-center gap-2 my-2 text-white">
+        <a
+          href="https://2024.wsaf.org.uk"
+          className="inline-block bg-purple px-4 py-1 rounded-xs drop-shadow-xs hover:scale-105"
+          target="_blank"
+        >
+          <span className="text-xl uppercase font-bold">
+            <FiBookOpen className="inline-block mb-1 mr-2" />
+            2024 Website
+          </span>
+        </a>
+      </div>
+
+      <section className="bg-teal mt-6 text-slate-200 w-full mx-auto px-4">
+        <div className="max-w-7xl mx-auto pt-6">
+          <HighlightedHeading text="History of WSAF" />
+          <p className="my-2">
+            Warwick Student Arts Festival is not a completely novel idea - it
+            made its{' '}
+            <a
+              href="https://web.archive.org/web/20050506042341/http://www.wsaf.org.uk:80/"
+              className="text-slate-100"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              first debut on 20-24 June 2004
+            </a>
+            , with over 50 events. Since then, it ran for 11 further years
+            before it stopped, with more and more success each time.{' '}
+            <strong>
+              Our aim is to bring this event back to campus, reclaiming the
+              title as &quot;Europe&apos;s largest annual student arts
+              festival&quot;.
+            </strong>
+          </p>
+          <p>
+            This page is based from the research of WSAF organisers Adam
+            Skrzymowski and Josh Heng, which is based off what we can find
+            online. Whilst we have made this as accurate as possible, there is
+            likely to be things we&apos;ve missed or got wrong - if you know
+            more about the lore of WSAF or know anything that could be
+            interesting, please contact us at{' '}
+            <a
+              href="mailto:info@wsaf.org.uk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-teal"
+            >
+              info@wsaf.org.uk
+            </a>
+            !
+          </p>
+          <section className="mb-6">
+            <FestivalsTable />
+          </section>
+        </div>
       </section>
 
       <section className="max-w-6xl mx-auto px-4 mb-16">

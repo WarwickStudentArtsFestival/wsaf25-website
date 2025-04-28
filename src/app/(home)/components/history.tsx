@@ -1,21 +1,10 @@
 import { FiBookOpen } from 'react-icons/fi';
-import {
-  FaRegHourglass,
-} from 'react-icons/fa';
+import { FaRegHourglass } from 'react-icons/fa';
 import Image from 'next/image';
-import PiazzaStage from '@/assets/images/stage.jpg';
-import Dance from '@/assets/images/dance.jpg';
-import Curiositea from '@/assets/images/curiositea.jpg';
-import Art from '@/assets/images/art.jpg';
-import Curiositea2 from '@/assets/images/curiositea-2.jpg';
-import FabTerrace from '@/assets/images/fab-terrace.jpg';
-import FabTerrace2 from '@/assets/images/fab-terrace-2.jpg';
-import Theatre from '@/assets/images/theatre.jpg';
-import TshirtMaking from '@/assets/images/tshirt-making.jpg';
-import WsafClosingSpeech from '@/assets/images/wsaf-closing-speech.jpg';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import Wsaf2015StandImage from '@/assets/history/wsaf-2015-stand.jpg';
 import Link from 'next/link';
+import LastYearGallery from '@/app/history/components/last-year-gallery';
 
 export default function History() {
   return (
@@ -75,61 +64,8 @@ export default function History() {
         </Link>
       </div>
 
-      <p className="mt-4 mb-0.5 text-white text-sm">WSAF 2024 Photos</p>
-      <div className="px-8 lg:text-lg max-w-5xl mx-auto">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 w-max mx-auto">
-          <Image
-            src={PiazzaStage}
-            alt="Aerial photo of dance at the WSAF piazza stage"
-            className="object-contain h-32 md:h-40 w-auto"
-          />
-          <Image
-            src={Curiositea}
-            alt="The WSAF-mobile at Curiositea"
-            className="object-contain h-32 md:h-40 w-auto"
-          />
-          <Image
-            src={Dance}
-            alt="Dance at the WSAF piazza stage"
-            className="object-contain h-32 md:h-40 w-auto"
-          />
-          <Image
-            src={TshirtMaking}
-            alt="T-shirt making workship in the FAB"
-            className="object-contain h-32 md:h-40 w-auto"
-          />
-          <Image
-            src={FabTerrace}
-            alt="Aerial photo of WSAF at the FAB terrace"
-            className="object-contain h-32 md:h-40 w-auto"
-          />
-          <Image
-            src={Art}
-            alt="The WSAF art gallery"
-            className="object-contain h-32 md:h-40 w-auto hidden sm:block"
-          />
-          <Image
-            src={FabTerrace2}
-            alt="The indoor WSAF FAB terrace"
-            className="object-contain h-32 md:h-40 w-auto"
-          />
-          <Image
-            src={Theatre}
-            alt="Theatre at WSAF"
-            className="object-contain h-32 md:h-40 w-auto"
-          />
-          <Image
-            src={Curiositea2}
-            alt="WSAF comedy night at Curiositea"
-            className="object-contain h-32 md:h-40 w-auto"
-          />
-          <Image
-            src={WsafClosingSpeech}
-            alt="WSAF closing speech"
-            className="object-contain h-32 md:h-40 w-auto hidden lg:block"
-          />
-        </div>
-      </div>
+      <LastYearGallery />
+      <p className="mt-0.5 mb-4 text-white text-sm">WSAF 2024 Photos</p>
     </section>
   );
 }

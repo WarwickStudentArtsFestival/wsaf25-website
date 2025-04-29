@@ -1,5 +1,4 @@
-import { StaticImageData } from 'next/image';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 export type IdCardProps = {
   name: string;
@@ -26,11 +25,11 @@ export default function IdCard({
   image?: StaticImageData;
 }) {
   return (
-    <article className="rounded-xl m-2 overflow-hidden w-40 sm:w-52 flex flex-col bg-accent">
-      <header className="bg-secondary h-6 sm:h-8 flex justify-center items-center">
-        <div className="rounded-2xl w-12 h-2 sm:h-3 mt-1 bg-accent" />
+    <article className="rounded-xl m-2 overflow-hidden w-40 sm:w-52 flex flex-col bg-yellow">
+      <header className="bg-purple h-6 sm:h-8 flex justify-center items-center">
+        <div className="rounded-2xl w-12 h-2 sm:h-3 mt-1 bg-yellow" />
       </header>
-      <div className="flex-grow flex flex-col px-4 py-1 sm:py-2 text-black">
+      <div className="grow flex flex-col px-4 py-1 sm:py-2 text-black">
         {image && (
           <Image
             src={image}
@@ -47,7 +46,7 @@ export default function IdCard({
             <a
               href="mailto:info@wsaf.org.uk"
               target="_blank"
-              className="text-secondary"
+              className="bg-secondary"
             >
               info@wsaf.org.uk
             </a>
@@ -60,7 +59,7 @@ export default function IdCard({
         )}
       </div>
       {role && (
-        <footer className="bg-secondary text-sm sm:text-lg leading-tight sm:leading-tight uppercase font-bold pt-1 pb-1 sm:pb-2 px-2 mt-auto min-h-12 sm:min-h-14 flex justify-center items-center whitespace-pre-wrap">
+        <footer className="bg-purple text-white text-sm sm:text-lg leading-tight sm:leading-tight uppercase font-bold pt-1 pb-1 sm:pb-2 px-2 mt-auto min-h-12 sm:min-h-14 flex justify-center items-center whitespace-pre-wrap">
           {role}
         </footer>
       )}

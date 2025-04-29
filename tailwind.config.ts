@@ -3,22 +3,21 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx,css}',
   ],
   theme: {
     extend: {
       colors: {
-        primary: '#087F8C',
-        secondary: '#4F1D75',
+        teal: '#087F8C',
+        purple: '#4F1D75',
         tertiary: '#FF0054',
-        accent: '#FFBD00',
+        yellow: '#FFBD00',
         white: '#FFFFFF',
         dark: '#000000',
         orange: '#FF5400',
         'event-pink': '#B82458',
         'event-orange': '#F5722F',
+        'text-dark': '#737373'
       },
       fontSize: {
         '2xs': '0.6rem',
@@ -38,17 +37,5 @@ const config: Config = {
     },
   },
   plugins: [],
-  safelist: [
-    '!bg-accent',
-    '!bg-secondary',
-    '!bg-event-pink',
-    '!bg-event-orange',
-    '!text-white',
-    '!text-black',
-    'border-b-accent',
-    'border-b-event-orange',
-    'border-b-event-pink',
-    'border-b-secondary',
-  ],
 };
 export default config;

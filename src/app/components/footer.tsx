@@ -1,91 +1,154 @@
-import Image from 'next/image';
-import warwickTechCrewLogo from '@/assets/organisations/warwick-tech-crew.png';
-import warwickSuLogo from '@/assets/organisations/warwick-su.svg';
-import warwickPresentsLogo from '@/assets/organisations/warwick-presents.png';
 import Link from 'next/link';
-import { FiInstagram } from 'react-icons/fi';
-import { FaDiscord } from 'react-icons/fa';
+import { FaDiscord, FaEnvelope, FaGithub, FaYoutube } from 'react-icons/fa';
+import { AiFillInstagram } from 'react-icons/ai';
 
-export default function Footer() {
+type LinkItem = {
+  href: string;
+  label: string;
+  icon?: React.ComponentType<{ className?: string }>;
+  newTab?: boolean;
+};
+
+type SectionProps = {
+  title: string | React.ReactNode;
+  children: React.ReactNode;
+};
+
+const FooterLink: React.FC<LinkItem & { children?: React.ReactNode }> = ({
+  href,
+  label,
+  icon: Icon,
+  children,
+  newTab,
+}) => (
+  <li>
+    <Link
+      href={href}
+      className="text-muted-foreground hover:text-slate-200"
+      target={newTab ? '_blank' : undefined}
+      rel={newTab ? 'noopener noreferrer' : undefined}
+    >
+      {Icon ? (
+        <>
+          <span className="sr-only">{label}</span>
+          <Icon className="h-5 w-5" />
+        </>
+      ) : (
+        children || label
+      )}
+    </Link>
+  </li>
+);
+
+const Section: React.FC<SectionProps> = ({ title, children }) => (
+  <div>
+    <h3 className="text-lg text-left text-yellow font-semibold mb-4">
+      {title}
+    </h3>
+    {children}
+  </div>
+);
+
+const Footer: React.FC = () => {
+  const links = {
+    quick: [
+      { href: '/perform', label: 'Perform or Exhibit' },
+      { href: '/crew', label: 'Join the Crew' },
+      { href: '/submit', label: 'Submit to WSAF' },
+      { href: '/wpaint', label: 'W-Paint' },
+    ],
+    info: [
+      { href: '/privacy', label: 'Privacy Policy' },
+      { href: '/press', label: 'Press Kit' },
+      { href: '/partners', label: 'Delivery Partners' },
+      { href: '/faq', label: 'FAQs' },
+    ],
+    social: [
+      {
+        href: 'https://www.instagram.com/wsaf25/',
+        label: 'Instagram',
+        icon: AiFillInstagram,
+        newTab: true,
+      },
+      {
+        href: 'https://discord.gg/TuFwJX4GKM',
+        label: 'Discord',
+        icon: FaDiscord,
+        newTab: true,
+      },
+      {
+        href: 'mailto:info@wsaf.org.uk',
+        label: 'Email',
+        icon: FaEnvelope,
+        newTab: true,
+      },
+      {
+        href: 'https://www.youtube.com/channel/UCCFESD5QMLnlgKQjkBLuv3A',
+        label: 'YouTube',
+        icon: FaYoutube,
+        newTab: true,
+      },
+    ],
+  };
+
   return (
-    <footer className="bg-secondary mt-auto px-4 pt-6 pb-8 text-sm">
-      <div className="flex gap-2 justify-center items-center font-bold uppercase">
-        <Link href="/">WSAF</Link>
-        <span className="font-light"> • </span>
-        <Link href="/history">History</Link>
-      </div>
-
-      <div className="m-2">
-        <h3 className="font-bold">Delivery Partners</h3>
-        <p className="font-light">
-          WSAF would not be possible without the generous support of our
-          delivery partners:
-        </p>
-        <div className="flex justify-center items-center gap-4 mt-1">
-          <a href="https://www.warwicktechcrew.co.uk/" target="_blank">
-            <Image
-              src={warwickTechCrewLogo}
-              alt="Warwick Tech Crew logo"
-              className="h-12 sm:h-16 w-auto"
-            />
-          </a>
-          <a
-            href="https://warwick.ac.uk/students/warwickpresents/"
-            target="_blank"
+    <footer className="bg-teal text-white w-full border-t">
+      <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+          <Section
+            title={
+              <span>
+                <span className="text-white">WSAF</span> 2025
+              </span>
+            }
           >
-            <Image
-              src={warwickPresentsLogo}
-              alt="Warwick Presents logo"
-              className="h-8 sm:h-10 w-auto"
-            />
-          </a>
-          <a href="https://www.warwicksu.com/" target="_blank">
-            <Image
-              src={warwickSuLogo}
-              alt="Warwick SU logo"
-              className="h-9 sm:h-14 w-auto"
-            />
-          </a>
+            <p className="text-sm text-left pr-8 text-muted-foreground">
+              Celebrating student creativity at the University of Warwick
+            </p>
+          </Section>
+
+          <Section title="Quick Links">
+            <ul className="space-y-3 text-left text-sm">
+              {links.quick.map((link, index) => (
+                <FooterLink key={index} {...link} />
+              ))}
+            </ul>
+          </Section>
+
+          <Section title="Information">
+            <ul className="space-y-3 text-left text-sm">
+              {links.info.map((link, index) => (
+                <FooterLink key={index} {...link} />
+              ))}
+            </ul>
+          </Section>
+
+          <Section title="Follow Us">
+            <ul className="flex align-center space-x-4">
+              {links.social.map((social, index) => (
+                <FooterLink key={index} {...social} />
+              ))}
+            </ul>
+          </Section>
+        </div>
+
+        <div className="mt-10 border-t pt-6 text-center text-sm text-muted-foreground">
+          <p>© 2025 Warwick Student Arts Festival. All rights reserved.</p>
+          <p className="mt-2 flex justify-center items-center gap-1">
+            <FaGithub className="inline-block" />
+            <a
+              href="https://github.com/WarwickStudentArtsFestival/wsaf25-website"
+              className="underline hover:text-slate-200"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open source on GitHub
+            </a>
+          </p>
         </div>
       </div>
-      <p className="font-light mt-8">
-        Copyright © Warwick Student Arts Festival 2025
-      </p>
-
-      <p className="font-bold text-xs">
-        <a
-          href="https://github.com/WarwickStudentArtsFestival/WSAF25-Website"
-          target="_blank"
-        >
-          Source Code
-        </a>
-        <span className="font-light mx-1">•</span>
-        <a href="/privacy">Privacy Policy</a>
-      </p>
-
-      <p className="font-bold mt-2 flex gap-2 justify-center">
-        <a href="mailto:info@wsaf.org.uk" target="_blank">
-          info@wsaf.org.uk
-        </a>
-        <span className="font-light">•</span>
-        <a
-          href="/instagram"
-          target="_blank"
-          className="flex items-center justify-center"
-        >
-          <FiInstagram className="inline mr-0.5 mt-0.5" />
-          @wsaf24
-        </a>
-        <span className="font-light">•</span>
-        <a
-          href="/discord"
-          target="_blank"
-          className="flex items-center justify-center"
-        >
-          <FaDiscord className="inline mr-0.5" />
-          Discord
-        </a>
-      </p>
     </footer>
   );
-}
+};
+
+export default Footer;

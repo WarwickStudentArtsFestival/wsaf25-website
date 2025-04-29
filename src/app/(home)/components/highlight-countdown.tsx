@@ -35,7 +35,7 @@ export default function HighlightCountdown() {
   return (
     <a
       href="https://submit.wsaf.org.uk/2025/cfp"
-      className="inline-block mb-1 bg-purple px-6 py-2 rounded-md drop-shadow-xs hover:scale-105 text-white"
+      className="inline-block mb-1 bg-purple px-6 py-2 rounded-md drop-shadow-xs hover:scale-105 text-white mx-2"
       target="_blank"
     >
       <FiCalendar className="mx-auto text-2xl text-yellow" />

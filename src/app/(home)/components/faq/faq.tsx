@@ -28,7 +28,7 @@ export default function Faq({ defaultTab }: { defaultTab?: string }) {
           <button
             key={tab}
             onClick={() => setSelectedTab(tab)}
-            className={`px-4 py-1 uppercase text-sm text-slate-600 hover:cursor-pointer rounded-md border-slate-400 hover:bg-slate-300 hover:drop-shadow-sm ${selectedTab === tab ? 'bg-slate-300 border drop-shadow-sm' : ''}`}
+            className={`px-4 py-1 uppercase text-xs xs:text-sm text-slate-600 hover:cursor-pointer rounded-md border-slate-400 hover:bg-slate-300 hover:drop-shadow-sm ${selectedTab === tab ? 'bg-slate-300 border drop-shadow-sm' : ''}`}
           >
             {tab}
           </button>

@@ -1,5 +1,4 @@
-import { StaticImageData } from 'next/image';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 export type IdCardProps = {
   name: string;
@@ -60,7 +59,7 @@ export default function IdCard({
         )}
       </div>
       {role && (
-        <footer className="bg-purple text-sm sm:text-lg leading-tight sm:leading-tight uppercase font-bold pt-1 pb-1 sm:pb-2 px-2 mt-auto min-h-12 sm:min-h-14 flex justify-center items-center whitespace-pre-wrap">
+        <footer className="bg-purple text-white text-sm sm:text-lg leading-tight sm:leading-tight uppercase font-bold pt-1 pb-1 sm:pb-2 px-2 mt-auto min-h-12 sm:min-h-14 flex justify-center items-center whitespace-pre-wrap">
           {role}
         </footer>
       )}

@@ -2,6 +2,9 @@ import IdCard from '@/app/components/id-card';
 import AvatarImage from '@/assets/people/avatar.jpg';
 import { FiArrowRight } from 'react-icons/fi';
 import HighlightedHeading from '@/app/components/highlighted-heading';
+import Link from 'next/link';
+import organisers from '@/app/crew/organisers';
+import React from 'react';
 
 export default function KeyDates() {
   return (
@@ -11,20 +14,22 @@ export default function KeyDates() {
         The Team Behind The Warwick Student Arts Festival
       </h2>
       <p className="mt-2 mb-1 mx-4">
-        WSAF 2024 was organised by a team of over 30 volunteers in roles such as
-        organisation, marketing, tech and logistics.
-        <br />
-        If you&apos;d be interested in helping out this year, please email us at{' '}
-        <a
-          href="mailto:info@wsaf.org.uk"
-          className="text-yellow"
-          target="_blank"
-        >
-          info@wsaf.org.uk.
-        </a>
+        Whilst we collaborate with the University and are primarily funded by
+        the Together@Warwick grant, WSAF is a fully student-run event. We have
+        many teams including marketing, stewarding, digital and tech, and
+        we&apos;d love to see you be a part of it!
       </p>
 
       <div className="flex text-white justify-center flex-wrap mb-4">
+        {organisers.map((person) => (
+          <IdCard
+            key={person.name}
+            name={person.name}
+            description={person.description}
+            role="Organiser"
+            image={person.image}
+          />
+        ))}
         <IdCard
           name="You?"
           role="Volunteer"
@@ -33,15 +38,15 @@ export default function KeyDates() {
         />
       </div>
 
-      <a
-        href="https://2024.wsaf.org.uk/team"
-        className="inline-block bg-tertiary px-4 py-1 rounded-xs drop-shadow-xs hover:scale-105 mb-4 mx-4"
+      <Link
+        href="/crew"
+        className="inline-block bg-purple px-4 py-1 rounded-xs drop-shadow-xs hover:scale-105 mb-4 mx-4"
       >
         <span className="text-xl uppercase text-white font-bold">
           <FiArrowRight className="inline mr-2 mb-1" />
-          View the WSAF 2024 Team
+          Join the WSAF 2025 Crew
         </span>
-      </a>
+      </Link>
     </section>
   );
 }

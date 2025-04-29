@@ -13,6 +13,8 @@ import Stewards from '@/assets/crew/circle-team.jpg';
 import Tech from '@/assets/crew/colourful-stage.jpg';
 import VenueManager from '@/assets/crew/fab-terrace-drone.jpg';
 import Operations from '@/assets/crew/flight-cases.jpg';
+import organisers from '@/app/crew/organisers';
+import IdCard from '@/app/components/id-card';
 
 export const metadata: Metadata = {
   title: 'Team | Warwick Student Arts Festival 2024',
@@ -89,7 +91,7 @@ export default function Team() {
               <a
                 href="mailto:info@wsaf.org.uk"
                 target="_blank"
-                className="text-accent"
+                className="text-teal"
               >
                 info@wsaf.org.uk
               </a>
@@ -157,11 +159,14 @@ export default function Team() {
         </a> */}
       </section>
 
-      {/* <section className="md:mb-16">
-        <h2>Organiser Team</h2>
+      <section className="md:mb-16">
+        <HighlightedHeading text="Meet the Team" />
+        <h2 className="text-teal text-xl pt-2 sm:text-2xl font-semibold">
+          Organisers
+        </h2>
         <p className="mb-1 max-w-6xl mx-auto px-4">
-          Our organiser team, led by the four founders, have been central in the
-          preparation and coordination of WSAF.
+          Our organisers are responsible for the overall planning and running of
+          WSAF.
         </p>
 
         <div className="flex justify-center flex-wrap mb-8 mx-4">
@@ -170,14 +175,14 @@ export default function Team() {
               key={person.name}
               name={person.name}
               description={person.description}
-              role={person.role}
+              role="Organiser"
               image={person.image}
             />
           ))}
         </div>
       </section>
 
-      <section className="md:mb-16">
+      {/*<section className="md:mb-16">
         <h2>Volunteer Team</h2>
         <p className="mb-1 max-w-6xl mx-auto px-4">
           Our volunteer team are also essential to the running of WSAF, and

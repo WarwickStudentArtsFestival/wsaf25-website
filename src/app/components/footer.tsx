@@ -6,6 +6,7 @@ type LinkItem = {
   href: string;
   label: string;
   icon?: React.ComponentType<{ className?: string }>;
+  newTab?: boolean;
 };
 
 type SectionProps = {
@@ -18,9 +19,15 @@ const FooterLink: React.FC<LinkItem & { children?: React.ReactNode }> = ({
   label,
   icon: Icon,
   children,
+  newTab,
 }) => (
   <li>
-    <Link href={href} className="text-muted-foreground hover:text-slate-200">
+    <Link
+      href={href}
+      className="text-muted-foreground hover:text-slate-200"
+      target={newTab ? '_blank' : undefined}
+      rel={newTab ? 'noopener noreferrer' : undefined}
+    >
       {Icon ? (
         <>
           <span className="sr-only">{label}</span>
@@ -61,17 +68,25 @@ const Footer: React.FC = () => {
         href: 'https://www.instagram.com/wsaf25/',
         label: 'Instagram',
         icon: AiFillInstagram,
+        newTab: true,
       },
       {
         href: 'https://discord.gg/TuFwJX4GKM',
         label: 'Discord',
         icon: FaDiscord,
+        newTab: true,
       },
-      { href: 'mailto:info@wsaf.org.uk', label: 'Email', icon: FaEnvelope },
+      {
+        href: 'mailto:info@wsaf.org.uk',
+        label: 'Email',
+        icon: FaEnvelope,
+        newTab: true,
+      },
       {
         href: 'https://www.youtube.com/channel/UCCFESD5QMLnlgKQjkBLuv3A',
         label: 'YouTube',
         icon: FaYoutube,
+        newTab: true,
       },
     ],
   };

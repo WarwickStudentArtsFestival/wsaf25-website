@@ -1,11 +1,11 @@
 import AdamPhoto from '@/assets/people/adam.jpg';
 import AlexPhoto from '@/assets/people/alex.jpg';
-import DaePhoto from '@/assets/people/dae.jpg';
-import MaximusPhoto from '@/assets/people/maximus.jpg';
+// import DaePhoto from '@/assets/people/dae.jpg';
+// import MaximusPhoto from '@/assets/people/maximus.jpg';
 import JoshPhoto from '@/assets/people/josh.jpg';
 import ElliePhoto from '@/assets/people/ellie.jpg';
-import EthanPhoto from '@/assets/people/ethan.jpg';
-import KitPhoto from '@/assets/people/kit.jpg';
+// import EthanPhoto from '@/assets/people/ethan.jpg';
+// import KitPhoto from '@/assets/people/kit.jpg';
 import { IdCardProps } from '@/app/components/people-involved/id-card';
 import KishanPhoto from '@/assets/people/kishan.jpg';
 import EchoPhoto from '@/assets/people/echo.jpg';

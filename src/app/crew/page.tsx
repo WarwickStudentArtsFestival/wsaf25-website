@@ -3,7 +3,7 @@ import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import PosteringImage from '@/assets/images/postering.jpg';
 import Image from 'next/image';
-import RoleCard from '@/app/crew/RoleCard';
+import RoleCard from '@/app/components/RoleCard';
 import { FaDiscord } from 'react-icons/fa';
 import { Metadata } from 'next';
 import CrewFaq from '../(home)/components/faq/crew-faq';

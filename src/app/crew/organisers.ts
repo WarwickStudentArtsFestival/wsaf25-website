@@ -8,6 +8,7 @@ import EthanPhoto from '@/assets/people/ethan.jpg';
 import KitPhoto from '@/assets/people/kit.jpg';
 import { IdCardProps } from '@/app/components/id-card';
 import KishanPhoto from '@/assets/people/kishan.jpg';
+import EchoPhoto from '@/assets/people/echo.jpg';
 import DannyPhoto from '@/assets/people/danny.jpg';
 import JoelPhoto from '@/assets/people/joel.jpg';
 
@@ -73,11 +74,19 @@ const organisers: IdCardProps[] = [
     image: KishanPhoto,
   },
   {
+    name: 'Echo',
+    role: 'Tech',
+    description: '2nd Year Cyber Security',
+    image: EchoPhoto,
+  },
+  {
     name: 'Danny',
     role: 'Sustainability Coordinator',
     description: '3rd Year Biological Sciences',
     image: DannyPhoto,
   },
 ];
+
+organisers.sort((a, b) => a.name.localeCompare(b.name));
 
 export default organisers;

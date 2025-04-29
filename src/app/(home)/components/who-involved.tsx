@@ -5,7 +5,7 @@ import HighlightedHeading from '@/app/components/highlighted-heading';
 
 export default function KeyDates() {
   return (
-    <section className="mb-4 md:mb-8">
+    <section className="py-8">
       <HighlightedHeading text="Who is WSAF?" />
       <h2 className="text-teal text-2xl font-semibold">
         The Team Behind The Warwick Student Arts Festival

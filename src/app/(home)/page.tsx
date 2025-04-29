@@ -14,9 +14,9 @@ export default function Home() {
       <Hero />
       <About />
       <KeyDates />
-      <Faq defaultTab="General" />
-      <History />
       <WhoInvolved />
+      <History />
+      <Faq defaultTab="General" />
     </main>
   );
 }

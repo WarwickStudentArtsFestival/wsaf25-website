@@ -17,7 +17,7 @@ export default function Faq({ defaultTab }: { defaultTab?: string }) {
   );
 
   return (
-    <section className="py-4">
+    <section className="py-4 pb-8">
       <HighlightedHeading text="FAQ" />
       <h2 className="text-teal text-2xl font-semibold mb-2">
         Frequently Asked Questions

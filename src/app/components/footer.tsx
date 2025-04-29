@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaEnvelope, FaYoutube, FaDiscord } from 'react-icons/fa';
+import { FaEnvelope, FaYoutube, FaDiscord, FaGithub } from 'react-icons/fa';
 import { AiFillInstagram } from 'react-icons/ai';
 
 type LinkItem = {
@@ -113,6 +113,17 @@ const Footer: React.FC = () => {
 
         <div className="mt-10 border-t pt-6 text-center text-sm text-muted-foreground">
           <p>© 2025 Warwick Student Arts Festival. All rights reserved.</p>
+          <p className="mt-2 flex justify-center items-center gap-1">
+            <FaGithub className="inline-block" />
+            <a
+              href="https://github.com/WarwickStudentArtsFestival/wsaf25-website"
+              className="underline hover:text-slate-200"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open source on GitHub
+            </a>
+          </p>
         </div>
       </div>
     </footer>

@@ -13,7 +13,7 @@ export default function KeyDates() {
       <h2 className="text-teal text-2xl font-semibold">
         The Team Behind The Warwick Student Arts Festival
       </h2>
-      <p className="mt-2 mb-1 mx-4">
+      <p className="mt-2 mb-1 max-w-6xl mx-auto p-4">
         Whilst we collaborate with the University and are primarily funded by
         the Together@Warwick grant, WSAF is a fully student-run event. We have
         many teams including marketing, stewarding, digital and tech, and

@@ -11,79 +11,136 @@ import KishanPhoto from '@/assets/people/kishan.jpg';
 import EchoPhoto from '@/assets/people/echo.jpg';
 import DannyPhoto from '@/assets/people/danny.jpg';
 import JoelPhoto from '@/assets/people/joel.jpg';
+import AlicePhoto from '@/assets/people/alice.jpg';
+import GeorgePhoto from '@/assets/people/george.jpg';
+import KatchImage from '@/assets/people/katch.jpg';
+import EmrysImage from '@/assets/people/emrys.jpg';
+import IzzyImage from '@/assets/people/izzy.jpg';
 
-const organisers: IdCardProps[] = [
+interface RefactoredIdCardProps extends Omit<IdCardProps, 'description'> {
+  year: string;
+  course: string;
+}
+
+const organisers: RefactoredIdCardProps[] = [
   {
     name: 'Adam',
     role: 'WSAF Lead (Technical)',
-    description: '4th Year Computer Systems Engineering',
+    year: '4th Year',
+    course: 'Computer Systems Engineering',
     image: AdamPhoto,
   },
   {
     name: 'Alex',
     role: 'WSAF Lead (Operations)',
-    description: '3rd Year\nChemistry (PhD)',
+    year: '3rd Year',
+    course: 'Chemistry (PhD)',
     image: AlexPhoto,
   },
   {
     name: 'Dae',
     role: 'WSAF Lead (Communications)',
-    description: '3rd Year\nLiberal Arts',
+    year: '3rd Year',
+    course: 'Liberal Arts',
     image: DaePhoto,
   },
   {
     name: 'Maximus',
     role: 'WSAF Lead (Finance & Data)',
-    description: '2nd Year\nMathematics',
+    year: '2nd Year',
+    course: 'Mathematics',
     image: MaximusPhoto,
   },
   {
     name: 'Josh',
     role: 'Head of\nDigital',
-    description: '3rd Year Computer Science',
+    year: '3rd Year',
+    course: 'Computer Science',
     image: JoshPhoto,
   },
   {
     name: 'Ellie',
     role: 'Head of Marketing',
-    description: '3rd Year English and Theatre Studies',
+    year: '3rd Year',
+    course: 'English and Theatre Studies',
     image: ElliePhoto,
   },
   {
     name: 'Ethan',
     role: 'Head of\nTeam Catering',
-    description: '3rd Year Mechanical Engineering',
+    year: '3rd Year',
+    course: 'Mechanical Engineering',
     image: EthanPhoto,
   },
   {
     name: 'Joel',
     role: 'Head of Streaming',
-    description: '3rd Year Computer Science',
+    year: '3rd Year',
+    course: 'Computer Science',
     image: JoelPhoto,
   },
   {
     name: 'Kit',
     role: 'Communications',
-    description: '3rd Year Politics and Sociology',
+    year: '3rd Year',
+    course: 'Politics and Sociology',
     image: KitPhoto,
   },
   {
     name: 'Kishan',
     role: 'Tech',
-    description: '3rd Year Computer Science & Mathematics',
+    year: '3rd Year',
+    course: 'Computer Science & Mathematics',
     image: KishanPhoto,
   },
   {
     name: 'Echo',
     role: 'Tech',
-    description: '2nd Year Cyber Security',
+    year: '2nd Year',
+    course: 'Cyber Security',
     image: EchoPhoto,
   },
   {
     name: 'Danny',
     role: 'Sustainability Coordinator',
-    description: '3rd Year Biological Sciences',
+    year: '3rd Year',
+    course: 'Biological Sciences',
     image: DannyPhoto,
+  },
+  {
+    name: 'Alice',
+    role: 'Organiser',
+    year: '3rd Year',
+    course: 'Manufacturing and Mechanical Engineering',
+    image: AlicePhoto,
+  },
+  {
+    name: 'George',
+    role: 'Organiser',
+    year: '3rd Year',
+    course: 'English and Theatre Studies',
+    image: GeorgePhoto,
+  },
+  {
+    name: 'Katch',
+    role: 'Organiser',
+    year: '4th Year',
+    course: 'Politics and International Studies',
+    image: KatchImage,
+  },
+  {
+    name: 'Emrys',
+    role: 'Organiser',
+    year: '2nd Year',
+    course: 'International Management ',
+    image: EmrysImage,
+  },
+  {
+    name: 'Izzy',
+    role: 'Organiser',
+    year: '1st',
+    course: 'English and Theatre Studies',
+    image: IzzyImage,
   },
 ];
 

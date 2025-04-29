@@ -13,8 +13,7 @@ import Stewards from '@/assets/crew/circle-team.jpg';
 import Tech from '@/assets/crew/colourful-stage.jpg';
 import VenueManager from '@/assets/crew/fab-terrace-drone.jpg';
 import Operations from '@/assets/crew/flight-cases.jpg';
-import organisers from '@/app/crew/organisers';
-import IdCard from '@/app/components/id-card';
+import PeopleInvolved from '../components/people-involved';
 
 export const metadata: Metadata = {
   title: 'Team | Warwick Student Arts Festival 2024',
@@ -159,7 +158,7 @@ export default function Team() {
         </a> */}
       </section>
 
-      <section className="md:mb-16">
+      <section className="">
         <HighlightedHeading text="Meet the Team" />
         <h2 className="text-teal text-xl pt-2 sm:text-2xl font-semibold">
           Organisers
@@ -168,18 +167,7 @@ export default function Team() {
           Our organisers are responsible for the overall planning and running of
           WSAF.
         </p>
-
-        <div className="flex justify-center flex-wrap mb-8 mx-4">
-          {organisers.map((person) => (
-            <IdCard
-              key={person.name}
-              name={person.name}
-              description={person.description}
-              role="Organiser"
-              image={person.image}
-            />
-          ))}
-        </div>
+        <PeopleInvolved />
       </section>
 
       {/*<section className="md:mb-16">

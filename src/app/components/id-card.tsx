@@ -2,7 +2,8 @@ import Image, { StaticImageData } from 'next/image';
 
 export type IdCardProps = {
   name: string;
-  description?: string;
+  year?: string;
+  course?: string;
   role?: string;
   pronouns?: string;
   image?: StaticImageData;
@@ -11,37 +12,42 @@ export type IdCardProps = {
 
 export default function IdCard({
   name,
-  description,
+  year,
+  course,
   emailDescription,
   role,
   pronouns,
   image,
 }: {
   name: string;
-  description?: string;
+  year?: string;
+  course?: string;
   emailDescription?: boolean;
   role?: string;
   pronouns?: string;
   image?: StaticImageData;
 }) {
   return (
-    <article className="rounded-xl m-2 overflow-hidden w-40 sm:w-52 flex flex-col bg-yellow">
-      <header className="bg-purple h-6 sm:h-8 flex justify-center items-center">
-        <div className="rounded-2xl w-12 h-2 sm:h-3 mt-1 bg-yellow" />
-      </header>
-      <div className="grow flex flex-col px-4 py-1 sm:py-2 text-black">
-        {image && (
+    <article className="rounded-xl border text-left border-slate-300 m-2 overflow-hidden w-36 sm:w-44 flex flex-col h-80">
+      {image && (
+        <div className="relative w-full h-2/3">
           <Image
             src={image}
             alt={`Image of ${name}`}
-            className="mx-auto mb-2 w-24 sm:w-32 h-auto"
+            className="object-cover"
+            fill
             placeholder="blur"
           />
-        )}
-        <h3 className="text-lg sm:text-xl font-bold leading-tight">{name}</h3>
+        </div>
+      )}
+      <div className="flex flex-col p-2 text-slate-600 flex-1 overflow-hidden">
+        <h3 className="text-base sm:text-lg font-bold leading-tight text-teal">
+          {name}
+        </h3>
+        <h3 className="text-xs font-bold leading-tight text-black">{role}</h3>
         {pronouns && <p className="text-2xs font-bold -mt-1">{pronouns}</p>}
         {emailDescription && (
-          <span className="block text-xs sm:text-sm leading-tight">
+          <span className="text-xs sm:text-sm leading-tight mt-1">
             Interested? Email us at{' '}
             <a
               href="mailto:info@wsaf.org.uk"
@@ -52,17 +58,17 @@ export default function IdCard({
             </a>
           </span>
         )}
-        {description && (
-          <span className="block text-xs sm:text-sm leading-tight whitespace-pre-wrap">
-            {description}
+        {course && (
+          <span className="block text-xs sm:text-sm leading-tight whitespace-pre-wrap mt-1">
+            {course}
           </span>
         )}
+        {/* {year && (
+          <span className="block text-xs sm:text-sm leading-tight whitespace-pre-wrap mt-auto">
+            {year}
+          </span>
+        )} */}
       </div>
-      {role && (
-        <footer className="bg-purple text-white text-sm sm:text-lg leading-tight sm:leading-tight uppercase font-bold pt-1 pb-1 sm:pb-2 px-2 mt-auto min-h-12 sm:min-h-14 flex justify-center items-center whitespace-pre-wrap">
-          {role}
-        </footer>
-      )}
     </article>
   );
 }

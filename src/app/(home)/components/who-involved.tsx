@@ -1,10 +1,8 @@
-import IdCard from '@/app/components/id-card';
-import AvatarImage from '@/assets/people/avatar.jpg';
 import { FiArrowRight } from 'react-icons/fi';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import Link from 'next/link';
-import organisers from '@/app/crew/organisers';
 import React from 'react';
+import PeopleInvolved from '@/app/components/people-involved';
 
 export default function KeyDates() {
   return (
@@ -19,24 +17,7 @@ export default function KeyDates() {
         many teams including marketing, stewarding, digital and tech, and
         we&apos;d love to see you be a part of it!
       </p>
-
-      <div className="flex text-white justify-center flex-wrap mb-4">
-        {organisers.map((person) => (
-          <IdCard
-            key={person.name}
-            name={person.name}
-            description={person.description}
-            role="Organiser"
-            image={person.image}
-          />
-        ))}
-        <IdCard
-          name="You?"
-          role="Volunteer"
-          image={AvatarImage}
-          emailDescription
-        />
-      </div>
+      <PeopleInvolved />
 
       <Link
         href="/crew"

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FaEnvelope, FaYoutube, FaDiscord, FaGithub } from 'react-icons/fa';
+import { FaDiscord, FaEnvelope, FaGithub, FaYoutube } from 'react-icons/fa';
 import { AiFillInstagram } from 'react-icons/ai';
 
 type LinkItem = {
@@ -9,7 +9,7 @@ type LinkItem = {
 };
 
 type SectionProps = {
-  title: string;
+  title: string | React.ReactNode;
   children: React.ReactNode;
 };
 
@@ -80,7 +80,13 @@ const Footer: React.FC = () => {
     <footer className="bg-teal text-white w-full border-t">
       <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-          <Section title="WSAF 2025">
+          <Section
+            title={
+              <span>
+                <span className="text-white">WSAF</span> 2025
+              </span>
+            }
+          >
             <p className="text-sm text-left pr-8 text-muted-foreground">
               Celebrating student creativity at the University of Warwick
             </p>

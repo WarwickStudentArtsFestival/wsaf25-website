@@ -7,6 +7,7 @@ import ElliePhoto from '@/assets/people/ellie.jpg';
 import EthanPhoto from '@/assets/people/ethan.jpg';
 import KitPhoto from '@/assets/people/kit.jpg';
 import { IdCardProps } from '@/app/components/id-card';
+import KishanPhoto from '@/assets/people/kishan.jpg';
 import DannyPhoto from '@/assets/people/danny.jpg';
 import JoelPhoto from '@/assets/people/joel.jpg';
 
@@ -20,31 +21,31 @@ const organisers: IdCardProps[] = [
   {
     name: 'Alex',
     role: 'WSAF Lead (Operations)',
-    description: '2nd Year\nChemistry (PhD)',
+    description: '3rd Year\nChemistry (PhD)',
     image: AlexPhoto,
   },
   {
     name: 'Dae',
     role: 'WSAF Lead (Communications)',
-    description: '2nd Year\nLiberal Arts',
+    description: '3rd Year\nLiberal Arts',
     image: DaePhoto,
   },
   {
     name: 'Maximus',
     role: 'WSAF Lead (Finance & Data)',
-    description: '1st Year\nMathematics',
+    description: '2nd Year\nMathematics',
     image: MaximusPhoto,
   },
   {
     name: 'Josh',
     role: 'Head of\nDigital',
-    description: '2nd Year Computer Science',
+    description: '3rd Year Computer Science',
     image: JoshPhoto,
   },
   {
     name: 'Ellie',
     role: 'Head of Marketing',
-    description: '2nd Year English and Theatre Studies',
+    description: '3rd Year English and Theatre Studies',
     image: ElliePhoto,
   },
   {
@@ -56,19 +57,25 @@ const organisers: IdCardProps[] = [
   {
     name: 'Joel',
     role: 'Head of Streaming',
-    description: '2nd Year Computer Science',
+    description: '3rd Year Computer Science',
     image: JoelPhoto,
   },
   {
     name: 'Kit',
     role: 'Communications',
-    description: '2nd Year Politics and Sociology',
+    description: '3rd Year Politics and Sociology',
     image: KitPhoto,
+  },
+  {
+    name: 'Kishan',
+    role: 'Tech',
+    description: '3rd Year Computer Science & Mathematics',
+    image: KishanPhoto,
   },
   {
     name: 'Danny',
     role: 'Sustainability Coordinator',
-    description: '2nd Year Biological Sciences',
+    description: '3rd Year Biological Sciences',
     image: DannyPhoto,
   },
 ];

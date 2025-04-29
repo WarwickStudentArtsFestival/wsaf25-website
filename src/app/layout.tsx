@@ -15,7 +15,7 @@ const lexend = Lexend({
 export const metadata: Metadata = {
   title: 'Warwick Student Arts Festival 2025',
   description:
-    'Warwick Student Arts Festival (WSAF) is a showcase and celebration of all aspects of the arts at Warwick that takes place in Term 3.',
+    'Warwick Student Arts Festival (WSAF) is a showcase and celebration of the arts at Warwick, taking place in Week 8-9 of Term 3 (Fri 13th - Mon 16th June).\n\nSubmissions for events are open until Friday 2nd May!',
   category: 'website',
   keywords: [
     'Warwick',

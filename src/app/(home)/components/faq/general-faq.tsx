@@ -8,12 +8,40 @@ export default function GeneralFaq() {
       <div>
         <Question>Why are you putting on this event?</Question>
         <Answer>
-          {' '}
           The University of Warwick has a wealth of highly motivated student
           bands, theatre societies and other performing groups which we want to
           present to whole University community in the summer term. This is
           inspired by the old &apos;Warwick Student Arts Festival&apos;, which
           to our knowledge last took place in 2015.
+        </Answer>
+      </div>
+
+      <div>
+        <Question>Are you run by the University?</Question>
+        <Answer>
+          No, we are an independent group of students. Last year, WSAF operated
+          under the{' '}
+          <a
+            href="https://warwicktechcrew.co.uk"
+            target="_blank"
+            className="text-teal"
+          >
+            Tech Crew
+          </a>{' '}
+          society, however we are currently in the process of establishing a
+          society of our own. Last year and this year we were fortunate to
+          receive funding from{' '}
+          <a
+            href="https://warwick.ac.uk/students/together/eventorganisers/extracurricular/programmefunding"
+            target="_blank"
+            className="text-teal"
+          >
+            Together@Warwick
+          </a>
+          &apos;s grant scheme, and due to the nature of the festival we have
+          closely collaborated with university departments such as Marketing,
+          Estates, AV Services and Conferences. Despite this, all decisions are
+          still made by students!
         </Answer>
       </div>
 

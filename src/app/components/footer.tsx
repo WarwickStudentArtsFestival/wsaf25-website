@@ -20,10 +20,7 @@ const FooterLink: React.FC<LinkItem & { children?: React.ReactNode }> = ({
   children,
 }) => (
   <li>
-    <Link
-      href={href}
-      className="text-muted-foreground hover:text-foreground transition-colors"
-    >
+    <Link href={href} className="text-muted-foreground hover:text-slate-200">
       {Icon ? (
         <>
           <span className="sr-only">{label}</span>
@@ -56,6 +53,7 @@ const Footer: React.FC = () => {
     info: [
       { href: '/privacy', label: 'Privacy Policy' },
       { href: '/press', label: 'Press Kit' },
+      { href: '/partners', label: 'Delivery Partners' },
       { href: '/faq', label: 'FAQs' },
     ],
     social: [

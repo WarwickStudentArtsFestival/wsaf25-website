@@ -2,7 +2,7 @@ import { FiArrowRight } from 'react-icons/fi';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import Link from 'next/link';
 import React from 'react';
-import PeopleInvolved from '@/app/components/people-involved';
+import PeopleInvolved from '@/app/components/people-involved/people-involved';
 
 export default function KeyDates() {
   return (

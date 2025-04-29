@@ -1,4 +1,4 @@
-import { IdCardProps } from '@/app/components/id-card';
+import { IdCardProps } from '@/app/components/people-involved/id-card';
 import DallonPhoto from '@/assets/people/dallon.jpg';
 import EchoPhoto from '@/assets/people/echo.jpg';
 import KishanPhoto from '@/assets/people/kishan.jpg';

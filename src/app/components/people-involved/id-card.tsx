@@ -12,7 +12,6 @@ export type IdCardProps = {
 
 export default function IdCard({
   name,
-  year,
   course,
   emailDescription,
   role,

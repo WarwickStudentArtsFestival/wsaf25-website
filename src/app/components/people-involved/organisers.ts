@@ -6,7 +6,7 @@ import JoshPhoto from '@/assets/people/josh.jpg';
 import ElliePhoto from '@/assets/people/ellie.jpg';
 import EthanPhoto from '@/assets/people/ethan.jpg';
 import KitPhoto from '@/assets/people/kit.jpg';
-import { IdCardProps } from '@/app/components/id-card';
+import { IdCardProps } from '@/app/components/people-involved/id-card';
 import KishanPhoto from '@/assets/people/kishan.jpg';
 import EchoPhoto from '@/assets/people/echo.jpg';
 import DannyPhoto from '@/assets/people/danny.jpg';

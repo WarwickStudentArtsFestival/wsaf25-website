@@ -13,7 +13,7 @@ import Stewards from '@/assets/crew/circle-team.jpg';
 import Tech from '@/assets/crew/colourful-stage.jpg';
 import VenueManager from '@/assets/crew/fab-terrace-drone.jpg';
 import Operations from '@/assets/crew/flight-cases.jpg';
-import PeopleInvolved from '../components/people-involved';
+import PeopleInvolved from '../components/people-involved/people-involved';
 
 export const metadata: Metadata = {
   title: 'Team | Warwick Student Arts Festival 2024',

@@ -1,6 +1,6 @@
 import IdCard from './id-card';
 import AvatarImage from '@/assets/people/avatar.jpg';
-import organisers from '@/app/crew/organisers';
+import organisers from '@/app/components/people-involved/organisers';
 
 export default function PeopleInvolved({}) {
   return (

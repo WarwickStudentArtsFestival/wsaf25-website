@@ -26,7 +26,7 @@ export default function About() {
       imageAlt: 'WSAF 2024 crew debrief',
       title: 'Crew',
       description: [
-        'WSAF is a fully student-led event, made by students for students. We need your help to make this possible!',
+        'WSAF is a fully student-run event, made by students for students. We need your help to make this possible!',
         'Join us in teams such as tech, stewarding, marketing and venue design which can match your commitment and availability.',
       ],
       footer: 'Find out more',
@@ -55,8 +55,8 @@ export default function About() {
       </h2>
       <div className="max-w-screen-lg mx-auto p-4 mb-1">
         <span className="font-semibold">
-          We&apos;re back for 2025, putting on a four-day, student-led showcase
-          and celebration of the arts at Warwick.
+          We&apos;re back for 2025, putting on a fully student-run, free
+          four-day showcase and celebration of the arts at Warwick.
         </span>
         <br />
         Join us during Week 8-9 for our free festival of performances,

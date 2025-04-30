@@ -1,21 +1,22 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
-import Canvas from './Canvas';
+import Canvas, { CanvasRef } from './Canvas';
 import ColourPicker from './ColourPicker';
 import BrushSizePicker from './BrushSizePicker';
 import Paintbrush from '@/assets/icons/paintbrush.png';
 import Image from 'next/image';
-import { FiX, FiSave } from 'react-icons/fi';
+import { FiX, FiSave, FiRotateCcw } from 'react-icons/fi';
 import ActionButton from './ActionButton';
 
 const PaintApp = () => {
-  const [color, setColor] = useState<string>('#4f1d75');
-  const [brushSize, setBrushSize] = useState<number>(40);
+  const [color, setColor] = useState('#4f1d75');
+  const [brushSize, setBrushSize] = useState(40);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isMouseInside, setIsMouseInside] = useState(false);
+  const canvasRef = useRef<CanvasRef>(null);
 
   const saveCanvas = () => {
     const canvas = document.querySelector('canvas') as HTMLCanvasElement;
@@ -28,11 +29,15 @@ const PaintApp = () => {
   };
 
   const clearCanvas = () => {
-    const canvas = document.querySelector('canvas');
+    const canvas = document.querySelector('canvas') as HTMLCanvasElement;
     const ctx = canvas?.getContext('2d');
     if (ctx && canvas) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
+  };
+
+  const undoCanvas = () => {
+    canvasRef.current?.undo();
   };
 
   useEffect(() => {
@@ -62,7 +67,7 @@ const PaintApp = () => {
         onMouseLeave={() => setIsMouseInside(false)}
         className="border border-black mt-5 mx-auto aspect-video w-full sm:w-1/2"
       >
-        <Canvas color={color} brushSize={brushSize} />
+        <Canvas ref={canvasRef} color={color} brushSize={brushSize} />
       </div>
 
       <div className="p-4 justify-center flex gap-4 mx-auto">
@@ -77,6 +82,12 @@ const PaintApp = () => {
           icon={FiSave}
           text="Save Image"
           bgColor="bg-[#087f8c]"
+        />
+        <ActionButton
+          onClick={undoCanvas}
+          icon={FiRotateCcw}
+          text="Undo"
+          bgColor="bg-[#ff5400]"
         />
       </div>
 

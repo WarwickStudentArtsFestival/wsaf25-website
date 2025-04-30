@@ -1,7 +1,7 @@
 import AdamPhoto from '@/assets/people/adam.jpg';
 import AlexPhoto from '@/assets/people/alex.jpg';
 // import DaePhoto from '@/assets/people/dae.jpg';
-// import MaximusPhoto from '@/assets/people/maximus.jpg';
+import MaximusPhoto from '@/assets/people/maximus.jpg';
 import JoshPhoto from '@/assets/people/josh.jpg';
 import ElliePhoto from '@/assets/people/ellie.jpg';
 // import EthanPhoto from '@/assets/people/ethan.jpg';
@@ -44,13 +44,13 @@ const organisers: RefactoredIdCardProps[] = [
   //   course: 'Liberal Arts',
   //   image: DaePhoto,
   // },
-  // {
-  //   name: 'Maximus',
-  //   role: 'WSAF Lead (Finance & Data)',
-  //   year: '2nd Year',
-  //   course: 'Mathematics',
-  //   image: MaximusPhoto,
-  // },
+  {
+    name: 'Maximus',
+    role: 'WSAF Lead (Finance & Data)',
+    year: '2nd Year',
+    course: 'Mathematics',
+    image: MaximusPhoto,
+  },
   {
     name: 'Josh',
     role: 'Head of\nDigital',

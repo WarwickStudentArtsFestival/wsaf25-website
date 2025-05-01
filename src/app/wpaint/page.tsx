@@ -2,17 +2,17 @@
 
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
-
 import React, { useState, useEffect, useRef } from 'react';
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
-import Canvas, { CanvasRef } from './Canvas';
-import ColourPicker from './ColourPicker';
-import BrushSizePicker from './BrushSizePicker';
+import TextInput from './components/TextInput';
+import Canvas, { CanvasRef } from './components/Canvas';
+import ColourPicker from './components/ColourPicker';
+import BrushSizePicker from './components/BrushSizePicker';
 import Paintbrush from '@/assets/icons/paintbrush.png';
 import Image from 'next/image';
 import { FiX, FiSave, FiRotateCcw, FiSend } from 'react-icons/fi';
-import ActionButton from './ActionButton';
+import ActionButton from './components/ActionButton';
 
 const PaintApp = () => {
   const [color, setColor] = useState('#4f1d75');
@@ -133,25 +133,16 @@ const PaintApp = () => {
           <Canvas ref={canvasRef} color={color} brushSize={brushSize} />
         </div>
 
-        <div className="mt-6 px-4 2xl:w-2/3 mx-auto flex justify-center">
-          <input
-            type="text"
-            placeholder="Caption your genius..."
-            value={caption}
-            onChange={(e) => setCaption(e.target.value)}
-            className="border border-gray-400 px-4 py-2 rounded w-full sm:w-1/2 text-black"
-          />
-        </div>
-
-        <div className="mt-4 px-4 2xl:w-2/3 mx-auto flex justify-center">
-          <input
-            type="text"
-            placeholder="Sign your name..."
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            className="border border-gray-400 px-4 py-2 rounded w-full sm:w-1/2 text-black"
-          />
-        </div>
+        <TextInput
+          value={caption}
+          onChange={setCaption}
+          placeholder="Caption your genius..."
+        />
+        <TextInput
+          value={author}
+          onChange={setAuthor}
+          placeholder="Sign your name..."
+        />
 
         <div className="p-4 grid grid-cols-2 sm:flex sm:justify-center gap-4 mx-auto">
           <ActionButton
@@ -179,22 +170,6 @@ const PaintApp = () => {
             bgColor="bg-[#7289da]"
           />
         </div>
-
-        {isMouseInside && (
-          <Image
-            src={Paintbrush}
-            alt="Paintbrush"
-            width={300}
-            height={300}
-            className="pointer-events-none fixed z-50 hidden md:block"
-            style={{
-              left: cursorPos.x,
-              top: cursorPos.y,
-              translate: '-5% -25%',
-              rotate: '120deg',
-            }}
-          />
-        )}
       </div>
     </>
   );

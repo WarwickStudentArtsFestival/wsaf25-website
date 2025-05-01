@@ -19,10 +19,12 @@ const PaintApp = () => {
   const [brushSize, setBrushSize] = useState(40);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isMouseInside, setIsMouseInside] = useState(false);
+  const [canvasPosition, setCanvasPosition] = useState({ x: 0, y: 0 });
   const [caption, setCaption] = useState('');
   const [author, setAuthor] = useState('');
 
   const canvasRef = useRef<CanvasRef>(null);
+  const canvasWrapperRef = useRef<HTMLDivElement>(null);
 
   const sendToDiscord = async () => {
     const canvas = document.querySelector('canvas') as HTMLCanvasElement;
@@ -109,6 +111,22 @@ const PaintApp = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const updateCanvasPosition = () => {
+      if (canvasWrapperRef.current) {
+        const rect = canvasWrapperRef.current.getBoundingClientRect();
+        setCanvasPosition({
+          x: rect.right,
+          y: rect.bottom,
+        });
+      }
+    };
+
+    updateCanvasPosition();
+    window.addEventListener('resize', updateCanvasPosition);
+    return () => window.removeEventListener('resize', updateCanvasPosition);
+  }, []);
+
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
@@ -126,6 +144,7 @@ const PaintApp = () => {
         </div>
 
         <div
+          ref={canvasWrapperRef}
           onMouseEnter={() => setIsMouseInside(true)}
           onMouseLeave={() => setIsMouseInside(false)}
           className="border border-black mt-5 mx-auto aspect-video w-full sm:w-1/2"
@@ -170,6 +189,29 @@ const PaintApp = () => {
             bgColor="bg-[#7289da]"
           />
         </div>
+
+        <Image
+          src={Paintbrush}
+          alt="Paintbrush"
+          width={300}
+          height={300}
+          className="pointer-events-none fixed z-50 hidden md:block"
+          style={
+            isMouseInside
+              ? {
+                  left: cursorPos.x,
+                  top: cursorPos.y,
+                  translate: '-5% -25%',
+                  rotate: '120deg',
+                }
+              : {
+                  left: `${canvasPosition.x - 250}px`,
+                  bottom: '150px',
+                  position: 'absolute',
+                  rotate: '120deg',
+                }
+          }
+        />
       </div>
     </>
   );

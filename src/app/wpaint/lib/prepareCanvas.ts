@@ -36,10 +36,10 @@ export const prepareCanvasImage = async (
 
       sendCtx.putImageData(imageData, 0, 0);
 
-      // Draw the paintbrush
-      const brushX = sendCanvas.width - 110;
-      const brushY = sendCanvas.height - 105;
-      const scale = 1.2;
+      const scale = Math.min(canvas.width, canvas.height) / paintbrushImg.width;
+      const brushX = sendCanvas.width - paintbrushImg.width * 0.1 * scale - 10;
+      const brushY =
+        sendCanvas.height - paintbrushImg.height * 0.1 * scale - 10;
 
       sendCtx.save();
       sendCtx.translate(brushX, brushY);

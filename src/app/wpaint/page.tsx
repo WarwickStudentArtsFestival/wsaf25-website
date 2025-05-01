@@ -19,6 +19,9 @@ const PaintApp = () => {
   const [brushSize, setBrushSize] = useState(40);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isMouseInside, setIsMouseInside] = useState(false);
+  const [caption, setCaption] = useState('');
+  const [author, setAuthor] = useState('');
+
   const canvasRef = useRef<CanvasRef>(null);
 
   const sendToDiscord = async () => {
@@ -30,9 +33,18 @@ const PaintApp = () => {
 
       const formData = new FormData();
       formData.append('file', blob, 'canvas.png');
+      formData.append(
+        'payload_json',
+        JSON.stringify({
+          content: `# *"${caption || 'Untitled'}"*\n_by ${author || 'Unknown'}_`,
+        }),
+      );
 
-      const webhookUrl =
-        'TODO';
+      const webhookUrl = process.env.NEXT_PUBLIC_DISCORD_WEBHOOK_URL;
+      if (!webhookUrl) {
+        toast.error('Webhook URL is not set');
+        return;
+      }
       const sendingToast = toast.loading('Sending to Discord...');
       try {
         const response = await fetch(webhookUrl, {
@@ -68,7 +80,11 @@ const PaintApp = () => {
     const ctx = canvas?.getContext('2d');
     if (ctx && canvas) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
+    setCaption('');
+    setAuthor('');
   };
 
   const undoCanvas = () => {
@@ -105,6 +121,26 @@ const PaintApp = () => {
           className="border border-black mt-5 mx-auto aspect-video w-full sm:w-1/2"
         >
           <Canvas ref={canvasRef} color={color} brushSize={brushSize} />
+        </div>
+
+        <div className="mt-6 px-4 2xl:w-2/3 mx-auto flex justify-center">
+          <input
+            type="text"
+            placeholder="Caption your genius..."
+            value={caption}
+            onChange={(e) => setCaption(e.target.value)}
+            className="border border-gray-400 px-4 py-2 rounded w-full sm:w-1/2 text-black"
+          />
+        </div>
+
+        <div className="mt-4 px-4 2xl:w-2/3 mx-auto flex justify-center">
+          <input
+            type="text"
+            placeholder="Sign your name..."
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            className="border border-gray-400 px-4 py-2 rounded w-full sm:w-1/2 text-black"
+          />
         </div>
 
         <div className="p-4 grid grid-cols-2 sm:flex sm:justify-center gap-4 mx-auto">

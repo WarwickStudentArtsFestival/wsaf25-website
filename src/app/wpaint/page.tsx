@@ -33,28 +33,21 @@ const PaintApp = () => {
 
       const formData = new FormData();
       formData.append('file', blob, 'canvas.png');
-      formData.append(
-        'payload_json',
-        JSON.stringify({
-          content: `# *["${caption || 'Untitled'}"](https://wsaf.org.uk/wpaint)*\n_by ${author || 'Unknown'}_`,
-        }),
-      );
+      formData.append('caption', caption || 'Untitled');
+      formData.append('author', author || 'Unknown');
 
-      const webhookUrl = process.env.NEXT_PRIVATE_DISCORD_WEBHOOK_URL;
-      if (!webhookUrl) {
-        toast.error('Webhook URL is not set');
-        return;
-      }
       const sendingToast = toast.loading('Sending to Discord...');
       try {
-        const response = await fetch(webhookUrl, {
+        const response = await fetch('/api/sendToDiscord', {
           method: 'POST',
           body: formData,
         });
 
+        const result = await response.json();
         if (!response.ok) {
-          toast.error('Failed to send image', { id: sendingToast });
-          console.error(await response.text());
+          toast.error(result.error || 'Failed to send image', {
+            id: sendingToast,
+          });
         } else {
           toast.success('Image sent to Discord!', { id: sendingToast });
         }

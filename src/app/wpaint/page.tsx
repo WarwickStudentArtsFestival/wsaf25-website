@@ -1,7 +1,6 @@
 'use client';
 
 import { Toaster } from 'react-hot-toast';
-import toast from 'react-hot-toast';
 import React, { useState, useEffect, useRef } from 'react';
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
@@ -13,6 +12,7 @@ import Paintbrush from '@/assets/icons/paintbrush.png';
 import Image from 'next/image';
 import { FiX, FiSave, FiRotateCcw, FiSend } from 'react-icons/fi';
 import ActionButton from './components/ActionButton';
+import { sendToDiscord as sendToDiscordFn } from './lib/sendToDiscord';
 
 const PaintApp = () => {
   const [color, setColor] = useState<string>('#4f1d75');
@@ -25,80 +25,6 @@ const PaintApp = () => {
 
   const canvasRef = useRef<CanvasRef>(null);
   const canvasWrapperRef = useRef<HTMLDivElement>(null);
-
-  const sendToDiscord = async () => {
-    const canvas = document.querySelector('canvas') as HTMLCanvasElement;
-    if (!canvas) return toast.error('Canvas not found');
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return toast.error('Canvas context not available');
-
-    // Load the paintbrush image
-    const paintbrushImg = new window.Image();
-    paintbrushImg.src = Paintbrush.src;
-
-    paintbrushImg.onload = () => {
-      // Save the current canvas content
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-      // Create a new canvas for sending to Discord
-      const sendCanvas = document.createElement('canvas');
-      const sendCtx = sendCanvas.getContext('2d');
-      if (!sendCtx)
-        return toast.error('Unable to create canvas for sending to Discord');
-
-      // Set the dimensions for the new canvas to match the original
-      sendCanvas.width = canvas.width;
-      sendCanvas.height = canvas.height;
-
-      // Draw the original content of the canvas onto the new canvas
-      sendCtx.putImageData(imageData, 0, 0);
-
-      const brushX = sendCanvas.width - 110;
-      const brushY = sendCanvas.height - 105;
-      const scale = 1.2;
-
-      sendCtx.save();
-      sendCtx.translate(brushX, brushY);
-      sendCtx.rotate((120 * Math.PI) / 180);
-      sendCtx.scale(scale, scale);
-      sendCtx.drawImage(
-        paintbrushImg,
-        -paintbrushImg.width / 2,
-        -paintbrushImg.height / 2,
-      );
-      sendCtx.restore();
-
-      sendCanvas.toBlob(async (blob) => {
-        if (!blob) return toast.error('Failed to get image blob');
-
-        const formData = new FormData();
-        formData.append('file', blob, 'canvas.png');
-        formData.append('caption', caption || 'Untitled');
-        formData.append('author', author || 'Unknown');
-
-        const sendingToast = toast.loading('Sending to Discord...');
-        try {
-          const response = await fetch('/api/sendToDiscord', {
-            method: 'POST',
-            body: formData,
-          });
-
-          const result = await response.json();
-          if (!response.ok) {
-            toast.error(result.error || 'Failed to send image', {
-              id: sendingToast,
-            });
-          } else {
-            toast.success('Image sent to Discord!', { id: sendingToast });
-          }
-        } catch (err) {
-          toast.error('Error sending image', { id: sendingToast });
-          console.error(err);
-        }
-      }, 'image/png');
-    };
-  };
 
   const saveCanvas = () => {
     const canvas = document.querySelector('canvas') as HTMLCanvasElement;
@@ -223,7 +149,7 @@ const PaintApp = () => {
             bgColor="bg-[#ff5400]"
           />
           <ActionButton
-            onClick={sendToDiscord}
+            onClick={() => sendToDiscordFn(caption, author)}
             icon={FiSend}
             text="Send to Discord"
             bgColor="bg-[#7289da]"

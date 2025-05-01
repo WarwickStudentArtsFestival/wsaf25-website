@@ -1,8 +1,8 @@
 const rateLimitMap = new Map(); // Keyed by IP
 
 // Allow 1 request per IP every 60 seconds
-// const RATE_LIMIT_WINDOW_MS = 60 * 1000;
-const RATE_LIMIT_WINDOW_MS = 1 * 1000;
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+// const RATE_LIMIT_WINDOW_MS = 1 * 1000 // testing
 
 export async function POST(req) {
   try {

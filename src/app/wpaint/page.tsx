@@ -12,7 +12,8 @@ import Paintbrush from '@/assets/icons/paintbrush.png';
 import Image from 'next/image';
 import { FiX, FiSave, FiRotateCcw, FiSend } from 'react-icons/fi';
 import ActionButton from './components/ActionButton';
-import { sendToDiscord as sendToDiscordFn } from './lib/sendToDiscord';
+import { saveImage } from './lib/saveImage';
+import { sendToDiscord } from './lib/sendToDiscord';
 
 const PaintApp = () => {
   const [color, setColor] = useState<string>('#4f1d75');
@@ -25,16 +26,6 @@ const PaintApp = () => {
 
   const canvasRef = useRef<CanvasRef>(null);
   const canvasWrapperRef = useRef<HTMLDivElement>(null);
-
-  const saveCanvas = () => {
-    const canvas = document.querySelector('canvas') as HTMLCanvasElement;
-    if (!canvas) return;
-
-    const link = document.createElement('a');
-    link.download = 'my-artwork.png';
-    link.href = canvas.toDataURL('image/png');
-    link.click();
-  };
 
   const clearCanvas = () => {
     const canvas = document.querySelector('canvas') as HTMLCanvasElement;
@@ -137,7 +128,7 @@ const PaintApp = () => {
             bgColor="bg-[#ff0054]"
           />
           <ActionButton
-            onClick={saveCanvas}
+            onClick={() => saveImage(caption, author)}
             icon={FiSave}
             text="Save Image"
             bgColor="bg-[#087f8c]"
@@ -149,7 +140,7 @@ const PaintApp = () => {
             bgColor="bg-[#ff5400]"
           />
           <ActionButton
-            onClick={() => sendToDiscordFn(caption, author)}
+            onClick={() => sendToDiscord(caption, author)}
             icon={FiSend}
             text="Send to Discord"
             bgColor="bg-[#7289da]"

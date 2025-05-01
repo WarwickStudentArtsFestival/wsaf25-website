@@ -54,12 +54,21 @@ const PaintApp = () => {
       // Draw the original content of the canvas onto the new canvas
       sendCtx.putImageData(imageData, 0, 0);
 
-      // Draw the paintbrush image on the new canvas (only for sending)
-      const centerX = sendCanvas.width / 2 - paintbrushImg.width / 2;
-      const centerY = sendCanvas.height / 2 - paintbrushImg.height / 2;
-      sendCtx.drawImage(paintbrushImg, centerX, centerY);
+      const brushX = sendCanvas.width - 110;
+      const brushY = sendCanvas.height - 105;
+      const scale = 1.2;
 
-      // Convert the modified canvas to a blob and send to Discord
+      sendCtx.save();
+      sendCtx.translate(brushX, brushY);
+      sendCtx.rotate((120 * Math.PI) / 180);
+      sendCtx.scale(scale, scale);
+      sendCtx.drawImage(
+        paintbrushImg,
+        -paintbrushImg.width / 2,
+        -paintbrushImg.height / 2,
+      );
+      sendCtx.restore();
+
       sendCanvas.toBlob(async (blob) => {
         if (!blob) return toast.error('Failed to get image blob');
 

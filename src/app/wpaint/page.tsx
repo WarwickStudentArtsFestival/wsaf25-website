@@ -142,7 +142,7 @@ const PaintApp = () => {
           <ActionButton
             onClick={() => sendToDiscord(caption, author)}
             icon={FiSend}
-            text="Send to Discord"
+            text="Send to WSAF"
             bgColor="bg-[#7289da]"
           />
         </div>

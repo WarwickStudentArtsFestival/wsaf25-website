@@ -8,7 +8,7 @@ export const sendToDiscord = async (
   const formData = await prepareCanvasImage(caption, author);
   if (!formData) return;
 
-  const sendingToast = toast.loading('Sending to Discord...');
+  const sendingToast = toast.loading('Sending to WSAF...');
   try {
     const response = await fetch('/api/sendToDiscord', {
       method: 'POST',
@@ -21,7 +21,7 @@ export const sendToDiscord = async (
         id: sendingToast,
       });
     } else {
-      toast.success('Image sent to Discord!', { id: sendingToast });
+      toast.success('Image sent to WSAF!', { id: sendingToast });
     }
   } catch (err) {
     toast.error('Error sending image', { id: sendingToast });

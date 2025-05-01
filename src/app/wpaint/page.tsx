@@ -91,7 +91,9 @@ const PaintApp = () => {
         className={`text-center relative ${isMouseInside ? 'cursor-none' : 'cursor-default'}`}
       >
         <PageHeader />
-        <HighlightedHeading text="Create your own W-ARTWORK !" />
+        <HighlightedHeading text="W-Paint" />
+        <h1 className="text-teal text-2xl font-semibold mb-2">Create your own W-Artwork!</h1>
+
         <div>
           <ColourPicker currentColor={color} onColorChange={setColor} />
           <BrushSizePicker

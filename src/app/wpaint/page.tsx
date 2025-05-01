@@ -15,13 +15,13 @@ import { FiX, FiSave, FiRotateCcw, FiSend } from 'react-icons/fi';
 import ActionButton from './components/ActionButton';
 
 const PaintApp = () => {
-  const [color, setColor] = useState('#4f1d75');
-  const [brushSize, setBrushSize] = useState(40);
+  const [color, setColor] = useState<string>('#4f1d75');
+  const [brushSize, setBrushSize] = useState<number>(40);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-  const [isMouseInside, setIsMouseInside] = useState(false);
+  const [isMouseInside, setIsMouseInside] = useState<boolean>(false);
   const [canvasPosition, setCanvasPosition] = useState({ x: 0, y: 0 });
-  const [caption, setCaption] = useState('');
-  const [author, setAuthor] = useState('');
+  const [caption, setCaption] = useState<string>('');
+  const [author, setAuthor] = useState<string>('');
 
   const canvasRef = useRef<CanvasRef>(null);
   const canvasWrapperRef = useRef<HTMLDivElement>(null);
@@ -30,34 +30,65 @@ const PaintApp = () => {
     const canvas = document.querySelector('canvas') as HTMLCanvasElement;
     if (!canvas) return toast.error('Canvas not found');
 
-    canvas.toBlob(async (blob) => {
-      if (!blob) return toast.error('Failed to get image blob');
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return toast.error('Canvas context not available');
 
-      const formData = new FormData();
-      formData.append('file', blob, 'canvas.png');
-      formData.append('caption', caption || 'Untitled');
-      formData.append('author', author || 'Unknown');
+    // Load the paintbrush image
+    const paintbrushImg = new window.Image();
+    paintbrushImg.src = Paintbrush.src;
 
-      const sendingToast = toast.loading('Sending to Discord...');
-      try {
-        const response = await fetch('/api/sendToDiscord', {
-          method: 'POST',
-          body: formData,
-        });
+    paintbrushImg.onload = () => {
+      // Save the current canvas content
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-        const result = await response.json();
-        if (!response.ok) {
-          toast.error(result.error || 'Failed to send image', {
-            id: sendingToast,
+      // Create a new canvas for sending to Discord
+      const sendCanvas = document.createElement('canvas');
+      const sendCtx = sendCanvas.getContext('2d');
+      if (!sendCtx)
+        return toast.error('Unable to create canvas for sending to Discord');
+
+      // Set the dimensions for the new canvas to match the original
+      sendCanvas.width = canvas.width;
+      sendCanvas.height = canvas.height;
+
+      // Draw the original content of the canvas onto the new canvas
+      sendCtx.putImageData(imageData, 0, 0);
+
+      // Draw the paintbrush image on the new canvas (only for sending)
+      const centerX = sendCanvas.width / 2 - paintbrushImg.width / 2;
+      const centerY = sendCanvas.height / 2 - paintbrushImg.height / 2;
+      sendCtx.drawImage(paintbrushImg, centerX, centerY);
+
+      // Convert the modified canvas to a blob and send to Discord
+      sendCanvas.toBlob(async (blob) => {
+        if (!blob) return toast.error('Failed to get image blob');
+
+        const formData = new FormData();
+        formData.append('file', blob, 'canvas.png');
+        formData.append('caption', caption || 'Untitled');
+        formData.append('author', author || 'Unknown');
+
+        const sendingToast = toast.loading('Sending to Discord...');
+        try {
+          const response = await fetch('/api/sendToDiscord', {
+            method: 'POST',
+            body: formData,
           });
-        } else {
-          toast.success('Image sent to Discord!', { id: sendingToast });
+
+          const result = await response.json();
+          if (!response.ok) {
+            toast.error(result.error || 'Failed to send image', {
+              id: sendingToast,
+            });
+          } else {
+            toast.success('Image sent to Discord!', { id: sendingToast });
+          }
+        } catch (err) {
+          toast.error('Error sending image', { id: sendingToast });
+          console.error(err);
         }
-      } catch (err) {
-        toast.error('Error sending image', { id: sendingToast });
-        console.error(err);
-      }
-    }, 'image/png');
+      }, 'image/png');
+    };
   };
 
   const saveCanvas = () => {

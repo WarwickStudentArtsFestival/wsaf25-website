@@ -31,6 +31,7 @@ const Canvas = forwardRef<CanvasRef, CanvasProps>(
       if (canvasRef.current) {
         const canvas = canvasRef.current;
         const { clientWidth, clientHeight } = canvas;
+
         if (
           canvasSize.width !== clientWidth ||
           canvasSize.height !== clientHeight
@@ -38,6 +39,12 @@ const Canvas = forwardRef<CanvasRef, CanvasProps>(
           setCanvasSize({ width: clientWidth, height: clientHeight });
           canvas.width = clientWidth;
           canvas.height = clientHeight;
+
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+          }
         }
       }
     }, [canvasSize]);

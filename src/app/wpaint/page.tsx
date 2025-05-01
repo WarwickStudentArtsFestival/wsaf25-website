@@ -36,11 +36,11 @@ const PaintApp = () => {
       formData.append(
         'payload_json',
         JSON.stringify({
-          content: `# *"${caption || 'Untitled'}"*\n_by ${author || 'Unknown'}_`,
+          content: `# *["${caption || 'Untitled'}"](https://wsaf.org.uk/wpaint)*\n_by ${author || 'Unknown'}_`,
         }),
       );
 
-      const webhookUrl = process.env.NEXT_PUBLIC_DISCORD_WEBHOOK_URL;
+      const webhookUrl = process.env.NEXT_PRIVATE_DISCORD_WEBHOOK_URL;
       if (!webhookUrl) {
         toast.error('Webhook URL is not set');
         return;

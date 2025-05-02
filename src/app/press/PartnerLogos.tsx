@@ -34,7 +34,7 @@ export function PartnerLogos() {
         image={WarwickSuLogo}
         name="Warwick SU (click to see all versions)"
         size="w-24 max-w-48"
-        href="https:/wwtc.uk/brand#additional-resources"
+        href="https://wwtc.uk/brand#additional-resources"
       />
     </div>
   );

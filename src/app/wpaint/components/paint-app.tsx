@@ -117,7 +117,7 @@ const PaintApp = () => {
         <TextInput
           value={caption}
           onChange={setCaption}
-          placeholder="Caption your genius..."
+          placeholder="Caption your artwork..."
         />
         <TextInput
           value={author}

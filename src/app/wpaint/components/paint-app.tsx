@@ -9,6 +9,7 @@ import Canvas, { CanvasRef } from './Canvas';
 import ColourPicker from './ColourPicker';
 import BrushSizePicker from './BrushSizePicker';
 import Paintbrush from '@/assets/icons/paintbrush.png';
+import Gallery from './Gallery';
 import Image from 'next/image';
 import { FiRotateCcw, FiSave, FiSend, FiX } from 'react-icons/fi';
 import ActionButton from './ActionButton';
@@ -174,6 +175,8 @@ const PaintApp = () => {
           }
         />
       </div>
+      <h1 className="text-teal text-2xl font-semibold mb-2 mt-4">Gallery</h1>
+      <Gallery />
     </>
   );
 };

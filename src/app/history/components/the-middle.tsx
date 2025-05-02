@@ -14,7 +14,7 @@ export default function MiddleYearsSection() {
             href="https://web.archive.org/web/20081007200600/http://www.wsaf.org.uk/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-violet-300"
+            className="text-yellow"
           >
             WSAF &apos;08
           </a>{' '}
@@ -31,7 +31,7 @@ export default function MiddleYearsSection() {
             href="https://warwick.ac.uk/newsandevents/news-old/get_set_for/wsaf_prog_08_190608_print.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-violet-300"
+            className="text-yellow"
           >
             16-page printed programme
           </a>{' '}
@@ -57,7 +57,7 @@ export default function MiddleYearsSection() {
               href="https://www.youtube.com/watch?v=NETIyo4Uc_o"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-violet-300"
+              className="text-yellow"
             >
               WSAF &apos;08 Trailer
             </a>
@@ -74,7 +74,7 @@ export default function MiddleYearsSection() {
               href="https://warwick.ac.uk/newsandevents/news-old/get_set_for/wsaf_prog_08_190608_print.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-violet-300"
+              className="text-yellow"
             >
               WSAF &apos;08 Schedule
             </a>
@@ -94,7 +94,7 @@ export default function MiddleYearsSection() {
               href="https://warwick.ac.uk/newsandevents/news-old/wsaf2010"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-violet-300"
+              className="text-yellow"
             >
               WSAF 2010 Logo
             </a>
@@ -107,7 +107,7 @@ export default function MiddleYearsSection() {
               href="http://web.archive.org/web/20090524043909/http://wsaf.org.uk/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-violet-300"
+              className="text-yellow"
             >
               SPLAT-Fest
             </a>
@@ -122,7 +122,7 @@ export default function MiddleYearsSection() {
               href="https://warwick.ac.uk/newsandevents/pressreleases/award-winning_author_to/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-violet-300"
+              className="text-yellow"
             >
               WSAF-related press release from Warwick University
             </a>
@@ -134,7 +134,7 @@ export default function MiddleYearsSection() {
               href="https://warwick.ac.uk/newsandevents/news-old/wsaf2010"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-violet-300"
+              className="text-yellow"
             >
               WSAF 2010
             </a>{' '}
@@ -152,7 +152,7 @@ export default function MiddleYearsSection() {
               href="https://warwick.ac.uk/newsandevents/news-old/wsaf2010"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-violet-300"
+              className="text-yellow"
             >
               WSAF 2011
             </a>{' '}
@@ -163,7 +163,7 @@ export default function MiddleYearsSection() {
               href="https://warwick.ac.uk/newsandevents/news-old/wsaf2010"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-violet-300"
+              className="text-yellow"
             >
               WSAF 2012
             </a>
@@ -180,7 +180,7 @@ export default function MiddleYearsSection() {
               href="http://web.archive.org/web/20130810135711/http://wsaf.co.uk/whatiswsaf.php"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-violet-300"
+              className="text-yellow"
             >
               2013
             </a>{' '}
@@ -199,7 +199,7 @@ export default function MiddleYearsSection() {
               href="https://warwick.ac.uk/newsandevents/news-old/wsaf_2012/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-violet-300"
+              className="text-yellow"
             >
               WSAF 2012 Poster
             </a>

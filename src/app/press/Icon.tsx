@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
@@ -39,7 +39,7 @@ function Icon({ src, alt }: IconProps) {
 
   return (
     <div
-      className="relative aspect-square"
+      className="relative aspect-square max-h-48"
       onMouseEnter={() => {
         setHovered(true);
         setAmplitude(20);
@@ -56,7 +56,7 @@ function Icon({ src, alt }: IconProps) {
           src={src}
           alt={alt}
           fill
-          style={{ objectFit: 'contain' }}
+          className="object-contain"
           placeholder="blur"
         />
       </a>

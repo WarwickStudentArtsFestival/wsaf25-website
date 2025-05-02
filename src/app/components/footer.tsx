@@ -60,7 +60,6 @@ const Footer: React.FC = () => {
     info: [
       { href: '/history', label: 'History' },
       { href: '/press', label: 'Press Kit' },
-      { href: '/partners', label: 'Delivery Partners' },
       { href: '/faq', label: 'FAQs' },
       { href: '/privacy', label: 'Privacy Policy' },
     ],

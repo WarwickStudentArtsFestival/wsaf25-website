@@ -175,7 +175,7 @@ const PaintApp = () => {
           }
         />
       </div>
-      <h1 className="text-teal text-2xl font-semibold mb-2 mt-4">Gallery</h1>
+      <h1 className="text-teal text-2xl font-semibold mb-2 mt-4">W-Gallery</h1>
       <Gallery />
     </>
   );

@@ -1,21 +1,22 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useState } from 'react';
-
-const imageCount = 8;
+import React, { useEffect, useState } from 'react';
 
 const Gallery: React.FC = () => {
+  const [imageFilenames, setImageFilenames] = useState<string[]>([]);
   const [selected, setSelected] = useState<number | null>(null);
 
-  const imageFilenames = Array.from(
-    { length: imageCount },
-    (_, i) => `canvas${i + 1}.jpg`,
-  );
+  useEffect(() => {
+    fetch('/api/gallery')
+      .then((res) => res.json())
+      .then((data) => setImageFilenames(data.files))
+      .catch((err) => console.error('Failed to load images:', err));
+  }, []);
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-4">
+      <div className="grid grid-cols-1 bg-black lg:grid-cols-2 gap-4 p-4">
         {imageFilenames.map((filename, index) => (
           <div
             key={index}
@@ -35,7 +36,6 @@ const Gallery: React.FC = () => {
         ))}
       </div>
 
-      {/* Lightbox  */}
       {selected !== null && (
         <div
           className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50"

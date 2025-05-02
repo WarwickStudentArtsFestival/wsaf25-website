@@ -11,6 +11,11 @@ import SpokenWord from '@/assets/perform/spoken-word.jpg';
 
 import RoleCard from '../components/RoleCard';
 import HighlightCountdown from '../(home)/components/highlight-countdown';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Perform or Exhibit',
+};
 
 export default function Perform() {
   const performanceTypes = [

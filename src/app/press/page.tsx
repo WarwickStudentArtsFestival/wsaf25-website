@@ -8,6 +8,7 @@ import { Copy } from '@/app/press/Copy';
 import { PartnerLogos } from '@/app/press/PartnerLogos';
 import Media from '@/app/press/Media';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Press Kit',
@@ -20,31 +21,84 @@ export default function Press() {
     <main>
       <PageHeader />
       <h1 className="text-teal text-2xl font-semibold mb-2">Press Kit</h1>
-      <div className="max-w-7xl mx-auto px-4 mb-4">
-        <p>
-          This page provides information and resources to publicise the Warwick
-          Student Arts Festival. Any resources on this page are free to use and
-          distribute.
-        </p>
-        <p>
-          For more information, please contact us at{' '}
-          <a
-            href="mailto:info@wsaf.org.uk"
-            target="_blank"
-            className="text-teal"
-          >
-            info@wsaf.org.uk
-          </a>{' '}
-          or on Instagram at{' '}
-          <a
-            href="https://www.instagram.com/wsaf25/"
-            target="_blank"
-            className="text-teal"
-          >
-            @wsaf25
-          </a>
-          .
-        </p>
+      <div className="max-w-7xl mx-auto px-4 mb-4 space-y-4">
+        <div>
+          <p>
+            The Warwick Student Arts Festival used to be a yearly event from{' '}
+            <Link href="/history" target="_blank" className="text-teal">
+              2004 to 2015
+            </Link>
+            . A group of students from{' '}
+            <a
+              href="https://www.warwicktechcrew.co.uk/"
+              target="_blank"
+              className="text-teal"
+            >
+              Tech Crew
+            </a>{' '}
+            decided to bring it back{' '}
+            <a
+              href="https://2024.wsaf.org.uk"
+              target="_blank"
+              className="text-teal"
+            >
+              last year
+            </a>
+            , and it was a huge success with 2,500+ attendees across 70+ events
+            in 9 venues. This year we are planning to go even bigger with a
+            4-day festival, merging with{' '}
+            <a
+              href="https://www.warwicksu.com/societies-sports/societies/Band/"
+              target="_blank"
+              className="text-teal"
+            >
+              BandSoc&apos;s WickFest
+            </a>{' '}
+            and{' '}
+            <a
+              href="https://www.warwicksu.com/societies-sports/societies/MusicTheatreWarwick/"
+              target="_blank"
+              className="text-teal"
+            >
+              MTW StageFest
+            </a>{' '}
+            and collaborating with{' '}
+            <a
+              href="https://warwick.ac.uk/study/undergraduate/opendays/"
+              target="_blank"
+              className="text-teal"
+            >
+              University Open Days
+            </a>
+            .
+          </p>
+        </div>
+        <div>
+          <p>
+            This page provides information and resources to publicise the
+            Warwick Student Arts Festival. Any resources on this page are free
+            to use and distribute.
+          </p>
+          <p>
+            For more information, please contact us at{' '}
+            <a
+              href="mailto:info@wsaf.org.uk"
+              target="_blank"
+              className="text-teal"
+            >
+              info@wsaf.org.uk
+            </a>{' '}
+            or on Instagram at{' '}
+            <a
+              href="https://www.instagram.com/wsaf25/"
+              target="_blank"
+              className="text-teal"
+            >
+              @wsaf25
+            </a>
+            .
+          </p>
+        </div>
       </div>
 
       <HighlightedHeading text="Logos" />

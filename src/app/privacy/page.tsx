@@ -5,7 +5,7 @@ import React from 'react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Warwick Student Arts Festival 2025',
+  title: 'Privacy Policy',
   description:
     'This Privacy Policy was last updated on 1 May 2025 and describes our policies and procedures on the collection, use and disclosure of personal information.',
 };

@@ -16,7 +16,7 @@ import Operations from '@/assets/crew/flight-cases.jpg';
 import PeopleInvolved from '../components/people-involved/people-involved';
 
 export const metadata: Metadata = {
-  title: 'Team | Warwick Student Arts Festival 2024',
+  title: 'Crew',
   description:
     "Warwick Student Arts Festival would not be possible without our amazing team of volunteers. From marketing to catering and from stewarding to tech, our team have been working hard since February to make the event the best that it can be. However, we're still looking for people to help!",
 };

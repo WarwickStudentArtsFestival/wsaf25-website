@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '@/app/components/highlighted-heading';
@@ -9,6 +7,13 @@ import { Logos } from '@/app/press/Logos';
 import { Copy } from '@/app/press/Copy';
 import { PartnerLogos } from '@/app/press/PartnerLogos';
 import Media from '@/app/press/Media';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Press Kit',
+  description:
+    'This page provides information and resources to publicise the Warwick Student Arts Festival.',
+};
 
 export default function Press() {
   return (

@@ -33,7 +33,7 @@ export default function HistoryOverview() {
           href="mailto:info@wsaf.org.uk"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-violet-300"
+          className="text-yellow"
         >
           info@wsaf.org.uk
         </a>

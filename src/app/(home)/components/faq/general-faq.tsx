@@ -100,6 +100,20 @@ export default function GeneralFaq() {
       </div>
 
       <div>
+        <Question>
+          Where can I find out more information, find additional photos or
+          download your logo?
+        </Question>
+        <Answer>
+          We have a press kit{' '}
+          <Link href="/press" className="text-teal">
+            available here
+          </Link>
+          .
+        </Answer>
+      </div>
+
+      <div>
         <Question>Where can I find more information?</Question>
         <Answer>
           Please contact us by email at{' '}

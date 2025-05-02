@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function Colours() {
-  const colors = ['#4f1d75', '#ff0054', '#ff5400', '#ffbd00', '#087f8c'];
+  const colors = ['#087f8c', '#4f1d75', '#ff0054', '#ff5400', '#ffbd00'];
   const [copied, setCopied] = useState('');
 
   const handleClick = (hexValue: string) => {
@@ -11,7 +11,7 @@ function Colours() {
   };
 
   return (
-    <div className="grid mx-auto max-w-7xl grid-cols-3 sm:grid-cols-5 gap-4 p-4">
+    <div className="grid mx-auto max-w-7xl grid-cols-3 sm:grid-cols-5 gap-4 p-4 mb-4">
       {colors.map((hex, key) => (
         <div
           key={key}

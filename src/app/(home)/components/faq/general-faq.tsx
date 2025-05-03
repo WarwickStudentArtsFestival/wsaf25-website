@@ -90,7 +90,7 @@ export default function GeneralFaq() {
         </Question>
         <Answer>
           Yes! The Warwick Student Arts Festival used to be a yearly event from
-          2004 to 2015, and we brought it back last year in 2025! You can find
+          2004 to 2015, and we brought it back last year in 2024! You can find
           out more about WSAF&apos;s history on the{' '}
           <Link href="/history" className="text-teal">
             history page

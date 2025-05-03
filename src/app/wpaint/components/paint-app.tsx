@@ -11,19 +11,22 @@ import BrushSizePicker from './BrushSizePicker';
 import Paintbrush from '@/assets/icons/paintbrush.png';
 import Gallery from './Gallery';
 import Image from 'next/image';
-import { FiRotateCcw, FiSave, FiSend, FiX } from 'react-icons/fi';
+import { FiRotateCcw, FiSave, FiX } from 'react-icons/fi';
 import ActionButton from './ActionButton';
 import { saveImage } from '../lib/saveImage';
-import { sendToDiscord } from '../lib/sendToDiscord';
+import SubmissionModal from './SubmissionModal';
 
 const PaintApp = () => {
-  const [color, setColor] = useState<string>('#4f1d75');
-  const [brushSize, setBrushSize] = useState<number>(40);
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-  const [isMouseInside, setIsMouseInside] = useState<boolean>(false);
-  const [canvasPosition, setCanvasPosition] = useState({ x: 0, y: 0 });
-  const [caption, setCaption] = useState<string>('');
-  const [author, setAuthor] = useState<string>('');
+  const [brushSettings, setBrushSettings] = useState({
+    color: '#4f1d75',
+    size: 40,
+  });
+  const [form, setForm] = useState({ caption: '', author: '' });
+  const [mouse, setMouse] = useState({
+    inside: false,
+    position: { x: 0, y: 0 },
+    canvasPos: { x: 0, y: 0 },
+  });
 
   const canvasRef = useRef<CanvasRef>(null);
   const canvasWrapperRef = useRef<HTMLDivElement>(null);
@@ -36,8 +39,7 @@ const PaintApp = () => {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
-    setCaption('');
-    setAuthor('');
+    setForm({ caption: '', author: '' });
   };
 
   const undoCanvas = () => {
@@ -46,7 +48,10 @@ const PaintApp = () => {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setCursorPos({ x: e.clientX, y: e.clientY });
+      setMouse((prev) => ({
+        ...prev,
+        position: { x: e.clientX, y: e.clientY },
+      }));
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -73,10 +78,10 @@ const PaintApp = () => {
     const updateCanvasPosition = () => {
       if (canvasWrapperRef.current) {
         const rect = canvasWrapperRef.current.getBoundingClientRect();
-        setCanvasPosition({
-          x: rect.right,
-          y: rect.bottom,
-        });
+        setMouse((prev) => ({
+          ...prev,
+          canvasPos: { x: rect.right, y: rect.bottom },
+        }));
       }
     };
 
@@ -85,11 +90,26 @@ const PaintApp = () => {
     return () => window.removeEventListener('resize', updateCanvasPosition);
   }, []);
 
+  const getBrushStyle = (): React.CSSProperties =>
+    mouse.inside
+      ? {
+          left: mouse.position.x,
+          top: mouse.position.y,
+          translate: '-5% -25%',
+          rotate: '120deg',
+        }
+      : {
+          left: `${mouse.canvasPos.x - 250}px`,
+          bottom: '150px',
+          position: 'absolute',
+          rotate: '120deg',
+        };
+
   return (
     <>
       <Toaster position="top-center" reverseOrder={false} />
       <div
-        className={`text-center relative ${isMouseInside ? 'cursor-none' : 'cursor-default'}`}
+        className={`text-center relative ${mouse.inside ? 'cursor-none' : 'cursor-default'}`}
       >
         <PageHeader />
         <HighlightedHeading text="W-Paint" />
@@ -98,30 +118,41 @@ const PaintApp = () => {
         </h1>
 
         <div>
-          <ColourPicker currentColor={color} onColorChange={setColor} />
+          <ColourPicker
+            currentColor={brushSettings.color}
+            onColorChange={(color) =>
+              setBrushSettings((prev) => ({ ...prev, color }))
+            }
+          />
           <BrushSizePicker
-            brushSize={brushSize}
-            onBrushSizeChange={setBrushSize}
+            brushSize={brushSettings.size}
+            onBrushSizeChange={(size) =>
+              setBrushSettings((prev) => ({ ...prev, size }))
+            }
           />
         </div>
 
         <div
           ref={canvasWrapperRef}
-          onMouseEnter={() => setIsMouseInside(true)}
-          onMouseLeave={() => setIsMouseInside(false)}
+          onMouseEnter={() => setMouse((prev) => ({ ...prev, inside: true }))}
+          onMouseLeave={() => setMouse((prev) => ({ ...prev, inside: false }))}
           className="border border-black mt-5 mx-auto aspect-video w-full sm:w-1/2"
         >
-          <Canvas ref={canvasRef} color={color} brushSize={brushSize} />
+          <Canvas
+            ref={canvasRef}
+            color={brushSettings.color}
+            brushSize={brushSettings.size}
+          />
         </div>
 
         <TextInput
-          value={caption}
-          onChange={setCaption}
+          value={form.caption}
+          onChange={(caption) => setForm((prev) => ({ ...prev, caption }))}
           placeholder="Caption your artwork..."
         />
         <TextInput
-          value={author}
-          onChange={setAuthor}
+          value={form.author}
+          onChange={(author) => setForm((prev) => ({ ...prev, author }))}
           placeholder="Sign your name..."
         />
 
@@ -133,7 +164,7 @@ const PaintApp = () => {
             bgColor="bg-[#ff0054]"
           />
           <ActionButton
-            onClick={() => saveImage(caption, author)}
+            onClick={() => saveImage(form.caption, form.author)}
             icon={FiSave}
             text="Save Image"
             bgColor="bg-[#087f8c]"
@@ -144,12 +175,7 @@ const PaintApp = () => {
             text="Undo"
             bgColor="bg-[#ff5400]"
           />
-          <ActionButton
-            onClick={() => sendToDiscord(caption, author)}
-            icon={FiSend}
-            text="Send to WSAF"
-            bgColor="bg-[#7289da]"
-          />
+          <SubmissionModal caption={form.caption} author={form.author} />
         </div>
 
         <Image
@@ -158,21 +184,7 @@ const PaintApp = () => {
           width={300}
           height={300}
           className="pointer-events-none fixed z-50 hidden md:block"
-          style={
-            isMouseInside
-              ? {
-                  left: cursorPos.x,
-                  top: cursorPos.y,
-                  translate: '-5% -25%',
-                  rotate: '120deg',
-                }
-              : {
-                  left: `${canvasPosition.x - 250}px`,
-                  bottom: '150px',
-                  position: 'absolute',
-                  rotate: '120deg',
-                }
-          }
+          style={getBrushStyle()}
         />
       </div>
       <h1 className="text-teal text-2xl font-semibold mb-2 mt-4">W-Gallery</h1>

@@ -49,7 +49,6 @@ const PaintApp = () => {
   };
 
   const saveCanvasState = () => {
-    console.log('Saving canvas state...');
     const canvas = document.querySelector('canvas') as HTMLCanvasElement;
     if (canvas) {
       const dataURL = canvas.toDataURL();
@@ -218,7 +217,16 @@ const PaintApp = () => {
             text="Undo"
             bgColor="bg-[#ff5400]"
           />
-          <SubmissionModal caption={form.caption} author={form.author} />
+          <SubmissionModal
+            caption={form.caption}
+            author={form.author}
+            setCaption={(newCaption: string) =>
+              setForm((prev) => ({ ...prev, caption: newCaption }))
+            }
+            setAuthor={(newAuthor: string) =>
+              setForm((prev) => ({ ...prev, author: newAuthor }))
+            }
+          />
         </div>
 
         <NextImage

@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { FiSend } from 'react-icons/fi';
@@ -9,11 +7,15 @@ import { sendToDiscord } from '../lib/sendToDiscord';
 interface SubmissionModalProps {
   caption: string;
   author: string;
+  setCaption: (newCaption: string) => void;
+  setAuthor: (newAuthor: string) => void;
 }
 
 const SubmissionModal: React.FC<SubmissionModalProps> = ({
   caption,
   author,
+  setCaption,
+  setAuthor,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [previewDataUrl, setPreviewDataUrl] = useState<string | null>(null);
@@ -56,6 +58,29 @@ const SubmissionModal: React.FC<SubmissionModalProps> = ({
                 height={360}
               />
             )}
+
+            <div className="space-y-2 text-black">
+              <div>
+                <input
+                  id="caption"
+                  type="text"
+                  value={caption}
+                  onChange={(e) => setCaption(e.target.value)}
+                  placeholder="Caption your artwork..."
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </div>
+              <div>
+                <input
+                  id="author"
+                  type="text"
+                  value={author}
+                  onChange={(e) => setAuthor(e.target.value)}
+                  placeholder="Sign your name..."
+                  className="w-full p-2 border border-gray-300 rounded-md"
+                />
+              </div>
+            </div>
 
             <p className="text-sm text-gray-700">
               By submitting your artwork, you agree to our{' '}

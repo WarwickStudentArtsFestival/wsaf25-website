@@ -90,7 +90,6 @@ const Canvas = forwardRef<CanvasRef, CanvasProps>(
       }
     };
 
-    // Expose the undo function to parent
     useImperativeHandle(ref, () => ({ undo }));
 
     const startDrawing = (e: React.MouseEvent | React.TouchEvent) => {

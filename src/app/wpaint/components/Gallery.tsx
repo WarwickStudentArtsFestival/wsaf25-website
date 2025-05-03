@@ -7,10 +7,21 @@ const Gallery: React.FC = () => {
   const [imageFilenames, setImageFilenames] = useState<string[]>([]);
   const [selected, setSelected] = useState<number | null>(null);
 
+  const shuffleArray = (array: string[]) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   useEffect(() => {
     fetch('/api/gallery')
       .then((res) => res.json())
-      .then((data) => setImageFilenames(data.files))
+      .then((data) => {
+        const shuffledFiles = shuffleArray(data.files);
+        setImageFilenames(shuffledFiles);
+      })
       .catch((err) => console.error('Failed to load images:', err));
   }, []);
 

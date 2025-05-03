@@ -10,6 +10,7 @@ import React, {
 export interface CanvasProps {
   color: string;
   brushSize: number;
+  onDraw?: () => void;
 }
 
 export interface CanvasRef {

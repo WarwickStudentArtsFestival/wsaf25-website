@@ -1,5 +1,4 @@
 'use client';
-
 import { Toaster } from 'react-hot-toast';
 import React, { useEffect, useRef, useState } from 'react';
 import PageHeader from '@/app/components/page-header';
@@ -10,7 +9,7 @@ import ColourPicker from './ColourPicker';
 import BrushSizePicker from './BrushSizePicker';
 import Paintbrush from '@/assets/icons/paintbrush.png';
 import Gallery from './Gallery';
-import Image from 'next/image';
+import NextImage from 'next/image';
 import { FiRotateCcw, FiSave, FiX } from 'react-icons/fi';
 import ActionButton from './ActionButton';
 import { saveImage } from '../lib/saveImage';
@@ -40,10 +39,37 @@ const PaintApp = () => {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
     setForm({ caption: '', author: '' });
+    localStorage.removeItem('canvasState');
+    saveCanvasState();
   };
 
   const undoCanvas = () => {
     canvasRef.current?.undo();
+    saveCanvasState();
+  };
+
+  const saveCanvasState = () => {
+    console.log('Saving canvas state...');
+    const canvas = document.querySelector('canvas') as HTMLCanvasElement;
+    if (canvas) {
+      const dataURL = canvas.toDataURL();
+      localStorage.setItem('canvasState', dataURL);
+    }
+  };
+
+  const loadCanvasState = () => {
+    const savedCanvasState = localStorage.getItem('canvasState');
+    if (savedCanvasState) {
+      const canvas = document.querySelector('canvas') as HTMLCanvasElement;
+      const ctx = canvas?.getContext('2d');
+      if (ctx && canvas) {
+        const img = new window.Image();
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0);
+        };
+        img.src = savedCanvasState;
+      }
+    }
   };
 
   useEffect(() => {
@@ -65,12 +91,24 @@ const PaintApp = () => {
       }
     };
 
+    const handleMouseUp = () => {
+      saveCanvasState();
+    };
+
+    const handleTouchEnd = () => {
+      saveCanvasState();
+    };
+
+    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('touchend', handleTouchEnd);
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('touchend', handleTouchEnd);
     };
   }, []);
 
@@ -88,6 +126,10 @@ const PaintApp = () => {
     updateCanvasPosition();
     window.addEventListener('resize', updateCanvasPosition);
     return () => window.removeEventListener('resize', updateCanvasPosition);
+  }, []);
+
+  useEffect(() => {
+    loadCanvasState();
   }, []);
 
   const getBrushStyle = (): React.CSSProperties =>
@@ -142,6 +184,7 @@ const PaintApp = () => {
             ref={canvasRef}
             color={brushSettings.color}
             brushSize={brushSettings.size}
+            onDraw={saveCanvasState}
           />
         </div>
 
@@ -178,7 +221,7 @@ const PaintApp = () => {
           <SubmissionModal caption={form.caption} author={form.author} />
         </div>
 
-        <Image
+        <NextImage
           src={Paintbrush}
           alt="Paintbrush"
           width={300}

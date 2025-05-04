@@ -4,8 +4,8 @@ import AlexPhoto from '@/assets/people/alex.jpg';
 import MaximusPhoto from '@/assets/people/maximus.jpg';
 import JoshPhoto from '@/assets/people/josh.jpg';
 import ElliePhoto from '@/assets/people/ellie.jpg';
-// import EthanPhoto from '@/assets/people/ethan.jpg';
-// import KitPhoto from '@/assets/people/kit.jpg';
+import EthanPhoto from '@/assets/people/ethan.jpg';
+import KitPhoto from '@/assets/people/kit.jpg';
 import { IdCardProps } from '@/app/components/people-involved/id-card';
 import KishanPhoto from '@/assets/people/kishan.jpg';
 import EchoPhoto from '@/assets/people/echo.jpg';
@@ -13,11 +13,13 @@ import DannyPhoto from '@/assets/people/danny.jpg';
 import JoelPhoto from '@/assets/people/joel.jpg';
 import AlicePhoto from '@/assets/people/alice.jpg';
 import GeorgePhoto from '@/assets/people/george.jpg';
-import KatchImage from '@/assets/people/katch.jpg';
-import EmrysImage from '@/assets/people/emrys.jpg';
-import IzzyImage from '@/assets/people/izzy.jpg';
-import NaomiImage from '@/assets/people/naiomi.jpg';
-import DanaiImage from '@/assets/people/danai.jpg';
+import KatchPhoto from '@/assets/people/katch.jpg';
+import EmrysPhoto from '@/assets/people/emrys.jpg';
+import IzzyPhoto from '@/assets/people/izzy.jpg';
+import NaomiPhoto from '@/assets/people/naiomi.jpg';
+import DanaiPhoto from '@/assets/people/danai.jpg';
+import StanPhoto from '@/assets/people/stan.jpg';
+import AliaPhoto from '@/assets/people/alia.jpg';
 
 interface RefactoredIdCardProps extends Omit<IdCardProps, 'description'> {
   year: string;
@@ -67,13 +69,6 @@ const organisers: RefactoredIdCardProps[] = [
     course: 'English and Theatre Studies',
     image: ElliePhoto,
   },
-  // {
-  //   name: 'Ethan',
-  //   role: 'Head of\nTeam Catering',
-  //   year: '3rd Year',
-  //   course: 'Mechanical Engineering',
-  //   image: EthanPhoto,
-  // },
   {
     name: 'Joel',
     role: 'Head of Streaming',
@@ -81,13 +76,6 @@ const organisers: RefactoredIdCardProps[] = [
     course: 'Computer Science',
     image: JoelPhoto,
   },
-  // {
-  //   name: 'Kit',
-  //   role: 'Communications',
-  //   year: '3rd Year',
-  //   course: 'Politics and Sociology',
-  //   image: KitPhoto,
-  // },
   {
     name: 'Kishan',
     role: 'Tech',
@@ -128,35 +116,63 @@ const organisers: RefactoredIdCardProps[] = [
     role: 'Organiser',
     year: '4th Year',
     course: 'Politics and International Studies',
-    image: KatchImage,
+    image: KatchPhoto,
   },
   {
     name: 'Emrys',
     role: 'Organiser',
     year: '2nd Year',
     course: 'International Management ',
-    image: EmrysImage,
+    image: EmrysPhoto,
   },
   {
     name: 'Izzy',
     role: 'Organiser',
     year: '1st',
     course: 'English and Theatre Studies',
-    image: IzzyImage,
+    image: IzzyPhoto,
   },
   {
     name: 'Naomi',
     role: 'Organiser',
     year: '2nd Year',
     course: 'English and Creative Writing',
-    image: NaomiImage,
+    image: NaomiPhoto,
   },
   {
     name: 'Danai',
     role: 'Organiser',
-    year: '2st Year',
+    year: '2nd Year',
     course: 'Data Science',
-    image: DanaiImage,
+    image: DanaiPhoto,
+  },
+  {
+    name: 'Stan',
+    role: 'Organiser',
+    year: '2nd Year',
+    course: 'Mathematics',
+    image: StanPhoto,
+  },
+  {
+    name: 'Alia',
+    role: 'Organiser',
+    year: '4th Year',
+    course: 'Computer Systems Engineering',
+    image: AliaPhoto,
+  },
+  {
+    name: 'Ethan',
+    role: 'Organiser',
+    year: '3rd Year',
+    course: 'Mechanical Engineering',
+    image: EthanPhoto,
+  },
+  {
+    name: 'Kit',
+    role: 'Organiser',
+    year: '3rd Year',
+    course: 'Politics and Sociology',
+    image: KitPhoto,
   },
 ];
 

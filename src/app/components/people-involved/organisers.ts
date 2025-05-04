@@ -18,6 +18,7 @@ import EmrysImage from '@/assets/people/emrys.jpg';
 import GobiImage from '@/assets/people/gobi.jpg';
 import IzzyImage from '@/assets/people/izzy.jpg';
 import NaomiImage from '@/assets/people/naiomi.jpg';
+import DanaiImage from '@/assets/people/danai.jpg';
 
 interface RefactoredIdCardProps extends Omit<IdCardProps, 'description'> {
   year: string;
@@ -157,6 +158,13 @@ const organisers: RefactoredIdCardProps[] = [
     year: '2nd Year',
     course: 'English and Creative Writing',
     image: NaomiImage,
+  },
+  {
+    name: 'Danai',
+    role: 'Organiser',
+    year: '2st Year',
+    course: 'Data Science',
+    image: DanaiImage,
   },
 ];
 

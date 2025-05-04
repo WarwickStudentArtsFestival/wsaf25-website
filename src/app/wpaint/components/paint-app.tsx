@@ -65,7 +65,7 @@ const PaintApp = () => {
         const img = new window.Image();
         img.onload = () => {
           ctx.drawImage(img, 0, 0);
-        };
+        }; 
         img.src = savedCanvasState;
       }
     }
@@ -234,7 +234,7 @@ const PaintApp = () => {
           alt="Paintbrush"
           width={300}
           height={300}
-          className="pointer-events-none fixed z-50 hidden md:block"
+          className="pointer-events-none fixed z-20 hidden md:block"
           style={getBrushStyle()}
         />
       </div>

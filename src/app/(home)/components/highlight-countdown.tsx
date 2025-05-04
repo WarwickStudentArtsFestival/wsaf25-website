@@ -40,7 +40,7 @@ export default function HighlightCountdown() {
     >
       <FiCalendar className="mx-auto text-2xl text-yellow" />
       <p className="text-yellow text-2xs h-3">{timeLeft}</p>
-      <h3 className="text-lg font-semibold">Event Submissions Closing Soon</h3>
+      <h3 className="text-lg font-semibold">Event Submissions Closed</h3>
       <p className="text-xs text-slate-300 leading-4">
         Registration for events close on Friday Week 2 (2nd May)
       </p>

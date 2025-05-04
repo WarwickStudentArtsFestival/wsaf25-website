@@ -10,7 +10,6 @@ import Dance from '@/assets/perform/dance.jpg';
 import SpokenWord from '@/assets/perform/spoken-word.jpg';
 
 import RoleCard from '../components/RoleCard';
-import HighlightCountdown from '../(home)/components/highlight-countdown';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -55,8 +54,30 @@ export default function Perform() {
     <main className="mb-4">
       <PageHeader />
       <HighlightedHeading text="Submit to WSAF" />
-      <div className="m-4">
-        <HighlightCountdown />
+      <div className="max-w-6xl mx-auto px-4">
+        <p>
+          While event submissions are now closed, if you are still interested in
+          performing please contact us at{' '}
+          <a
+            href="https://www.instagram.com/wsaf25/"
+            target="_blank"
+            className="text-teal"
+          >
+            @wsaf25
+          </a>{' '}
+          or fill in the{' '}
+          <a
+            href="https://submit.wsaf.org.uk/2025/cfp"
+            target="_blank"
+            className="text-teal"
+          >
+            submissions form
+          </a>{' '}
+          and we&apos;ll try and fit you in. Please note that we cannot
+          guarantee an available slot or inclusion in any promotional or
+          physical material.
+        </p>
+        {/* <HighlightCountdown /> */}
       </div>
       <section className="my-4 max-w-8xl mx-auto">
         <HighlightedHeading text="Perform Or Exhibit" />

@@ -4,7 +4,6 @@ import HighlightedHeading from '@/app/components/highlighted-heading';
 import Performers from '@/assets/home/performers.jpg';
 import Crew from '@/assets/home/crew.jpg';
 import Guests from '@/assets/home/guests.jpg';
-import HighlightCountdown from '@/app/(home)/components/highlight-countdown';
 import InfoCard from './InfoCard';
 
 export default function About() {
@@ -15,7 +14,8 @@ export default function About() {
       title: 'Performers and Exhibitors',
       description: [
         "An arts festival could not take place without art! We're looking for your performances, creations and talents.",
-        'Submissions for events are open until Friday Week 2 (2nd May).',
+        // 'Submissions for events are open until Friday Week 2 (2nd May).',
+        "Submissions are now closed, but if you are still interested in performing please submit the form or contact us at @wsaf25 and we'll do our best to fit you in.",
       ],
       footer: 'Find out more',
       link: '/perform',
@@ -48,12 +48,12 @@ export default function About() {
   ];
 
   return (
-    <section className="px-4 sm:px-8 mb-4">
+    <section className="px-4 sm:px-8">
       <HighlightedHeading text="What is WSAF?" />
       <h2 className="text-teal text-xl pt-2 sm:text-2xl font-semibold">
         The Warwick Student Arts Festival 2025
       </h2>
-      <div className="max-w-screen-lg mx-auto p-4 mb-1">
+      <div className="max-w-screen-lg mx-auto p-4 pb-0 mb-1">
         <span className="font-semibold">
           We&apos;re back for 2025, putting on a fully student-run, free
           four-day showcase and celebration of the arts at Warwick.
@@ -63,9 +63,9 @@ export default function About() {
         exhibitions, workshops and more.
       </div>
 
-      <HighlightCountdown />
+      {/* <HighlightCountdown /> */}
 
-      <div className="flex gap-2 pt-2 justify-center mb-4">
+      <div className="flex gap-2 justify-center mb-4">
         <a
           href="https://www.instagram.com/wsaf25/"
           target="_blank"

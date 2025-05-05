@@ -15,7 +15,13 @@ const nextConfig = {
             pathname: '/**',
           },
         ]
-      : [],
+      : [
+          {
+            protocol: 'https',
+            hostname: 'cdn.discordapp.com', 
+            pathname: '/**', 
+          },
+        ],
   },
   redirects: () => [
     {

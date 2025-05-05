@@ -8,19 +8,19 @@ interface Props {
 export default function NavLinks({ onClick }: Props) {
   const pathname = usePathname();
 
-  const performIsActive = pathname === '/perform';
+  const scheduleIsActive = pathname === '/schedule';
   const crewIsActive = pathname === '/crew';
 
   return (
     <ul className="flex flex-row gap-4 md:gap-8 font-semibold uppercase">
       <li className="flex items-center justify-center gap-2">
         <Link
-          href="/perform"
+          href="/schedule"
           onClick={onClick}
-          className={performIsActive ? 'text-yellow-400' : ''}
+          className={scheduleIsActive ? 'text-yellow-400' : ''}
         >
-          Perform
-          <span className="xs:inline-block hidden">&nbsp;or exhibit</span>
+          <span className="xs:inline-block hidden">View the&nbsp;</span>
+          Schedule
         </Link>
       </li>
       <li className="flex items-center justify-center gap-2">

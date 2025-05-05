@@ -7,6 +7,7 @@ import { Logos } from '@/app/press/Logos';
 import { Copy } from '@/app/press/Copy';
 import { PartnerLogos } from '@/app/press/PartnerLogos';
 import Media from '@/app/press/Media';
+import Submissions from '@/app/press/submissions';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -135,6 +136,9 @@ export default function Press() {
         documents.
       </p>
 
+      <HighlightedHeading text="Submissions" />
+      <Submissions />
+      
       <HighlightedHeading text="Delivery Partner Logos" />
       <p className="max-w-2xl mx-auto px-4">Click each logo to download.</p>
       <PartnerLogos />

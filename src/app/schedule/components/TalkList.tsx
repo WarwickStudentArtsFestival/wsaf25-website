@@ -1,9 +1,9 @@
 import React from 'react';
-import EventCard from '../EventCard';
-import { Event } from '../lib/types';
+import TalkCard from '../TalkCard';
+import { Talk } from '../lib/types';
 
 type TalkListProps = {
-  talks: Event[];
+  talks: Talk[];
 };
 
 export default function TalkList({ talks }: TalkListProps) {
@@ -14,7 +14,7 @@ export default function TalkList({ talks }: TalkListProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {talks.map((talk, id) => (
-        <EventCard key={`${talk.slug}-${id}`} talk={talk} id={id} />
+        <TalkCard key={`${talk.slug}-${id}`} talk={talk} id={id} />
       ))}
     </div>
   );

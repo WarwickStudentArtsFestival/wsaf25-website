@@ -4,7 +4,7 @@ import { fetchSchedule } from './lib/api';
 import ErrorMessage from './components/ErrorMessage';
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
-import EventList from './components/EventList';
+import EventList from './components/TalkList';
 
 export const metadata: Metadata = {
   title: 'WSAF Schedule',
@@ -18,7 +18,7 @@ export default async function Schedule() {
   }
 
   return (
-    <main className="p-4 w-full">
+    <main className="w-full">
       <PageHeader />
       <HighlightedHeading text="Schedule" />
       <h1 className="text-teal text-2xl font-semibold mb-2">WSAF Schedule</h1>

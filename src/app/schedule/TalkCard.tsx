@@ -1,15 +1,15 @@
 import React from 'react';
-import { Event } from './lib/types';
+import { Talk } from './lib/types';
 
 type TalkCardProps = {
-  talk: Event;
+  talk: Talk;
   id: number;
 };
 
 export default function TalkCard({ talk, id }: TalkCardProps) {
   return (
     <div
-      key={`${talk.slug}-${id}`}
+      key={`${talk.code}-${id}`}
       className={`border p-4 rounded shadow ${
         talk.state === 'confirmed' ? 'bg-green-100' : 'bg-yellow-100'
       }`}

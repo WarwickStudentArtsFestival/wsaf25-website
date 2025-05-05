@@ -4,13 +4,13 @@ export type Speaker = {
   biography: string;
 };
 
-export type Event = {
+export type Talk = {
+  code: string;
   title: string;
-  slug: string;
+  state: string;
   description: string;
   start: string;
   end: string;
-  state: string;
   speakers: Speaker[];
   duration: number | null;
   room: string | null;

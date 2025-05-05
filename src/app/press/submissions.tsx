@@ -1,10 +1,10 @@
 import React from 'react';
 
-export function Submissions() {
+export default function Submissions() {
   return (
     <div className="mb-4 mx-auto max-w-7xl px-4">
       <p>
-        We're so excited your event is coming to WSAF, please by all means:
+        We&apos;re so excited your event is coming to WSAF, please by all means:
       </p>
       <ol className="list-bullet list-inside text-sm text-slate-800">
         <li>

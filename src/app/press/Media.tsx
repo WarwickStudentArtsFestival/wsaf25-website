@@ -6,7 +6,7 @@ export default function Media() {
       <p className="mb-2">
         We have a{' '}
         <a
-          href="https://youtu.be/31Wp-S3dqGE"
+          href="https://youtu.be/5_doeGYlb-U"
           target="_blank"
           rel="noopener noreferrer"
           className="text-teal"
@@ -18,7 +18,7 @@ export default function Media() {
 
       <iframe
         className="mx-auto h-auto aspect-video w-full max-w-128"
-        src="https://www.youtube.com/embed/31Wp-S3dqGE?modestbranding=1&rel=0"
+        src="https://www.youtube.com/embed/5_doeGYlb-U?modestbranding=1&rel=0"
         title="WSAF Trailer"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"

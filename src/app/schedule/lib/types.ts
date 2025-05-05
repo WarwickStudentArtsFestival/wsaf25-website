@@ -1,18 +1,17 @@
 export type Speaker = {
-  name: string;
   code: string;
-  biography: string;
+  name: string;
 };
 
 export type Talk = {
   code: string;
+  speakers: Speaker[];
   title: string;
+  submission_type: { en: string };
+  track: { en: string };
   state: string;
   description: string;
-  start: string;
-  end: string;
-  speakers: Speaker[];
-  duration: number | null;
-  room: string | null;
-  tags: string[];
+  slot: { room: { en: string }; start: string; end: string };
+  image: string;
+  duration: number;
 };

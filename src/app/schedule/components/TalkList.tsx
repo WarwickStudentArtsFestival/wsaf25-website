@@ -14,7 +14,7 @@ export default function TalkList({ talks }: TalkListProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {talks.map((talk, id) => (
-        <TalkCard key={`${talk.slug}-${id}`} talk={talk} id={id} />
+        <TalkCard key={`${talk.code}-${id}`} talk={talk} id={id} />
       ))}
     </div>
   );

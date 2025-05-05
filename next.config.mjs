@@ -18,8 +18,13 @@ const nextConfig = {
       : [
           {
             protocol: 'https',
-            hostname: 'cdn.discordapp.com', 
-            pathname: '/**', 
+            hostname: 'cdn.discordapp.com',
+            pathname: '/**',
+          },
+          {
+            protocol: 'https',
+            hostname: 'pretalx.wsaf.org.uk',
+            pathname: '/**',
           },
         ],
   },

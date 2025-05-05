@@ -10,6 +10,7 @@ export default function ErrorMessage() {
       <HighlightedHeading text="W-please-set-the-api-token" />
       <Image
         src="/rotating.gif"
+        className='mx-auto'
         alt="loading sundae"
         width={500}
         height={500}

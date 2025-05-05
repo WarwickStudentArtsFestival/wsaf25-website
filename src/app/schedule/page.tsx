@@ -22,8 +22,7 @@ export default async function Schedule() {
       <PageHeader />
       <HighlightedHeading text="Schedule" />
       <h1 className="text-teal text-2xl font-semibold mb-2">WSAF Schedule</h1>
-      <h1 className="text-2xl font-bold mb-4">Schedule</h1>
-      <div className="mb-6 p-4 bg-gray-100 rounded shadow flex flex-col sm:flex-row gap-4">
+      <div className="mb-6 p-4 mx-auto w-fit bg-gray-100 rounded shadow flex flex-col sm:flex-row gap-4">
         <div>
           <span className="font-semibold">Total performances:</span>{' '}
           {talks.length}

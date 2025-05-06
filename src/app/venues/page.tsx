@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import PageHeader from '../components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
 import { fetchRooms } from './lib/fetchRooms';
-import ErrorMessage from '../events/components/ErrorMessage';
+import ErrorMessage from '../components/ErrorMessage';
 import RoomList from './components/RoomList';
 
 export const metadata: Metadata = {

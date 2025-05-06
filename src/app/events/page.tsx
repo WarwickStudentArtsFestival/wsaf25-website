@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { fetchEvents as fetchEvents } from './lib/fetchEvents';
-import ErrorMessage from './components/ErrorMessage';
+import ErrorMessage from '../components/ErrorMessage';
 import PageHeader from '../components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
 import Events from './components/events/Events';

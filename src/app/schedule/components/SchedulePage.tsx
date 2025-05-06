@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Metadata } from 'next';
 import { fetchSchedule } from '../lib/fetchSchedule';
 import ErrorMessage from './ErrorMessage';
@@ -20,30 +20,36 @@ export async function ScheduleData() {
   if (talks === 'API_ERROR') {
     return <ErrorMessage msg="w-please-set-the-api-token" />;
   }
-
-  return <Schedule initialTalks={talks} />;
+  const allTracks = Array.from(new Set(talks.map((talk) => talk.track.en)));
+  return <Schedule initialTalks={talks} initialTracks={allTracks} />;
 }
 
 interface ScheduleProps {
   initialTalks: Talk[];
+  initialTracks: string[];
 }
 
-export default function Schedule({ initialTalks }: ScheduleProps) {
+export default function Schedule({
+  initialTalks,
+  initialTracks,
+}: ScheduleProps) {
   const [talks] = useState<Talk[]>(initialTalks);
-  const [selectedTracks, setSelectedTracks] = useState<string[]>([
-    'MTW Stagefest',
-  ]);
+  const [selectedTracks, setSelectedTracks] = useState<string[]>(initialTracks);
   const [selectedRooms, setSelectedRooms] = useState<string[]>([]);
+  const [filteredTalks, setFilteredTalks] = useState<Talk[]>(initialTalks);
 
-  const filteredTalks = talks.filter((talk) => {
-    const trackMatch =
-      selectedTracks.length === 0 || selectedTracks.includes(talk.track.en);
-    const roomMatch =
-      selectedRooms.length === 0 ||
-      (talk.slot?.room?.en && selectedRooms.includes(talk.slot.room.en));
+  useEffect(() => {
+    const newFilteredTalks = talks.filter((talk) => {
+      const trackMatch =
+        selectedTracks.length === 0 || selectedTracks.includes(talk.track.en);
+      const roomMatch =
+        selectedRooms.length === 0 ||
+        (talk.slot?.room?.en && selectedRooms.includes(talk.slot.room.en));
 
-    return trackMatch && roomMatch;
-  });
+      return trackMatch && roomMatch;
+    });
+    setFilteredTalks(newFilteredTalks);
+  }, [talks, selectedTracks, selectedRooms]);
 
   const handleTrackFilterChange = (tracks: string[]) => {
     setSelectedTracks(tracks);
@@ -57,6 +63,7 @@ export default function Schedule({ initialTalks }: ScheduleProps) {
     <main className="w-full">
       <PageHeader />
       <HighlightedHeading text="Schedule" />
+      <p>{selectedTracks}</p>
       <h1 className="text-teal text-2xl font-semibold mb-2">WSAF Schedule</h1>
       <div className="flex flex-row px-4">
         <div className="w-1/6">
@@ -70,6 +77,9 @@ export default function Schedule({ initialTalks }: ScheduleProps) {
         </div>
         <div className="flex-1">
           <TalkList talks={filteredTalks} />
+          <div className="mt-4 text-sm text-gray-500">
+            Showing {filteredTalks.length} of {talks.length} events
+          </div>
         </div>
       </div>
     </main>

@@ -36,11 +36,11 @@ const FilterSection = ({
   showIcons?: boolean;
 }) => {
   const handleItemToggle = (item: string) => {
-    if (selectedItems.includes(item)) {
-      onChange(selectedItems.filter((i) => i !== item));
-    } else {
-      onChange([...selectedItems, item]);
-    }
+    const newSelectedItems = selectedItems.includes(item)
+      ? selectedItems.filter((i) => i !== item)
+      : [...selectedItems, item];
+
+    onChange(newSelectedItems);
   };
 
   const handleSelectAll = () => {
@@ -95,13 +95,11 @@ const SummaryStatistics: React.FC<SummaryStatsProps> = ({
   onTrackFilterChange,
   onRoomFilterChange,
 }) => {
-  // Calculate frequencies
   const trackFreq = getFrequency(talks.map((t) => t.track.en));
   const roomFreq = getFrequency(
     talks.filter((t) => t.slot?.room?.en).map((t) => t.slot!.room!.en),
   );
 
-  // Convert to sorted arrays for rendering
   const trackItems = Object.entries(trackFreq).sort((a, b) => b[1] - a[1]);
   const roomItems = Object.entries(roomFreq).sort((a, b) => b[1] - a[1]);
 

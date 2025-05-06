@@ -5,6 +5,7 @@ import {
   FiCalendar,
   FiArrowRight,
   FiAlertCircle,
+  FiUser,
 } from 'react-icons/fi';
 import { Talk } from '../lib/types';
 import Link from 'next/link';
@@ -40,6 +41,10 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
               {
                 icon: <FiClock className="text-purple-500" />,
                 text: `${formatTime(talk.slot.start)} - ${formatTime(talk.slot.end)}`,
+              },
+              {
+                icon: <FiUser className="text-purple-500" />,
+                text: talk.speakers.map((s) => s.name).join(', '),
               },
             ].map(({ icon, text }, index) => (
               <p key={index} className="text-sm flex items-center gap-2 mb-2">

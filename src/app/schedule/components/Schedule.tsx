@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import TalkList from '../event/TalkList';
+import TalkList from './TalkList';
 import FilterPanel from './FilterPanel';
 import { Talk } from '../lib/types';
 

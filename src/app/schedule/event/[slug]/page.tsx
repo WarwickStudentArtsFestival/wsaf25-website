@@ -7,7 +7,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 import EventDetails from './components/EventDetails';
-import TrackPill from '../track/TrackPill';
+import TrackPill from '../../components/track/TrackPill';
 
 type TalkPageProps = {
   params: {

@@ -7,10 +7,10 @@ import {
   FiAlertCircle,
   FiUser,
 } from 'react-icons/fi';
-import { Talk } from '../lib/types';
+import { Talk } from '../../lib/types';
 import Link from 'next/link';
-import TrackPill from './track/TrackPill';
-import { formatDate, formatTime } from '../lib/dateUtils';
+import TrackPill from '../track/TrackPill';
+import { formatDate, formatTime } from '../../lib/dateUtils';
 
 type TalkCardProps = {
   talk: Talk;

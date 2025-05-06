@@ -1,6 +1,6 @@
 import React from 'react';
 import TalkCard from './TalkCard';
-import { Talk } from '../lib/types';
+import { Talk } from '../../lib/types';
 
 type TalkListProps = {
   talks: Talk[];

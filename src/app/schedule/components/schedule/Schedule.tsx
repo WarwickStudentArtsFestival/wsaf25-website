@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import TalkList from './TalkList';
-import FilterPanel from './FilterPanel';
-import { Talk } from '../lib/types';
+import FilterPanel from '../FilterPanel';
+import { Talk } from '../../lib/types';
 
 interface ScheduleProps {
   allTalks: Talk[];
@@ -28,7 +28,7 @@ export default function Schedule({ allTalks, initialTracks }: ScheduleProps) {
 
   return (
     <div className="flex flex-row px-4">
-      <div className="w-1/6">
+      <div className="w-1/6 hidden lg:block">
         <FilterPanel
           talks={allTalks}
           filteredTalks={filteredTalks}

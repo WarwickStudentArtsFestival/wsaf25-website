@@ -3,7 +3,7 @@ import { fetchSchedule } from './lib/fetchSchedule';
 import ErrorMessage from './components/ErrorMessage';
 import PageHeader from '../components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
-import Schedule from './components/Schedule';
+import Schedule from './components/schedule/Schedule';
 
 export const metadata: Metadata = {
   title: 'WSAF Schedule',

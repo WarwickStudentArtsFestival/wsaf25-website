@@ -2,7 +2,7 @@ import React from 'react';
 import { FiMapPin, FiClock, FiCalendar, FiArrowRight } from 'react-icons/fi';
 import { Talk } from '../lib/types';
 import Link from 'next/link';
-import TrackIcon from './TrackIcon';
+import TalkTypePill from './TalkTypePill'; // Import the new component
 import { formatDate, formatDuration } from '../lib/dateUtils';
 
 type TalkCardProps = {
@@ -17,15 +17,7 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
         key={`${talk.code}-${id}`}
         className="border p-4 text-left text-black border-slate-300 rounded-md overflow-hidden w-full h-full flex flex-col hover:scale-[1.02] transition duration-150 ease-in-out shadow-lg"
       >
-        <p className="inline-flex items-center gap-2 text-sm font-medium text-purple-700 rounded-full mb-4">
-          <span className="p-2 bg-purple-200 text-purple-800 border border-purple-800 rounded-full">
-            <TrackIcon track={talk.track?.en} size={17} />
-          </span>
-          <span className="bg-purple-200 text-purple-800 border border-purple-800 rounded-full px-3 py-1">
-            <strong>{talk.track?.en}</strong>
-          </span>
-        </p>
-
+        <TalkTypePill track={talk.track?.en} />{' '}
         <div className="flex flex-col flex-grow">
           {talk.slot?.room && (
             <p className="text-sm flex items-center gap-2 mb-2">
@@ -49,7 +41,6 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
             </>
           )}
         </div>
-
         <div className="flex items-center gap-2 mt-4 text-black text-sm font-medium">
           <span>View Details</span>
           <FiArrowRight className="text-purple-500" />

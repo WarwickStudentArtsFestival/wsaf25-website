@@ -7,6 +7,21 @@ export const formatDate = (time: string) => {
     day: 'numeric',
   });
 };
+export const formatTime = (time: string | undefined): string => {
+  if (!time) {
+    return 'No time';
+  }
+  const date = new Date(time);
+  if (date.getHours() === 12 && date.getMinutes() === 0) {
+    return 'Midday';
+  }
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const amPm = hours >= 12 ? 'PM' : 'AM';
+  const formattedHour = hours % 12 || 12;
+  const formattedMinute = minutes.toString().padStart(2, '0');
+  return `${formattedHour}:${formattedMinute} ${amPm}`;
+};
 
 export const formatDuration = (durationInMinutes: number): string => {
   const hours = Math.floor(durationInMinutes / 60);

@@ -1,9 +1,15 @@
 import React from 'react';
-import { FiMapPin, FiClock, FiCalendar, FiArrowRight } from 'react-icons/fi';
+import {
+  FiMapPin,
+  FiClock,
+  FiCalendar,
+  FiArrowRight,
+  FiAlertCircle,
+} from 'react-icons/fi';
 import { Talk } from '../lib/types';
 import Link from 'next/link';
-import TalkTypePill from './TalkTypePill'; // Import the new component
-import { formatDate, formatDuration } from '../lib/dateUtils';
+import TalkTypePill from './TalkTypePill';
+import { formatDate, formatTime } from '../lib/dateUtils';
 
 type TalkCardProps = {
   talk: Talk;
@@ -19,24 +25,29 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
       >
         <TalkTypePill track={talk.track?.en} />{' '}
         <div className="flex flex-col flex-grow">
-          {talk.slot?.room && (
-            <p className="text-sm flex items-center gap-2 mb-2">
-              <FiMapPin className="text-purple-500" />
-              {talk.slot.room.en}
-            </p>
-          )}
-
           <h3 className="text-teal text-xl font-semibold mb-3">{talk.title}</h3>
 
-          {talk.slot?.start && (
+          {(talk.slot?.start && (
             <>
+              <p className="text-sm flex items-center gap-2 mb-2">
+                <FiMapPin className="text-purple-500" />
+                {talk.slot.room.en}
+              </p>
               <p className="text-sm flex items-center gap-2 mb-1">
                 <FiCalendar className="text-purple-500" />
                 {formatDate(talk.slot.start)}
               </p>
               <p className="text-sm flex items-center gap-2 mb-2">
                 <FiClock className="text-purple-500" />
-                {formatDuration(talk.duration)}
+                {formatTime(talk.slot?.start)} - {formatTime(talk.slot?.end)}
+                {/* {formatDuration(talk.duration)} */}
+              </p>
+            </>
+          )) || (
+            <>
+              <p className="text-sm flex items-center gap-2 mb-1">
+                <FiAlertCircle className="text-purple-500" />
+                No Slot yet
               </p>
             </>
           )}

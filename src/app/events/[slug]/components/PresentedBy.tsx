@@ -1,5 +1,5 @@
 import { FiUser } from 'react-icons/fi';
-import { Speaker } from '../../../lib/types';
+import { Speaker } from '../../lib/types';
 
 type PresentedByProps = {
   speakers: Speaker[];

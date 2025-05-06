@@ -1,13 +1,13 @@
 import { fetchTalk } from '@/app/events/lib/fetchTalk';
 import PageHeader from '@/app/components/page-header';
-import ErrorMessage from '../../components/ErrorMessage';
+import ErrorMessage from '../components/ErrorMessage';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import PresentedBy from './components/PresentedBy';
 import { FaArrowLeft } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 import EventDetails from './components/EventDetails';
-import TrackPill from '../../components/track/TrackPill';
+import TrackPill from '../components/track/TrackPill';
 
 type TalkPageProps = {
   params: {

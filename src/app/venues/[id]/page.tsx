@@ -1,8 +1,7 @@
 import PageHeader from '@/app/components/page-header';
 import ErrorMessage from '@/app/components/ErrorMessage';
 import HighlightedHeading from '@/app/components/highlighted-heading';
-import { customRoomData } from '../lib/customRoomData';
-import { fetchRoom } from '../lib/fetchRoom';
+import { fetchRoom } from '@/app/lib/fetchRoom';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FiMapPin } from 'react-icons/fi';
@@ -21,9 +20,6 @@ export default async function VenuePage({ params }: VenuePageProps) {
   if (!room || room === 'API_ERROR') {
     return <ErrorMessage msg={`Venue '${params.id}' not found!`} />;
   }
-
-  const venueMeta = customRoomData[room.id];
-  const { image, imageAlt, mapUrl, roomLocation } = venueMeta || {};
 
   return (
     <>
@@ -57,17 +53,17 @@ export default async function VenuePage({ params }: VenuePageProps) {
                     {room.description?.en || 'No description available.'}
                   </p>
                 </div>
-                {roomLocation && (
+                {room.roomLocation && (
                   <div className="lg:w-1/3">
                     <div className="flex items-center space-x-2 mb-2">
                       <FiMapPin className="text-purple-500 flex-shrink-0" />
                       <h3 className="text-black font-semibold">
-                        {roomLocation}
+                        {room.roomLocation}
                       </h3>
                     </div>
-                    {mapUrl && (
+                    {room.mapUrl && (
                       <Link
-                        href={mapUrl}
+                        href={room.mapUrl}
                         target="_blank"
                         className="text-sm text-blue-600 hover:underline"
                       >
@@ -80,11 +76,11 @@ export default async function VenuePage({ params }: VenuePageProps) {
             </div>
           </div>
 
-          {image && (
+          {room.image && (
             <div className="my-8">
               <Image
-                src={image}
-                alt={imageAlt || `${room.name?.en} image`}
+                src={room.image}
+                alt={room.imageAlt || `${room.name?.en} image`}
                 width={800}
                 height={600}
                 className="w-full max-h-96 object-contain rounded-lg"
@@ -92,15 +88,15 @@ export default async function VenuePage({ params }: VenuePageProps) {
               />
             </div>
           )}
-          {/* <div className="mt-4">
+          <div className="mt-4">
             <iframe
-              src={mapUrl + '?controls=off'}
+              src={room.mapUrl + '?controls=off'}
               width="100%"
               height="400"
               style={{ border: 'none' }}
               title="Campus Map"
             />
-          </div> */}
+          </div>
         </div>
       </div>
     </>

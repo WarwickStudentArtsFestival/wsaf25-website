@@ -6,14 +6,7 @@ import Fab2 from '@/assets/venues/fab2.jpg';
 // import Cinema from '@/assets/venues/fab2.jpg';
 import Rehersal from '@/assets/venues/rehersal.jpg';
 import Terrace from '@/assets/venues/terrace.jpg';
-import { StaticImageData } from 'next/image';
-
-type CustomRoomData = {
-  imageAlt: string;
-  mapUrl: string;
-  image: StaticImageData;
-  roomLocation: string;
-};
+import { CustomRoomData } from './types';
 
 export const customRoomData: Record<number, CustomRoomData> = {
   // Benefactors Place Stage

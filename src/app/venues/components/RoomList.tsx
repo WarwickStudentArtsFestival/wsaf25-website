@@ -1,9 +1,9 @@
 import React from 'react';
-import { Room } from '../lib/types';
+import { ExtendedRoom } from '@/app/lib/types';
 import RoomCard from './RoomCard';
 
 interface RoomListProps {
-  rooms: Room[];
+  rooms: ExtendedRoom[];
 }
 
 export default function RoomList({ rooms }: RoomListProps) {

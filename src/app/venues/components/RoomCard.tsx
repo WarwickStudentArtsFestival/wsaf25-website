@@ -1,17 +1,14 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiMapPin } from 'react-icons/fi';
-import { Room } from '../lib/types';
-import { customRoomData } from '../lib/customRoomData';
+import { FiMapPin, FiList } from 'react-icons/fi';
+import { ExtendedRoom } from '@/app/lib/types';
+import { customRoomData } from '@/app/lib/customRoomData';
 
 interface RoomCardProps {
-  room: Room;
+  room: ExtendedRoom;
 }
 
 export default function RoomCard({ room }: RoomCardProps) {
-  const roomImage = customRoomData[room.id]?.image;
-  const roomLocation = customRoomData[room.id]?.roomLocation;
-
   return (
     <Link
       href={`/venues/${room.id}`}
@@ -19,9 +16,9 @@ export default function RoomCard({ room }: RoomCardProps) {
     >
       <div className="border text-left border-slate-300 rounded-md overflow-hidden flex flex-col w-full max-w-sm mx-auto h-full min-h-[450px]">
         <div className="relative w-full aspect-[4/3]">
-          {roomImage ? (
+          {room.image ? (
             <Image
-              src={roomImage}
+              src={room.image}
               alt={customRoomData[room.id]?.imageAlt || 'Room Image'}
               className="object-cover"
               fill
@@ -36,10 +33,18 @@ export default function RoomCard({ room }: RoomCardProps) {
           <h3 className="text-teal text-xl font-semibold mb-2">
             {room.name.en}
           </h3>
-          {roomLocation && (
+          {room.roomLocation && (
             <div className="flex items-center space-x-2">
               <FiMapPin className="text-purple-500 flex-shrink-0" />
-              <h3 className="text-black font-semibold">{roomLocation}</h3>
+              <h3 className="text-black font-semibold">{room.roomLocation}</h3>
+            </div>
+          )}
+          {room.eventCount !== undefined && (
+            <div className="flex items-center space-x-2 my-2">
+              <FiList className="text-purple-500 flex-shrink-0" />
+              <h3 className="text-black font-semibold">
+                {room.eventCount} Events
+              </h3>
             </div>
           )}
           <p className="text-sm text-gray-700 flex-1 my-2">

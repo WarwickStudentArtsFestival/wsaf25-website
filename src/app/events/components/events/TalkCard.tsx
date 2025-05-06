@@ -10,7 +10,7 @@ import {
 import { Talk } from '../../lib/types';
 import Link from 'next/link';
 import TrackPill from '../track/TrackPill';
-import { formatDate, formatTime } from '../../lib/dateUtils';
+import { formatDate, formatTime } from '@/app/lib/dateUtils';
 
 type TalkCardProps = {
   talk: Talk;

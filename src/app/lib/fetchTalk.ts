@@ -1,11 +1,11 @@
-import { Room } from './types';
+import { Talk } from '@/app/lib/types';
 
-export async function fetchRoom(roomSlug: string): Promise<Room | 'API_ERROR'> {
+export async function fetchTalk(talkSlug: string): Promise<Talk | 'API_ERROR'> {
   if (!process.env.PRETALX_PRIVATE_API_TOKEN) {
     return 'API_ERROR';
   }
 
-  const url = `https://pretalx.wsaf.org.uk/api/events/2025/rooms/${roomSlug}`;
+  const url = `https://pretalx.wsaf.org.uk/api/events/2025/talks/${talkSlug}`;
 
   const res = await fetch(url, {
     headers: {
@@ -20,6 +20,6 @@ export async function fetchRoom(roomSlug: string): Promise<Room | 'API_ERROR'> {
     return 'API_ERROR';
   }
 
-  const data: Room = await res.json();
+  const data: Talk = await res.json();
   return data;
 }

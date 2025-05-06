@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import PageHeader from '../components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
-import { fetchRooms } from './lib/fetchRooms';
+import { fetchRooms } from '@/app/lib/fetchRooms';
 import ErrorMessage from '../components/ErrorMessage';
 import RoomList from './components/RoomList';
 

@@ -2,6 +2,7 @@ import PageHeader from '@/app/components/page-header';
 import ErrorMessage from '@/app/components/ErrorMessage';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import { customRoomData } from '../lib/customRoomData';
+import { fetchRoom } from '../lib/fetchRoom';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FiMapPin } from 'react-icons/fi';
@@ -13,12 +14,15 @@ type VenuePageProps = {
   };
 };
 
-export default function VenuePage({ params }: VenuePageProps) {
-  const venue = customRoomData[params.id];
+export default async function VenuePage({ params }: VenuePageProps) {
+  const { id } = await params;
+  const room = await fetchRoom(id);
 
-  if (!venue) {
+  if (!room || room == 'API_ERROR') {
     return <ErrorMessage msg={`Venue '${params.id}' not found!`} />;
   }
+
+  const { image, imageAlt, mapUrl, roomLocation } = customRoomData[room.id];
 
   return (
     <>
@@ -35,40 +39,25 @@ export default function VenuePage({ params }: VenuePageProps) {
             </Link>
           </div>
 
-          <HighlightedHeading text={venue.name?.en || 'Unnamed Venue'} />
+          <HighlightedHeading text={room.name?.en || 'Unnamed Venue'} />
 
           <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200 mt-4">
             <div className="flex flex-col lg:flex-row gap-6">
               <div className="lg:w-2/3">
+                {roomLocation && (
+                  <div className="flex items-center space-x-2">
+                    <FiMapPin className="text-purple-500 flex-shrink-0" />
+                    <h3 className="text-black font-semibold">{roomLocation}</h3>
+                  </div>
+                )}
                 <h2 className="text-black text-xl font-semibold mb-4">
                   Description
                 </h2>
                 <p className="prose max-w-none">
-                  {venue.description?.en || 'No description available.'}
+                  {room.description?.en || 'No description available.'}
                 </p>
               </div>
-              <div className="lg:w-1/3 space-y-4">
-                {venue.roomLocation && (
-                  <div className="flex items-center text-gray-700">
-                    <FiMapPin className="text-purple-500 mr-2" />
-                    <span className="font-medium">{venue.roomLocation}</span>
-                  </div>
-                )}
-              </div>
             </div>
-
-            {venue.image && (
-              <div className="my-8">
-                <Image
-                  src={venue.image}
-                  alt={venue.imageAlt || 'Venue image'}
-                  width={800}
-                  height={600}
-                  className="w-full max-h-96 object-cover rounded-lg"
-                  priority
-                />
-              </div>
-            )}
           </div>
         </div>
       </div>

@@ -8,37 +8,34 @@ import { Talk } from '../lib/types';
 interface ScheduleProps {
   allTalks: Talk[];
   initialTracks: string[];
-  initialRooms: string[];
+  // initialRooms: string[];
 }
 
 export default function Schedule({
   allTalks,
   initialTracks,
-  initialRooms,
+  // initialRooms,
 }: ScheduleProps) {
   const [selectedTracks, setSelectedTracks] = useState<string[]>(initialTracks);
-  const [selectedRooms, setSelectedRooms] = useState<string[]>(initialRooms);
+  // const [selectedRooms, setSelectedRooms] = useState<string[]>(initialRooms);
   const [filteredTalks, setFilteredTalks] = useState<Talk[]>(allTalks);
 
   useEffect(() => {
-    const newFilteredTalks = allTalks.filter((talk) => {
-      const trackMatch =
-        selectedTracks.length === 0 || selectedTracks.includes(talk.track.en);
-      const roomMatch =
-        selectedRooms.length === 0 ||
-        (talk.slot?.room?.en && selectedRooms.includes(talk.slot.room.en));
-      return trackMatch && roomMatch;
-    });
-    setFilteredTalks(newFilteredTalks);
-  }, [allTalks, selectedTracks, selectedRooms]);
+    setFilteredTalks(
+      allTalks.filter((talk) => {
+        return selectedTracks.some((track) => talk.track.en.includes(track));
+        // selectedRooms.some((room) => talk.slot?.room?.en.includes(room))
+      }),
+    );
+  }, [allTalks, selectedTracks]);
 
   const handleTrackFilterChange = (tracks: string[]) => {
     setSelectedTracks(tracks);
   };
 
-  const handleRoomFilterChange = (rooms: string[]) => {
-    setSelectedRooms(rooms);
-  };
+  // const handleRoomFilterChange = (rooms: string[]) => {
+  //   setSelectedRooms(rooms);
+  // };
 
   return (
     <div className="flex flex-row px-4">
@@ -47,9 +44,9 @@ export default function Schedule({
           talks={allTalks}
           filteredTalks={filteredTalks}
           selectedTracks={selectedTracks}
-          selectedRooms={selectedRooms}
+          // selectedRooms={selectedRooms}
           onTrackFilterChange={handleTrackFilterChange}
-          onRoomFilterChange={handleRoomFilterChange}
+          // onRoomFilterChange={handleRoomFilterChange}
         />
       </div>
       <div className="flex-1">

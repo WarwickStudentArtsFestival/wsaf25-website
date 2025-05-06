@@ -17,9 +17,9 @@ export default async function SchedulePage() {
   }
 
   const allTracks = Array.from(new Set(talks.map((talk) => talk.track.en)));
-  const allRooms = Array.from(
-    new Set(talks.map((talk) => talk.slot?.room?.en)),
-  );
+  // const allRooms = Array.from(
+  //   new Set(talks.map((talk) => talk.slot?.room?.en)),
+  // );
 
   return (
     <main className="w-full">
@@ -30,7 +30,7 @@ export default async function SchedulePage() {
       <Schedule
         allTalks={talks}
         initialTracks={allTracks}
-        initialRooms={allRooms}
+        // initialRooms={allRooms}
       />
     </main>
   );

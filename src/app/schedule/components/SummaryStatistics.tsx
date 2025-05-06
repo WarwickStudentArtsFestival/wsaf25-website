@@ -38,12 +38,12 @@ const SummaryStatistics: React.FC<SummaryStatsProps> = ({ talks }) => {
   );
 
   return (
-    <div className="mb-6 p-4 mx-auto text-left w-fit bg-gray-100 rounded shadow flex flex-col gap-4">
+    <div className="m-4 p-4 mx-auto text-left w-fit bg-gray-100 rounded shadow flex flex-col gap-4">
       <div>
         <span className="font-semibold">Total performances:</span>{' '}
         {talks.length}
       </div>
-      {renderFrequencies('Tracks', trackFreq)}
+      {renderFrequencies('Events', trackFreq)}
       {renderFrequencies('Rooms', roomFreq)}
       {renderFrequencies('Submission types', submissionTypeFreq)}
     </div>

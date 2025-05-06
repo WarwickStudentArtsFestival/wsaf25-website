@@ -4,7 +4,7 @@ import { fetchSchedule } from './lib/fetchSchedule';
 import ErrorMessage from './components/ErrorMessage';
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
-import EventList from './components/TalkList';
+import TalkList from './components/TalkList';
 import SummaryStatistics from './components/SummaryStatistics';
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default async function Schedule() {
   const talks = await fetchSchedule();
 
   if (talks === 'API_ERROR') {
-    return <ErrorMessage msg="w-please-set-the-api-token"/>;
+    return <ErrorMessage msg="w-please-set-the-api-token" />;
   }
 
   return (
@@ -23,8 +23,10 @@ export default async function Schedule() {
       <PageHeader />
       <HighlightedHeading text="Schedule" />
       <h1 className="text-teal text-2xl font-semibold mb-2">WSAF Schedule</h1>
-      <SummaryStatistics talks={talks}/>
-      <EventList talks={talks} />
+      <div className="flex flex-row px-4">
+        <SummaryStatistics talks={talks} />
+        <TalkList talks={talks} />
+      </div>
     </main>
   );
 }

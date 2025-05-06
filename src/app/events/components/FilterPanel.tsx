@@ -29,7 +29,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   const trackItems = Object.entries(trackFreq).sort((a, b) => b[1] - a[1]);
 
   return (
-    <div className="sticky top-20 border p-4 text-left text-black border-slate-300 rounded-md overflow-auto max-h-screen shadow-lg">
+    <div className="sticky z-50 top-20 border p-4 text-left text-black border-slate-300 rounded-md overflow-auto max-h-screen shadow-lg">
       <h3 className="font-bold mb-4 text-lg border-b pb-2">Filters</h3>
 
       <FilterSection

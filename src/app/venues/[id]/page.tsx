@@ -32,8 +32,6 @@ export default async function VenuePage({ params }: VenuePageProps) {
       <PageHeader />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="my-4">
-          <HighlightedHeading text={room.name?.en || 'Unnamed Venue'} />
-
           <div className="bg-white p-6 py-0 my-4 h-fit rounded-lg shadow-lg border border-gray-200">
             <div className="mb-6">
               <div className="my-4 text-left">
@@ -45,7 +43,10 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   Back to Venues
                 </Link>
               </div>
-              <h1 className="text-4xl font-bold text-teal-600 mb-4">
+              <h3 className="text-teal font-semibold italic text-left -pb-4">
+                What&apos;s on in...
+              </h3>
+              <h1 className="text-4xl font-bold text-teal-600 mb-4 ">
                 {room.name?.en || 'Unnamed Venue'}
               </h1>
               <RoomInfo room={room} />
@@ -53,7 +54,15 @@ export default async function VenuePage({ params }: VenuePageProps) {
           </div>
         </div>
       </div>
-      <div className="w-full">
+      <div className="w-full bg-white sticky z-40 top-15">
+        <div className="m-4 mb-0">
+          <HighlightedHeading
+            className="mb-0"
+            text={room.name?.en || 'Unnamed Venue'}
+          />
+        </div>
+      </div>
+      <div className="w-full mt-8">
         <Events allTalks={filteredTalks} />
       </div>
     </>

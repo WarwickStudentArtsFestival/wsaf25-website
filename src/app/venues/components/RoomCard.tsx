@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiMapPin, FiList } from 'react-icons/fi';
+import { FiMapPin, FiList, FiArrowRight } from 'react-icons/fi';
 import { ExtendedRoom } from '@/app/lib/types';
 import { customRoomData } from '@/app/lib/customRoomData';
 
@@ -50,6 +50,10 @@ export default function RoomCard({ room }: RoomCardProps) {
           <p className="text-sm text-gray-700 flex-1 my-2">
             {room.description.en}
           </p>
+          <div className="flex items-center gap-2 mt-4 text-black text-sm font-medium">
+            <span>View Details</span>
+            <FiArrowRight className="text-purple-500" />
+          </div>
         </div>
       </div>
     </Link>

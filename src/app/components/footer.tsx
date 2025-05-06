@@ -92,7 +92,7 @@ const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-teal text-white w-full border-t">
+    <footer className="mt-auto bg-teal text-white w-full border-t">
       <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           <Section

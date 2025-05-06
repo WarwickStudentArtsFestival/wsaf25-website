@@ -7,17 +7,28 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint:fix": "next lint --fix",
+    "prisma:db:pull": "dotenv -e .env.local -e .env -- npx prisma db pull",
+    "prisma:generate": "dotenv -e .env.local -e .env -- npx prisma generate",
+    "prisma:studio": "dotenv -e .env.local -e .env -- npx prisma studio",
+    "prisma:validate": "dotenv -e .env.local -e .env -- npx prisma validate",
+    "prisma:format": "dotenv -e .env.local -e .env -- npx prisma format",
+    "prisma:migrate:generate": "dotenv -e .env.local -e .env -- npx migrate dev",
+    "prisma:migrate:run": "dotenv -e .env.local -e .env -- npx migrate deploy"
   },
   "dependencies": {
     "@next/third-parties": "15.3.1",
+    "@prisma/client": "^6.7.0",
+    "better-auth": "^1.2.7",
     "dayjs": "^1.11.11",
     "dotenv-cli": "^8.0.0",
     "next": "15.3.1",
+    "next-auth": "^5.0.0-beta.27",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hot-toast": "^2.5.2",
-    "react-icons": "^5.0.1"
+    "react-icons": "^5.0.1",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
@@ -25,12 +36,14 @@
     "@types/node": "^22.14.1",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
+    "dotenv": "^16.5.0",
     "eslint": "^9.25.1",
     "eslint-config-next": "^15.3.1",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-prettier": "^5.1.3",
     "postcss": "^8",
     "prettier": "^3.2.5",
+    "prisma": "^6.7.0",
     "tailwindcss": "^4.1.4",
     "typescript": "^5"
   },

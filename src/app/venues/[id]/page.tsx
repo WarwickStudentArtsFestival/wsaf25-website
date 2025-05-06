@@ -18,47 +18,89 @@ export default async function VenuePage({ params }: VenuePageProps) {
   const { id } = await params;
   const room = await fetchRoom(id);
 
-  if (!room || room == 'API_ERROR') {
+  if (!room || room === 'API_ERROR') {
     return <ErrorMessage msg={`Venue '${params.id}' not found!`} />;
   }
 
-  const { image, imageAlt, mapUrl, roomLocation } = customRoomData[room.id];
+  const venueMeta = customRoomData[room.id];
+  const { image, imageAlt, mapUrl, roomLocation } = venueMeta || {};
 
   return (
     <>
       <PageHeader />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="my-4">
-          <div className="my-4 text-left">
-            <Link
-              href="/venues"
-              className="inline-flex p-0 b-0 text-black items-center text-sm hover:underline"
-            >
-              <FaArrowLeft className="mr-2 text-purple-500" />
-              Back to Venues
-            </Link>
-          </div>
-
           <HighlightedHeading text={room.name?.en || 'Unnamed Venue'} />
 
-          <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200 mt-4">
-            <div className="flex flex-col lg:flex-row gap-6">
-              <div className="lg:w-2/3">
+          <div className="bg-white p-6 py-0 my-4 h-fit rounded-lg shadow-lg border border-gray-200">
+            <div className="mb-6">
+              <div className="my-4 text-left">
+                <Link
+                  href="/venues"
+                  className="inline-flex p-0 b-0 text-black items-center text-sm hover:underline"
+                >
+                  <FaArrowLeft className="mr-2 text-purple-500" />
+                  Back to Venues
+                </Link>
+              </div>
+
+              <h1 className="text-4xl font-bold text-teal-600 mb-4">
+                {room.name?.en || 'Unnamed Venue'}
+              </h1>
+
+              <div className="flex flex-col text-left lg:flex-row gap-6 mt-6">
+                <div className="lg:w-2/3">
+                  <h2 className="text-black text-xl font-semibold mb-4">
+                    Description
+                  </h2>
+                  <p className="prose max-w-none">
+                    {room.description?.en || 'No description available.'}
+                  </p>
+                </div>
                 {roomLocation && (
-                  <div className="flex items-center space-x-2">
-                    <FiMapPin className="text-purple-500 flex-shrink-0" />
-                    <h3 className="text-black font-semibold">{roomLocation}</h3>
+                  <div className="lg:w-1/3">
+                    <div className="flex items-center space-x-2 mb-2">
+                      <FiMapPin className="text-purple-500 flex-shrink-0" />
+                      <h3 className="text-black font-semibold">
+                        {roomLocation}
+                      </h3>
+                    </div>
+                    {mapUrl && (
+                      <Link
+                        href={mapUrl}
+                        target="_blank"
+                        className="text-sm text-blue-600 hover:underline"
+                      >
+                        View on map
+                      </Link>
+                    )}
                   </div>
                 )}
-                <h2 className="text-black text-xl font-semibold mb-4">
-                  Description
-                </h2>
-                <p className="prose max-w-none">
-                  {room.description?.en || 'No description available.'}
-                </p>
               </div>
             </div>
           </div>
+
+          {image && (
+            <div className="my-8">
+              <Image
+                src={image}
+                alt={imageAlt || `${room.name?.en} image`}
+                width={800}
+                height={600}
+                className="w-full max-h-96 object-contain rounded-lg"
+                priority
+              />
+            </div>
+          )}
+          {/* <div className="mt-4">
+            <iframe
+              src={mapUrl + '?controls=off'}
+              width="100%"
+              height="400"
+              style={{ border: 'none' }}
+              title="Campus Map"
+            />
+          </div> */}
         </div>
       </div>
     </>

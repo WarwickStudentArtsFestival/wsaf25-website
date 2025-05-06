@@ -19,7 +19,7 @@ type TalkCardProps = {
 
 export default function TalkCard({ talk, id }: TalkCardProps) {
   return (
-    <Link href={`/schedule/event/${talk.code}`}>
+    <Link href={`/events/event/${talk.code}`}>
       <div
         key={`${talk.code}-${id}`}
         className="border p-4 text-left text-black border-slate-300 rounded-md overflow-hidden w-full h-full flex flex-col hover:scale-[1.02] transition duration-150 ease-in-out shadow-lg"
@@ -55,7 +55,7 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
           ) : (
             <p className="text-sm flex items-center gap-2 mb-1">
               <FiAlertCircle className="text-purple-500" />
-              No Slot yet
+              Not Confirmed Yet
             </p>
           )}
         </div>

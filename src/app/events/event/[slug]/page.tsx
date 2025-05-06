@@ -1,4 +1,4 @@
-import { fetchTalk } from '@/app/schedule/lib/fetchTalk';
+import { fetchTalk } from '@/app/events/lib/fetchTalk';
 import PageHeader from '@/app/components/page-header';
 import ErrorMessage from '../../components/ErrorMessage';
 import HighlightedHeading from '@/app/components/highlighted-heading';
@@ -34,11 +34,11 @@ export default async function TalkPage({ params }: TalkPageProps) {
             <div className="mb-6">
               <div className="my-4 text-left">
                 <Link
-                  href="/schedule"
+                  href="/events"
                   className="inline-flex p-0 b-0 text-black items-center text-sm hover:underline"
                 >
                   <FaArrowLeft className="mr-2 text-purple-500" />
-                  Back to Schedule
+                  Back to Events
                 </Link>
               </div>
               <h1 className="text-4xl font-bold text-teal-600 mb-4">

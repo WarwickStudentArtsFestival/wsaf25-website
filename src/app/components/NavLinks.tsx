@@ -9,7 +9,7 @@ export default function NavLinks({ onClick }: Props) {
   const pathname = usePathname();
 
   // const performIsActive = pathname === '/perform';
-  const scheduleIsActive = pathname === '/schedule';
+  const eventsIsActive = pathname === '/events';
   const crewIsActive = pathname === '/crew';
 
   return (
@@ -26,12 +26,12 @@ export default function NavLinks({ onClick }: Props) {
       </li> */}
       <li className="flex items-center justify-center gap-2">
         <Link
-          href="/schedule"
+          href="/events"
           onClick={onClick}
-          className={scheduleIsActive ? 'text-yellow-400' : ''}
+          className={eventsIsActive ? 'text-yellow-400' : ''}
         >
           <span className="xs:inline-block hidden">View the&nbsp;</span>
-          Schedule
+          Events
         </Link>
       </li>
       <li className="flex items-center justify-center gap-2">

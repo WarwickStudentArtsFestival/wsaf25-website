@@ -5,12 +5,12 @@ import TalkList from './TalkList';
 import FilterPanel from '../FilterPanel';
 import { Talk } from '../../lib/types';
 
-interface ScheduleProps {
+interface EventsProps {
   allTalks: Talk[];
   initialTracks: string[];
 }
 
-export default function Schedule({ allTalks, initialTracks }: ScheduleProps) {
+export default function Events({ allTalks, initialTracks }: EventsProps) {
   const [selectedTracks, setSelectedTracks] = useState<string[]>(initialTracks);
   const [filteredTalks, setFilteredTalks] = useState<Talk[]>(allTalks);
 

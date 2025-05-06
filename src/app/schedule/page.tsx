@@ -17,9 +17,6 @@ export default async function SchedulePage() {
   }
 
   const allTracks = Array.from(new Set(talks.map((talk) => talk.track.en)));
-  // const allRooms = Array.from(
-  //   new Set(talks.map((talk) => talk.slot?.room?.en)),
-  // );
 
   return (
     <main className="w-full">
@@ -27,11 +24,7 @@ export default async function SchedulePage() {
       <HighlightedHeading text="Schedule" />
       <h1 className="text-teal text-2xl font-semibold mb-2">WSAF Schedule</h1>
 
-      <Schedule
-        allTalks={talks}
-        initialTracks={allTracks}
-        // initialRooms={allRooms}
-      />
+      <Schedule allTalks={talks} initialTracks={allTracks} />
     </main>
   );
 }

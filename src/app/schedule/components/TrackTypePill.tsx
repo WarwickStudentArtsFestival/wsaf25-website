@@ -6,7 +6,7 @@ type TalkTypePillProps = {
 };
 
 const TalkTypePill = ({ track }: TalkTypePillProps) => {
-  if (!track) return null; // Don't render if track is not available
+  if (!track) return null;
 
   return (
     <p className="inline-flex items-center gap-2 text-sm font-medium text-purple-700 rounded-full mb-4">

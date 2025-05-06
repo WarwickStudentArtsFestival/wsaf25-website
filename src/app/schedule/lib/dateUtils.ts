@@ -7,6 +7,7 @@ export const formatDate = (time: string) => {
     day: 'numeric',
   });
 };
+
 export const formatTime = (time: string | undefined): string => {
   if (!time) {
     return 'No time';

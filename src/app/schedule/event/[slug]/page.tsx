@@ -83,7 +83,7 @@ export default async function TalkPage({ params }: TalkPageProps) {
                     dangerouslySetInnerHTML={{ __html: talk.description }}
                   />
                 </div>
-                <div className="flex-1 p-6 border border-slate-300 rounded-md shadow-lg text-left overflow-hidden">
+                <div className="flex-1 p-6 border border-slate-300 rounded-md shadow-lg h-fit text-left overflow-hidden">
                   <h2 className="text-black text-xl font-semibold mb-4">
                     Event Details
                   </h2>

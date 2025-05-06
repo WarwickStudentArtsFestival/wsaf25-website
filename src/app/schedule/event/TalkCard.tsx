@@ -8,7 +8,7 @@ import {
 } from 'react-icons/fi';
 import { Talk } from '../lib/types';
 import Link from 'next/link';
-import TalkTypePill from './TalkTypePill';
+import TalkTypePill from '../components/TrackTypePill';
 import { formatDate, formatTime } from '../lib/dateUtils';
 
 type TalkCardProps = {
@@ -40,7 +40,6 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
               <p className="text-sm flex items-center gap-2 mb-2">
                 <FiClock className="text-purple-500" />
                 {formatTime(talk.slot?.start)} - {formatTime(talk.slot?.end)}
-                {/* {formatDuration(talk.duration)} */}
               </p>
             </>
           )) || (

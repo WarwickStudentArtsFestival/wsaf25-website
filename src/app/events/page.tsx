@@ -6,7 +6,8 @@ import HighlightedHeading from '../components/highlighted-heading';
 import Events from './components/events/Events';
 
 export const metadata: Metadata = {
-  title: 'WSAF Schedule',
+  title: 'WSAF Events',
+  description: 'List of all the events on in WSAF 2025',
 };
 
 export default async function EventsPage() {

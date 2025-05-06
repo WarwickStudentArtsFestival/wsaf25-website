@@ -15,15 +15,3 @@ export type Talk = {
   image: string;
   duration: number;
 };
-
-type TalkTrack =
-  | 'Theatre'
-  | 'Music'
-  | 'Comedy'
-  | 'Mixed'
-  | 'Dance'
-  | 'Visual Art'
-  | 'Creation'
-  | 'MTW Stagefest'
-  | 'Film'
-  | 'Spoken Word';

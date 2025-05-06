@@ -27,6 +27,7 @@ export async function fetchSchedule(): Promise<Talk[] | 'API_ERROR'> {
     allTalks = allTalks.concat(data.results);
 
     nextPageUrl = data.next || null;
+    console.log("API Call");
     // nextPageUrl = null;
   }
 

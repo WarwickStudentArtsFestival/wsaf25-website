@@ -12,9 +12,11 @@ export default function TalkList({ talks }: TalkListProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-16">
+    <div className="grid grid-cols-1 sm:grid-cols-5 gap-4 px-16 items-stretch">
       {talks.map((talk, id) => (
-        <TalkCard key={`${talk.code}-${id}`} talk={talk} id={id} />
+        <div key={`${talk.code}-${id}`} className="h-full">
+          <TalkCard talk={talk} id={id} />
+        </div>
       ))}
     </div>
   );

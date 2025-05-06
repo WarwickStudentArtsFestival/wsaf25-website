@@ -5,6 +5,7 @@ import ErrorMessage from './components/ErrorMessage';
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
 import EventList from './components/TalkList';
+import SummaryStatistics from './components/SummaryStatistics';
 
 export const metadata: Metadata = {
   title: 'WSAF Schedule',
@@ -22,12 +23,7 @@ export default async function Schedule() {
       <PageHeader />
       <HighlightedHeading text="Schedule" />
       <h1 className="text-teal text-2xl font-semibold mb-2">WSAF Schedule</h1>
-      <div className="mb-6 p-4 mx-auto w-fit bg-gray-100 rounded shadow flex flex-col sm:flex-row gap-4">
-        <div>
-          <span className="font-semibold">Total performances:</span>{' '}
-          {talks.length}
-        </div>
-      </div>
+      <SummaryStatistics talks={talks}/>
       <EventList talks={talks} />
     </main>
   );

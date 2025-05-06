@@ -47,6 +47,13 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
         </p>
 
         <div className="flex flex-col flex-grow">
+          {talk.slot?.room && (
+            <p className="text-sm  flex items-center gap-2 mb-2">
+              <FiMapPin className="text-purple-500" />
+              {talk.slot.room.en}
+            </p>
+          )}
+
           <h3 className="text-teal text-xl font-semibold mb-3">{talk.title}</h3>
 
           {talk.slot?.start && (
@@ -60,13 +67,6 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
                 {formatDuration(talk.duration)}
               </p>
             </>
-          )}
-
-          {talk.slot?.room && (
-            <p className="text-sm  flex items-center gap-2 mb-2">
-              <FiMapPin className="text-purple-500" />
-              {talk.slot.room.en}
-            </p>
           )}
         </div>
 

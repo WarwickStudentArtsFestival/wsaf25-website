@@ -23,7 +23,8 @@ const renderFrequencies = (label: string, freq: Record<string, number>) => (
       {Object.entries(freq).map(([key, count]) => (
         <li key={key} className="flex items-center gap-2">
           <TrackIcon size={15} track={key} />
-          {key || '(None)'}: {count}
+          {/* {key || '(None)'}: {count} */}
+          {key}
         </li>
       ))}
     </ul>
@@ -38,14 +39,14 @@ const SummaryStatistics: React.FC<SummaryStatsProps> = ({ talks }) => {
   );
 
   return (
-    <div className="sticky top-20 border p-4 text-left text-black border-slate-300 rounded-md overflow-hidden h-full flex flex-col shadow-lg">
-      <div>
+    <div className="sticky top-20 border p-4 text-left text-black border-slate-300 rounded-md overflow-hidden h-auto flex flex-col shadow-lg">
+      {/* <div>
         <span className="font-semibold">Total performances:</span>{' '}
         {talks.length}
-      </div>
-      {renderFrequencies('Events', trackFreq)}
+      </div> */}
+      {renderFrequencies('Event Type', trackFreq)}
       {renderFrequencies('Rooms', roomFreq)}
-      {renderFrequencies('Submission types', submissionTypeFreq)}
+      {/* {renderFrequencies('Submission types', submissionTypeFreq)} */}
     </div>
   );
 };

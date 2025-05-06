@@ -1,6 +1,7 @@
 import { fetchTalk } from '@/app/schedule/lib/fetchTalk';
+import PageHeader from '@/app/components/page-header';
 import ErrorMessage from '../../components/ErrorMessage';
-// import Image from 'next/image';
+import HighlightedHeading from '@/app/components/highlighted-heading';
 
 type TalkPageProps = {
   params: {
@@ -17,15 +18,10 @@ export default async function TalkPage({ params }: TalkPageProps) {
   }
 
   return (
-    <div className="p-8 text-black space-y-6">
-      <h1 className="text-4xl font-bold">{talk.title}</h1>
-      {/* <Image
-        src={talk.image}
-        alt={talk.title}
-        className="rounded-lg shadow-lg w-full h-auto"
-        width={800}
-        height={600}
-      /> */}
+    <div>
+      <PageHeader />
+      <HighlightedHeading text={talk.title} />
+      <h1 className="text-teal text-2xl font-semibold mb-2">{talk.title}</h1>
     </div>
   );
 }

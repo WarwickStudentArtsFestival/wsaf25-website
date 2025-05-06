@@ -18,14 +18,21 @@ export default async function Schedule() {
     return <ErrorMessage msg="w-please-set-the-api-token" />;
   }
 
+  const filteredTalks = talks.filter((talk) => talk.track.en == 'MTW Stagefest');
+
   return (
     <main className="w-full">
       <PageHeader />
       <HighlightedHeading text="Schedule" />
       <h1 className="text-teal text-2xl font-semibold mb-2">WSAF Schedule</h1>
+
       <div className="flex flex-row px-4">
-        <SummaryStatistics talks={talks} />
-        <TalkList talks={talks} />
+        <div className="w-1/6">
+          <SummaryStatistics talks={talks} />
+        </div>
+        <div className="flex-1">
+          <TalkList talks={filteredTalks} />
+        </div>
       </div>
     </main>
   );

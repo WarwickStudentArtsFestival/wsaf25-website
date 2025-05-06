@@ -1,11 +1,11 @@
 import React from 'react';
 import TrackIcon from './TrackIcon';
 
-type TalkTypePillProps = {
+type TrackPill = {
   track: string | undefined;
 };
 
-const TalkTypePill = ({ track }: TalkTypePillProps) => {
+const TrackPill = ({ track }: TrackPill) => {
   if (!track) return null;
 
   return (
@@ -20,4 +20,4 @@ const TalkTypePill = ({ track }: TalkTypePillProps) => {
   );
 };
 
-export default TalkTypePill;
+export default TrackPill;

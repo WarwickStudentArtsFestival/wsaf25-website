@@ -1,4 +1,4 @@
-import TrackIcon from './TrackIcon';
+import TrackIcon from '../event/track/TrackIcon';
 
 type FilterSectionProps = {
   label: string;

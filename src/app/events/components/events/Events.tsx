@@ -3,15 +3,15 @@
 import React, { useState, useEffect } from 'react';
 import TalkList from './TalkList';
 import FilterPanel from '../FilterPanel';
-import { Talk } from '../../lib/types';
+import { Talk } from '@/app/lib/types';
 
 interface EventsProps {
   allTalks: Talk[];
-  initialTracks: string[];
 }
 
-export default function Events({ allTalks, initialTracks }: EventsProps) {
-  const [selectedTracks, setSelectedTracks] = useState<string[]>(initialTracks);
+export default function Events({ allTalks }: EventsProps) {
+  const allTracks = Array.from(new Set(allTalks.map((talk) => talk.track.en)));
+  const [selectedTracks, setSelectedTracks] = useState<string[]>(allTracks);
   const [filteredTalks, setFilteredTalks] = useState<Talk[]>(allTalks);
 
   useEffect(() => {

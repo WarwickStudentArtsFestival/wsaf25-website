@@ -1,6 +1,6 @@
 import { Talk } from './types';
 
-export async function fetchEvents(): Promise<Talk[] | 'API_ERROR'> {
+export async function fetchTalks(): Promise<Talk[] | 'API_ERROR'> {
   if (!process.env.PRETALX_PRIVATE_API_TOKEN) {
     return 'API_ERROR';
   }

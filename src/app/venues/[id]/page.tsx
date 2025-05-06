@@ -2,10 +2,11 @@ import PageHeader from '@/app/components/page-header';
 import ErrorMessage from '@/app/components/ErrorMessage';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import { fetchRoom } from '@/app/lib/fetchRoom';
-import Image from 'next/image';
 import Link from 'next/link';
-import { FiMapPin } from 'react-icons/fi';
 import { FaArrowLeft } from 'react-icons/fa';
+import RoomInfo from './components/RoomInfo';
+import Events from '@/app/events/components/events/Events';
+import { fetchTalks } from '@/app/lib/fetchTalks';
 
 type VenuePageProps = {
   params: {
@@ -16,10 +17,15 @@ type VenuePageProps = {
 export default async function VenuePage({ params }: VenuePageProps) {
   const { id } = await params;
   const room = await fetchRoom(id);
+  const allTalks = await fetchTalks();
 
-  if (!room || room === 'API_ERROR') {
+  if (!room || room === 'API_ERROR' || allTalks === 'API_ERROR') {
     return <ErrorMessage msg={`Venue '${params.id}' not found!`} />;
   }
+
+  const filteredTalks = allTalks.filter(
+    (t) => t.slot?.room?.en == room.name.en,
+  );
 
   return (
     <>
@@ -39,44 +45,23 @@ export default async function VenuePage({ params }: VenuePageProps) {
                   Back to Venues
                 </Link>
               </div>
-
               <h1 className="text-4xl font-bold text-teal-600 mb-4">
                 {room.name?.en || 'Unnamed Venue'}
               </h1>
-
-              <div className="flex flex-col text-left lg:flex-row gap-6 mt-6">
-                <div className="lg:w-2/3">
-                  <h2 className="text-black text-xl font-semibold mb-4">
-                    Description
-                  </h2>
-                  <p className="prose max-w-none">
-                    {room.description?.en || 'No description available.'}
-                  </p>
-                </div>
-                {room.roomLocation && (
-                  <div className="lg:w-1/3">
-                    <div className="flex items-center space-x-2 mb-2">
-                      <FiMapPin className="text-purple-500 flex-shrink-0" />
-                      <h3 className="text-black font-semibold">
-                        {room.roomLocation}
-                      </h3>
-                    </div>
-                    {room.mapUrl && (
-                      <Link
-                        href={room.mapUrl}
-                        target="_blank"
-                        className="text-sm text-blue-600 hover:underline"
-                      >
-                        View on map
-                      </Link>
-                    )}
-                  </div>
-                )}
-              </div>
+              <RoomInfo room={room} />
             </div>
           </div>
+        </div>
+      </div>
+      <div className="w-full">
+        <Events allTalks={filteredTalks} />
+      </div>
+    </>
+  );
+}
 
-          {room.image && (
+{
+  /* {room.image && (
             <div className="my-8">
               <Image
                 src={room.image}
@@ -96,9 +81,5 @@ export default async function VenuePage({ params }: VenuePageProps) {
               style={{ border: 'none' }}
               title="Campus Map"
             />
-          </div>
-        </div>
-      </div>
-    </>
-  );
+          </div> */
 }

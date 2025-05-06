@@ -1,6 +1,6 @@
 import React from 'react';
-import { Talk } from '../lib/types';
 import FilterSection from './FilterSection';
+import { Talk } from '@/app/lib/types';
 
 type FilterPanelProps = {
   talks: Talk[];

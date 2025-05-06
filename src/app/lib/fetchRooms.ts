@@ -1,11 +1,11 @@
 import { customRoomData } from '@/app/lib/customRoomData';
-import { fetchEvents } from './fetchEvents';
+import { fetchTalks } from './fetchTalks';
 import { Talk, ExtendedRoom, Room } from './types';
 
 export async function fetchRooms(): Promise<
   (ExtendedRoom & { eventCount: number })[] | 'API_ERROR'
 > {
-  const events = await fetchEvents();
+  const events = await fetchTalks();
   if (!process.env.PRETALX_PRIVATE_API_TOKEN || events === 'API_ERROR') {
     return 'API_ERROR';
   }

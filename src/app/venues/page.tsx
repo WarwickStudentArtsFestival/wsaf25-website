@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import PageHeader from '../components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
-import { fetchRoom } from './lib/fetchRoom';
+import { fetchRooms } from './lib/fetchRooms';
+import ErrorMessage from '../events/components/ErrorMessage';
+import RoomList from './components/RoomList';
 
 export const metadata: Metadata = {
   title: 'WSAF Venues',
@@ -9,8 +11,11 @@ export const metadata: Metadata = {
 };
 
 export default async function EventsPage() {
-  const roomPromises = ['1'].map((id) => fetchRoom(id));
-  const rooms = await Promise.all(roomPromises);
+  const rooms = await fetchRooms();
+
+  if (rooms === 'API_ERROR') {
+    return <ErrorMessage msg="w-please-set-the-api-token" />;
+  }
 
   return (
     <main className="w-full">
@@ -18,12 +23,8 @@ export default async function EventsPage() {
       <HighlightedHeading text="Venues" />
       <h1 className="text-teal text-2xl font-semibold mb-2">
         Venues, Rooms and Spaces
-        {rooms.map((r, index) => (
-          <p key={index}>
-            {r !== 'API_ERROR' ? r.name.en : 'Error loading room'}
-          </p>
-        ))}
       </h1>
+      <RoomList rooms={rooms} />
     </main>
   );
 }

@@ -6,7 +6,6 @@ export type Room = {
   };
   description: {
     en: string;
-    [lang: string]: string;
   };
   capacity: number;
   position: number | null;

@@ -3,32 +3,12 @@ import { FiMapPin, FiClock, FiCalendar, FiArrowRight } from 'react-icons/fi';
 import { Talk } from '../lib/types';
 import Link from 'next/link';
 import TrackIcon from './TrackIcon';
+import { formatDate, formatDuration } from '../lib/dateUtils';
 
 type TalkCardProps = {
   talk: Talk;
   id: number;
 };
-
-const formatDate = (time: string) => {
-  const date = new Date(time);
-  return date.toLocaleDateString([], {
-    weekday: 'short',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
-};
-
-function formatDuration(durationInMinutes: number): string {
-  const hours = Math.floor(durationInMinutes / 60);
-  const minutes = durationInMinutes % 60;
-
-  if (hours === 0) {
-    return `${minutes} min`;
-  }
-
-  return minutes > 0 ? `${hours}h ${minutes} min` : `${hours}h`;
-}
 
 export default function TalkCard({ talk, id }: TalkCardProps) {
   return (
@@ -48,7 +28,7 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
 
         <div className="flex flex-col flex-grow">
           {talk.slot?.room && (
-            <p className="text-sm  flex items-center gap-2 mb-2">
+            <p className="text-sm flex items-center gap-2 mb-2">
               <FiMapPin className="text-purple-500" />
               {talk.slot.room.en}
             </p>
@@ -58,11 +38,11 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
 
           {talk.slot?.start && (
             <>
-              <p className="text-sm  flex items-center gap-2 mb-1">
+              <p className="text-sm flex items-center gap-2 mb-1">
                 <FiCalendar className="text-purple-500" />
                 {formatDate(talk.slot.start)}
               </p>
-              <p className="text-sm  flex items-center gap-2 mb-2">
+              <p className="text-sm flex items-center gap-2 mb-2">
                 <FiClock className="text-purple-500" />
                 {formatDuration(talk.duration)}
               </p>

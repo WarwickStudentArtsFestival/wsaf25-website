@@ -1,6 +1,6 @@
 import { fetchTalk } from '@/app/schedule/lib/fetchTalk';
 import ErrorMessage from '../../components/ErrorMessage';
-import Image from 'next/image';
+// import Image from 'next/image';
 
 type TalkPageProps = {
   params: {

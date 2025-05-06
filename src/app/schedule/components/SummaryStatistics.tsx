@@ -22,7 +22,7 @@ const renderFrequencies = (label: string, freq: Record<string, number>) => (
     <ul className="list-disc list-inside ml-4">
       {Object.entries(freq).map(([key, count]) => (
         <li key={key} className="flex items-center gap-2">
-          <TrackIcon track={key} />
+          <TrackIcon size={15} track={key} />
           {key || '(None)'}: {count}
         </li>
       ))}
@@ -38,7 +38,7 @@ const SummaryStatistics: React.FC<SummaryStatsProps> = ({ talks }) => {
   );
 
   return (
-    <div className="m-4 p-4 mx-auto text-left w-fit bg-gray-100 rounded shadow flex flex-col gap-4">
+    <div className="sticky top-20 border p-4 text-left text-black border-slate-300 rounded-md overflow-hidden h-full flex flex-col shadow-lg">
       <div>
         <span className="font-semibold">Total performances:</span>{' '}
         {talks.length}

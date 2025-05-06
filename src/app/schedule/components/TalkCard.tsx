@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  FiMapPin,
-  FiClock,
-  FiCalendar,
-  FiUsers,
-  FiArrowRight,
-} from 'react-icons/fi';
+import { FiMapPin, FiClock, FiCalendar, FiArrowRight } from 'react-icons/fi';
 import { Talk } from '../lib/types';
 import Link from 'next/link';
 import TrackIcon from './TrackIcon';
@@ -41,7 +35,7 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
     <Link href={`/schedule/event/${talk.code}`}>
       <div
         key={`${talk.code}-${id}`}
-        className="border p-4 text-left border-slate-300 rounded-md overflow-hidden w-full h-full flex flex-col hover:scale-[1.02] transition duration-150 ease-in-out shadow-lg"
+        className="border p-4 text-left text-black border-slate-300 rounded-md overflow-hidden w-full h-full flex flex-col hover:scale-[1.02] transition duration-150 ease-in-out shadow-lg"
       >
         <p className="inline-flex items-center gap-2 text-sm font-medium text-purple-700 rounded-full mb-4">
           <span className="p-2 bg-purple-200 text-purple-800 border border-purple-800 rounded-full">
@@ -57,11 +51,11 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
 
           {talk.slot?.start && (
             <>
-              <p className="text-sm text-gray-700 flex items-center gap-2 mb-1">
+              <p className="text-sm  flex items-center gap-2 mb-1">
                 <FiCalendar className="text-purple-500" />
                 {formatDate(talk.slot.start)}
               </p>
-              <p className="text-sm text-gray-700 flex items-center gap-2 mb-2">
+              <p className="text-sm  flex items-center gap-2 mb-2">
                 <FiClock className="text-purple-500" />
                 {formatDuration(talk.duration)}
               </p>
@@ -69,7 +63,7 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
           )}
 
           {talk.slot?.room && (
-            <p className="text-sm text-gray-700 flex items-center gap-2 mb-2">
+            <p className="text-sm  flex items-center gap-2 mb-2">
               <FiMapPin className="text-purple-500" />
               {talk.slot.room.en}
             </p>

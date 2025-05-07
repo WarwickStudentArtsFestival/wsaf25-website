@@ -13,7 +13,7 @@ export type Talk = {
   track: { en: string };
   state: string;
   description: string;
-  slot: { room: { en: string }; start: string; end: string };
+  slot: { room_id: number; room: { en: string }; start: string; end: string };
   image: string;
   duration: number;
 };

@@ -3,12 +3,10 @@ import PageHeader from '@/app/components/page-header';
 import ErrorMessage from '../../components/ErrorMessage';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import PresentedBy from './components/PresentedBy';
-import { FaArrowLeft } from 'react-icons/fa';
 import Image from 'next/image';
-import Link from 'next/link';
 import EventDetails from './components/EventDetails';
-import TrackPill from '../components/track/TrackPill';
 import GoToVenue from './components/GoToVenue';
+import TalkHeader from './components/TalkHeader';
 
 type TalkPageProps = {
   params: {
@@ -32,46 +30,36 @@ export default async function TalkPage({ params }: TalkPageProps) {
           <HighlightedHeading text={talk.title} />
 
           <div className="bg-white p-6 py-0 my-4 h-fit rounded-lg shadow-lg border border-gray-200">
-            <div className="">
-              <div className="my-4 text-left">
-                <Link
-                  href="/events"
-                  className="inline-flex p-0 b-0 text-black items-center text-sm hover:underline"
-                >
-                  <FaArrowLeft className="mr-2 text-purple-500" />
-                  Back to Events
-                </Link>
-              </div>
+            <TalkHeader track={talk.track.en} />
 
-              <div className="mt-8">
-                <PresentedBy speakers={talk.speakers} />
-                <h1 className="text-4xl font-bold text-teal-600">
-                  &ldquo;{talk.title}&rdquo;
-                </h1>
-              </div>
+            <div className="my-4">
+              <PresentedBy speakers={talk.speakers} />
+              <h1 className="text-4xl font-bold text-teal-600">
+                &ldquo;{talk.title}&rdquo;
+              </h1>
+            </div>
 
-              <div className="flex flex-col text-left lg:flex-row gap-6 mt-6">
-                <div className="lg:w-2/3">
-                  <h2 className="text-black text-xl font-semibold mb-4">
-                    Description
-                  </h2>
-                  <div
-                    className="prose max-w-none"
-                    dangerouslySetInnerHTML={{ __html: talk.description }}
-                  />
-                </div>
-                <div className="lg:w-1/3">
-                  <EventDetails
-                    start={talk.slot?.start}
-                    end={talk.slot?.end}
-                    room={talk.slot?.room?.en}
-                  />
-                </div>
+            <div className="flex flex-col text-left lg:flex-row gap-6 mt-12">
+              <div className="lg:w-2/3">
+                <h2 className="text-black text-xl font-semibold mb-4">
+                  Description
+                </h2>
+                <div
+                  className="prose max-w-none"
+                  dangerouslySetInnerHTML={{ __html: talk.description }}
+                />
               </div>
+              <div className="lg:w-1/3">
+                <EventDetails
+                  start={talk.slot?.start}
+                  end={talk.slot?.end}
+                  room={talk.slot?.room?.en}
+                />
+              </div>
+            </div>
 
-              <div className="flex mt-4 flex-row flex-wrap items-center justify-between gap-4 p-4">
-                <GoToVenue talk={talk} />
-              </div>
+            <div className="flex mt-4 flex-row flex-wrap items-center justify-between gap-4 p-4">
+              <GoToVenue talk={talk} />
             </div>
           </div>
 

@@ -34,21 +34,24 @@ export default function TalkList({ talks }: TalkListProps) {
   }
 
   return (
-    <div className="relative max-md:h-[500px]">
+    <div className="relative max-md:h-[500px] overflow-hidden">
       <div
         ref={scrollRef}
-        className="max-md:h-[500px] max-md:overflow-y-auto pl-4 border-teal  border-4 mx-4 grid gap-4 items-stretch grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 md:border-none"
+        className="max-md:h-[500px] w-full max-md:overflow-y-auto grid gap-2 grid-cols-2 md:grid-cols-3 xl:grid-cols-5 px-2"
       >
         {talks.map((talk, id) => (
-          <div key={`${talk.code}-${id}`} className="h-full m-4">
+          <div key={`${talk.code}-${id}`} className="h-full w-full sm:p-2">
             <TalkCard talk={talk} id={id} />
           </div>
         ))}
-        <div
-          className="bg-teal p-2 mx-4 transition-all duration-150 absolute sm:hidden left-1 top-0 bottom-0 w-2 z-10"
-          style={{ height: `${scrollPercent}%` }}
-        />
       </div>
     </div>
   );
+}
+
+{
+  /* <div
+          className="bg-teal p-2 mx-4 transition-all duration-150 absolute sm:hidden left-1 top-0 bottom-0 w-2 z-10"
+          style={{ height: `${scrollPercent}%` }}
+        /> */
 }

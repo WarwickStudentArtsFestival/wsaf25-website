@@ -27,37 +27,38 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
         <TrackPill track={talk.track?.en} />
         <div className="flex flex-col flex-grow">
           <h3 className="text-teal text-xl font-semibold mb-3">{talk.title}</h3>
-
-          {talk.slot?.start ? (
-            [
-              {
-                icon: <FiMapPin className="text-purple-500" />,
-                text: talk.slot.room.en,
-              },
-              {
-                icon: <FiCalendar className="text-purple-500" />,
-                text: formatDate(talk.slot.start),
-              },
-              {
-                icon: <FiClock className="text-purple-500" />,
-                text: `${formatTime(talk.slot.start)} - ${formatTime(talk.slot.end)}`,
-              },
-              {
-                icon: <FiUser className="text-purple-500" />,
-                text: talk.speakers.map((s) => s.name).join(', '),
-              },
-            ].map(({ icon, text }, index) => (
-              <p key={index} className="text-sm flex items-center gap-2 mb-2">
-                {icon}
-                {text}
+          <div className="hidden sm:block">
+            {talk.slot?.start ? (
+              [
+                {
+                  icon: <FiMapPin className="text-purple-500" />,
+                  text: talk.slot.room.en,
+                },
+                {
+                  icon: <FiCalendar className="text-purple-500" />,
+                  text: formatDate(talk.slot.start),
+                },
+                {
+                  icon: <FiClock className="text-purple-500" />,
+                  text: `${formatTime(talk.slot.start)} - ${formatTime(talk.slot.end)}`,
+                },
+                {
+                  icon: <FiUser className="text-purple-500" />,
+                  text: talk.speakers.map((s) => s.name).join(', '),
+                },
+              ].map(({ icon, text }, index) => (
+                <p key={index} className="text-sm flex items-center gap-2 mb-2">
+                  {icon}
+                  {text}
+                </p>
+              ))
+            ) : (
+              <p className="text-sm flex items-center gap-2 mb-1">
+                <FiAlertCircle className="text-purple-500" />
+                Not Confirmed Yet
               </p>
-            ))
-          ) : (
-            <p className="text-sm flex items-center gap-2 mb-1">
-              <FiAlertCircle className="text-purple-500" />
-              Not Confirmed Yet
-            </p>
-          )}
+            )}
+          </div>
         </div>
         <div className="flex items-center gap-2 mt-4 text-black text-sm font-medium">
           <span>View Details</span>

@@ -9,6 +9,7 @@ import GoToVenue from './components/GoToVenue';
 import TalkHeader from './components/TalkHeader';
 import Share from './components/Share';
 import { Toaster } from 'react-hot-toast';
+import GoToGenre from './components/GoToGenre';
 
 type Params = Promise<{ slug: string }>;
 
@@ -52,6 +53,7 @@ export default async function Page({ params }: { params: Params }) {
                     Related Events
                   </h2>
                   <GoToVenue talk={talk} />
+                  <GoToGenre talk={talk} />
                 </div>
               </div>
               <div className="lg:w-1/3 flex flex-col mx-4 gap-4">
@@ -63,6 +65,7 @@ export default async function Page({ params }: { params: Params }) {
                   Related Events
                 </h2>
                 <GoToVenue talk={talk} />
+                <GoToGenre talk={talk} />
               </div>
             </div>
           </div>

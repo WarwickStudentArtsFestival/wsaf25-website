@@ -4,6 +4,7 @@ import { fetchRoom } from '@/app/lib/fetchRoom';
 import RoomInfo from './components/RoomInfo';
 import Events from '@/app/events/components/events/Events';
 import { fetchTalks } from '@/app/lib/fetchTalks';
+import GoToVenues from './components/GoToVenues';
 import RoomHeader from './components/RoomHeader';
 
 type Params = Promise<{ id: string }>;
@@ -37,6 +38,10 @@ export default async function VenuePage({ params }: { params: Params }) {
       </div>
       <div className="w-full mt-8">
         <Events allTalks={filteredTalks} />
+      </div>
+      <div className="w-2xl flex my-4 flex-col items-center justify-center mx-auto">
+        <h2 className="text-black text-xl font-semibold">Related Events</h2>
+        <GoToVenues />
       </div>
     </>
   );

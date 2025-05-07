@@ -26,7 +26,7 @@ export default function EventDetails({ start, end }: EventDetailsProps) {
   ];
 
   return (
-    <div className="flex-1 p-6 border border-slate-300 rounded-md shadow-lg h-fit text-left overflow-hidden">
+    <div className="flex-1 h-fit text-left overflow-hidden">
       <h2 className="text-black text-xl font-semibold mb-4">Event Details</h2>
       {talkDetails.map((detail, index) => (
         <div key={index} className="flex items-center gap-4 mb-4">

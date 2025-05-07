@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import React from 'react';
-import ErrorMessage from '@/app/components/ErrorMessage';
 
 export const dynamicParams = false;
 export const dynamic = 'force-static';

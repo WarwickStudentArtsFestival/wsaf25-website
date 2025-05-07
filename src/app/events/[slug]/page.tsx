@@ -36,6 +36,9 @@ export default async function Page({ params }: { params: Params }) {
             </div>
 
             <div className="flex flex-col text-left lg:flex-row gap-6 mt-12">
+              <div className="lg:w-1/3">
+                <EventDetails start={talk.slot?.start} end={talk.slot?.end} />
+              </div>
               <div className="lg:w-2/3">
                 <h2 className="text-black text-xl font-semibold mb-4">
                   Description
@@ -45,14 +48,9 @@ export default async function Page({ params }: { params: Params }) {
                   dangerouslySetInnerHTML={{ __html: talk.description }}
                 />
               </div>
-              <div className="lg:w-1/3">
-                <EventDetails start={talk.slot?.start} end={talk.slot?.end} />
-              </div>
             </div>
 
-            <div className="flex mt-4 flex-row flex-wrap items-center justify-between gap-4 p-4">
-              <GoToVenue talk={talk} />
-            </div>
+            <GoToVenue talk={talk} />
           </div>
 
           {talk.image && (

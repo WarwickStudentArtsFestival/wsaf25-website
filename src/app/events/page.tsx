@@ -21,7 +21,6 @@ export default async function EventsPage() {
   return (
     <main className="w-full">
       <PageHeader />
-      <HighlightedHeading text="Events" />
       <Events allTalks={talks} />
     </main>
   );

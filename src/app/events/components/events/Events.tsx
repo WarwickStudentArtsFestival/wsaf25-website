@@ -5,6 +5,7 @@ import FilterPanel from '../FilterPanel';
 import { Talk, trackTypes } from '@/app/lib/types';
 import { useSearchParams, useRouter } from 'next/navigation';
 import GoToAllEvents from './GoToAllEvents';
+import HighlightedHeading from '@/app/components/highlighted-heading';
 
 interface EventsProps {
   allTalks: Talk[];
@@ -40,10 +41,13 @@ function EventsClient({ allTalks }: EventsProps) {
   };
 
   const isFiltered = allTalks.length !== filteredTalks.length;
+  const headerText =
+    selectedTracks.length === 1 ? `${selectedTracks[0]}` : 'All Events';
 
   return (
     <>
-      <h1 className="text-teal text-2xl font-semibold mb-2">WSAF Events</h1>
+      <HighlightedHeading text={headerText} />
+      <h1 className="text-teal text-2xl font-semibold mb-4">WSAF Events</h1>
       <div className="flex flex-row px-4 relative">
         <div className="w-1/6 hidden lg:block">
           <FilterPanel

@@ -1,10 +1,7 @@
 import { Talk } from '@/app/lib/types';
+import { cache } from 'react';
 
-export async function fetchTalk(talkSlug: string): Promise<Talk | 'API_ERROR'> {
-  if (!process.env.PRETALX_PRIVATE_API_TOKEN) {
-    return 'API_ERROR';
-  }
-
+const fetchTalkData = async (talkSlug: string): Promise<Talk | 'API_ERROR'> => {
   const url = `https://pretalx.wsaf.org.uk/api/events/2025/talks/${talkSlug}`;
 
   const res = await fetch(url, {
@@ -12,14 +9,32 @@ export async function fetchTalk(talkSlug: string): Promise<Talk | 'API_ERROR'> {
       Authorization: `Token ${process.env.PRETALX_PRIVATE_API_TOKEN}`,
       Accept: 'application/json',
     },
-    cache: 'no-store',
+    next: {
+      revalidate: 3600,
+    },
   });
 
   if (!res.ok) {
-    console.error('Failed to fetch event data:', talkSlug, await res.text());
+    const errorText = await res.text();
+    console.error('Failed to fetch event data:', talkSlug, errorText);
     return 'API_ERROR';
   }
 
-  const data: Talk = await res.json();
-  return data;
-}
+  return res.json();
+};
+
+export const fetchTalk = cache(
+  async (talkSlug: string): Promise<Talk | 'API_ERROR'> => {
+    if (!process.env.PRETALX_PRIVATE_API_TOKEN) {
+      console.error('Missing Pretalx API token');
+      return 'API_ERROR';
+    }
+
+    try {
+      return await fetchTalkData(talkSlug);
+    } catch (error) {
+      console.error('Error fetching talk data:', error);
+      return 'API_ERROR';
+    }
+  },
+);

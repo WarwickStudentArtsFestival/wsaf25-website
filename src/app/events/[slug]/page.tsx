@@ -8,15 +8,11 @@ import EventDetails from './components/EventDetails';
 import GoToVenue from './components/GoToVenue';
 import TalkHeader from './components/TalkHeader';
 
-type TalkPageProps = {
-  params: {
-    slug: string;
-  };
-};
+type Params = Promise<{ slug: string[] }>;
 
-export default async function TalkPage({ params }: TalkPageProps) {
+export default async function Page({ params }: { params: Params }) {
   const { slug } = await params;
-  const talk = await fetchTalk(slug);
+  const talk = await fetchTalk(slug.join('/'));
 
   if (!talk || talk === 'API_ERROR') {
     return <ErrorMessage msg={`Event '${slug}' not found!`} />;
@@ -50,11 +46,7 @@ export default async function TalkPage({ params }: TalkPageProps) {
                 />
               </div>
               <div className="lg:w-1/3">
-                <EventDetails
-                  start={talk.slot?.start}
-                  end={talk.slot?.end}
-                  room={talk.slot?.room?.en}
-                />
+                <EventDetails start={talk.slot?.start} end={talk.slot?.end} />
               </div>
             </div>
 

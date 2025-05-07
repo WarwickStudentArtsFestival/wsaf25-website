@@ -8,7 +8,7 @@ import Rehersal from '@/assets/venues/rehersal.jpg';
 import Terrace from '@/assets/venues/terrace.jpg';
 import { CustomRoomData } from './types';
 
-export const customRoomData: Record<number, CustomRoomData> = {
+export const customRoomData: Record<number, Partial<CustomRoomData>> = {
   // Benefactors Place Stage
   1: {
     mapUrl:

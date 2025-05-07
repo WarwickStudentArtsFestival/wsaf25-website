@@ -42,7 +42,7 @@ export type Room = {
 export type CustomRoomData = {
   imageAlt: string;
   mapUrl: string;
-  image: StaticImageData;
+  image: StaticImageData | string;
   roomLocation: string;
   eventCount: number;
 };

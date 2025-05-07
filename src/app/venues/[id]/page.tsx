@@ -8,19 +8,15 @@ import RoomInfo from './components/RoomInfo';
 import Events from '@/app/events/components/events/Events';
 import { fetchTalks } from '@/app/lib/fetchTalks';
 
-type VenuePageProps = {
-  params: {
-    id: string;
-  };
-};
+type Params = Promise<{ id: string[] }>;
 
-export default async function VenuePage({ params }: VenuePageProps) {
+export default async function VenuePage({ params }: { params: Params }) {
   const { id } = await params;
-  const room = await fetchRoom(id);
+  const room = await fetchRoom(id.join('/'));
   const allTalks = await fetchTalks();
 
   if (!room || room === 'API_ERROR' || allTalks === 'API_ERROR') {
-    return <ErrorMessage msg={`Venue '${params.id}' not found!`} />;
+    return <ErrorMessage msg={`Venue not found!`} />;
   }
 
   const filteredTalks = allTalks.filter(

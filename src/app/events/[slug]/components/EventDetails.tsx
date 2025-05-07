@@ -1,13 +1,12 @@
-import { FiCalendar, FiClock, FiMapPin } from 'react-icons/fi';
+import { FiCalendar, FiClock } from 'react-icons/fi';
 import { formatDate, formatTime } from '@/app/lib/dateUtils';
 
 type EventDetailsProps = {
   start?: string;
   end?: string;
-  room?: string;
 };
 
-export default function EventDetails({ start, end, room }: EventDetailsProps) {
+export default function EventDetails({ start, end }: EventDetailsProps) {
   const talkDetails = [
     // {
     //   icon: <FiMapPin className="h-5 w-5 text-purple-500" />,

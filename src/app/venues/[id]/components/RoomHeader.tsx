@@ -13,7 +13,7 @@ export default function RoomHeader({ room }: RoomHeaderProps) {
         <Image
           src={room.image}
           alt={room.imageAlt || 'Venue image'}
-          className="w-full rounded-xl"
+          className="w-full md:rounded-xl rounded-none"
           layout="responsive"
           width={1200}
           height={600}

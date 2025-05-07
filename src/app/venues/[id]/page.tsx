@@ -24,7 +24,7 @@ export default async function VenuePage({ params }: { params: Params }) {
   return (
     <>
       <PageHeader />
-      <div className="w-full sm:w-2xl my-4 mx-auto bg-white rounded-xl shadow border border-gray-200">
+      <div className="w-full sm:w-2xl md:my-4 -mt-2 mx-auto bg-white rounded-xl shadow border border-gray-200">
         <RoomHeader room={room} />
         <RoomInfo room={room} />
       </div>
@@ -39,7 +39,7 @@ export default async function VenuePage({ params }: { params: Params }) {
       <div className="w-full mt-8">
         <Events allTalks={filteredTalks} />
       </div>
-      <div className="w-2xl flex my-4 flex-col items-center justify-center mx-auto">
+      <div className="flex my-4 w-full flex-col items-center justify-center mx-auto">
         <h2 className="text-black text-xl font-semibold">Related Events</h2>
         <GoToVenues />
       </div>

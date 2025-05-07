@@ -1,11 +1,12 @@
 import { Talk } from './types';
 
-export async function fetchSchedule(): Promise<Talk[] | 'API_ERROR'> {
+export async function fetchTalks(): Promise<Talk[] | 'API_ERROR'> {
   if (!process.env.PRETALX_PRIVATE_API_TOKEN) {
     return 'API_ERROR';
   }
 
-  let allTalks: Talk[] = [];
+  const allTalks: Talk[] = [];
+  const seen = new Set<string>();
   let nextPageUrl = 'https://pretalx.wsaf.org.uk/api/events/2025/submissions';
 
   while (nextPageUrl) {
@@ -24,7 +25,13 @@ export async function fetchSchedule(): Promise<Talk[] | 'API_ERROR'> {
 
     const data = await res.json();
 
-    allTalks = allTalks.concat(data.results);
+    for (const talk of data.results) {
+      const id = talk.code || talk.id;
+      if (!seen.has(id)) {
+        seen.add(id);
+        allTalks.push(talk);
+      }
+    }
 
     nextPageUrl = data.next || null;
   }

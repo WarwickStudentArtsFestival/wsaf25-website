@@ -1,26 +1,25 @@
 import { Speaker } from '@/app/lib/types';
-import { FiUser } from 'react-icons/fi';
 
 type PresentedByProps = {
   speakers: Speaker[];
 };
 
 export default function PresentedBy({ speakers }: PresentedByProps) {
+  const speakerNames = speakers.map((speaker) => speaker.name);
+
   return (
-    <div>
-      <h3 className="text-2xl font-semibold text-black flex items-center">
-        <FiUser className="h-5 w-5 text-purple-500 mr-2" />
-        Presented By:
-      </h3>
-      <div className="flex flex-wrap gap-4">
-        {speakers.map((speaker) => (
-          <div
-            key={speaker.code}
-            className="flex items-center gap-2 text-lg text-gray-700"
-          >
-            <span className="font-medium">{speaker.name}</span>
-          </div>
-        ))}
+    <div className="flex gap-4 text-teal italic text-2xl">
+      <div className="flex flex-wrap">
+        <span>
+          {speakerNames.length > 2
+            ? speakerNames.slice(0, -1).join(', ') +
+              ' & ' +
+              speakerNames[speakerNames.length - 1]
+            : speakerNames.join(' and ')}
+        </span>
+        {(speakers.length > 1 && <span>&nbsp;present...</span>) || (
+          <span>&nbsp;presents...</span>
+        )}
       </div>
     </div>
   );

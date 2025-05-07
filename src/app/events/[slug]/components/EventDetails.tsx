@@ -9,11 +9,11 @@ type EventDetailsProps = {
 
 export default function EventDetails({ start, end, room }: EventDetailsProps) {
   const talkDetails = [
-    {
-      icon: <FiMapPin className="h-5 w-5 text-purple-500" />,
-      title: 'Room',
-      value: room || 'TBD',
-    },
+    // {
+    //   icon: <FiMapPin className="h-5 w-5 text-purple-500" />,
+    //   title: 'Room',
+    //   value: room || 'TBD',
+    // },
     {
       icon: <FiCalendar className="h-5 w-5 text-purple-500" />,
       title: 'Date',

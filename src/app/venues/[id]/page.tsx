@@ -1,13 +1,10 @@
 import PageHeader from '@/app/components/page-header';
 import ErrorMessage from '@/app/components/ErrorMessage';
-import HighlightedHeading from '@/app/components/highlighted-heading';
 import { fetchRoom } from '@/app/lib/fetchRoom';
-import Link from 'next/link';
-import { FaArrowLeft } from 'react-icons/fa';
 import RoomInfo from './components/RoomInfo';
 import Events from '@/app/events/components/events/Events';
 import { fetchTalks } from '@/app/lib/fetchTalks';
-import Image from 'next/image';
+import RoomHeader from './components/RoomHeader';
 
 type Params = Promise<{ id: string }>;
 
@@ -27,31 +24,8 @@ export default async function VenuePage({ params }: { params: Params }) {
     <>
       <PageHeader />
       <div className="w-full sm:w-2xl my-4 mx-auto bg-white rounded-xl shadow border border-gray-200">
-        <div className="relative">
-          {room.image && (
-            <Image
-              src={room.image}
-              alt={room.imageAlt || 'Venue image'}
-              className="w-full rounded-xl"
-            />
-          )}
-          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent p-4">
-            <HighlightedHeading
-              className="text-black text-2xl"
-              text={room.name?.en || 'Unnamed Venue'}
-            />
-          </div>
-        </div>
-        <div className="p-6">
-          <Link
-            href="/venues"
-            className="flex items-center text-sm text-black hover:underline mb-4"
-          >
-            <FaArrowLeft className="mr-2 text-purple-500" />
-            Back to Venues
-          </Link>
-          <RoomInfo room={room} />
-        </div>
+        <RoomHeader room={room} />
+        <RoomInfo room={room} />
       </div>
       <div className="sticky top-15 z-40 bg-white w-full">
         <h3 className="text-teal pt-4 font-semibold italic">

@@ -1,11 +1,22 @@
 export const formatDate = (time: string) => {
   const date = new Date(time);
-  return date.toLocaleDateString([], {
-    weekday: 'short',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  });
+  const day = date.getDate();
+
+  const getOrdinal = (n: number) => {
+    const mod10 = n % 10;
+    const mod100 = n % 100;
+    if (mod10 === 1 && mod100 !== 11) return 'st';
+    if (mod10 === 2 && mod100 !== 12) return 'nd';
+    if (mod10 === 3 && mod100 !== 13) return 'rd';
+    return 'th';
+  };
+
+  const ordinalDay = `${day}${getOrdinal(day)}`;
+
+  const weekday = date.toLocaleDateString([], { weekday: 'short' });
+  const month = date.toLocaleDateString([], { month: 'short' });
+
+  return `${weekday}, ${month} ${ordinalDay}`;
 };
 
 export const formatTime = (time: string | undefined): string => {

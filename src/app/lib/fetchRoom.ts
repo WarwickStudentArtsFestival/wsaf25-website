@@ -21,7 +21,6 @@ export const fetchRoom = cache(
     });
 
     if (!res.ok) {
-      console.error('Failed to fetch event data:', roomSlug, await res.text());
       return 'API_ERROR';
     }
 

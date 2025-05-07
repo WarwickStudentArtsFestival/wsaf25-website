@@ -26,7 +26,13 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   onTrackFilterChange,
 }) => {
   const trackFreq = getFrequency(talks.map((t) => t.track.en));
-  const trackItems = Object.entries(trackFreq).sort((a, b) => b[1] - a[1]);
+  const trackItems = Object.entries(trackFreq).sort((a, b) => {
+    if (b[1] !== a[1]) {
+      return b[1] - a[1];
+    } else {
+      return a[0].localeCompare(b[0]);
+    }
+  });
 
   return (
     <div className="sticky z-50 top-20 border p-4 text-left text-black border-slate-300 rounded-md overflow-auto max-h-screen shadow-lg">

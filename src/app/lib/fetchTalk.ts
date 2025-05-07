@@ -22,8 +22,6 @@ export const fetchTalk = cache(
       });
 
       if (!res.ok) {
-        const errorText = await res.text();
-        console.error('Failed to fetch event data:', talkSlug, errorText);
         return 'API_ERROR';
       }
 

@@ -11,18 +11,17 @@ export const metadata: Metadata = {
 };
 
 export default async function EventsPage() {
-  const talks = await fetchTalks();
-
+  let talks = await fetchTalks();
   if (talks === 'API_ERROR') {
     console.error('Error fetching talks from API');
     return <ErrorMessage msg="w-please-set-the-api-token" />;
   }
+  talks = talks.sort(() => Math.random() - 0.5);
 
   return (
     <main className="w-full">
       <PageHeader />
       <HighlightedHeading text="Events" />
-      <h1 className="text-teal text-2xl font-semibold mb-2">WSAF Events</h1>
       <Events allTalks={talks} />
     </main>
   );

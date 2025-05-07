@@ -8,12 +8,11 @@ import EventDetails from './components/EventDetails';
 import GoToVenue from './components/GoToVenue';
 import TalkHeader from './components/TalkHeader';
 
-type Params = Promise<{ slug: string[] }>;
+type Params = Promise<{ slug: string }>;
 
 export default async function Page({ params }: { params: Params }) {
   const { slug } = await params;
-
-  const talk = await fetchTalk(slug[0]);
+  const talk = await fetchTalk(slug);
 
   if (!talk || talk === 'API_ERROR') {
     return <ErrorMessage msg={`Event '${slug}' not found!`} />;

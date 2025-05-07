@@ -8,11 +8,11 @@ import RoomInfo from './components/RoomInfo';
 import Events from '@/app/events/components/events/Events';
 import { fetchTalks } from '@/app/lib/fetchTalks';
 
-type Params = Promise<{ id: string[] }>;
+type Params = Promise<{ id: string }>;
 
 export default async function VenuePage({ params }: { params: Params }) {
   const { id } = await params;
-  const room = await fetchRoom(id[0]);
+  const room = await fetchRoom(id);
   const allTalks = await fetchTalks();
 
   if (!room || room === 'API_ERROR' || allTalks === 'API_ERROR') {

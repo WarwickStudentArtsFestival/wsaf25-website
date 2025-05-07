@@ -16,7 +16,7 @@ export async function fetchTalk(talkSlug: string): Promise<Talk | 'API_ERROR'> {
   });
 
   if (!res.ok) {
-    console.error('Failed to fetch event data:', await res.text());
+    console.error('Failed to fetch event data:', talkSlug, await res.text());
     return 'API_ERROR';
   }
 

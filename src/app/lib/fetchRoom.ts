@@ -19,7 +19,7 @@ export async function fetchRoom(
   });
 
   if (!res.ok) {
-    console.error('Failed to fetch event data:', await res.text());
+    console.error('Failed to fetch event data:', roomSlug, await res.text());
     return 'API_ERROR';
   }
 

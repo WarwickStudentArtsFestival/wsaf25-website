@@ -1,9 +1,9 @@
-// Required for Next redirects to work on export
 import nextConfig from '../../../../next.config.mjs';
 import { notFound } from 'next/navigation';
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import React from 'react';
+import ErrorMessage from '@/app/components/ErrorMessage';
 
 export const dynamicParams = false;
 export const dynamic = 'force-static';
@@ -34,7 +34,13 @@ export default async function Redirect(props: {
   const redirects = await getRedirects();
   if (!redirects) return notFound();
 
-  const path = slug.join('/');
+  let path;
+  try {
+    path = await slug.join('/');
+  } catch {
+    return <ErrorMessage msg={`Event '${slug}' not found!`} />;
+  }
+
   const redirect = redirects.find((redirect) => redirect.path === path);
   if (!redirect) return notFound();
 

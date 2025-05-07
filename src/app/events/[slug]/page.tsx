@@ -7,6 +7,8 @@ import Image from 'next/image';
 import EventDetails from './components/EventDetails';
 import GoToVenue from './components/GoToVenue';
 import TalkHeader from './components/TalkHeader';
+import Share from './components/Share';
+import { Toaster } from 'react-hot-toast';
 
 type Params = Promise<{ slug: string }>;
 
@@ -20,6 +22,7 @@ export default async function Page({ params }: { params: Params }) {
 
   return (
     <>
+      <Toaster position="top-center" />
       <PageHeader />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="my-4">
@@ -35,10 +38,7 @@ export default async function Page({ params }: { params: Params }) {
               </h1>
             </div>
 
-            <div className="flex flex-col text-left lg:flex-row gap-6 mt-12">
-              <div className="lg:w-1/3">
-                <EventDetails start={talk.slot?.start} end={talk.slot?.end} />
-              </div>
+            <div className="flex flex-col mb-4 text-left lg:flex-row gap-6 mt-12">
               <div className="lg:w-2/3">
                 <h2 className="text-black text-xl font-semibold mb-4">
                   Description
@@ -47,10 +47,24 @@ export default async function Page({ params }: { params: Params }) {
                   className="prose max-w-none"
                   dangerouslySetInnerHTML={{ __html: talk.description }}
                 />
+                <div className="hidden lg:block">
+                  <h2 className="text-black text-xl font-semibold my-4">
+                    Related Events
+                  </h2>
+                  <GoToVenue talk={talk} />
+                </div>
+              </div>
+              <div className="lg:w-1/3 flex flex-col mx-4 gap-4">
+                <EventDetails talk={talk} />
+                <Share talk={talk} />
+              </div>
+              <div className="block lg:hidden">
+                <h2 className="text-black text-xl font-semibold my-4">
+                  Related Events
+                </h2>
+                <GoToVenue talk={talk} />
               </div>
             </div>
-
-            <GoToVenue talk={talk} />
           </div>
 
           {talk.image && (

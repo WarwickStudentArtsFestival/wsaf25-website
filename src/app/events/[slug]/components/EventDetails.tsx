@@ -1,18 +1,22 @@
-import { FiCalendar, FiClock } from 'react-icons/fi';
+import { FiCalendar, FiClock, FiMapPin } from 'react-icons/fi';
 import { formatDate, formatTime } from '@/app/lib/dateUtils';
+import { Talk } from '@/app/lib/types';
 
 type EventDetailsProps = {
-  start?: string;
-  end?: string;
+  talk: Talk;
 };
 
-export default function EventDetails({ start, end }: EventDetailsProps) {
+export default function EventDetails({ talk }: EventDetailsProps) {
+  const room = talk.slot?.room?.en;
+  const start = talk.slot?.start;
+  const end = talk.slot?.end;
+
   const talkDetails = [
-    // {
-    //   icon: <FiMapPin className="h-5 w-5 text-purple-500" />,
-    //   title: 'Room',
-    //   value: room || 'TBD',
-    // },
+    {
+      icon: <FiMapPin className="h-5 w-5 text-purple-500" />,
+      title: 'Venue',
+      value: room || 'TBD',
+    },
     {
       icon: <FiCalendar className="h-5 w-5 text-purple-500" />,
       title: 'Date',
@@ -26,7 +30,7 @@ export default function EventDetails({ start, end }: EventDetailsProps) {
   ];
 
   return (
-    <div className="flex-1 h-fit text-left overflow-hidden">
+    <div className="flex-1 h-fit text-left overflow-hidden border border-gray-200 shadow-lg p-4">
       <h2 className="text-black text-xl font-semibold mb-4">Event Details</h2>
       {talkDetails.map((detail, index) => (
         <div key={index} className="flex items-center gap-4 mb-4">

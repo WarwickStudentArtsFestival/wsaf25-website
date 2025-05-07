@@ -66,7 +66,7 @@ jobs:
           BASE_URL: ${{ vars.BASE_URL }}
           NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ vars.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID }}
           WSAF_ASSETS_BASE_URL: ${{ vars.WSAF_ASSETS_BASE_URL }}
-          PRETALX_PRIVATE_API_TOKEN: ${ secrets.PRETALX_PRIVATE_API_TOKEN }
+          PRETALX_PRIVATE_API_TOKEN: ${{ secrets.PRETALX_PRIVATE_API_TOKEN }}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

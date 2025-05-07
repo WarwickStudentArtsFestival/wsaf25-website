@@ -30,16 +30,10 @@ export default async function Redirect(props: {
   const params = await props.params;
 
   const { slug } = params;
+  const path = slug[0];
 
   const redirects = await getRedirects();
   if (!redirects) return notFound();
-
-  let path;
-  try {
-    path = await slug.join('/');
-  } catch {
-    return <ErrorMessage msg={`Event '${slug}' not found!`} />;
-  }
 
   const redirect = redirects.find((redirect) => redirect.path === path);
   if (!redirect) return notFound();

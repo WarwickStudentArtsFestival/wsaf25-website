@@ -13,12 +13,8 @@ type Params = Promise<{ slug: string[] }>;
 export default async function Page({ params }: { params: Params }) {
   const { slug } = await params;
 
-  let talk;
-  try {
-    talk = await fetchTalk(slug.join('/'));
-  } catch {
-    return <ErrorMessage msg={`Event '${slug}' not found!`} />;
-  }
+  const talk = await fetchTalk(slug[0]);
+
   if (!talk || talk === 'API_ERROR') {
     return <ErrorMessage msg={`Event '${slug}' not found!`} />;
   }

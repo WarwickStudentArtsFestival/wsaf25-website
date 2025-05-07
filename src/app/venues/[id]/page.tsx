@@ -12,13 +12,7 @@ type Params = Promise<{ id: string[] }>;
 
 export default async function VenuePage({ params }: { params: Params }) {
   const { id } = await params;
-  let room;
-  try {
-    room = await fetchRoom(id.join('/'));
-  } catch {
-    return <ErrorMessage msg={`Venue not found!`} />;
-  }
-
+  const room = await fetchRoom(id[0]);
   const allTalks = await fetchTalks();
 
   if (!room || room === 'API_ERROR' || allTalks === 'API_ERROR') {

@@ -14,6 +14,7 @@ export default async function EventsPage() {
   const rooms = await fetchRooms();
 
   if (rooms === 'API_ERROR') {
+    console.error('Error fetching rooms from API');
     return <ErrorMessage msg="w-please-set-the-api-token" />;
   }
 

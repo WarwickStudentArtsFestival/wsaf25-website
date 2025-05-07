@@ -1,12 +1,15 @@
+import 'server-only';
+
 import { customRoomData } from '@/app/lib/customRoomData';
 import { fetchTalks } from './fetchTalks';
-import { Talk, ExtendedRoom, Room } from './types';
+import { ExtendedRoom, Room, Talk } from './types';
 
 export async function fetchRooms(): Promise<
   (ExtendedRoom & { eventCount: number })[] | 'API_ERROR'
 > {
   const events = await fetchTalks();
   if (!process.env.PRETALX_PRIVATE_API_TOKEN || events === 'API_ERROR') {
+    console.error('Missing Pretalx API token');
     return 'API_ERROR';
   }
 
@@ -32,7 +35,7 @@ export async function fetchRooms(): Promise<
     });
 
     if (!res.ok) {
-      console.error('Failed to fetch Pretalx data:', await res.text());
+      console.error('Failed to fetch Pretalx room data:', await res.text());
       return 'API_ERROR';
     }
 

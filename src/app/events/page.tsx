@@ -14,6 +14,7 @@ export default async function EventsPage() {
   const talks = await fetchTalks();
 
   if (talks === 'API_ERROR') {
+    console.error('Error fetching talks from API');
     return <ErrorMessage msg="w-please-set-the-api-token" />;
   }
 

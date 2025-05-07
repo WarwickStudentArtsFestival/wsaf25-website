@@ -1,7 +1,10 @@
+import 'server-only';
+
 import { Talk } from './types';
 
 export async function fetchTalks(): Promise<Talk[] | 'API_ERROR'> {
   if (!process.env.PRETALX_PRIVATE_API_TOKEN) {
+    console.error('Missing Pretalx API token');
     return 'API_ERROR';
   }
 
@@ -19,7 +22,10 @@ export async function fetchTalks(): Promise<Talk[] | 'API_ERROR'> {
     });
 
     if (!res.ok) {
-      console.error('Failed to fetch Pretalx data:', await res.text());
+      console.error(
+        'Failed to fetch Pretalx submissions data:',
+        await res.text(),
+      );
       return 'API_ERROR';
     }
 

@@ -12,12 +12,14 @@ export default function TalkList({ talks }: TalkListProps) {
   }
 
   return (
-    <div className="mx-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 items-stretch">
-      {talks.map((talk, id) => (
-        <div key={`${talk.code}-${id}`} className="h-full">
-          <TalkCard talk={talk} id={id} />
-        </div>
-      ))}
+    <div className="relative max-md:h-[500px] max-md:overflow-y-auto">
+      <div className="mx-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 items-stretch">
+        {talks.map((talk, id) => (
+          <div key={`${talk.code}-${id}`} className="h-full">
+            <TalkCard talk={talk} id={id} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

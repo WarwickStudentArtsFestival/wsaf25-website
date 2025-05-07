@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, Suspense, useEffect } from 'react';
 import TalkList from './TalkList';
 import FilterPanel from '../FilterPanel';
@@ -10,7 +9,7 @@ interface EventsProps {
   allTalks: Talk[];
 }
 
-export default function Events({ allTalks }: EventsProps) {
+function EventsClient({ allTalks }: EventsProps) {
   const [selectedTracks, setSelectedTracks] = useState<string[]>(trackTypes);
   const [filteredTalks, setFilteredTalks] = useState<Talk[]>(allTalks);
   const searchParams = useSearchParams();
@@ -26,7 +25,7 @@ export default function Events({ allTalks }: EventsProps) {
         setSelectedTracks(tracksFromUrl);
       }
     }
-  }, []);
+  }, [searchParams, selectedTracks]);
 
   useEffect(() => {
     setFilteredTalks(
@@ -51,23 +50,29 @@ export default function Events({ allTalks }: EventsProps) {
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className="flex flex-row px-4 relative">
-        <div className="w-1/6 hidden lg:block">
-          <FilterPanel
-            talks={allTalks}
-            filteredTalks={filteredTalks}
-            selectedTracks={selectedTracks}
-            onTrackFilterChange={handleTrackFilterChange}
-          />
-        </div>
-        <div className="flex-1 mb-16">
-          <TalkList talks={filteredTalks} />
-        </div>
-        <div className="absolute left-1/2 transform -translate-x-1/2 bottom-4 text-sm text-gray-500">
-          Showing {filteredTalks.length} of {allTalks.length} events
-        </div>
+    <div className="flex flex-row px-4 relative">
+      <div className="w-1/6 hidden lg:block">
+        <FilterPanel
+          talks={allTalks}
+          filteredTalks={filteredTalks}
+          selectedTracks={selectedTracks}
+          onTrackFilterChange={handleTrackFilterChange}
+        />
       </div>
+      <div className="flex-1 mb-16">
+        <TalkList talks={filteredTalks} />
+      </div>
+      <div className="absolute left-1/2 transform -translate-x-1/2 bottom-4 text-sm text-gray-500">
+        Showing {filteredTalks.length} of {allTalks.length} events
+      </div>
+    </div>
+  );
+}
+
+export default function Events({ allTalks }: EventsProps) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EventsClient allTalks={allTalks} />
     </Suspense>
   );
 }

@@ -7,9 +7,10 @@ import {
   FaFilm,
   FaMicrophoneAlt,
   FaUsers,
+  FaWalking,
   FaMagic,
+  FaPersonBooth,
 } from 'react-icons/fa';
-import { FaPeopleGroup } from 'react-icons/fa6';
 
 interface IconProps {
   track: string;
@@ -22,10 +23,10 @@ const TrackIcon: React.FC<IconProps> = ({ track, size }) => {
     Music: <FaMusic size={size} />,
     Comedy: <FaLaughSquint size={size} />,
     Mixed: <FaUsers size={size} />,
-    Dance: <FaMicrophoneAlt size={size} />,
+    Dance: <FaWalking size={size} />,
     VisualArt: <FaPaintBrush size={size} />,
     Creation: <FaMagic size={size} />,
-    MTWStagefest: <FaPeopleGroup size={size} />,
+    MTWStagefest: <FaPersonBooth size={size} />,
     Film: <FaFilm size={size} />,
     SpokenWord: <FaMicrophoneAlt size={size} />,
   };

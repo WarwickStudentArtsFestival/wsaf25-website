@@ -17,7 +17,11 @@ export default function PresentedBy({ speakers }: PresentedByProps) {
               speakerNames[speakerNames.length - 1]
             : speakerNames.join(' and ')}
         </span>
-        {(speakers.length > 1 && <span>&nbsp;present...</span>) || (
+        {speakers.length === 0 ? (
+          <span>&nbsp;presenting...</span>
+        ) : speakers.length > 1 ? (
+          <span>&nbsp;present...</span>
+        ) : (
           <span>&nbsp;presents...</span>
         )}
       </div>

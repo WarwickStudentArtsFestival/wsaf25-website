@@ -26,23 +26,23 @@ export default async function VenuePage({ params }: { params: Params }) {
   return (
     <>
       <PageHeader />
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full sm:w-2xl mx-auto px-4">
         <div className="my-4">
-          <div className="bg-white p-6 py-0 my-4 h-fit rounded-lg shadow-lg border border-gray-200">
+          <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
             <div className="mb-6">
               <div className="my-4 text-left">
                 <Link
                   href="/venues"
-                  className="inline-flex p-0 b-0 text-black items-center text-sm hover:underline"
+                  className="inline-flex items-center text-sm text-black hover:underline"
                 >
                   <FaArrowLeft className="mr-2 text-purple-500" />
                   Back to Venues
                 </Link>
               </div>
-              <h3 className="text-teal font-semibold italic text-left -pb-4">
+              <h3 className="text-teal font-semibold italic">
                 What&apos;s on in...
               </h3>
-              <h1 className="text-4xl font-bold text-teal-600 mb-4 ">
+              <h1 className="text-4xl font-bold text-teal-600 mb-4">
                 {room.name?.en || 'Unnamed Venue'}
               </h1>
               <RoomInfo room={room} />
@@ -50,7 +50,7 @@ export default async function VenuePage({ params }: { params: Params }) {
           </div>
         </div>
       </div>
-      <div className="w-full bg-white sticky z-40 top-15">
+      <div className="sticky top-15 z-40 bg-white w-full">
         <div className="m-4 mb-0">
           <HighlightedHeading
             className="mb-0"

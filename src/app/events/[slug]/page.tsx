@@ -30,7 +30,7 @@ export default async function Page({ params }: { params: Params }) {
 
             <div className="my-4">
               <PresentedBy speakers={talk.speakers} />
-              <h1 className="text-4xl font-bold text-teal-600">
+              <h1 className="text-4xl font-bold break-words text-teal-600 -mx-6 sm:mx-auto ">
                 &ldquo;{talk.title}&rdquo;
               </h1>
             </div>

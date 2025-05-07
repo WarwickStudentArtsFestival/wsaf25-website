@@ -1,5 +1,18 @@
 import { StaticImageData } from 'next/image';
 
+export const trackTypes = [
+  'Music',
+  'Visual Art',
+  'Mixed',
+  'Theatre',
+  'Creation',
+  'Film',
+  'Dance',
+  'MTW Stagefest',
+  'Comedy',
+  'Spoken Word',
+];
+
 export type Speaker = {
   code: string;
   name: string;

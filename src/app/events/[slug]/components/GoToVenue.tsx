@@ -32,7 +32,7 @@ export default async function GoToVenue({ talk }: GoToVenueProps) {
           </div>
           <div className="flex flex-col text-left m-2 items-start gap-1 text-black font-medium group-hover:underline">
             <span className="italic pt-2 text-teal font-semibold text-lg -my-2">
-              See more events at...
+              More events in...
             </span>
             <span className="font-semibold pt-0">{room.name.en}</span>
           </div>

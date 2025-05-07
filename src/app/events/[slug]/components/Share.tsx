@@ -23,7 +23,7 @@ export default function Share({ talk }: ShareProps) {
         toast.success('Shared successfully!');
       } catch (err) {
         console.error('Error sharing:', err);
-        toast.error('Sharing failed. Please try again.');
+        toast.error('Sharing cancelled.');
       }
     } else {
       try {
@@ -36,7 +36,7 @@ export default function Share({ talk }: ShareProps) {
   };
 
   return (
-    <div className=" bg-white p-6 h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-102 transition duration-150 ease-in-out">
+    <div className=" bg-white p-4 h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-102 transition duration-150 ease-in-out">
       <button
         onClick={handleShare}
         className="flex items-center justify-between w-full cursor-pointer hover:text-purple-500 transition-colors duration-200"
@@ -45,10 +45,7 @@ export default function Share({ talk }: ShareProps) {
           <div className="text-purple-500">
             <FiShare2 className="h-5 w-5" />
           </div>
-          <div className="text-left">
-            <h3 className="text-teal text-lg font-semibold">Share</h3>
-            <p className="text-sm text-black">Copy to Clipboard</p>
-          </div>
+          <h3 className="text-black text-lg font-semibold">Share</h3>
         </div>
       </button>
     </div>

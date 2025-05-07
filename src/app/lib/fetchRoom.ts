@@ -4,7 +4,7 @@ import { cache } from 'react';
 
 export const fetchRoom = cache(
   async (roomSlug: string): Promise<ExtendedRoom | 'API_ERROR'> => {
-    if (!process.env.PRETALX_PRIVATE_API_TOKEN) {
+    if (!process.env.PRETALX_PRIVATE_API_TOKEN || !roomSlug) {
       return 'API_ERROR';
     }
 

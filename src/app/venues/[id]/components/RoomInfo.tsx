@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiMapPin } from 'react-icons/fi';
+import { FiExternalLink, FiMapPin } from 'react-icons/fi';
 import Link from 'next/link';
 import { ExtendedRoom } from '@/app/lib/types';
 
@@ -28,9 +28,10 @@ const RoomInfo: React.FC<RoomInfoProps> = ({ room }) => {
             <Link
               href={room.mapUrl}
               target="_blank"
-              className="text-sm text-blue-600 hover:underline"
+              className="text-sm flex-row flex gap-2 items-center text-purple-600 hover:underline"
             >
-              View on map
+              <FiExternalLink />
+              View on campus map
             </Link>
           )}
         </div>

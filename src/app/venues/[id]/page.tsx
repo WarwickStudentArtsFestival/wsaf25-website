@@ -7,6 +7,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import RoomInfo from './components/RoomInfo';
 import Events from '@/app/events/components/events/Events';
 import { fetchTalks } from '@/app/lib/fetchTalks';
+import Image from 'next/image';
 
 type Params = Promise<{ id: string }>;
 
@@ -22,41 +23,43 @@ export default async function VenuePage({ params }: { params: Params }) {
   const filteredTalks = allTalks.filter(
     (t) => t.slot?.room?.en == room.name.en,
   );
-
   return (
     <>
       <PageHeader />
-      <div className="w-full sm:w-2xl mx-auto px-4">
-        <div className="my-4">
-          <div className="bg-white p-6 rounded-lg shadow border border-gray-200">
-            <div className="mb-6">
-              <div className="my-4 text-left">
-                <Link
-                  href="/venues"
-                  className="inline-flex items-center text-sm text-black hover:underline"
-                >
-                  <FaArrowLeft className="mr-2 text-purple-500" />
-                  Back to Venues
-                </Link>
-              </div>
-              <h3 className="text-teal font-semibold italic">
-                What&apos;s on in...
-              </h3>
-              <h1 className="text-4xl font-bold text-teal-600 mb-4">
-                {room.name?.en || 'Unnamed Venue'}
-              </h1>
-              <RoomInfo room={room} />
-            </div>
+      <div className="w-full sm:w-2xl my-4 mx-auto bg-white rounded-xl shadow border border-gray-200">
+        <div className="relative">
+          {room.image && (
+            <Image
+              src={room.image}
+              alt={room.imageAlt || 'Venue image'}
+              className="w-full rounded-xl"
+            />
+          )}
+          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/60 to-transparent p-4">
+            <HighlightedHeading
+              className="text-black text-2xl"
+              text={room.name?.en || 'Unnamed Venue'}
+            />
           </div>
+        </div>
+        <div className="p-6">
+          <Link
+            href="/venues"
+            className="flex items-center text-sm text-black hover:underline mb-4"
+          >
+            <FaArrowLeft className="mr-2 text-purple-500" />
+            Back to Venues
+          </Link>
+          <RoomInfo room={room} />
         </div>
       </div>
       <div className="sticky top-15 z-40 bg-white w-full">
-        <div className="m-4 mb-0">
-          <HighlightedHeading
-            className="mb-0"
-            text={room.name?.en || 'Unnamed Venue'}
-          />
-        </div>
+        <h3 className="text-teal pt-4 font-semibold italic">
+          What&apos;s on in...
+        </h3>
+        <h1 className="text-4xl font-bold text-teal-600 mb-4">
+          {room.name?.en || 'Unnamed Venue'}
+        </h1>
       </div>
       <div className="w-full mt-8">
         <Events allTalks={filteredTalks} />
@@ -68,14 +71,6 @@ export default async function VenuePage({ params }: { params: Params }) {
 {
   /* {room.image && (
             <div className="my-8">
-              <Image
-                src={room.image}
-                alt={room.imageAlt || `${room.name?.en} image`}
-                width={800}
-                height={600}
-                className="w-full max-h-96 object-contain rounded-lg"
-                priority
-              />
             </div>
           )}
           <div className="mt-4">

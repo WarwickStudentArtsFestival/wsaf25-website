@@ -8,7 +8,7 @@ type TalkListProps = {
 };
 
 export default function TalkList({ talks }: TalkListProps) {
-  if (talks.length === 0) {
+  if (!talks || talks.length === 0) {
     return <p>No events found. Maybe enable some filters?</p>;
   }
 

@@ -1,7 +1,7 @@
 import { Talk, trackTypes } from '@/app/lib/types';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
-import TrackIcon from '../../components/track/TrackIcon';
+import TrackIcon from '../../../components/track/TrackIcon';
 
 type GoToGenreProps = {
   talk: Talk;

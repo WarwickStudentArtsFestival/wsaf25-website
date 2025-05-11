@@ -36,7 +36,7 @@ export default function NavLinks({ onClick }: Props) {
               href={href}
               onClick={onClick}
               className={`block p-2 underline-offset-4 hover:underline ${
-                active ? 'text-yellow-400' : 'text-white hover:text-slate-200'
+                active ? 'text-yellow-400' : 'text-white'
               }`}
               title={longLabel ?? shortLabel}
               aria-label={longLabel ?? shortLabel}

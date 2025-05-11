@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Lexend } from 'next/font/google';
 import './globals.css';
-import Footer from '@/app/components/footer';
+import Footer from '@/app/components/footer/footer';
 import React from 'react';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Header from '@/app/components/header';

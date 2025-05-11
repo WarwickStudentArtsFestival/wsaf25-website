@@ -27,7 +27,7 @@ export default function IdCard({
   image?: StaticImageData;
 }) {
   return (
-    <article className="rounded-xl border text-left border-slate-300 m-2 overflow-hidden w-36 sm:w-44 flex flex-col h-80">
+    <article className="rounded-xl border text-left border-slate-300 overflow-hidden flex flex-col h-60 sm:h-70">
       {image && (
         <div className="relative w-full h-2/3">
           <Image

@@ -48,7 +48,7 @@ export default function About() {
   ];
 
   return (
-    <section className="px-4 sm:px-8">
+    <section className="px-4 my-4 sm:my-8 sm:px-8">
       <HighlightedHeading text="What is WSAF?" />
       <h2 className="text-teal text-xl pt-2 sm:text-2xl font-semibold">
         The Warwick Student Arts Festival 2025
@@ -65,14 +65,14 @@ export default function About() {
 
       {/* <HighlightCountdown /> */}
 
-      <div className="flex gap-2 justify-center mb-4">
+      <div className="flex gap-2 justify-center">
         <a
           href="https://www.instagram.com/wsaf25/"
           target="_blank"
           className="flex items-center justify-center hover:scale-105"
         >
           <FiInstagram className="inline mr-0.5 mt-1" />
-          @wsaf25
+          wsaf25
         </a>
         <span className="font-light">•</span>
         <a

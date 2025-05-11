@@ -5,44 +5,56 @@ interface Props {
   onClick?: () => void;
 }
 
+interface NavItem {
+  shortLabel: string;
+  longLabel?: string;
+  href: string;
+}
+
+const navItems: NavItem[] = [
+  { shortLabel: 'Venues', href: '/venues' },
+  { shortLabel: 'Events', href: '/events' },
+  {
+    shortLabel: 'Crew',
+    longLabel: 'Join the Crew',
+    href: '/crew',
+  },
+];
+
 export default function NavLinks({ onClick }: Props) {
   const pathname = usePathname();
 
-  // const performIsActive = pathname === '/perform';
-  const eventsIsActive = pathname === '/events';
-  const crewIsActive = pathname === '/crew';
+  const isActive = (href: string) => pathname === href;
 
   return (
     <ul className="flex flex-row gap-4 md:gap-8 font-semibold uppercase">
-      {/* <li className="flex items-center justify-center gap-2">
-        <Link
-          href="/perform"
-          onClick={onClick}
-          className={performIsActive ? 'text-yellow-400' : ''}
-        >
-          Perform
-          <span className="xs:inline-block hidden">&nbsp;or Exhibit</span>
-        </Link>
-      </li> */}
-      <li className="flex items-center justify-center gap-2">
-        <Link
-          href="/events"
-          onClick={onClick}
-          className={eventsIsActive ? 'text-yellow-400' : ''}
-        >
-          <span className="xs:inline-block hidden">View the&nbsp;</span>
-          Events
-        </Link>
-      </li>
-      <li className="flex items-center justify-center gap-2">
-        <Link
-          href="/crew"
-          onClick={onClick}
-          className={crewIsActive ? 'text-yellow-400' : ''}
-        >
-          <span className="xs:inline-block hidden">Join the&nbsp;</span>Crew
-        </Link>
-      </li>
+      {navItems.map(({ shortLabel, longLabel, href }) => {
+        const active = isActive(href);
+        return (
+          <li key={href}>
+            <Link
+              href={href}
+              onClick={onClick}
+              className={`block p-2 underline-offset-4 hover:underline ${
+                active ? 'text-yellow-400' : 'text-white'
+              }`}
+              title={longLabel ?? shortLabel}
+              aria-label={longLabel ?? shortLabel}
+            >
+              <span className="inline">
+                {longLabel ? (
+                  <>
+                    <span className="hidden xs:inline">{longLabel}</span>
+                    <span className="inline xs:hidden">{shortLabel}</span>
+                  </>
+                ) : (
+                  shortLabel
+                )}
+              </span>
+            </Link>
+          </li>
+        );
+      })}
     </ul>
   );
 }

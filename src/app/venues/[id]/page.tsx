@@ -2,7 +2,7 @@ import PageHeader from '@/app/components/page-header';
 import ErrorMessage from '@/app/components/ErrorMessage';
 import { fetchRoom } from '@/app/lib/fetchRoom';
 import RoomInfo from './components/RoomInfo';
-import Events from '@/app/events/components/events/Events';
+import EventsList from '@/app/events/components/events-list/EventsList';
 import { fetchTalks } from '@/app/lib/fetchTalks';
 import GoToVenues from './components/GoToVenues';
 import RoomHeader from './components/RoomHeader';
@@ -37,7 +37,7 @@ export default async function VenuePage({ params }: { params: Params }) {
         </h1>
       </div>
       <div className="w-full mt-8">
-        <Events allTalks={filteredTalks} />
+        <EventsList allTalks={filteredTalks} />
       </div>
       <div className="flex my-4 w-full flex-col items-center justify-center mx-auto">
         <h2 className="text-black text-xl font-semibold">Related Events</h2>

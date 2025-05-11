@@ -9,7 +9,7 @@ import {
 } from 'react-icons/fi';
 import { Talk } from '@/app/lib/types';
 import Link from 'next/link';
-import TrackPill from '../track/TrackPill';
+import TrackPill from '../../../components/track/TrackPill';
 import { formatDate, formatTime } from '@/app/lib/dateUtils';
 
 type TalkCardProps = {

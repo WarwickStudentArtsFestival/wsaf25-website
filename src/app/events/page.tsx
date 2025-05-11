@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { fetchTalks } from '@/app/lib/fetchTalks';
 import ErrorMessage from '../components/ErrorMessage';
 import PageHeader from '../components/page-header';
-import Events from './components/events/Events';
+import EventsList from './components/events-list/EventsList';
 
 export const metadata: Metadata = {
   title: 'WSAF Events',
@@ -20,7 +20,7 @@ export default async function EventsPage() {
   return (
     <main className="w-full">
       <PageHeader />
-      <Events allTalks={talks} />
+      <EventsList allTalks={talks} />
     </main>
   );
 }

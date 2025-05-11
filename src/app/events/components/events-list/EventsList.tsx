@@ -111,7 +111,7 @@ function EventsClient({ allTalks }: EventsProps) {
         </div>
       )}
 
-      <div className="flex flex-row px-4 relative">
+      <div className="flex flex-row px-2 sm:px-4 relative">
         <aside className="w-1/6 hidden lg:block">
           <FilterPanel
             talks={allTalks}

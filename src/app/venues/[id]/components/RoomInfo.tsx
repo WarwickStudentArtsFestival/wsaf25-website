@@ -11,7 +11,7 @@ export default function RoomInfo({ room }: RoomInfoProps) {
     <div className="p-6">
       <div className=" flex flex-col gap-6 text-left lg:flex-row">
         <div className="lg:w-2/3">
-          <h2 className="mb-4 text-xl font-semibold text-black">Description</h2>
+          {/* <h2 className="mb-4 text-xl font-semibold text-black">Description</h2> */}
           <p className="prose max-w-none">
             {room.description?.en || 'No description available.'}
           </p>

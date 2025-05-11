@@ -32,11 +32,11 @@ export default async function VenuePage({ params }: { params: Params }) {
         <h3 className="text-teal pt-4 font-semibold italic">
           What&apos;s on at...
         </h3>
-        <h1 className="text-4xl font-bold text-teal-600 mb-4">
+        <h1 className="text-4xl font-bold text-teal-600 mb-4 px-2">
           {room.name?.en || 'Unnamed Venue'}
         </h1>
       </div>
-      <div className="w-full mt-8">
+      <div className="w-full">
         <EventsList allTalks={filteredTalks} />
       </div>
       <div className="flex my-4 w-full flex-col items-center justify-center mx-auto">

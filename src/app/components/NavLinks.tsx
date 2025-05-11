@@ -11,6 +11,7 @@ export default function NavLinks({ onClick }: Props) {
   // const performIsActive = pathname === '/perform';
   const eventsIsActive = pathname === '/events';
   const crewIsActive = pathname === '/crew';
+  const venuesIsActive = pathname === '/venues';
 
   return (
     <ul className="flex flex-row gap-4 md:gap-8 font-semibold uppercase">
@@ -26,11 +27,19 @@ export default function NavLinks({ onClick }: Props) {
       </li> */}
       <li className="flex items-center justify-center gap-2">
         <Link
+          href="/venues"
+          onClick={onClick}
+          className={venuesIsActive ? 'text-yellow-400' : ''}
+        >
+          Venues
+        </Link>
+      </li>
+      <li className="flex items-center justify-center gap-2">
+        <Link
           href="/events"
           onClick={onClick}
           className={eventsIsActive ? 'text-yellow-400' : ''}
         >
-          <span className="xs:inline-block hidden">View the&nbsp;</span>
           Events
         </Link>
       </li>

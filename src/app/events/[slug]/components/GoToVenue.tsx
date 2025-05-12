@@ -25,7 +25,7 @@ export default async function GoToVenue({ talk }: GoToVenueProps) {
         <div className="flex items-center gap-2">
           <div>
             <Image
-              src={room.image || '/default-room-image.jpg'}
+              src={room.image || '/logo.png'}
               alt={room.imageAlt || 'Room Image'}
               className="w-13 h-13 rounded-md object-cover"
             />

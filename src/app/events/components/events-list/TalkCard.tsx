@@ -59,7 +59,7 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
     <Link href={`/events/${talk.code}`}>
       <div
         key={`${talk.code}-${id}`}
-        className="border py-4 px-2 text-left text-black border-slate-300 rounded-md overflow-hidden w-full h-full flex flex-col hover:scale-[1.02] transition duration-150 ease-in-out shadow-lg"
+        className="border py-4  px-2 md:p-4 text-left text-black border-slate-300 rounded-md overflow-hidden w-full h-full flex flex-col hover:scale-[1.02] transition duration-150 ease-in-out shadow-lg"
       >
         <TrackPill track={talk.track?.en} />
         <div className="flex flex-col flex-grow">

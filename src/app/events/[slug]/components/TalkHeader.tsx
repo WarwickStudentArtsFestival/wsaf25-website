@@ -16,7 +16,7 @@ const TalkHeader: React.FC<TalkHeaderProps> = ({ track }) => {
           className="inline-flex p-0 b-0 text-black items-center text-sm hover:underline"
         >
           <FaArrowLeft className="mr-2 text-purple-500" />
-          Back to Events
+          Back to All Events
         </Link>
       </div>
       <div className="pt-4">

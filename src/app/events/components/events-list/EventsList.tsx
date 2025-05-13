@@ -29,13 +29,14 @@ function EventsClient({ allTalks }: EventsProps) {
   // Filter, sort, and group talks
   const { talksByDay, unscheduledTalks, talksFilteredByTrack } = useMemo(() => {
     // Filter talks based on selected tracks, or return all talks if no filters are selected
-    let filtered = allTalks.filter((talk) =>
+    let talksFilteredByTrack = allTalks.filter((talk) =>
       selectedTracks.some((track) => talk.track.en.includes(track)),
     );
-    filtered = filtered.length > 0 ? filtered : allTalks;
+    talksFilteredByTrack =
+      talksFilteredByTrack.length > 0 ? talksFilteredByTrack : allTalks;
     const talksByDay: Record<string, Talk[]> = {};
     const unscheduledTalks: Talk[] = [];
-    filtered.forEach((talk) => {
+    talksFilteredByTrack.forEach((talk) => {
       if (talk.slot?.start) {
         const day = new Date(talk.slot.start).toISOString().split('T')[0];
         talksByDay[day] = talksByDay[day] || [];
@@ -48,11 +49,7 @@ function EventsClient({ allTalks }: EventsProps) {
     return {
       talksByDay,
       unscheduledTalks,
-      talksFilteredByTrack: filtered.sort(
-        (a, b) =>
-          new Date(a.slot?.start || 0).getTime() -
-          new Date(b.slot?.start || 0).getTime(),
-      ),
+      talksFilteredByTrack,
     };
   }, [allTalks, selectedTracks]);
 

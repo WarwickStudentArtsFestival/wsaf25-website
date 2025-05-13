@@ -15,7 +15,11 @@ export default async function EventsPage() {
     console.error('Error fetching talks from API');
     return <ErrorMessage msg="w-please-set-the-api-token" />;
   }
-  talks = talks.sort(() => Math.random() - 0.5);
+  talks = talks.sort(
+    (a, b) =>
+      new Date(a.slot?.start || 0).getTime() -
+      new Date(b.slot?.start || 0).getTime(),
+  );
   const publicVisibleTalks = talks.filter((talk) =>
     (process.env.NEXT_PUBLIC_TALK_STATE_TO_SHOW || '')
       .split(',')

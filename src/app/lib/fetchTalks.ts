@@ -10,7 +10,9 @@ export const fetchTalks = cache(async (): Promise<Talk[] | 'API_ERROR'> => {
 
   const allTalks: Talk[] = [];
   const seen = new Set<string>();
-  let nextPageUrl = 'https://pretalx.wsaf.org.uk/api/events/2025/talks';
+  // TODO: Fix pagination
+  let nextPageUrl =
+    'https://pretalx.wsaf.org.uk/api/events/2025/submissions/?limit=200';
   try {
     while (nextPageUrl) {
       const res = await fetch(nextPageUrl, {

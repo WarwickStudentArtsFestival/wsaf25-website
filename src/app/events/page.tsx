@@ -17,7 +17,9 @@ export default async function EventsPage() {
   }
   talks = talks.sort(() => Math.random() - 0.5);
   const publicVisibleTalks = talks.filter((talk) =>
-    ['confirmed'].includes(talk.state),
+    (process.env.NEXT_PUBLIC_TALK_STATE_TO_SHOW || '')
+      .split(',')
+      .includes(talk.state),
   );
 
   return (

@@ -50,7 +50,7 @@ export default function TalkCard({ talk, id }: TalkCardProps) {
     : [
         {
           icon: <FiAlertCircle className="text-purple-500" />,
-          text: 'Not Confirmed Yet',
+          text: 'No Slot Yet',
           showOnSmall: true,
         },
       ];

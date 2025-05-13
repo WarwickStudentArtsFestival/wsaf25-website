@@ -43,6 +43,7 @@ function EventsClient({ allTalks }: EventsProps) {
   }, [allTalks, selectedTracks]);
 
   // Group talks by date and unscheduled
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { talksByDay, unscheduledTalks } = useMemo(() => {
     const byDay: Record<string, Talk[]> = {};
     const unscheduled: Talk[] = [];

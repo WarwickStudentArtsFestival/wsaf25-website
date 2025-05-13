@@ -24,11 +24,15 @@ export default async function GoToVenue({ talk }: GoToVenueProps) {
       >
         <div className="flex items-center gap-2">
           <div>
-            <Image
-              src={room.image || '/logo.png'}
-              alt={room.imageAlt || 'Room Image'}
-              className="w-13 h-13 rounded-md object-cover"
-            />
+            {room.image && (
+              <Image
+                src={room.image}
+                alt={room.imageAlt || 'Room Image'}
+                width={50}
+                height={50}
+                className="w-13 h-13 rounded-md object-cover"
+              />
+            )}
           </div>
           <div className="flex flex-col text-left m-2 items-start gap-1 text-black font-medium group-hover:underline">
             <span className="italic pt-2 text-teal font-semibold text-lg -my-2">

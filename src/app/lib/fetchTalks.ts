@@ -10,8 +10,7 @@ export const fetchTalks = cache(async (): Promise<Talk[] | 'API_ERROR'> => {
 
   const allTalks: Talk[] = [];
   const seen = new Set<string>();
-  let nextPageUrl = 'https://pretalx.wsaf.org.uk/api/events/2025/submissions';
-
+  let nextPageUrl = 'https://pretalx.wsaf.org.uk/api/events/2025/talks';
   try {
     while (nextPageUrl) {
       const res = await fetch(nextPageUrl, {
@@ -25,19 +24,17 @@ export const fetchTalks = cache(async (): Promise<Talk[] | 'API_ERROR'> => {
       if (!res.ok) {
         const errorText = await res.text();
         console.error('Failed to fetch Pretalx submissions data:', errorText);
-        throw new Error(errorText);
+        return 'API_ERROR';
       }
 
       const data = await res.json();
 
       for (const talk of data.results) {
-        const id = talk.code || talk.id;
-        if (!seen.has(id)) {
-          seen.add(id);
+        if (!seen.has(talk.code)) {
+          seen.add(talk.code);
           allTalks.push(talk);
         }
       }
-
       nextPageUrl = data.next || null;
     }
 

@@ -129,12 +129,12 @@ function EventsClient({ allTalks }: EventsProps) {
             </section>
           ))}
 
-          {unscheduledTalks.length > 0 && (
+          {/* {unscheduledTalks.length > 0 && (
             <section>
               <HighlightedHeading text="Not Scheduled Yet" />
               <TalkList talks={unscheduledTalks} />
             </section>
-          )}
+          )} */}
 
           {isFiltered && (
             <div className="mt-8 flex justify-center">

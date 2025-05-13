@@ -16,11 +16,14 @@ export default async function EventsPage() {
     return <ErrorMessage msg="w-please-set-the-api-token" />;
   }
   talks = talks.sort(() => Math.random() - 0.5);
+  const publicVisibleTalks = talks.filter((talk) =>
+    ['confirmed', 'accepted'].includes(talk.state),
+  );
 
   return (
     <main className="w-full">
       <PageHeader />
-      <EventsList allTalks={talks} />
+      <EventsList allTalks={publicVisibleTalks} />
     </main>
   );
 }

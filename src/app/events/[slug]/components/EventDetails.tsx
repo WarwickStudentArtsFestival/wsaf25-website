@@ -1,9 +1,9 @@
 import { FiCalendar, FiClock, FiMapPin } from 'react-icons/fi';
 import { formatDate, formatTime } from '@/app/lib/dateUtils';
-import { Talk } from '@/app/lib/types';
+import { Event } from '@/app/lib/events';
 
 type EventDetailsProps = {
-  talk: Talk;
+  talk: Event;
 };
 
 export default function EventDetails({ talk }: EventDetailsProps) {

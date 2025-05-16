@@ -1,10 +1,10 @@
 'use client';
-import { Talk } from '@/app/lib/types';
 import { FiShare2 } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
+import type { Event } from '@/app/lib/events';
 
 type ShareProps = {
-  talk: Talk;
+  talk: Event;
 };
 
 export default function Share({ talk }: ShareProps) {

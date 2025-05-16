@@ -37,6 +37,7 @@ const getFormattedDate = (date: Date): string => {
     day: undefined,
     hour: 'numeric',
     minute: 'numeric',
+    hour12: true,
   };
   return date.toLocaleString('en-GB', options);
 };
@@ -51,10 +52,9 @@ export default function TimeSelection() {
     <div className="p-4">
       <RangeSlider value={range} onInput={setRange} />
 
-      <p>
-        {getFormattedDate(convertIndexToDate(range[0]))}
-        {' - '}
-        {getFormattedDate(convertIndexToDate(range[1]))}
+      <p className="text-sm">
+        Showing 11 events from {getFormattedDate(convertIndexToDate(range[0]))}{' '}
+        to {getFormattedDate(convertIndexToDate(range[1]))}
       </p>
     </div>
   );

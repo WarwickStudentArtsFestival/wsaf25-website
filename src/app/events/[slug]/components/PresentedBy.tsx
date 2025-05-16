@@ -1,7 +1,7 @@
-import { Speaker } from '@/app/lib/types';
+import { EventAdmin } from '@/app/lib/events';
 
 type PresentedByProps = {
-  speakers: Speaker[];
+  speakers: EventAdmin[];
 };
 
 export default function PresentedBy({ speakers }: PresentedByProps) {

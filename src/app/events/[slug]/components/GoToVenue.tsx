@@ -1,33 +1,38 @@
 import ErrorMessage from '@/app/components/ErrorMessage';
-import { fetchRoom } from '@/app/lib/fetchRoom';
-import { Talk } from '@/app/lib/types';
+import { Event } from '@/app/lib/events';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
+import React from 'react';
+import { fetchVenue } from '@/app/lib/venues';
 
 type GoToVenueProps = {
-  talk: Talk;
+  talk: Event;
 };
 
 export default async function GoToVenue({ talk }: GoToVenueProps) {
-  const room = await fetchRoom(String(talk.slot?.room_id));
-  if (room === 'API_ERROR') {
+  let venue;
+  try {
+    venue = await fetchVenue(String(talk.slot?.room_id));
+  } catch (error) {
+    console.error('Error fetching room', error);
     return <ErrorMessage msg="Room not found" />;
   }
+
   return (
     <div className="my-4 bg-white p-4 h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-102 transition duration-150 ease-in-out">
       <Link
-        href={`/venues/${room.id}`}
+        href={`/venues/${venue.id}`}
         passHref
-        className=" cursor-pointer group"
-        title={`View more events at ${room.name.en}`}
+        className="cursor-pointer group"
+        title={`View more events at ${venue.name}`}
       >
         <div className="flex items-center gap-2">
           <div>
-            {room.image && (
+            {venue.image && (
               <Image
-                src={room.image}
-                alt={room.imageAlt || 'Room Image'}
+                src={venue.image}
+                alt={venue.imageAlt || 'Room Image'}
                 width={50}
                 height={50}
                 className="w-13 h-13 rounded-md object-cover"
@@ -38,7 +43,7 @@ export default async function GoToVenue({ talk }: GoToVenueProps) {
             <span className="italic pt-2 text-teal font-semibold text-lg -my-2">
               More events in...
             </span>
-            <span className="font-semibold pt-0">{room.name.en}</span>
+            <span className="font-semibold pt-0">{venue.name}</span>
           </div>
           <div className="text-purple-500">
             <FaArrowRight />

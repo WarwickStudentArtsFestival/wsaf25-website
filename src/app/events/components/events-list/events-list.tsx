@@ -1,19 +1,15 @@
 'use client';
-import React, { Suspense, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import TalkList from './TalkList';
-import FilterPanel from '../FilterPanel';
+import OptionsSidebar from './options-sidebar';
 import { Talk, trackTypes } from '@/app/lib/types';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import GoToAllEvents from './GoToAllEvents';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import TrackIcon from '@/app/components/track/TrackIcon';
 import TimeSelection from '@/app/events/components/time-selection';
 
-interface EventsProps {
-  allTalks: Talk[];
-}
-
-function EventsClient({ allTalks }: EventsProps) {
+export default function EventsList({ events }: { events: Event[] }) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const urlTracks = searchParams.get('genre');
@@ -92,8 +88,8 @@ function EventsClient({ allTalks }: EventsProps) {
 
       <div className="flex flex-row px-2 sm:px-4 relative">
         <aside className="w-1/6 hidden lg:block">
-          <FilterPanel
-            talks={allTalks}
+          <OptionsSidebar
+            talks={events}
             filteredTalks={talksFilteredByTrack}
             selectedTracks={selectedTracks}
             onTrackFilterChange={handleTrackFilterChange}
@@ -130,17 +126,9 @@ function EventsClient({ allTalks }: EventsProps) {
         </main>
 
         <footer className="absolute left-1/2 transform -translate-x-1/2 bottom-4 text-sm text-gray-500">
-          Showing {talksFilteredByTrack.length} of {allTalks.length} events
+          Showing {talksFilteredByTrack.length} of {events.length} events
         </footer>
       </div>
     </>
-  );
-}
-
-export default function EventsList({ allTalks }: EventsProps) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <EventsClient allTalks={allTalks} />
-    </Suspense>
   );
 }

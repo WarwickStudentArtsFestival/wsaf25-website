@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { fetchTalks } from '@/app/lib/fetchTalks';
 import ErrorMessage from '../components/ErrorMessage';
 import PageHeader from '../components/page-header';
 import EventsList from './components/events-list/EventsList';
+import { fetchEvents } from '../lib/events';
 
 export const metadata: Metadata = {
   title: 'WSAF Events',
@@ -10,26 +10,25 @@ export const metadata: Metadata = {
 };
 
 export default async function EventsPage() {
-  let talks = await fetchTalks();
-  if (talks === 'API_ERROR') {
-    console.error('Error fetching talks from API');
+  let events;
+
+  try {
+    events = await fetchEvents();
+  } catch (error) {
+    console.error('Error fetching talks from API', error);
     return <ErrorMessage msg="w-please-set-the-api-token" />;
   }
-  talks = talks.sort(
-    (a, b) =>
-      new Date(a.slot?.start || 0).getTime() -
-      new Date(b.slot?.start || 0).getTime(),
-  );
-  const publicVisibleTalks = talks.filter((talk) =>
+
+  const publicEvents = events.filter((event) =>
     (process.env.NEXT_PUBLIC_TALK_STATE_TO_SHOW || '')
       .split(',')
-      .includes(talk.state),
+      .includes(event.state),
   );
 
   return (
     <main className="w-full">
       <PageHeader />
-      <EventsList allTalks={publicVisibleTalks} />
+      <EventsList events={publicEvents} />
     </main>
   );
 }

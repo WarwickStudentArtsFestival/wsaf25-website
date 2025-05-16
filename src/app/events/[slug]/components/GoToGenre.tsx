@@ -1,10 +1,11 @@
-import { Talk, trackTypes } from '@/app/lib/types';
+import { trackTypes } from '@/app/lib/types';
+import { Event } from '@/app/lib/events';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 import TrackIcon from '../../../components/track/TrackIcon';
 
 type GoToGenreProps = {
-  talk: Talk;
+  talk: Event;
 };
 
 export default async function GoToGenre({ talk }: GoToGenreProps) {

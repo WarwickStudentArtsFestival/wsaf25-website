@@ -1,4 +1,3 @@
-import { fetchTalk } from '@/app/lib/fetchTalk';
 import PageHeader from '@/app/components/page-header';
 import ErrorMessage from '../../components/ErrorMessage';
 import PresentedBy from './components/PresentedBy';
@@ -9,15 +8,18 @@ import TalkHeader from './components/TalkHeader';
 import Share from './components/Share';
 import { Toaster } from 'react-hot-toast';
 import GoToGenre from './components/GoToGenre';
+import { fetchEvent } from '@/app/lib/events';
+import React from 'react';
 
-type Params = Promise<{ slug: string }>;
+export default async function Page({ params }: { params: { slug: string } }) {
+  let event;
 
-export default async function Page({ params }: { params: Params }) {
-  const { slug } = await params;
-  const talk = await fetchTalk(slug);
-
-  if (!talk || talk === 'API_ERROR') {
-    return <ErrorMessage msg={`Event '${slug}' not found!`} />;
+  // TODO: Better 404 page
+  try {
+    event = await fetchEvent(params.slug);
+  } catch (error) {
+    console.error('Error fetching event', error);
+    return <ErrorMessage msg={`Event '${params.slug}' not found!`} />;
   }
 
   return (
@@ -27,19 +29,19 @@ export default async function Page({ params }: { params: Params }) {
       <div className="max-w-4xl mx-auto md:px-4 sm:px-6 lg:px-8">
         <div className="mb-4">
           <div className="bg-white p-6 py-0 mb-4 h-fit rounded-lg  md:border md:border-gray-200">
-            <TalkHeader track={talk.track.en} />
+            <TalkHeader track={event.track.en} />
 
             <div className="my-4">
-              <PresentedBy speakers={talk.speakers} />
+              <PresentedBy speakers={event.speakers} />
               <h1 className="text-4xl font-bold break-words text-teal-600 px-2 -mx-6 sm:mx-auto ">
-                &ldquo;{talk.title}&rdquo;
+                &ldquo;{event.title}&rdquo;
               </h1>
             </div>
-            {talk.image && (
+            {event.image && (
               <div className="my-4">
                 <Image
-                  src={talk.image}
-                  alt={`${talk.title} presentation image`}
+                  src={event.image}
+                  alt={`${event.title} presentation image`}
                   width={800}
                   height={600}
                   className="w-full max-h-96 object-contain rounded-lg"
@@ -55,26 +57,26 @@ export default async function Page({ params }: { params: Params }) {
                 </h2>
                 <div
                   className="prose max-w-none"
-                  dangerouslySetInnerHTML={{ __html: talk.description }}
+                  dangerouslySetInnerHTML={{ __html: event.description }}
                 />
                 <div className="hidden lg:block">
                   <h2 className="text-black text-xl font-semibold my-4">
                     Related Events
                   </h2>
-                  <GoToVenue talk={talk} />
-                  <GoToGenre talk={talk} />
+                  <GoToVenue talk={event} />
+                  <GoToGenre talk={event} />
                 </div>
               </div>
               <div className="lg:w-1/3 flex flex-col gap-4 md:p-4 md:pl-0">
-                <EventDetails talk={talk} />
-                <Share talk={talk} />
+                <EventDetails talk={event} />
+                <Share talk={event} />
               </div>
               <div className="block lg:hidden">
                 <h2 className="text-black text-xl font-semibold my-4">
                   Related Events
                 </h2>
-                <GoToVenue talk={talk} />
-                <GoToGenre talk={talk} />
+                <GoToVenue talk={event} />
+                <GoToGenre talk={event} />
               </div>
             </div>
           </div>

@@ -1,20 +1,23 @@
 import type { Metadata } from 'next';
 import PageHeader from '../components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
-import { fetchRooms } from '@/app/lib/fetchRooms';
 import ErrorMessage from '../components/ErrorMessage';
-import RoomList from './components/RoomList';
+import { fetchVenues } from '@/app/lib/venues';
+import VenueCard from '@/app/venues/venue-card';
+import React from 'react';
 
 export const metadata: Metadata = {
   title: 'WSAF Venues',
   description: 'List of Venues, Rooms and Spaces in use at WSAF 2025',
 };
 
-export default async function EventsPage() {
-  const rooms = await fetchRooms();
+export default async function VenuesPage() {
+  let venues;
 
-  if (rooms === 'API_ERROR') {
-    console.error('Error fetching rooms from API');
+  try {
+    venues = await fetchVenues();
+  } catch (error) {
+    console.error('Error fetching rooms from API', error);
     return <ErrorMessage msg="w-please-set-the-api-token" />;
   }
 
@@ -23,9 +26,14 @@ export default async function EventsPage() {
       <PageHeader />
       <HighlightedHeading text="Venues" />
       <h1 className="text-teal text-2xl font-semibold mb-2">
-        Venues, Rooms and Spaces
+        Venues and Spaces
       </h1>
-      <RoomList rooms={rooms} />
+
+      <div className="mt-2 grid px-4 gap-8 md:px-16 mx-auto py-4 grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 sm:gap-4 justify-center">
+        {venues.map((venue) => (
+          <VenueCard key={venue.id} venue={venue} />
+        ))}
+      </div>
     </main>
   );
 }

@@ -7,6 +7,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import GoToAllEvents from './GoToAllEvents';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import TrackIcon from '@/app/components/track/TrackIcon';
+import TimeSelection from '@/app/events/components/time-selection';
 
 interface EventsProps {
   allTalks: Talk[];
@@ -86,6 +87,8 @@ function EventsClient({ allTalks }: EventsProps) {
           </div>
         </div>
       )}
+
+      <TimeSelection />
 
       <div className="flex flex-row px-2 sm:px-4 relative">
         <aside className="w-1/6 hidden lg:block">

@@ -11,7 +11,7 @@ export default async function GoToGenre({ talk }: GoToGenreProps) {
   const track = talk.track.en;
   const index = trackTypes.indexOf(track);
   return (
-    <div className="my-4 bg-white p-4 h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-102 transition duration-150 ease-in-out">
+    <div className="my-4 bg-white p-4 h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-105 transition duration-100 ease-in-out">
       <Link
         href={`/events?genre=${2 ** index}`}
         passHref

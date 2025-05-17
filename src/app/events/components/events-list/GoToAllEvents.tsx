@@ -3,7 +3,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 export default function GoToAllEvents() {
   return (
-    <div className="my-4 bg-white p-4 w-fit mx-auto h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-102 transition duration-150 ease-in-out">
+    <div className="my-4 bg-white p-4 w-fit mx-auto h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-105 transition duration-100 ease-in-out">
       <Link
         href={`/events?genre=0`}
         passHref

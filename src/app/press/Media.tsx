@@ -53,7 +53,7 @@ export default function Media() {
         href="https://gallery.warwickdrama.org.uk/index.php?/category/87"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-block hover:scale-[101%] transition duration-200"
+        className="inline-block hover:scale-[101%] transition duration-100"
       >
         <LastYearGallery />
       </a>

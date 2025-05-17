@@ -18,7 +18,7 @@ function Colours() {
         <div
           key={key}
           onClick={() => handleClick(hex)}
-          className="w-full aspect-square rounded-lg cursor-pointer relative transition-transform duration-200 hover:scale-110 hover:ring-2 hover:ring-gray-300 flex items-end justify-center"
+          className="w-full aspect-square rounded-lg cursor-pointer relative transition-transform duration-100 hover:scale-105 hover:ring-2 hover:ring-gray-300 flex items-end justify-center"
           style={{ backgroundColor: hex }}
         >
           {copied === hex && (

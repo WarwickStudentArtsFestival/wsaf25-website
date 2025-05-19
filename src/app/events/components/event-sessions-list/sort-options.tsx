@@ -3,9 +3,11 @@ import { FaRandom, FaRegBuilding, FaRegClock } from 'react-icons/fa';
 export default function SortOptions({
   selectedSort,
   setSort,
+  randomiseSessions,
 }: {
   selectedSort: string;
   setSort: (sort: string) => void;
+  randomiseSessions: () => void;
 }) {
   return (
     <div className="mb-4">
@@ -16,8 +18,7 @@ export default function SortOptions({
         <button
           className={`flex items-center gap-2 px-3 py-1.5 hover:cursor-pointer hover:bg-slate-100 ${selectedSort === 'random' ? 'bg-slate-100 drop-shadow-sm' : ''}`}
           onClick={() =>
-            // If already random, switch to random2 to force re-render
-            setSort(selectedSort === 'random' ? 'random2' : 'random')
+            selectedSort === 'random' ? randomiseSessions() : setSort('random')
           }
         >
           <FaRandom />

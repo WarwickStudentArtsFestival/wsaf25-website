@@ -22,7 +22,8 @@
     "react-dom": "19.1.0",
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.0.1",
-    "react-range-slider-input": "^3.2.1"
+    "react-range-slider-input": "^3.2.1",
+    "use-debounce": "^10.0.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

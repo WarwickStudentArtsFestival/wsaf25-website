@@ -21,6 +21,7 @@ export default function EventSessionsList({
     selectedFilterValues,
     sortAndGroupEventSessions,
     setFilter,
+    selectedFilters,
   } = useEventSessionsFilters(context);
 
   const { sessionCount: filteredSessionCount, sessionGroups } = useMemo(() => {
@@ -30,22 +31,6 @@ export default function EventSessionsList({
 
   return (
     <>
-      {/*      {genreText && (
-        <div className="sticky top-15 mx-auto flex items-center z-40 pt-4 justify-center bg-white w-full px-4 md:px-8">
-          <div className="bg-purple-200 p-2 h-fit text-purple-800 border border-purple-800 rounded-full">
-            <TrackIcon track={genreText} size={25} />
-          </div>
-          <div className="ml-4">
-            <h1 className="text-3xl md:text-4xl font-bold text-teal">
-              {genreText}
-            </h1>
-            <h3 className="text-teal font-semibold italic">at WSAF 2025...</h3>
-          </div>
-        </div>
-      )}
-
-      */}
-
       <DatetimeSlider
         fromIndex={selectedFilterValues.dateFrom}
         toIndex={selectedFilterValues.dateTo}
@@ -59,6 +44,9 @@ export default function EventSessionsList({
             filteredCount={filteredSessionCount}
             totalCount={eventSessions.length}
             context={context}
+            selectedFilters={selectedFilters}
+            selectedFilterValues={selectedFilterValues}
+            setFilter={setFilter}
           />
         </aside>
 

@@ -1,8 +1,9 @@
 import { useSearchParams } from 'next/navigation';
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import { EventSessionsListContext } from '@/app/events/components/event-sessions-list/event-sessions-list-context';
 import { EventSession } from '@/lib/events';
 import { eventDateTimeIntervals, formatDate } from '@/lib/dates';
+import { useDebouncedCallback } from 'use-debounce';
 
 export type FilterOption = {
   label: string;
@@ -41,6 +42,18 @@ export type EventSessionGroup = {
   sessions: EventSession[];
 };
 
+const defaultFilters: SelectedFilters = {
+  sort: 'random',
+  randomSeed: new Date().getTime(),
+  search: null,
+  category: null,
+  venue: null,
+  duration: null,
+  dateFrom: 0,
+  dateTo: eventDateTimeIntervals.all.length - 1,
+  dropInOnly: false,
+};
+
 function getFilterOptionsFromBitField(
   bitFieldString: string | null,
   options: FilterOption[],
@@ -66,9 +79,14 @@ function getBitFieldFromFilterOptions(options: FilterOption[]): string {
 export default function useEventSessionsFilters(
   context: EventSessionsListContext,
 ) {
-  const searchParams = useSearchParams();
+  const [selectedFilters, setSelectedFilters] =
+    useState<SelectedFilters>(defaultFilters);
 
-  const selectedFilters = useMemo<SelectedFilters>(() => {
+  const searchParams = useSearchParams();
+  // Update selected filters from URL search params when URL search params updated
+  useEffect(() => {
+    if (selectedFiltersUrlParams === searchParams.toString()) return;
+
     const sortParam = searchParams.get('sort');
     const searchParam = searchParams.get('search');
     const categoryParam = searchParams.get('category');
@@ -77,14 +95,6 @@ export default function useEventSessionsFilters(
     const dateFromParam = searchParams.get('from');
     const dateToParam = searchParams.get('to');
     const dropInOnlyParam = searchParams.get('dropInOnly');
-
-    if (sortParam === 'random2') {
-      window.history.replaceState(
-        null,
-        '',
-        `?${searchParams.toString().replace('sort=random2', 'random')}`,
-      );
-    }
 
     let dateFrom = dateFromParam && parseInt(dateFromParam);
     if (!dateFrom || isNaN(dateFrom)) dateFrom = 0;
@@ -105,7 +115,7 @@ export default function useEventSessionsFilters(
       );
     }
 
-    return {
+    setSelectedFilters({
       sort: (sortParam && ['random', 'time', 'venue'].includes(sortParam)
         ? sortParam
         : 'random') as 'random' | 'time' | 'venue',
@@ -117,7 +127,7 @@ export default function useEventSessionsFilters(
       dateFrom,
       dateTo,
       dropInOnly: dropInOnlyParam !== null,
-    };
+    });
   }, [searchParams]);
 
   const selectedFilterValues = useMemo<SelectedFilterValues>(
@@ -175,14 +185,27 @@ export default function useEventSessionsFilters(
     return params.toString();
   };
 
+  const selectedFiltersUrlParams = useMemo(
+    () => getSearchParams(selectedFilters),
+    [selectedFilters],
+  );
+
+  const updateUrlFromFilters = useDebouncedCallback(() => {
+    if (selectedFiltersUrlParams !== searchParams.toString()) {
+      // Use window.state instead of router to avoid reloading the page
+      window.history.replaceState(null, '', `?${selectedFiltersUrlParams}`);
+    }
+    // Wait for 200ms of no movement before updating the URL
+  }, 200);
+
   const setFilter = (newFilters: Partial<SelectedFilters>) => {
-    const newSearchParams = getSearchParams({
+    const updatedFilters = {
       ...selectedFilters,
       ...newFilters,
-    });
+    };
 
-    // Use window.state instead of router to avoid reloading the page
-    window.history.replaceState(null, '', `?${newSearchParams}`);
+    setSelectedFilters(updatedFilters);
+    updateUrlFromFilters();
   };
 
   const isEventSessionInFilter = (eventSession: EventSession) => {

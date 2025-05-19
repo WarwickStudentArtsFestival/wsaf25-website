@@ -2,8 +2,10 @@
 import React from 'react';
 import { EventSessionsListContext } from '@/app/events/components/event-sessions-list/event-sessions-list-context';
 import FilterOptions from '@/app/events/components/event-sessions-list/filter-options';
-import useEventSessionsFilters, {
+import {
   FilterOption,
+  SelectedFilters,
+  SelectedFilterValues,
 } from '@/app/events/components/event-sessions-list/event-sessions-filters';
 import SortOptions from '@/app/events/components/event-sessions-list/sort-options';
 import TimeOptions from '@/app/events/components/event-sessions-list/time-options';
@@ -12,14 +14,17 @@ export default function OptionsSidebar({
   context,
   filteredCount,
   totalCount,
+  selectedFilters,
+  selectedFilterValues,
+  setFilter,
 }: {
   context: EventSessionsListContext;
   filteredCount: number;
   totalCount: number;
+  selectedFilters: SelectedFilters;
+  selectedFilterValues: SelectedFilterValues;
+  setFilter: (value: Partial<SelectedFilters>) => void;
 }) {
-  const { selectedFilters, selectedFilterValues, setFilter } =
-    useEventSessionsFilters(context);
-
   return (
     <div className="sticky z-50 top-20 border p-4 text-left text-black border-slate-300 rounded-md overflow-auto max-h-screen shadow-lg mb-4">
       <div className="border-b flex gap-2 items-center justify-between pb-2">
@@ -34,6 +39,9 @@ export default function OptionsSidebar({
           selectedSort={selectedFilters.sort}
           setSort={(value) =>
             setFilter({ sort: value as 'random' | 'time' | 'venue' })
+          }
+          randomiseSessions={() =>
+            setFilter({ randomSeed: new Date().getTime() })
           }
         />
 

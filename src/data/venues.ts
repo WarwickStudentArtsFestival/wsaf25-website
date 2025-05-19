@@ -18,6 +18,7 @@ const venues: Record<string, AdditionalVenueData> = {
     imageAlt: 'Picture of the WSAF 2024 Main Stage',
     roomLocation: 'Benefactors Place',
     slug: 'benefactors-stage',
+    filterBitFieldIndex: 1,
   },
 
   // The Other FAB Theatre - FAB0.19
@@ -28,6 +29,7 @@ const venues: Record<string, AdditionalVenueData> = {
     imageAlt: 'Image of a performance in a FAB theatre',
     roomLocation: 'FAB0.19',
     slug: 'other-fab-theatre',
+    filterBitFieldIndex: 2,
   },
 
   // FAB Theatre - FAB0.20
@@ -38,6 +40,7 @@ const venues: Record<string, AdditionalVenueData> = {
     imageAlt: 'Image of a performance in a FAB theatre',
     roomLocation: 'FAB0.20',
     slug: 'fab-theatre',
+    filterBitFieldIndex: 3,
   },
 
   // FAB Rehearsal Rooms (0.16, 0.18)
@@ -48,6 +51,7 @@ const venues: Record<string, AdditionalVenueData> = {
     imageAlt: 'FAB Rehearsal Rooms (0.16, 0.18)',
     roomLocation: 'FAB 0.16 & 0.18',
     slug: 'fab-rehearsal-rooms',
+    filterBitFieldIndex: 4,
   },
 
   // FAB Terrace
@@ -58,6 +62,7 @@ const venues: Record<string, AdditionalVenueData> = {
     imageAlt: 'Drone Shot of FAB terrace',
     roomLocation: 'FAB Terrace',
     slug: 'fab-terrace',
+    filterBitFieldIndex: 5,
   },
 
   // FAB Cinema
@@ -75,6 +80,7 @@ const venues: Record<string, AdditionalVenueData> = {
     imageAlt: 'Picture of FAB Art Gallery',
     roomLocation: 'Unknown',
     slug: 'fab-art-gallery',
+    filterBitFieldIndex: 6,
   },
 
   // Avon Drama Studio
@@ -86,6 +92,7 @@ const venues: Record<string, AdditionalVenueData> = {
       'Picture of a performance in a room that looks like Avon Drama Studio',
     roomLocation: 'Avon Drama Studio',
     slug: 'avon-drama-studio',
+    filterBitFieldIndex: 7,
   },
 
   // The Graduate

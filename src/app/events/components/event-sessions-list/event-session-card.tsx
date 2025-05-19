@@ -1,21 +1,8 @@
 import React from 'react';
-import {
-  FiMapPin,
-  FiClock,
-  FiCalendar,
-  FiArrowRight,
-  FiAlertCircle,
-  FiUser,
-} from 'react-icons/fi';
-import { Talk } from '@/lib/types';
+import { FiArrowRight, FiMapPin } from 'react-icons/fi';
 import Link from 'next/link';
 import TrackPill from '../../../components/track/TrackPill';
-import { formatDate, formatTime } from '@/lib/dateUtils';
-
-type TalkCardProps = {
-  talk: Talk;
-  id: number;
-};
+import { EventSession } from '@/lib/events';
 
 type InfoItem = {
   icon: React.ReactNode;
@@ -23,47 +10,42 @@ type InfoItem = {
   showOnSmall?: boolean;
 };
 
-export default function TalkCard({ talk, id }: TalkCardProps) {
-  const infoItems: InfoItem[] = talk.slot?.start
-    ? [
-        {
-          icon: <FiMapPin className="text-purple-500" />,
-          text: talk.slot.room.en,
-          showOnSmall: true,
-        },
-        {
+export default function EventSessionCard({
+  eventSession,
+}: {
+  eventSession: EventSession;
+}) {
+  const infoItems: InfoItem[] = [
+    {
+      icon: <FiMapPin className="text-purple-500" />,
+      text: eventSession.venueName,
+      showOnSmall: true,
+    },
+    /*{
           icon: <FiCalendar className="text-purple-500" />,
-          text: formatDate(talk.slot.start),
+          text: formatDate(eventSession.start),
           showOnSmall: false,
         },
         {
           icon: <FiClock className="text-purple-500" />,
           text: `${formatTime(talk.slot.start)} - ${formatTime(talk.slot.end)}`,
           showOnSmall: true,
-        },
-        {
+        },*/
+    /*{
           icon: <FiUser className="text-purple-500" />,
           text: talk.speakers.map((s) => s.name).join(', '),
           showOnSmall: false,
-        },
-      ]
-    : [
-        {
-          icon: <FiAlertCircle className="text-purple-500" />,
-          text: 'No Slot Yet',
-          showOnSmall: true,
-        },
-      ];
+        },*/
+  ];
 
   return (
-    <Link href={`/events/${talk.code}`}>
-      <div
-        key={`${talk.code}-${id}`}
-        className="border py-4  px-2 md:p-4 text-left text-black border-slate-300 rounded-md overflow-hidden w-full h-full flex flex-col hover:scale-[1.02] transition duration-150 ease-in-out shadow-lg"
-      >
-        <TrackPill track={talk.track?.en} />
+    <Link href={`/events/${eventSession.event.id}`}>
+      <div className="border py-4  px-2 md:p-4 text-left text-black border-slate-300 rounded-md overflow-hidden w-full h-full flex flex-col hover:scale-[1.02] transition duration-150 ease-in-out shadow-lg">
+        <TrackPill track={eventSession.event.categoryPretalxTrack} />
         <div className="flex flex-col flex-grow">
-          <h3 className="text-teal text-xl font-semibold mb-3">{talk.title}</h3>
+          <h3 className="text-teal text-xl font-semibold mb-3">
+            {eventSession.event.name}
+          </h3>
           <div className="block">
             {infoItems.map(({ icon, text, showOnSmall }, index) => (
               <p

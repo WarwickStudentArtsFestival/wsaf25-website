@@ -40,6 +40,7 @@ export type EventDurationCategory = {
   slug: string;
   label: string;
   minMinutes: number;
+  filterBitFieldIndex: number;
 };
 
 export type EventCategory = {
@@ -48,6 +49,7 @@ export type EventCategory = {
   label: string;
   icon: ReactNode;
   colour: string;
+  filterBitFieldIndex: number;
 };
 
 function constructEventSessionFromPretalxEvent(

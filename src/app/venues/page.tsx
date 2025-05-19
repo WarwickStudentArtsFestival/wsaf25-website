@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import PageHeader from '../components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
 import ErrorMessage from '../components/ErrorMessage';
-import { fetchVenues } from '@/lib/venues';
+import { fetchVenuesWithEventCount } from '@/lib/venues';
 import VenueCard from '@/app/venues/venue-card';
 import React from 'react';
 
@@ -15,7 +15,7 @@ export default async function VenuesPage() {
   let venues;
 
   try {
-    venues = await fetchVenues();
+    venues = await fetchVenuesWithEventCount();
   } catch (error) {
     console.error('Error fetching rooms from API', error);
     return <ErrorMessage msg="w-please-set-the-api-token" />;

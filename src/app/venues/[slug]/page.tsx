@@ -1,6 +1,5 @@
 import PageHeader from '@/app/components/page-header';
 import ErrorMessage from '@/app/components/ErrorMessage';
-import EventsList from '@/app/events/components/events-list/EventsList';
 import { fetchVenue } from '@/lib/venues';
 import React from 'react';
 import { fetchEventSessionsInVenue } from '@/lib/events';
@@ -9,14 +8,15 @@ import HighlightedHeading from '@/app/components/highlighted-heading';
 import { FiExternalLink, FiMapPin } from 'react-icons/fi';
 import Link from 'next/link';
 import { FaArrowRight, FaWarehouse } from 'react-icons/fa';
+import EventSessionsList from '@/app/events/components/event-sessions-list/event-sessions-list';
+import getContext from '@/app/events/components/event-sessions-list/event-sessions-list-context';
 
 export default async function VenuePage({
   params,
 }: {
   params: { slug: string };
 }) {
-  let venue;
-  let events;
+  let venue, eventSessions, eventSessionsListContext;
 
   // TODO: Better 404 page
   try {
@@ -31,7 +31,8 @@ export default async function VenuePage({
   }
 
   try {
-    events = await fetchEventSessionsInVenue(venue.name);
+    eventSessions = await fetchEventSessionsInVenue(venue.name);
+    eventSessionsListContext = await getContext(eventSessions);
   } catch (error) {
     console.error('Error fetching events from API', error);
     return <ErrorMessage msg="Unknown error" />;
@@ -102,7 +103,10 @@ export default async function VenuePage({
         </h1>
       </div>
       <div className="w-full">
-        <EventsList events={events} />
+        <EventSessionsList
+          eventSessions={eventSessions}
+          context={eventSessionsListContext}
+        />
       </div>
       <div className="flex my-4 w-full flex-col items-center justify-center mx-auto">
         <h2 className="text-black text-xl font-semibold">Related Events</h2>

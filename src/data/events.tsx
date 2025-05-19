@@ -16,18 +16,21 @@ import {
 export const durationCategories: EventDurationCategory[] = [
   {
     slug: 'short',
-    label: 'Short',
+    label: 'Short (<15m)',
     minMinutes: 0,
+    filterBitFieldIndex: 1,
   },
   {
     slug: 'medium',
-    label: 'Medium',
+    label: 'Medium (15m-1h)',
     minMinutes: 15,
+    filterBitFieldIndex: 2,
   },
   {
     slug: 'long',
-    label: 'Long',
+    label: 'Long (>1h)',
     minMinutes: 60,
+    filterBitFieldIndex: 3,
   },
 ];
 
@@ -38,6 +41,7 @@ export const eventCategories: EventCategory[] = [
     label: 'Theatre',
     icon: <FaTheaterMasks />,
     colour: '#a855f7', // purple-500
+    filterBitFieldIndex: 1,
   },
   {
     pretalxTrack: 'Music',
@@ -45,6 +49,7 @@ export const eventCategories: EventCategory[] = [
     label: 'Music',
     icon: <FaMusic />,
     colour: '#3b82f6', // blue-500
+    filterBitFieldIndex: 2,
   },
   {
     pretalxTrack: 'Comedy',
@@ -52,6 +57,7 @@ export const eventCategories: EventCategory[] = [
     label: 'Comedy',
     icon: <FaLaughSquint />,
     colour: '#f59e0b', // amber-500
+    filterBitFieldIndex: 3,
   },
   {
     pretalxTrack: 'Mixed',
@@ -59,6 +65,7 @@ export const eventCategories: EventCategory[] = [
     label: 'Mixed',
     icon: <FaUsers />,
     colour: '#10b981', // emerald-500
+    filterBitFieldIndex: 4,
   },
   {
     pretalxTrack: 'Dance',
@@ -66,6 +73,7 @@ export const eventCategories: EventCategory[] = [
     label: 'Dance',
     icon: <FaWalking />,
     colour: '#ef4444', // red-500
+    filterBitFieldIndex: 5,
   },
   {
     pretalxTrack: 'Visual Art',
@@ -73,6 +81,7 @@ export const eventCategories: EventCategory[] = [
     label: 'Visual Art',
     icon: <FaPaintBrush />,
     colour: '#f97316', // orange-500
+    filterBitFieldIndex: 6,
   },
   {
     pretalxTrack: 'Creation',
@@ -80,6 +89,7 @@ export const eventCategories: EventCategory[] = [
     label: 'Creation',
     icon: <FaMagic />,
     colour: '#8b5cf6', // violet-500
+    filterBitFieldIndex: 7,
   },
   {
     pretalxTrack: 'MTW Stagefest',
@@ -87,6 +97,7 @@ export const eventCategories: EventCategory[] = [
     label: 'MTW Stagefest',
     icon: <FaPersonBooth />,
     colour: '#14b8a6', // teal-500
+    filterBitFieldIndex: 8,
   },
   {
     pretalxTrack: 'Film',
@@ -94,6 +105,7 @@ export const eventCategories: EventCategory[] = [
     label: 'Film',
     icon: <FaFilm />,
     colour: '#64748b', // slate-500
+    filterBitFieldIndex: 9,
   },
   {
     pretalxTrack: 'Spoken Word',
@@ -101,5 +113,6 @@ export const eventCategories: EventCategory[] = [
     label: 'Spoken Word',
     icon: <FaMicrophoneAlt />,
     colour: '#ec4899', // pink-500
+    filterBitFieldIndex: 10,
   },
 ];

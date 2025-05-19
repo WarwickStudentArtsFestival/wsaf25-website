@@ -97,12 +97,12 @@ export const pretalxHttpRequest = cache(async function pretalxHttpRequest<
 
 export const pretalxApiRequest = (path: string): Promise<Response> => {
   return pretalxHttpRequest<Response>(
-    `api/events/${process.env.PRETALX_EVENT_ID}/${path}`,
+    `api/events/${process.env.PRETALX_EVENT_SLUG}/${path}`,
   );
 };
 
 export const fetchPretalxSchedule = (): Promise<PretalxScheduleJson> => {
   return pretalxHttpRequest<PretalxScheduleJson>(
-    `${process.env.PRETALX_EVENT_ID}/schedule/export/schedule.json`,
+    `${process.env.PRETALX_EVENT_SLUG}/schedule/export/schedule.json`,
   );
 };

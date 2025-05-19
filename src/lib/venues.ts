@@ -8,6 +8,7 @@ export type AdditionalVenueData = {
   image: StaticImageData | string;
   roomLocation: string;
   slug: string;
+  filterBitFieldIndex: number;
 };
 
 export type Venue = {
@@ -30,7 +31,7 @@ function constructVenueFromPretalxRoom(
   };
 
   const additionalVenueData = venues[room.guid];
-  if (!venues) {
+  if (!additionalVenueData) {
     console.error(
       `No venue data found for room ID: ${room.guid} (${room.name})`,
     );

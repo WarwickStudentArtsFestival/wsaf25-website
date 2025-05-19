@@ -1,14 +1,11 @@
 'use client';
 import React, { useMemo } from 'react';
-import TalkList from './TalkList';
 import OptionsSidebar from './options-sidebar';
-import { Talk, trackTypes } from '@/lib/types';
-import { useRouter, useSearchParams } from 'next/navigation';
 import GoToAllEvents from './GoToAllEvents';
-import TrackIcon from '@/app/components/track/TrackIcon';
-import TimeSelection from '@/app/events/components/events-list/time-selection';
 import { EventSession } from '@/lib/events';
 import { EventSessionsListContext } from '@/app/events/components/event-sessions-list/event-sessions-list-context';
+import EventSessionCard from '@/app/events/components/event-sessions-list/event-session-card';
+import useEventSessionsFilters from '@/app/events/components/event-sessions-list/event-sessions-filters';
 
 export default function EventSessionsList({
   eventSessions,
@@ -17,71 +14,16 @@ export default function EventSessionsList({
   eventSessions: EventSession[];
   context: EventSessionsListContext;
 }) {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const urlTracks = searchParams.get('genre');
-
-  // Get selected tracks based on URL parameters
-  const selectedTracks = useMemo(() => {
-    return urlTracks
-      ? trackTypes.filter(
-          (_, index) => (parseInt(urlTracks, 10) & (1 << index)) !== 0,
-        )
-      : trackTypes;
-  }, [urlTracks]);
-
-  // Filter, sort, and group talks
-  const { talksByDay, unscheduledTalks, talksFilteredByTrack } = useMemo(() => {
-    // Filter talks based on selected tracks, or return all talks if no filters are selected
-    let talksFilteredByTrack = allTalks.filter((talk) =>
-      selectedTracks.some((track) => talk.track.en.includes(track)),
-    );
-    talksFilteredByTrack =
-      talksFilteredByTrack.length > 0 ? talksFilteredByTrack : allTalks;
-    const talksByDay: Record<string, Talk[]> = {};
-    const unscheduledTalks: Talk[] = [];
-    talksFilteredByTrack.forEach((talk) => {
-      if (talk.slot?.start) {
-        const day = new Date(talk.slot.start).toISOString().split('T')[0];
-        talksByDay[day] = talksByDay[day] || [];
-        talksByDay[day].push(talk);
-      } else {
-        unscheduledTalks.push(talk);
-      }
-    });
-
-    return {
-      talksByDay,
-      unscheduledTalks,
-      talksFilteredByTrack,
-    };
-  }, [allTalks, selectedTracks]);
-
-  const sortedDays = useMemo(
-    () => Object.keys(talksByDay).sort(),
-    [talksByDay],
-  );
-
-  const handleTrackFilterChange = (tracks: string[]) => {
-    const bitmask = tracks.reduce(
-      (mask, track) => mask | (1 << trackTypes.indexOf(track)),
-      0,
-    );
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('genre', bitmask.toString());
-    router.replace(`?${params.toString()}`, { scroll: false });
-  };
-
-  const isFiltered = allTalks.length !== talksFilteredByTrack.length;
-  const genreText = selectedTracks.length === 1 ? selectedTracks[0] : null;
+  const { isEventSessionInFilter, selectedFilterValues } =
+    useEventSessionsFilters(context);
 
   const filteredEventSessions = useMemo(() => {
-    return eventSessions;
-  }, [eventSessions]);
+    return eventSessions.filter(isEventSessionInFilter);
+  }, [eventSessions, selectedFilterValues]);
 
   return (
     <>
-      {genreText && (
+      {/*      {genreText && (
         <div className="sticky top-15 mx-auto flex items-center z-40 pt-4 justify-center bg-white w-full px-4 md:px-8">
           <div className="bg-purple-200 p-2 h-fit text-purple-800 border border-purple-800 rounded-full">
             <TrackIcon track={genreText} size={25} />
@@ -95,7 +37,7 @@ export default function EventSessionsList({
         </div>
       )}
 
-      <TimeSelection />
+      <TimeSelection />*/}
 
       <div className="flex flex-row px-2 sm:px-4 relative">
         <aside className="w-1/6 hidden lg:block">
@@ -107,7 +49,24 @@ export default function EventSessionsList({
         </aside>
 
         <main className="flex-1 mb-16 space-y-8">
-          <TalkList talks={} />
+          {filteredEventSessions.length === 0 ? (
+            <p>No events found</p>
+          ) : (
+            <div
+              className={`
+        relative w-full grid gap-2
+        grid-cols-2 md:grid-cols-3 xl:grid-cols-5 px-2
+        ${filteredEventSessions.length > 4 ? 'overflow-y-auto' : ''}
+        max-h-[calc(6*10rem)] sm:max-h-[calc(6*10rem)]
+      `}
+            >
+              {filteredEventSessions.map((eventSession) => (
+                <div key={eventSession.id} className="w-full sm:p-2">
+                  <EventSessionCard eventSession={eventSession} />
+                </div>
+              ))}
+            </div>
+          )}
 
           {filteredEventSessions.length !== eventSessions.length && (
             <div className="mt-8 flex justify-center">

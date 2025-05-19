@@ -1,7 +1,7 @@
-import { FilterOption } from '@/app/events/components/events-list/filter-options';
 import { fetchVenuesWithEventCount } from '@/lib/venues';
 import { durationCategories, eventCategories } from '@/data/events';
 import { EventSession } from '@/lib/events';
+import { FilterOption } from '@/app/events/components/event-sessions-list/event-sessions-filters';
 
 export type EventSessionsListContext = {
   eventSessions: EventSession[];
@@ -19,24 +19,27 @@ export default async function getContext(
     eventSessions,
     categories: eventCategories.map((category) => ({
       label: category.label,
-      value: category.slug,
+      value: category.pretalxTrack,
       count: eventSessions.filter(
         (session) =>
           session.event.categoryPretalxTrack === category.pretalxTrack,
       ).length,
       icon: category.icon,
+      bitFieldIndex: category.filterBitFieldIndex,
     })),
     venues: venues.map((venue) => ({
       label: venue.name,
-      value: venue.slug,
+      value: venue.name,
       count: venue.eventCount,
+      bitFieldIndex: venue.filterBitFieldIndex,
     })),
-    durations: durationCategories.map((category) => ({
-      label: category.label,
-      value: category.slug,
+    durations: durationCategories.map((duration) => ({
+      label: duration.label,
+      value: duration.slug,
       count: eventSessions.filter(
-        (session) => session.durationCategory === category.slug,
+        (session) => session.durationCategory === duration.slug,
       ).length,
+      bitFieldIndex: duration.filterBitFieldIndex,
     })),
   };
 }

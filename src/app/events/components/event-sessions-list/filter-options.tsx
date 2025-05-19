@@ -1,41 +1,36 @@
-import { ReactNode } from 'react';
-
-export type FilterOption = {
-  label: string;
-  value: string;
-  count: number;
-  icon?: ReactNode;
-};
+import { FilterOption } from '@/app/events/components/event-sessions-list/event-sessions-filters';
 
 type FilterOptionsProps = {
   label: string;
   options: FilterOption[];
-  selectedOptions: string[];
-  onChange: (items: string[]) => void;
+  selectedFilters: FilterOption[] | null;
+  selectedFilterValues: string[] | null;
+  onChange: (items: FilterOption[] | null) => void;
 };
 
 export default function FilterOptions({
   label,
   options,
-  selectedOptions,
+  selectedFilters,
+  selectedFilterValues,
   onChange,
 }: FilterOptionsProps) {
   const handleOptionToggle = (option: string) => {
-    const isSelected = selectedOptions.includes(option);
-    const newSelectedOptions = isSelected
-      ? selectedOptions.filter((i) => i !== option)
-      : [...selectedOptions, option];
-
-    onChange(newSelectedOptions);
+    if (!selectedFilterValues || !selectedFilters) {
+      onChange(options.filter((i) => i.value !== option));
+    } else if (selectedFilterValues.includes(option)) {
+      onChange(selectedFilters.filter((i) => i.value !== option));
+    } else {
+      // Otherwise add
+      onChange([...selectedFilters, options.find((i) => i.value === option)!]);
+    }
   };
 
   const handleSelectAll = () => {
-    if (selectedOptions.length === options.length) {
-      onChange([]);
-    } else {
-      const allOptions = options.map((option) => option.value);
-      onChange(allOptions);
-    }
+    // [] = no options selected
+    // null = all options selected
+    if (!selectedFilterValues) onChange([]);
+    else onChange(null);
   };
 
   return (
@@ -47,9 +42,7 @@ export default function FilterOptions({
           onClick={handleSelectAll}
           className="text-xs text-blue-600 hover:underline cursor-pointer"
         >
-          {selectedOptions.length === options.length
-            ? 'Deselect All'
-            : 'Select All'}
+          {selectedFilterValues ? 'Select All' : 'Deselect All'}
         </button>
       </div>
       <ul className="space-y-1">
@@ -58,7 +51,10 @@ export default function FilterOptions({
             <label className="flex items-center cursor-pointer w-full">
               <input
                 type="checkbox"
-                checked={selectedOptions.includes(option.value)}
+                checked={
+                  !selectedFilterValues ||
+                  selectedFilterValues.includes(option.value)
+                }
                 onChange={() => handleOptionToggle(option.value)}
                 className="mr-2 h-4 w-4"
               />

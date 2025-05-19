@@ -17,9 +17,8 @@ export default function RoleCard({
   description,
 }: RoleCardProps) {
   return (
-    // <div className="border border-slate-300 rounded-md overflow-hidden w-full hover:scale-105 transition duration-100 ease-in-out flex flex-col h-auto sm:h-[28rem]">
-    <div className="border text-left border-slate-300 rounded-md overflow-hidden w-full flex flex-col h-auto sm:h-[28rem]">
-      <div className="relative w-full h-48 sm:h-1/2">
+    <div className="border text-left border-slate-300 rounded-md overflow-hidden w-full h-full flex flex-col">
+      <div className="relative w-full h-48">
         <Image
           src={image}
           alt={imageAlt}
@@ -27,10 +26,10 @@ export default function RoleCard({
           fill
         />
       </div>
-      <div className="p-4 flex flex-col flex-1 justify-start flex-grow">
+      <div className="p-4 flex flex-col h-fit overflow-y-auto">
         <h3 className="text-teal text-xl font-semibold mb-2">{title}</h3>
         {description.map((paragraph, index) => (
-          <p key={index} className="text-sm">
+          <p key={index} className="text-sm mb-2">
             {paragraph}
           </p>
         ))}

@@ -1,19 +1,20 @@
 import React from 'react';
+import Image from 'next/image';
+import { Metadata } from 'next';
+import { FaDiscord } from 'react-icons/fa';
+
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '@/app/components/highlighted-heading';
-import PosteringImage from '@/assets/images/postering.jpg';
-import Image from 'next/image';
-import RoleCard from '@/app/components/RoleCard';
-import { FaDiscord } from 'react-icons/fa';
-import { Metadata } from 'next';
+import RoleCard from '@/app/components/role-card';
+import PeopleInvolved from '../components/people-involved/people-involved';
 import CrewFaq from '../(home)/components/faq/crew-faq';
 
+import PosteringImage from '@/assets/images/postering.jpg';
 import Marketing from '@/assets/crew/marketing.jpg';
 import Stewards from '@/assets/crew/circle-team.jpg';
 import Tech from '@/assets/crew/colourful-stage.jpg';
 import VenueManager from '@/assets/crew/fab-terrace-drone.jpg';
 import Operations from '@/assets/crew/flight-cases.jpg';
-import PeopleInvolved from '../components/people-involved/people-involved';
 
 export const metadata: Metadata = {
   title: 'Crew',
@@ -96,7 +97,6 @@ export default function Team() {
               </a>
               .
             </p>
-
             <div className="flex gap-2 justify-center md:justify-end flex-wrap">
               <a
                 href="/discord"
@@ -108,18 +108,9 @@ export default function Team() {
                   Join Discord
                 </span>
               </a>
-              {/* <a
-                href="/helfertool"
-                target="_blank"
-                className="inline-block bg-secondary px-4 py-1 rounded-sm drop-shadow-sm hover:scale-105"
-              >
-                <span className="text-xl lg:text-2xl uppercase font-bold">
-                  <FiArrowRight className="inline-block mb-1 mr-2" />
-                  Sign Up
-                </span>
-              </a> */}
             </div>
           </div>
+
           <Image
             src={PosteringImage}
             alt="Warwick Student Arts Festival volunteers putting up posters on campus."
@@ -132,12 +123,12 @@ export default function Team() {
 
       <section className="my-4 max-w-8xl mx-auto">
         <HighlightedHeading text="Crew Roles" />
-        <div className="mt-2 grid w-full px-2 sm:px-16 sm:py-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 justify-center">
+        <div className="mt-2 grid w-full px-2 xl:px-16 sm:py-4 sm:grid-cols-3 grid-cols-1 lg:grid-cols-5 gap-4">
           {crewRoles.map((role) => (
             <RoleCard
+              key={role.name}
               image={role.image}
               imageAlt="Placeholder"
-              key={role.name}
               title={role.name}
               footer="placeholder"
               link='"#"'
@@ -145,20 +136,9 @@ export default function Team() {
             />
           ))}
         </div>
-
-        {/* <a
-          href="/helfertool"
-          className="inline-block px-4 py-1 rounded-sm drop-shadow-sm hover:scale-105 mt-4 mx-4"
-          target="_blank"
-        >
-          <span className="text-xl lg:text-2xl bg-purple text-white p-2 uppercase font-bold">
-            <FiArrowRight className="inline mr-2 mb-1" />
-            View or Sign Up to a Role
-          </span>
-        </a> */}
       </section>
 
-      <section className="">
+      <section>
         <HighlightedHeading text="Meet the Team" />
         <h2 className="text-teal text-xl pt-2 sm:text-2xl font-semibold">
           Organisers
@@ -169,48 +149,6 @@ export default function Team() {
         </p>
         <PeopleInvolved />
       </section>
-
-      {/*<section className="md:mb-16">
-        <h2>Volunteer Team</h2>
-        <p className="mb-1 max-w-6xl mx-auto px-4">
-          Our volunteer team are also essential to the running of WSAF, and
-          we&apos;re still looking for others to join! You can view our
-          available roles and sign up{' '}
-          <a href="/helfertool" target="_blank" className="text-accent">
-            here
-          </a>
-          , join the{' '}
-          <a href="/discord" target="_blank" className="text-accent">
-            Discord
-          </a>{' '}
-          or contact us at{' '}
-          <a
-            href="mailto:info@wsaf.org.uk"
-            target="_blank"
-            className="text-accent"
-          >
-            info@wsaf.org.uk
-          </a>
-          .
-        </p>
-        <div className="flex justify-center flex-wrap mb-8 mx-4">
-          {volunteers.map((person) => (
-            <IdCard
-              key={person.name}
-              name={person.name}
-              description={person.description}
-              role={person.role}
-              image={person.image}
-            />
-          ))}
-          <IdCard
-            name="You?"
-            role="Volunteer"
-            image={AvatarImage}
-            emailDescription
-          />
-        </div>
-      </section> */}
 
       <div className="max-w-7xl xl:mx-auto mb-8 mx-8">
         <HighlightedHeading text="FAQ" />

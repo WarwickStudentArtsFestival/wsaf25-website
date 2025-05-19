@@ -12,8 +12,13 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { shortLabel: 'Venues', href: '/venues' },
-  { shortLabel: 'Events', href: '/events' },
+  // { shortLabel: 'Venues', href: '/venues' },
+  // { shortLabel: 'Events', href: '/events' },
+  {
+    shortLabel: 'Perform',
+    longLabel: 'Perform or Exhibit',
+    href: '/perform',
+  },
   {
     shortLabel: 'Crew',
     longLabel: 'Join the Crew',

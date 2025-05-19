@@ -1,5 +1,5 @@
 import { FiCalendar, FiClock, FiMapPin } from 'react-icons/fi';
-import { formatDate, formatTime } from '@/lib/dateUtils';
+import { formatDate, formatTime } from '@/lib/dates';
 import { Event } from '@/lib/events';
 
 type EventDetailsProps = {

@@ -5,6 +5,7 @@ import FilterOptions from '@/app/events/components/event-sessions-list/filter-op
 import useEventSessionsFilters, {
   FilterOption,
 } from '@/app/events/components/event-sessions-list/event-sessions-filters';
+import SortOptions from '@/app/events/components/event-sessions-list/sort-options';
 
 export default function OptionsSidebar({
   context,
@@ -28,14 +29,20 @@ export default function OptionsSidebar({
       </div>
 
       <div className="mt-4 space-y-4">
+        <SortOptions
+          selectedSort={selectedFilters.sort}
+          setSort={(value) => setFilter('sort', value)}
+        />
+
         <div>
           <h4 className="font-semibold mb-1">Search</h4>
           <input
             type="text"
             placeholder="Search by title or speaker"
-            className="w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm"
+            className="w-full px-2 py-1.5 border border-slate-300 rounded-md text-sm"
           />
         </div>
+
         <div>
           <h4 className="font-semibold">Time</h4>
           <div>From to</div>

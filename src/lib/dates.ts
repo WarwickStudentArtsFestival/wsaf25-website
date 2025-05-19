@@ -2,20 +2,19 @@ export const formatDate = (date: Date) => {
   const day = date.getDate();
 
   const getOrdinal = (n: number) => {
-    const mod10 = n % 10;
-    const mod100 = n % 100;
-    if (mod10 === 1 && mod100 !== 11) return 'st';
-    if (mod10 === 2 && mod100 !== 12) return 'nd';
-    if (mod10 === 3 && mod100 !== 13) return 'rd';
+    const mod = n % 10;
+    if (mod === 1) return 'st';
+    if (mod === 2) return 'nd';
+    if (mod === 3) return 'rd';
     return 'th';
   };
 
   const ordinalDay = `${day}${getOrdinal(day)}`;
 
-  const weekday = date.toLocaleDateString([], { weekday: 'short' });
-  const month = date.toLocaleDateString([], { month: 'short' });
+  const weekday = date.toLocaleDateString([], { weekday: 'long' });
+  const month = date.toLocaleDateString([], { month: 'long' });
 
-  return `${weekday}, ${month} ${ordinalDay}`;
+  return `${weekday} ${ordinalDay} ${month}`;
 };
 
 export const formatTime = (date: Date): string => {

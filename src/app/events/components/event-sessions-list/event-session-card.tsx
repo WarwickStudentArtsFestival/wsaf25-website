@@ -3,7 +3,7 @@ import { FiArrowRight, FiCalendar, FiClock, FiMapPin } from 'react-icons/fi';
 import Link from 'next/link';
 import TrackPill from '../../../components/track/TrackPill';
 import { EventSession } from '@/lib/events';
-import { formatTime } from '@/lib/dateUtils';
+import { formatTime } from '@/lib/dates';
 
 type InfoItem = {
   icon: React.ReactNode;

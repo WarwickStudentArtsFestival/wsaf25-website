@@ -6,6 +6,7 @@ import { EventSession } from '@/lib/events';
 import { EventSessionsListContext } from '@/app/events/components/event-sessions-list/event-sessions-list-context';
 import EventSessionCard from '@/app/events/components/event-sessions-list/event-session-card';
 import useEventSessionsFilters from '@/app/events/components/event-sessions-list/event-sessions-filters';
+import HighlightedHeading from '@/app/components/highlighted-heading';
 
 export default function EventSessionsList({
   eventSessions,
@@ -14,11 +15,15 @@ export default function EventSessionsList({
   eventSessions: EventSession[];
   context: EventSessionsListContext;
 }) {
-  const { isEventSessionInFilter, selectedFilterValues } =
-    useEventSessionsFilters(context);
+  const {
+    isEventSessionInFilter,
+    selectedFilterValues,
+    sortAndGroupEventSessions,
+  } = useEventSessionsFilters(context);
 
-  const filteredEventSessions = useMemo(() => {
-    return eventSessions.filter(isEventSessionInFilter);
+  const { sessionCount: filteredSessionCount, sessionGroups } = useMemo(() => {
+    const filteredSessions = eventSessions.filter(isEventSessionInFilter);
+    return sortAndGroupEventSessions(filteredSessions, context.venues);
   }, [eventSessions, selectedFilterValues]);
 
   return (
@@ -42,40 +47,41 @@ export default function EventSessionsList({
       <div className="flex flex-row px-2 sm:px-4 relative">
         <aside className="w-1/6 hidden lg:block">
           <OptionsSidebar
-            filteredCount={filteredEventSessions.length}
+            filteredCount={filteredSessionCount}
             totalCount={eventSessions.length}
             context={context}
           />
         </aside>
 
         <main className="flex-1 mb-16 space-y-8">
-          {filteredEventSessions.length === 0 ? (
-            <p>No events found</p>
+          {filteredSessionCount === 0 ? (
+            <div>
+              <p>No events found</p>
+              <GoToAllEvents />
+            </div>
           ) : (
-            <div
-              className={`
+            sessionGroups.map((group, i) => (
+              <div key={i}>
+                {group.name && <HighlightedHeading text={group.name} />}
+                <div
+                  className={`
         relative w-full grid gap-2
         grid-cols-2 md:grid-cols-3 xl:grid-cols-5 px-2
       `}
-            >
-              {filteredEventSessions.map((eventSession) => (
-                <div key={eventSession.id} className="w-full sm:p-2">
-                  <EventSessionCard eventSession={eventSession} />
+                >
+                  {group.sessions.map((eventSession) => (
+                    <div key={eventSession.id} className="w-full sm:p-2">
+                      <EventSessionCard eventSession={eventSession} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          )}
-
-          {filteredEventSessions.length !== eventSessions.length && (
-            <div className="mt-8 flex justify-center">
-              <GoToAllEvents />
-            </div>
+              </div>
+            ))
           )}
         </main>
 
         <footer className="absolute left-1/2 transform -translate-x-1/2 bottom-4 text-sm text-gray-500">
-          Showing {filteredEventSessions.length} of {eventSessions.length}{' '}
-          events
+          Showing {filteredSessionCount} of {eventSessions.length} events
         </footer>
       </div>
     </>

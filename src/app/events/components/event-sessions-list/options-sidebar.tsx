@@ -9,6 +9,7 @@ import {
 } from '@/app/events/components/event-sessions-list/event-sessions-filters';
 import SortOptions from '@/app/events/components/event-sessions-list/sort-options';
 import TimeOptions from '@/app/events/components/event-sessions-list/time-options';
+import { eventDateTimeIntervals } from '@/lib/dates';
 
 export default function OptionsSidebar({
   context,
@@ -17,6 +18,7 @@ export default function OptionsSidebar({
   selectedFilters,
   selectedFilterValues,
   setFilter,
+  handleReset,
 }: {
   context: EventSessionsListContext;
   filteredCount: number;
@@ -24,12 +26,30 @@ export default function OptionsSidebar({
   selectedFilters: SelectedFilters;
   selectedFilterValues: SelectedFilterValues;
   setFilter: (value: Partial<SelectedFilters>) => void;
+  handleReset: () => void;
 }) {
+  const hasFilters =
+    selectedFilters.dateFrom !== 0 ||
+    selectedFilters.dateTo !== eventDateTimeIntervals.all.length - 1 ||
+    selectedFilters.category ||
+    selectedFilters.venue ||
+    selectedFilters.duration ||
+    selectedFilters.dropInOnly;
+
   return (
     <div className="sticky z-50 top-20 border p-4 text-left text-black border-slate-300 rounded-md overflow-auto max-h-screen shadow-lg mb-4">
-      <div className="border-b flex gap-2 items-center justify-between pb-2">
+      <div className="border-b flex gap-2 items-center pb-2">
         <h3 className="font-bold text-lg">Filters</h3>
-        <div className="text-sm text-gray-500 text-right">
+        {hasFilters && (
+          <button
+            type="button"
+            className="text-xs text-blue-600 hover:underline cursor-pointer"
+            onClick={handleReset}
+          >
+            Clear
+          </button>
+        )}
+        <div className="text-sm text-gray-500 text-right ml-auto">
           Showing {filteredCount} of {totalCount} events
         </div>
       </div>

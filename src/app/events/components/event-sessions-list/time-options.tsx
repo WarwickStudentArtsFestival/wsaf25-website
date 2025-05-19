@@ -17,17 +17,21 @@ export default function TimeOptions({
     onChange({ dateFrom: 0, dateTo: eventDateTimeIntervals.all.length - 1 });
   };
 
+  const isChanged = from !== 0 || to !== eventDateTimeIntervals.all.length - 1;
+
   return (
     <div className="mb-4">
       <div className="flex justify-between items-center mb-1">
         <h4 className="font-semibold">Time</h4>
-        <button
-          type="button"
-          className="text-xs text-blue-600 hover:underline cursor-pointer"
-          onClick={handleReset}
-        >
-          Reset
-        </button>
+        {isChanged && (
+          <button
+            type="button"
+            className="text-xs text-blue-600 hover:underline cursor-pointer"
+            onClick={handleReset}
+          >
+            Reset
+          </button>
+        )}
       </div>
 
       <div>

@@ -237,15 +237,17 @@ export default function useEventSessionsFilters(
     }
 
     // TODO - drop in event logic
-    const earliestTime =
-      eventDateTimeIntervals.all[selectedFilterValues.dateFrom].date;
-    const latestTime =
-      eventDateTimeIntervals.all[selectedFilterValues.dateTo].date;
     if (
-      eventSession.start.getTime() < earliestTime ||
-      eventSession.end.getTime() > latestTime
+      !eventDateTimeIntervals.all[selectedFilterValues.dateFrom].allowBefore
     ) {
-      return false;
+      const earliestTime =
+        eventDateTimeIntervals.all[selectedFilterValues.dateFrom].date;
+      if (eventSession.start.getTime() < earliestTime) return false;
+    }
+    if (!eventDateTimeIntervals.all[selectedFilterValues.dateTo].allowAfter) {
+      const latestTime =
+        eventDateTimeIntervals.all[selectedFilterValues.dateTo].date;
+      if (eventSession.end.getTime() > latestTime) return false;
     }
 
     return true;
@@ -310,10 +312,16 @@ export default function useEventSessionsFilters(
     };
   };
 
+  const resetFilters = () => {
+    setSelectedFilters(defaultFilters);
+    updateUrlFromFilters();
+  };
+
   return {
     selectedFilters,
     selectedFilterValues,
     setFilter,
+    resetFilters,
     isEventSessionInFilter,
     sortAndGroupEventSessions,
   };

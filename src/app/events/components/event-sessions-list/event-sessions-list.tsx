@@ -1,13 +1,13 @@
 'use client';
 import React, { useMemo } from 'react';
 import OptionsSidebar from './options-sidebar';
-import GoToAllEvents from './GoToAllEvents';
 import { EventSession } from '@/lib/events';
 import { EventSessionsListContext } from '@/app/events/components/event-sessions-list/event-sessions-list-context';
 import EventSessionCard from '@/app/events/components/event-sessions-list/event-session-card';
 import useEventSessionsFilters from '@/app/events/components/event-sessions-list/event-sessions-filters';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import DatetimeSlider from '@/app/events/components/event-sessions-list/datetime-slider';
+import { FaArrowLeft } from 'react-icons/fa';
 
 export default function EventSessionsList({
   eventSessions,
@@ -22,6 +22,7 @@ export default function EventSessionsList({
     sortAndGroupEventSessions,
     setFilter,
     selectedFilters,
+    resetFilters,
   } = useEventSessionsFilters(context);
 
   const { sessionCount: filteredSessionCount, sessionGroups } = useMemo(() => {
@@ -47,15 +48,26 @@ export default function EventSessionsList({
             selectedFilters={selectedFilters}
             selectedFilterValues={selectedFilterValues}
             setFilter={setFilter}
+            handleReset={resetFilters}
           />
         </aside>
 
         <main className="flex-1 mb-16 space-y-8">
           {filteredSessionCount === 0 ? (
-            <div>
-              <p>No events found</p>
-              <GoToAllEvents />
-            </div>
+            eventSessions.length === 0 ? (
+              <p>No events were found. Please check back later!</p>
+            ) : (
+              <div className="flex items-center flex-col gap-2">
+                <p>No events were found using your filters.</p>
+                <button
+                  className="text-black gap-1 flex items-center hover:cursor-pointer border border-slate-300 rounded-md hover:bg-slate-100 justify-center px-4 py-1"
+                  onClick={resetFilters}
+                >
+                  <FaArrowLeft />
+                  Clear Filters
+                </button>
+              </div>
+            )
           ) : (
             sessionGroups.map((group, i) => (
               <div key={i}>

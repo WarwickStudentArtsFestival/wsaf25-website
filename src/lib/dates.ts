@@ -54,6 +54,10 @@ export type EventDateTimeInterval = {
   timeLabel: string;
   date: number;
   index: number;
+
+  // These are used for the first and last intervals
+  allowBefore?: boolean;
+  allowAfter?: boolean;
 };
 
 type EventDateTimeHour = {
@@ -92,7 +96,11 @@ function getDateTimeIntervals(): EventDateTimeIntervals {
   while (currentDate.getTime() <= endDate) {
     if (currentDate.getUTCHours() < startHourUtc) {
       currentDate.setUTCHours(startHourUtc, 0, 0, 0);
-    } else if (currentDate.getUTCHours() > endHourUtc) {
+    } else if (
+      currentDate.getUTCHours() > endHourUtc ||
+      (currentDate.getUTCHours() === endHourUtc &&
+        currentDate.getUTCMinutes() > 0)
+    ) {
       currentDate.setUTCHours(24, 0, 0, 0);
     } else {
       // Add the interval to the list
@@ -160,6 +168,24 @@ function getDateTimeIntervals(): EventDateTimeIntervals {
     currentDateTimeDay.lastIndex = dateTimeIntervals.all.length - 1;
     dateTimeIntervals.days.push(currentDateTimeDay);
   }
+
+  // Set the first and last intervals to allow before and after
+  const firstDateTimeInterval = dateTimeIntervals.all[0];
+  firstDateTimeInterval.allowBefore = true;
+  firstDateTimeInterval.timeLabel = `<${firstDateTimeInterval.timeLabel}`;
+  firstDateTimeInterval.dateTimeLabel = `<${firstDateTimeInterval.dateTimeLabel}`;
+
+  const lastDateTimeInterval =
+    dateTimeIntervals.all[dateTimeIntervals.all.length - 1];
+  lastDateTimeInterval.allowAfter = true;
+  lastDateTimeInterval.timeLabel = `${lastDateTimeInterval.timeLabel}+`;
+  lastDateTimeInterval.dateTimeLabel = `${lastDateTimeInterval.dateTimeLabel}+`;
+
+  dateTimeIntervals.days[0].hours[0].minuteIntervals[0] = firstDateTimeInterval;
+  const lastDay = dateTimeIntervals.days[dateTimeIntervals.days.length - 1];
+  const lastHour = lastDay.hours[lastDay.hours.length - 1];
+  lastHour.minuteIntervals[lastHour.minuteIntervals.length - 1] =
+    lastDateTimeInterval;
 
   return dateTimeIntervals;
 }

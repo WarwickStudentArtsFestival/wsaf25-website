@@ -1,8 +1,9 @@
 import React from 'react';
-import { FiArrowRight, FiMapPin } from 'react-icons/fi';
+import { FiArrowRight, FiCalendar, FiClock, FiMapPin } from 'react-icons/fi';
 import Link from 'next/link';
 import TrackPill from '../../../components/track/TrackPill';
 import { EventSession } from '@/lib/events';
+import { formatTime } from '@/lib/dateUtils';
 
 type InfoItem = {
   icon: React.ReactNode;
@@ -21,21 +22,16 @@ export default function EventSessionCard({
       text: eventSession.venueName,
       showOnSmall: true,
     },
-    /*{
-          icon: <FiCalendar className="text-purple-500" />,
-          text: formatDate(eventSession.start),
-          showOnSmall: false,
-        },
-        {
-          icon: <FiClock className="text-purple-500" />,
-          text: `${formatTime(talk.slot.start)} - ${formatTime(talk.slot.end)}`,
-          showOnSmall: true,
-        },*/
-    /*{
-          icon: <FiUser className="text-purple-500" />,
-          text: talk.speakers.map((s) => s.name).join(', '),
-          showOnSmall: false,
-        },*/
+    {
+      icon: <FiCalendar className="text-purple-500" />,
+      text: eventSession.start.toLocaleDateString([], { weekday: 'long' }),
+      showOnSmall: false,
+    },
+    {
+      icon: <FiClock className="text-purple-500" />,
+      text: `${formatTime(eventSession.start)} - ${formatTime(eventSession.end)}`,
+      showOnSmall: true,
+    },
   ];
 
   return (

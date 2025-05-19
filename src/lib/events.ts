@@ -55,13 +55,13 @@ export type EventCategory = {
 function constructEventSessionFromPretalxEvent(
   event: PretalxScheduleEvent,
 ): EventSession {
-  const start = new Date(event.start);
+  const start = new Date(event.date);
 
   // Convert duration from hours:minutes to minutes
   const splitDuration = event.duration.split(':');
   const minutes = parseInt(splitDuration[1]) + parseInt(splitDuration[0]) * 60;
 
-  const end = new Date(event.start);
+  const end = new Date(event.date);
   end.setMinutes(end.getMinutes() + minutes);
 
   const durationCategory = durationCategories.findLast(

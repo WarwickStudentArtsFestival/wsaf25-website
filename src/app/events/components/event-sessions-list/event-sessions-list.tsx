@@ -56,8 +56,6 @@ export default function EventSessionsList({
               className={`
         relative w-full grid gap-2
         grid-cols-2 md:grid-cols-3 xl:grid-cols-5 px-2
-        ${filteredEventSessions.length > 4 ? 'overflow-y-auto' : ''}
-        max-h-[calc(6*10rem)] sm:max-h-[calc(6*10rem)]
       `}
             >
               {filteredEventSessions.map((eventSession) => (

@@ -26,6 +26,11 @@ const nextConfig = {
             hostname: 'pretalx.wsaf.org.uk',
             pathname: '/**',
           },
+          {
+            protocol: 'https',
+            hostname: 'submit.wsaf.org.uk',
+            pathname: '/**',
+          },
         ],
   },
   redirects: () => [

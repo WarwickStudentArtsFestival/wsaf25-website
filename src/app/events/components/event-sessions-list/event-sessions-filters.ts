@@ -117,7 +117,6 @@ export default function useEventSessionsFilters(
   };
 
   const isEventSessionInFilter = (eventSession: EventSession) => {
-    console.log(selectedFilterValues);
     if (selectedFilterValues.search) {
       if (
         !eventSession.event.name

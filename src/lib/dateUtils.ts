@@ -1,5 +1,4 @@
-export const formatDate = (time: string) => {
-  const date = new Date(time);
+export const formatDate = (date: Date) => {
   const day = date.getDate();
 
   const getOrdinal = (n: number) => {
@@ -19,11 +18,7 @@ export const formatDate = (time: string) => {
   return `${weekday}, ${month} ${ordinalDay}`;
 };
 
-export const formatTime = (time: string | undefined): string => {
-  if (!time) {
-    return 'No time';
-  }
-  const date = new Date(time);
+export const formatTime = (date: Date): string => {
   if (date.getHours() === 12 && date.getMinutes() === 0) {
     return 'Midday';
   }

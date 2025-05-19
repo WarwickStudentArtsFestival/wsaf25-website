@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             <TalkHeader track={event.categoryPretalxTrack} />
 
             <div className="my-4">
-              <!-- <PresentedBy speakers={event.speakers} /> -->
+              {/* <PresentedBy speakers={event.speakers} /> */}
               <h1 className="text-4xl font-bold break-words text-teal-600 px-2 -mx-6 sm:mx-auto ">
                 &ldquo;{event.name}&rdquo;
               </h1>

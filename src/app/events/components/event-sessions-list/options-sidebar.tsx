@@ -19,7 +19,7 @@ export default function OptionsSidebar({
     useEventSessionsFilters(context);
 
   return (
-    <div className="sticky z-50 top-20 border p-4 text-left text-black border-slate-300 rounded-md overflow-auto max-h-screen shadow-lg">
+    <div className="sticky z-50 top-20 border p-4 text-left text-black border-slate-300 rounded-md overflow-auto max-h-screen shadow-lg mb-4">
       <div className="border-b flex gap-2 items-center justify-between pb-2">
         <h3 className="font-bold text-lg">Filters</h3>
         <div className="text-sm text-gray-500 text-right">

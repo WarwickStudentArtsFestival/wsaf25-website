@@ -19,6 +19,7 @@ export default function OptionsSidebar({
   selectedFilterValues,
   setFilter,
   handleReset,
+  disableVenues,
 }: {
   context: EventSessionsListContext;
   filteredCount: number;
@@ -27,6 +28,7 @@ export default function OptionsSidebar({
   selectedFilterValues: SelectedFilterValues;
   setFilter: (value: Partial<SelectedFilters>) => void;
   handleReset: () => void;
+  disableVenues?: boolean;
 }) {
   const hasFilters =
     selectedFilters.dateFrom !== 0 ||
@@ -63,6 +65,7 @@ export default function OptionsSidebar({
           randomiseSessions={() =>
             setFilter({ randomSeed: new Date().getTime() })
           }
+          disableVenues={disableVenues}
         />
 
         <div>
@@ -81,6 +84,7 @@ export default function OptionsSidebar({
           to={selectedFilters.dateTo}
           dropInOnly={selectedFilters.dropInOnly}
           onChange={setFilter}
+          dropInCount={context.dropInCount}
         />
 
         <FilterOptions
@@ -92,15 +96,17 @@ export default function OptionsSidebar({
             setFilter({ category: value })
           }
         />
-        <FilterOptions
-          label="Venue"
-          options={context.venues}
-          selectedFilters={selectedFilters.venue}
-          selectedFilterValues={selectedFilterValues.venue}
-          onChange={(value: FilterOption[] | null) =>
-            setFilter({ venue: value })
-          }
-        />
+        {disableVenues || (
+          <FilterOptions
+            label="Venue"
+            options={context.venues}
+            selectedFilters={selectedFilters.venue}
+            selectedFilterValues={selectedFilterValues.venue}
+            onChange={(value: FilterOption[] | null) =>
+              setFilter({ venue: value })
+            }
+          />
+        )}
         <FilterOptions
           label="Duration"
           options={context.durations}

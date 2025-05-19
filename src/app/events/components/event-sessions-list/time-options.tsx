@@ -7,11 +7,13 @@ export default function TimeOptions({
   to,
   dropInOnly,
   onChange,
+  dropInCount,
 }: {
   from: number;
   to: number;
   dropInOnly: boolean;
   onChange: (newFilters: Partial<SelectedFilters>) => void;
+  dropInCount: number;
 }) {
   const handleReset = () => {
     onChange({ dateFrom: 0, dateTo: eventDateTimeIntervals.all.length - 1 });
@@ -56,7 +58,7 @@ export default function TimeOptions({
           />
           <div className="flex items-center gap-2 flex-1">
             <span className="text-sm">Show Drop-in Events Only</span>
-            <span className="text-xs text-gray-500">(2)</span>
+            <span className="text-xs text-gray-500">({dropInCount})</span>
           </div>
         </label>
       </div>

@@ -15,6 +15,9 @@ export type Event = {
   description: string;
 
   image: string;
+
+  dropIn: boolean;
+  artistName: string | null;
 };
 
 export type Session = {
@@ -74,6 +77,12 @@ function constructEventSessionFromPretalxEvent(
   // shifted by up to an hour, everything else will be persisted.
   const sessionId = `${event.guid}-${start.getUTCDay()}-${start.getUTCHours() % 2}`;
 
+  const dropIn = !!event.answers.find((answer) => answer.question === 11)
+    ?.answer;
+  const artistName = event.answers.find(
+    (answer) => answer.question === 8,
+  )?.answer;
+
   return {
     id: sessionId,
 
@@ -86,6 +95,9 @@ function constructEventSessionFromPretalxEvent(
       description: event.description,
 
       image: event.logo || '',
+
+      dropIn,
+      artistName: artistName || null,
     },
 
     start,

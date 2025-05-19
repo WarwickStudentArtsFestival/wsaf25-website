@@ -8,6 +8,7 @@ export type EventSessionsListContext = {
   categories: FilterOption[];
   venues: FilterOption[];
   durations: FilterOption[];
+  dropInCount: number;
 };
 
 export default async function getContext(
@@ -41,5 +42,6 @@ export default async function getContext(
       ).length,
       bitFieldIndex: duration.filterBitFieldIndex,
     })),
+    dropInCount: eventSessions.filter((session) => session.event.dropIn).length,
   };
 }

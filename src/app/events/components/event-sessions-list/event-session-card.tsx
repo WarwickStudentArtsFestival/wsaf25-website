@@ -1,60 +1,79 @@
 import React from 'react';
-import { FiArrowRight, FiCalendar, FiClock, FiMapPin } from 'react-icons/fi';
+import {
+  FiArrowRight,
+  FiCalendar,
+  FiClock,
+  FiMapPin,
+  FiUsers,
+} from 'react-icons/fi';
 import Link from 'next/link';
 import TrackPill from '../../../components/track/TrackPill';
 import { EventSession } from '@/lib/events';
-import { formatTime } from '@/lib/dates';
-
-type InfoItem = {
-  icon: React.ReactNode;
-  text: string;
-  showOnSmall?: boolean;
-};
+import { FaWalking } from 'react-icons/fa';
 
 export default function EventSessionCard({
   eventSession,
+  hideVenue,
 }: {
   eventSession: EventSession;
+  hideVenue?: boolean;
 }) {
-  const infoItems: InfoItem[] = [
-    {
-      icon: <FiMapPin className="text-purple-500" />,
-      text: eventSession.venueName,
-      showOnSmall: true,
-    },
-    {
-      icon: <FiCalendar className="text-purple-500" />,
-      text: eventSession.start.toLocaleDateString([], { weekday: 'long' }),
-      showOnSmall: false,
-    },
-    {
-      icon: <FiClock className="text-purple-500" />,
-      text: `${formatTime(eventSession.start)} - ${formatTime(eventSession.end)}`,
-      showOnSmall: true,
-    },
-  ];
-
   return (
     <Link href={`/events/${eventSession.event.id}`}>
       <div className="border py-4  px-2 md:p-4 text-left text-black border-slate-300 rounded-md overflow-hidden w-full h-full flex flex-col hover:scale-[1.02] transition duration-150 ease-in-out shadow-lg">
-        <TrackPill track={eventSession.event.categoryPretalxTrack} />
+        <div className="flex justify-between">
+          <TrackPill track={eventSession.event.categoryPretalxTrack} />
+          <div>
+            {eventSession.event.dropIn && (
+              <span className="flex gap-0.5 items-center text-teal rounded-md border-teal border px-1 text-sm bg-teal-50">
+                <FaWalking className="text-teal" /> Drop-in
+              </span>
+            )}
+          </div>
+        </div>
+
         <div className="flex flex-col flex-grow">
-          <h3 className="text-teal text-xl font-semibold mb-3">
+          <h3 className="text-teal text-xl font-semibold mb-2">
             {eventSession.event.name}
           </h3>
-          <div className="block">
-            {infoItems.map(({ icon, text, showOnSmall }, index) => (
-              <p
-                key={index}
-                className={`text-sm flex items-center gap-2 mb-2 ${
-                  showOnSmall ? '' : 'hidden sm:flex'
-                }`}
-              >
-                <span className="w-1/11">{icon}</span>
-                {text}
-              </p>
-            ))}
-          </div>
+          <ul className="text-sm space-y-1">
+            {eventSession.event.artistName && (
+              <li className="flex items-center gap-2">
+                <FiUsers className="text-purple-500" />
+                <span>{eventSession.event.artistName}</span>
+              </li>
+            )}
+            {hideVenue || (
+              <li className="flex items-center gap-2">
+                <FiMapPin className="text-purple-500" />
+                <span>{eventSession.venueName}</span>
+              </li>
+            )}
+            <li className="flex items-center gap-2">
+              <FiCalendar className="text-purple-500" />
+              <span>
+                {eventSession.start.toLocaleDateString('en-gb', {
+                  weekday: 'long',
+                })}
+              </span>
+            </li>
+            <li className="flex items-center gap-2">
+              <FiClock className="text-purple-500" />
+              <span>
+                {eventSession.start.toLocaleTimeString('en-gb', {
+                  hour: 'numeric',
+                  hour12: true,
+                  minute: '2-digit',
+                })}{' '}
+                -{' '}
+                {eventSession.end.toLocaleTimeString('en-gb', {
+                  hour: 'numeric',
+                  hour12: true,
+                  minute: '2-digit',
+                })}
+              </span>
+            </li>
+          </ul>
         </div>
         <div className="flex items-center gap-2 mt-4 text-black text-sm font-medium">
           <span>View Details</span>

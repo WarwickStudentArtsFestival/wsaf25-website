@@ -236,18 +236,31 @@ export default function useEventSessionsFilters(
         return false;
     }
 
-    // TODO - drop in event logic
     if (
       !eventDateTimeIntervals.all[selectedFilterValues.dateFrom].allowBefore
     ) {
       const earliestTime =
         eventDateTimeIntervals.all[selectedFilterValues.dateFrom].date;
-      if (eventSession.start.getTime() < earliestTime) return false;
+
+      if (eventSession.event.dropIn) {
+        if (eventSession.end.getTime() < earliestTime) return false;
+      } else {
+        if (eventSession.start.getTime() < earliestTime) return false;
+      }
     }
     if (!eventDateTimeIntervals.all[selectedFilterValues.dateTo].allowAfter) {
       const latestTime =
         eventDateTimeIntervals.all[selectedFilterValues.dateTo].date;
-      if (eventSession.end.getTime() > latestTime) return false;
+
+      if (eventSession.event.dropIn) {
+        if (eventSession.start.getTime() > latestTime) return false;
+      } else {
+        if (eventSession.end.getTime() > latestTime) return false;
+      }
+    }
+
+    if (selectedFilterValues.dropInOnly) {
+      if (!eventSession.event.dropIn) return false;
     }
 
     return true;

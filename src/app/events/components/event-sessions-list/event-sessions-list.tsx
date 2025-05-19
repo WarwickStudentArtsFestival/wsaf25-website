@@ -12,9 +12,11 @@ import { FaArrowLeft } from 'react-icons/fa';
 export default function EventSessionsList({
   eventSessions,
   context,
+  disableVenues = false,
 }: {
   eventSessions: EventSession[];
   context: EventSessionsListContext;
+  disableVenues?: boolean;
 }) {
   const {
     isEventSessionInFilter,
@@ -49,6 +51,7 @@ export default function EventSessionsList({
             selectedFilterValues={selectedFilterValues}
             setFilter={setFilter}
             handleReset={resetFilters}
+            disableVenues={disableVenues}
           />
         </aside>
 
@@ -80,7 +83,10 @@ export default function EventSessionsList({
                 >
                   {group.sessions.map((eventSession) => (
                     <div key={eventSession.id} className="w-full sm:p-2">
-                      <EventSessionCard eventSession={eventSession} />
+                      <EventSessionCard
+                        eventSession={eventSession}
+                        hideVenue={disableVenues}
+                      />
                     </div>
                   ))}
                 </div>

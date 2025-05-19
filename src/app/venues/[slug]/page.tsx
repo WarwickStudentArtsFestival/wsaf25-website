@@ -106,6 +106,7 @@ export default async function VenuePage({
         <EventSessionsList
           eventSessions={eventSessions}
           context={eventSessionsListContext}
+          disableVenues
         />
       </div>
       <div className="flex my-4 w-full flex-col items-center justify-center mx-auto">

@@ -14,7 +14,7 @@ export default function SortOptions({
       </div>
       <div className="inline-flex rounded-md border-slate-300 border justify-center items-center text-sm overflow-hidden">
         <button
-          className={`flex items-center gap-2 px-3 py-1.5 hover:cursor-pointer border-slate-400 hover:bg-slate-100 ${selectedSort === 'random' ? 'bg-slate-100 drop-shadow-sm' : ''}`}
+          className={`flex items-center gap-2 px-3 py-1.5 hover:cursor-pointer hover:bg-slate-100 ${selectedSort === 'random' ? 'bg-slate-100 drop-shadow-sm' : ''}`}
           onClick={() =>
             // If already random, switch to random2 to force re-render
             setSort(selectedSort === 'random' ? 'random2' : 'random')
@@ -24,14 +24,14 @@ export default function SortOptions({
           Random
         </button>
         <button
-          className={`flex items-center gap-2 px-3 py-1.5 hover:cursor-pointer border-slate-400 hover:bg-slate-100 ${selectedSort === 'time' ? 'bg-slate-100 drop-shadow-sm' : ''}`}
+          className={`flex items-center gap-2 px-3 py-1.5 hover:cursor-pointer hover:bg-slate-100 ${selectedSort === 'time' ? 'bg-slate-100 drop-shadow-sm' : ''}`}
           onClick={() => setSort('time')}
         >
           <FaRegClock />
           Time
         </button>
         <button
-          className={`flex items-center gap-2 px-3 py-1.5 hover:cursor-pointer border-slate-400 hover:bg-slate-100 ${selectedSort === 'venue' ? 'bg-slate-100 drop-shadow-sm' : ''}`}
+          className={`flex items-center gap-2 px-3 py-1.5 hover:cursor-pointer hover:bg-slate-100 ${selectedSort === 'venue' ? 'bg-slate-100 drop-shadow-sm' : ''}`}
           onClick={() => setSort('venue')}
         >
           <FaRegBuilding />

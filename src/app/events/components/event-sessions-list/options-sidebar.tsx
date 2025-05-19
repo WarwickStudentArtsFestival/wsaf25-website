@@ -6,6 +6,7 @@ import useEventSessionsFilters, {
   FilterOption,
 } from '@/app/events/components/event-sessions-list/event-sessions-filters';
 import SortOptions from '@/app/events/components/event-sessions-list/sort-options';
+import TimeOptions from '@/app/events/components/event-sessions-list/time-options';
 
 export default function OptionsSidebar({
   context,
@@ -31,7 +32,9 @@ export default function OptionsSidebar({
       <div className="mt-4 space-y-4">
         <SortOptions
           selectedSort={selectedFilters.sort}
-          setSort={(value) => setFilter('sort', value)}
+          setSort={(value) =>
+            setFilter({ sort: value as 'random' | 'time' | 'venue' })
+          }
         />
 
         <div>
@@ -41,14 +44,16 @@ export default function OptionsSidebar({
             placeholder="Search by title or speaker"
             className="w-full px-2 py-1.5 border border-slate-300 rounded-md text-sm"
             value={selectedFilters.search || ''}
-            onChange={(e) => setFilter('search', e.target.value)}
+            onChange={(e) => setFilter({ search: e.target.value })}
           />
         </div>
 
-        <div>
-          <h4 className="font-semibold">Time</h4>
-          <div>From to</div>
-        </div>
+        <TimeOptions
+          from={selectedFilters.dateFrom}
+          to={selectedFilters.dateTo}
+          dropInOnly={selectedFilters.dropInOnly}
+          onChange={setFilter}
+        />
 
         <FilterOptions
           label="Category"
@@ -56,7 +61,7 @@ export default function OptionsSidebar({
           selectedFilters={selectedFilters.category}
           selectedFilterValues={selectedFilterValues.category}
           onChange={(value: FilterOption[] | null) =>
-            setFilter('category', value)
+            setFilter({ category: value })
           }
         />
         <FilterOptions
@@ -64,7 +69,9 @@ export default function OptionsSidebar({
           options={context.venues}
           selectedFilters={selectedFilters.venue}
           selectedFilterValues={selectedFilterValues.venue}
-          onChange={(value: FilterOption[] | null) => setFilter('venue', value)}
+          onChange={(value: FilterOption[] | null) =>
+            setFilter({ venue: value })
+          }
         />
         <FilterOptions
           label="Duration"
@@ -72,7 +79,7 @@ export default function OptionsSidebar({
           selectedFilters={selectedFilters.duration}
           selectedFilterValues={selectedFilterValues.duration}
           onChange={(value: FilterOption[] | null) =>
-            setFilter('duration', value)
+            setFilter({ duration: value })
           }
         />
       </div>

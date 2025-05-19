@@ -7,6 +7,7 @@ import { EventSessionsListContext } from '@/app/events/components/event-sessions
 import EventSessionCard from '@/app/events/components/event-sessions-list/event-session-card';
 import useEventSessionsFilters from '@/app/events/components/event-sessions-list/event-sessions-filters';
 import HighlightedHeading from '@/app/components/highlighted-heading';
+import DatetimeSlider from '@/app/events/components/event-sessions-list/datetime-slider';
 
 export default function EventSessionsList({
   eventSessions,
@@ -19,6 +20,7 @@ export default function EventSessionsList({
     isEventSessionInFilter,
     selectedFilterValues,
     sortAndGroupEventSessions,
+    setFilter,
   } = useEventSessionsFilters(context);
 
   const { sessionCount: filteredSessionCount, sessionGroups } = useMemo(() => {
@@ -42,7 +44,14 @@ export default function EventSessionsList({
         </div>
       )}
 
-      <TimeSelection />*/}
+      */}
+
+      <DatetimeSlider
+        fromIndex={selectedFilterValues.dateFrom}
+        toIndex={selectedFilterValues.dateTo}
+        onChange={setFilter}
+        eventCount={filteredSessionCount}
+      />
 
       <div className="flex flex-row px-2 sm:px-4 relative">
         <aside className="w-1/6 hidden lg:block">

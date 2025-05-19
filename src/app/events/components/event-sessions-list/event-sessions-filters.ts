@@ -2,7 +2,7 @@ import { useSearchParams } from 'next/navigation';
 import { ReactNode, useMemo } from 'react';
 import { EventSessionsListContext } from '@/app/events/components/event-sessions-list/event-sessions-list-context';
 import { EventSession } from '@/lib/events';
-import { formatDate } from '@/lib/dates';
+import { eventDateTimeIntervals, formatDate } from '@/lib/dates';
 
 export type FilterOption = {
   label: string;
@@ -19,6 +19,9 @@ export type SelectedFilters = {
   category: FilterOption[] | null;
   venue: FilterOption[] | null;
   duration: FilterOption[] | null;
+  dateFrom: number;
+  dateTo: number;
+  dropInOnly: boolean;
 };
 
 export type SelectedFilterValues = {
@@ -28,6 +31,9 @@ export type SelectedFilterValues = {
   category: string[] | null;
   venue: string[] | null;
   duration: string[] | null;
+  dateFrom: number;
+  dateTo: number;
+  dropInOnly: boolean;
 };
 
 export type EventSessionGroup = {
@@ -68,12 +74,34 @@ export default function useEventSessionsFilters(
     const categoryParam = searchParams.get('category');
     const venueParam = searchParams.get('venue');
     const durationParam = searchParams.get('duration');
+    const dateFromParam = searchParams.get('from');
+    const dateToParam = searchParams.get('to');
+    const dropInOnlyParam = searchParams.get('dropInOnly');
 
     if (sortParam === 'random2') {
       window.history.replaceState(
         null,
         '',
         `?${searchParams.toString().replace('sort=random2', 'random')}`,
+      );
+    }
+
+    let dateFrom = dateFromParam && parseInt(dateFromParam);
+    if (!dateFrom || isNaN(dateFrom)) dateFrom = 0;
+    else {
+      dateFrom = Math.max(
+        Math.min(dateFrom, eventDateTimeIntervals.all.length - 1),
+        0,
+      );
+    }
+
+    let dateTo = dateToParam && parseInt(dateToParam);
+    if (!dateTo || isNaN(dateTo))
+      dateTo = eventDateTimeIntervals.all.length - 1;
+    else {
+      dateTo = Math.min(
+        Math.max(dateTo, dateFrom + 1),
+        eventDateTimeIntervals.all.length - 1,
       );
     }
 
@@ -86,6 +114,9 @@ export default function useEventSessionsFilters(
       category: getFilterOptionsFromBitField(categoryParam, context.categories),
       venue: getFilterOptionsFromBitField(venueParam, context.venues),
       duration: getFilterOptionsFromBitField(durationParam, context.durations),
+      dateFrom,
+      dateTo,
+      dropInOnly: dropInOnlyParam !== null,
     };
   }, [searchParams]);
 
@@ -105,6 +136,9 @@ export default function useEventSessionsFilters(
       duration: selectedFilters.duration
         ? selectedFilters.duration.map((option) => option.value)
         : null,
+      dateFrom: selectedFilters.dateFrom,
+      dateTo: selectedFilters.dateTo,
+      dropInOnly: selectedFilters.dropInOnly,
     }),
     [selectedFilters],
   );
@@ -128,15 +162,24 @@ export default function useEventSessionsFilters(
     if (filters.duration) {
       params.set('duration', getBitFieldFromFilterOptions(filters.duration));
     }
+    if (filters.dateFrom !== 0) {
+      params.set('from', filters.dateFrom.toString());
+    }
+    if (filters.dateTo !== eventDateTimeIntervals.all.length - 1) {
+      params.set('to', filters.dateTo.toString());
+    }
+    if (filters.dropInOnly) {
+      params.set('dropInOnly', '');
+    }
 
     return params.toString();
   };
 
-  const setFilter = (
-    key: 'sort' | 'search' | 'category' | 'venue' | 'duration',
-    value: string | FilterOption[] | null,
-  ) => {
-    const newSearchParams = getSearchParams({ [key]: value });
+  const setFilter = (newFilters: Partial<SelectedFilters>) => {
+    const newSearchParams = getSearchParams({
+      ...selectedFilters,
+      ...newFilters,
+    });
 
     // Use window.state instead of router to avoid reloading the page
     window.history.replaceState(null, '', `?${newSearchParams}`);
@@ -168,6 +211,18 @@ export default function useEventSessionsFilters(
         !selectedFilterValues.duration.includes(eventSession.durationCategory)
       )
         return false;
+    }
+
+    // TODO - drop in event logic
+    const earliestTime =
+      eventDateTimeIntervals.all[selectedFilterValues.dateFrom].date;
+    const latestTime =
+      eventDateTimeIntervals.all[selectedFilterValues.dateTo].date;
+    if (
+      eventSession.start.getTime() < earliestTime ||
+      eventSession.end.getTime() > latestTime
+    ) {
+      return false;
     }
 
     return true;

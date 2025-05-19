@@ -1,3 +1,11 @@
+import {
+  endDate,
+  endHourUtc,
+  minuteInterval,
+  startDate,
+  startHourUtc,
+} from '@/data/dates';
+
 export const formatDate = (date: Date) => {
   const day = date.getDate();
 
@@ -23,7 +31,7 @@ export const formatTime = (date: Date): string => {
   }
   const hours = date.getHours();
   const minutes = date.getMinutes();
-  const amPm = hours >= 12 ? 'PM' : 'AM';
+  const amPm = hours >= 12 ? 'pm' : 'am';
   const formattedHour = hours % 12 || 12;
   const formattedMinute = minutes.toString().padStart(2, '0');
   return `${formattedHour}:${formattedMinute} ${amPm}`;
@@ -39,3 +47,121 @@ export const formatDuration = (durationInMinutes: number): string => {
 
   return minutes > 0 ? `${hours}h ${minutes} min` : `${hours}h`;
 };
+
+// Calculate time intervals
+export type EventDateTimeInterval = {
+  dateTimeLabel: string;
+  timeLabel: string;
+  date: number;
+  index: number;
+};
+
+type EventDateTimeHour = {
+  label: string;
+  firstIndex: number;
+  lastIndex: number;
+  minuteIntervals: EventDateTimeInterval[];
+};
+
+type EventDateTimeDay = {
+  label: string;
+  firstIndex: number;
+  lastIndex: number;
+  hours: EventDateTimeHour[];
+};
+
+export type EventDateTimeIntervals = {
+  all: EventDateTimeInterval[];
+  days: EventDateTimeDay[];
+};
+
+function getDateTimeIntervals(): EventDateTimeIntervals {
+  const dateTimeIntervals: EventDateTimeIntervals = {
+    all: [],
+    days: [],
+  };
+
+  const currentDate = new Date(startDate);
+  currentDate.setMinutes(0, 0, 0);
+
+  let currentDateTimeHour: EventDateTimeHour | null = null;
+  let currentDateTimeDay: EventDateTimeDay | null = null;
+  let currentDay: number | null = null;
+  let currentHour: number | null = null;
+
+  while (currentDate.getTime() <= endDate) {
+    if (currentDate.getUTCHours() < startHourUtc) {
+      currentDate.setUTCHours(startHourUtc, 0, 0, 0);
+    } else if (currentDate.getUTCHours() > endHourUtc) {
+      currentDate.setUTCHours(24, 0, 0, 0);
+    } else {
+      // Add the interval to the list
+      const timeLabel = currentDate.toLocaleString('en-gb', {
+        hour: 'numeric',
+        hour12: true,
+        minute: 'numeric',
+      });
+
+      const hour = currentDate.getUTCHours();
+      if (currentHour !== hour || !currentDateTimeHour) {
+        currentHour = hour;
+        if (currentDateTimeDay && currentDateTimeHour) {
+          currentDateTimeHour.lastIndex = dateTimeIntervals.all.length - 1;
+          currentDateTimeDay.hours.push(currentDateTimeHour);
+        }
+
+        currentDateTimeHour = {
+          label: currentDate.toLocaleString('en-gb', {
+            hour: 'numeric',
+            hour12: true,
+          }),
+          firstIndex: dateTimeIntervals.all.length,
+          lastIndex: dateTimeIntervals.all.length,
+          minuteIntervals: [],
+        };
+      }
+
+      const day = currentDate.getUTCDate();
+      if (currentDay !== day || !currentDateTimeDay) {
+        currentDay = day;
+        if (currentDateTimeDay) {
+          currentDateTimeDay.lastIndex = dateTimeIntervals.all.length - 1;
+          dateTimeIntervals.days.push(currentDateTimeDay);
+        }
+
+        currentDateTimeDay = {
+          label: currentDate.toLocaleString('en-gb', { weekday: 'short' }),
+          firstIndex: dateTimeIntervals.all.length,
+          lastIndex: dateTimeIntervals.all.length,
+          hours: [],
+        };
+      }
+
+      const dateTimeInterval: EventDateTimeInterval = {
+        timeLabel,
+        dateTimeLabel: `${currentDateTimeDay.label} ${timeLabel}`,
+        date: currentDate.getTime(),
+        index: dateTimeIntervals.all.length,
+      };
+
+      currentDateTimeHour.minuteIntervals.push(dateTimeInterval);
+      dateTimeIntervals.all.push(dateTimeInterval);
+
+      // Increment time by interval
+      currentDate.setMinutes(currentDate.getMinutes() + minuteInterval);
+    }
+  }
+
+  if (currentDateTimeDay && currentDateTimeHour) {
+    currentDateTimeHour.lastIndex = dateTimeIntervals.all.length - 1;
+    currentDateTimeDay.hours.push(currentDateTimeHour);
+  }
+  if (currentDateTimeDay) {
+    currentDateTimeDay.lastIndex = dateTimeIntervals.all.length - 1;
+    dateTimeIntervals.days.push(currentDateTimeDay);
+  }
+
+  return dateTimeIntervals;
+}
+
+export const eventDateTimeIntervals = getDateTimeIntervals();

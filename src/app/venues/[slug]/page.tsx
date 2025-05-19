@@ -14,13 +14,14 @@ import getContext from '@/app/events/components/event-sessions-list/event-sessio
 export default async function VenuePage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   let venue, eventSessions, eventSessionsListContext;
+  const { slug } = await params;
 
   // TODO: Better 404 page
   try {
-    venue = await fetchVenue(params.slug);
+    venue = await fetchVenue(slug);
   } catch (error) {
     console.error('Error fetching rooms from API', error);
     return <ErrorMessage msg="Unknown error" />;

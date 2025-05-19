@@ -1,16 +1,16 @@
 import ErrorMessage from '@/app/components/ErrorMessage';
-import { Event } from '@/lib/events';
+import { EventSession } from '@/lib/events';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 import React from 'react';
 import { fetchVenue } from '@/lib/venues';
 
-type GoToVenueProps = {
-  talk: Event;
-};
-
-export default async function GoToVenue({ talk }: GoToVenueProps) {
+export default async function GoToVenue({
+  eventSession,
+}: {
+  eventSession: EventSession;
+}) {
   let venue;
   try {
     venue = await fetchVenue(String(talk.slot?.room_id));

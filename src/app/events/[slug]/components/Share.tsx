@@ -36,10 +36,10 @@ export default function Share({ talk }: ShareProps) {
   };
 
   return (
-    <div className=" bg-white p-4 h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-102 transition duration-150 ease-in-out">
+    <div className=" bg-white p-4 h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-105 transition duration-100 ease-in-out">
       <button
         onClick={handleShare}
-        className="flex items-center justify-between w-full cursor-pointer hover:text-purple-500 transition-colors duration-200"
+        className="flex items-center justify-between w-full cursor-pointer hover:text-purple-500 transition-colors duration-100"
       >
         <div className="flex items-center gap-4">
           <div className="text-purple-500">

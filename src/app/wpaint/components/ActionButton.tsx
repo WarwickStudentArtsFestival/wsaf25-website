@@ -8,7 +8,12 @@ interface ActionButtonProps {
   bgColor: string;
 }
 
-const ActionButton: React.FC<ActionButtonProps> = ({ onClick, icon: Icon, text, bgColor }) => {
+const ActionButton: React.FC<ActionButtonProps> = ({
+  onClick,
+  icon: Icon,
+  text,
+  bgColor,
+}) => {
   return (
     <button
       onClick={onClick}

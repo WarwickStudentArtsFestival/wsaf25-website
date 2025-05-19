@@ -22,7 +22,7 @@ export default function InfoCard({
   isExternalLink = false,
 }: InfoCardProps) {
   const cardClasses =
-    'border border-slate-300 rounded-md overflow-hidden w-full md:max-w-96 hover:scale-105 transition duration-75 ease-in-out';
+    'border border-slate-300 rounded-md overflow-hidden w-full md:max-w-96 hover:scale-105 transition duration-100 ease-in-out';
 
   const cardContent = (
     <>

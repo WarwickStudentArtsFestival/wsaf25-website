@@ -20,7 +20,7 @@ export function LogoDownload({
         href={href || image.src}
         target="_blank"
         download={!href}
-        className={`block hover:scale-105 transition duration-200 ${style}`}
+        className={`block hover:scale-105 transition duration-100 ${style}`}
       >
         <Image src={image} placeholder="blur" alt={name} />
       </a>

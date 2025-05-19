@@ -17,7 +17,7 @@ export default function RoleCard({
   description,
 }: RoleCardProps) {
   return (
-    // <div className="border border-slate-300 rounded-md overflow-hidden w-full hover:scale-105 transition duration-75 ease-in-out flex flex-col h-auto sm:h-[28rem]">
+    // <div className="border border-slate-300 rounded-md overflow-hidden w-full hover:scale-105 transition duration-100 ease-in-out flex flex-col h-auto sm:h-[28rem]">
     <div className="border text-left border-slate-300 rounded-md overflow-hidden w-full flex flex-col h-auto sm:h-[28rem]">
       <div className="relative w-full h-48 sm:h-1/2">
         <Image

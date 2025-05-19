@@ -64,7 +64,7 @@ export default function Team() {
         </div>
 
         <div className="flex mx-4 mt-4 flex-col md:flex-row justify-center items-center md:items-start max-w-6xl xl:mx-auto px-4 gap-4">
-          <div className="md:text-right leading-snug">
+          <div className="md:text-right leading-snug -mx-4 sm:mx-0">
             <h2 className="text-teal text-2xl font-semibold mb-4">
               Warwick Student Arts Festival would not be possible without our
               amazing team of volunteers.
@@ -123,7 +123,7 @@ export default function Team() {
           <Image
             src={PosteringImage}
             alt="Warwick Student Arts Festival volunteers putting up posters on campus."
-            className="max-w-64 sm:max-w-80 lg:max-w-md float-right"
+            className="hidden sm:block max-w-64 sm:max-w-80 lg:max-w-md float-right"
             priority
             placeholder="blur"
           />
@@ -132,7 +132,7 @@ export default function Team() {
 
       <section className="my-4 max-w-8xl mx-auto">
         <HighlightedHeading text="Crew Roles" />
-        <div className="mt-2 grid w-full px-16 py-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 justify-center">
+        <div className="mt-2 grid w-full px-2 sm:px-16 sm:py-4 grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4 justify-center">
           {crewRoles.map((role) => (
             <RoleCard
               image={role.image}

@@ -20,7 +20,7 @@ export default async function GoToVenue({
   }
 
   return (
-    <div className="my-4 bg-white p-4 h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-102 transition duration-150 ease-in-out">
+    <div className="my-4 bg-white p-4 h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-105 transition duration-100 ease-in-out">
       <Link
         href={`/venues/${venue.id}`}
         passHref

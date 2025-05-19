@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import TalkCard from './TalkCard';
-import { Talk } from '@/app/lib/types';
+import { Talk } from '@/lib/types';
 
 type TalkListProps = {
   talks: Talk[];

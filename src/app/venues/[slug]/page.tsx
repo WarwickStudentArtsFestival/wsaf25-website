@@ -1,16 +1,14 @@
 import PageHeader from '@/app/components/page-header';
 import ErrorMessage from '@/app/components/ErrorMessage';
 import EventsList from '@/app/events/components/events-list/EventsList';
-import { fetchVenue } from '@/app/lib/venues';
+import { fetchVenue } from '@/lib/venues';
 import React from 'react';
-import { fetchEventsInVenue } from '@/app/lib/events';
+import { fetchEventSessionsInVenue } from '@/lib/events';
 import Image from 'next/image';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import { FiExternalLink, FiMapPin } from 'react-icons/fi';
 import Link from 'next/link';
 import { FaArrowRight, FaWarehouse } from 'react-icons/fa';
-
-type Params = Promise<{ id: string }>;
 
 export default async function VenuePage({
   params,
@@ -23,10 +21,20 @@ export default async function VenuePage({
   // TODO: Better 404 page
   try {
     venue = await fetchVenue(params.slug);
-    events = await fetchEventsInVenue(venue.name);
   } catch (error) {
     console.error('Error fetching rooms from API', error);
+    return <ErrorMessage msg="Unknown error" />;
+  }
+
+  if (!venue) {
     return <ErrorMessage msg={`Venue not found!`} />;
+  }
+
+  try {
+    events = await fetchEventSessionsInVenue(venue.name);
+  } catch (error) {
+    console.error('Error fetching events from API', error);
+    return <ErrorMessage msg="Unknown error" />;
   }
 
   return (

@@ -64,7 +64,7 @@ export default function FilterOptions({
               />
               <div className="flex items-center gap-2 flex-1">
                 {option.icon}
-                <span className="text-sm">{option.label || '(None)'}</span>
+                <span className="text-sm">{option.label}</span>
                 <span className="text-xs text-gray-500 ml-auto">
                   ({option.count})
                 </span>

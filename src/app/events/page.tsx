@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import ErrorMessage from '../components/ErrorMessage';
 import PageHeader from '../components/page-header';
-import EventsList from './components/events-list/EventsList';
-import { fetchEvents } from '../lib/events';
+import { fetchEventSessions } from '@/lib/events';
+import getContext from '@/app/events/components/events-list/event-sessions-list-context';
+import EventSessionsList from '@/app/events/components/event-sessions-list/event-sessions-list';
 
 export const metadata: Metadata = {
   title: 'WSAF Events',
@@ -10,25 +11,26 @@ export const metadata: Metadata = {
 };
 
 export default async function EventsPage() {
-  let events;
+  let eventSessions, context;
 
   try {
-    events = await fetchEvents();
+    eventSessions = await fetchEventSessions();
   } catch (error) {
     console.error('Error fetching talks from API', error);
     return <ErrorMessage msg="w-please-set-the-api-token" />;
   }
 
-  const publicEvents = events.filter((event) =>
-    (process.env.NEXT_PUBLIC_TALK_STATE_TO_SHOW || '')
-      .split(',')
-      .includes(event.state),
-  );
+  try {
+    context = await getContext(eventSessions);();
+  } catch (error) {
+    console.error('Error fetching context from API', error);
+    return <ErrorMessage msg="w-please-set-the-api-token" />;
+  }
 
   return (
     <main className="w-full">
       <PageHeader />
-      <EventsList events={publicEvents} />
+      <EventSessionsList eventSessions={eventSessions} context={context} />
     </main>
   );
 }

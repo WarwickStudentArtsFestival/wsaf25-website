@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import PageHeader from '../components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
 import ErrorMessage from '../components/ErrorMessage';
-import { fetchVenues } from '@/app/lib/venues';
+import { fetchVenues } from '@/lib/venues';
 import VenueCard from '@/app/venues/venue-card';
 import React from 'react';
 

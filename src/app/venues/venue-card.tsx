@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { FiArrowRight, FiList, FiMapPin } from 'react-icons/fi';
-import { customRoomData } from '@/app/lib/customRoomData';
-import { VenueWithEventCount } from '@/app/lib/venues';
+import { VenueWithEventCount } from '@/lib/venues';
 
 export default function VenueCard({ venue }: { venue: VenueWithEventCount }) {
   return (
@@ -15,7 +14,7 @@ export default function VenueCard({ venue }: { venue: VenueWithEventCount }) {
           {venue.image ? (
             <Image
               src={venue.image}
-              alt={customRoomData[venue.id]?.imageAlt || 'Room Image'}
+              alt={venue.imageAlt}
               className="object-cover"
               fill
             />

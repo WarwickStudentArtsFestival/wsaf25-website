@@ -2,14 +2,21 @@
 import React, { useMemo } from 'react';
 import TalkList from './TalkList';
 import OptionsSidebar from './options-sidebar';
-import { Talk, trackTypes } from '@/app/lib/types';
+import { Talk, trackTypes } from '@/lib/types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import GoToAllEvents from './GoToAllEvents';
-import HighlightedHeading from '@/app/components/highlighted-heading';
 import TrackIcon from '@/app/components/track/TrackIcon';
-import TimeSelection from '@/app/events/components/time-selection';
+import TimeSelection from '@/app/events/components/events-list/time-selection';
+import { EventSession } from '@/lib/events';
+import { EventSessionsListContext } from '@/app/events/components/event-sessions-list/event-sessions-list-context';
 
-export default function EventsList({ events }: { events: Event[] }) {
+export default function EventSessionsList({
+  eventSessions,
+  context,
+}: {
+  eventSessions: EventSession[];
+  context: EventSessionsListContext;
+}) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const urlTracks = searchParams.get('genre');
@@ -68,6 +75,10 @@ export default function EventsList({ events }: { events: Event[] }) {
   const isFiltered = allTalks.length !== talksFilteredByTrack.length;
   const genreText = selectedTracks.length === 1 ? selectedTracks[0] : null;
 
+  const filteredEventSessions = useMemo(() => {
+    return eventSessions;
+  }, [eventSessions]);
+
   return (
     <>
       {genreText && (
@@ -89,36 +100,16 @@ export default function EventsList({ events }: { events: Event[] }) {
       <div className="flex flex-row px-2 sm:px-4 relative">
         <aside className="w-1/6 hidden lg:block">
           <OptionsSidebar
-            talks={events}
-            filteredTalks={talksFilteredByTrack}
-            selectedTracks={selectedTracks}
-            onTrackFilterChange={handleTrackFilterChange}
+            filteredCount={filteredEventSessions.length}
+            totalCount={eventSessions.length}
+            context={context}
           />
         </aside>
 
         <main className="flex-1 mb-16 space-y-8">
-          {sortedDays.map((day) => (
-            <section key={day}>
-              <HighlightedHeading
-                text={new Intl.DateTimeFormat('en-GB', {
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                }).format(new Date(day))}
-              />
-              <TalkList talks={talksByDay[day]} />
-            </section>
-          ))}
+          <TalkList talks={} />
 
-          {unscheduledTalks.length > 0 && (
-            <section>
-              <HighlightedHeading text="Not Scheduled Yet" />
-              <TalkList talks={unscheduledTalks} />
-            </section>
-          )}
-
-          {isFiltered && (
+          {filteredEventSessions.length !== eventSessions.length && (
             <div className="mt-8 flex justify-center">
               <GoToAllEvents />
             </div>
@@ -126,7 +117,8 @@ export default function EventsList({ events }: { events: Event[] }) {
         </main>
 
         <footer className="absolute left-1/2 transform -translate-x-1/2 bottom-4 text-sm text-gray-500">
-          Showing {talksFilteredByTrack.length} of {events.length} events
+          Showing {filteredEventSessions.length} of {eventSessions.length}{' '}
+          events
         </footer>
       </div>
     </>

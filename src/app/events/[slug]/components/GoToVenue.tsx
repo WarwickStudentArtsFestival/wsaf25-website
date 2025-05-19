@@ -1,10 +1,10 @@
 import ErrorMessage from '@/app/components/ErrorMessage';
-import { Event } from '@/app/lib/events';
+import { Event } from '@/lib/events';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 import React from 'react';
-import { fetchVenue } from '@/app/lib/venues';
+import { fetchVenue } from '@/lib/venues';
 
 type GoToVenueProps = {
   talk: Event;

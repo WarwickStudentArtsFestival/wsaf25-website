@@ -1,7 +1,7 @@
 'use client';
 import { FiShare2 } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
-import type { Event } from '@/app/lib/events';
+import type { Event } from '@/lib/events';
 
 type ShareProps = {
   talk: Event;

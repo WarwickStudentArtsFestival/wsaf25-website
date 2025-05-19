@@ -1,4 +1,4 @@
-import { EventAdmin } from '@/app/lib/events';
+import { EventAdmin } from '@/lib/events';
 
 type PresentedByProps = {
   speakers: EventAdmin[];

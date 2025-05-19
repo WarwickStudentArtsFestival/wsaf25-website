@@ -1,5 +1,5 @@
-import { trackTypes } from '@/app/lib/types';
-import { Event } from '@/app/lib/events';
+import { trackTypes } from '@/lib/types';
+import { Event } from '@/lib/events';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 import TrackIcon from '../../../components/track/TrackIcon';

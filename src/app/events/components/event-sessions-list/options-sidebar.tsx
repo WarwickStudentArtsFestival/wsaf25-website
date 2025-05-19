@@ -40,6 +40,8 @@ export default function OptionsSidebar({
             type="text"
             placeholder="Search by title or speaker"
             className="w-full px-2 py-1.5 border border-slate-300 rounded-md text-sm"
+            value={selectedFilters.search || ''}
+            onChange={(e) => setFilter('search', e.target.value)}
           />
         </div>
 

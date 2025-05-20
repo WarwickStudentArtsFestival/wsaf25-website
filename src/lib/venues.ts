@@ -76,3 +76,8 @@ export async function fetchVenue(slug: string): Promise<Venue | null> {
   const venues = await fetchVenues();
   return venues.find((v) => v.id === slug) || null;
 }
+
+export async function fetchVenueFromName(name: string): Promise<Venue | null> {
+  const venues = await fetchVenues();
+  return venues.find((v) => v.name === name) || null;
+}

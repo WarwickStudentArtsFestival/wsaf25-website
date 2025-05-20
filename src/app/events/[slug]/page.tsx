@@ -3,10 +3,13 @@ import ErrorMessage from '../../components/ErrorMessage';
 import Image from 'next/image';
 import TalkHeader from './components/TalkHeader';
 import { Toaster } from 'react-hot-toast';
-import { fetchEvent } from '@/lib/events';
+import { EventWithSessions, fetchEvent } from '@/lib/events';
 import React from 'react';
 import EventDetails from '@/app/events/[slug]/components/EventDetails';
 import Share from '@/app/events/[slug]/components/Share';
+import GoToVenue from '@/app/events/[slug]/components/GoToVenue';
+import GoToGenre from '@/app/events/[slug]/components/GoToGenre';
+
 
 export default async function Page({
   params,
@@ -15,8 +18,7 @@ export default async function Page({
 }) {
   const { slug } = await params;
 
-  let event;
-
+  let event: EventWithSessions | null = null;
   // TODO: Better 404 page
   try {
     event = await fetchEvent(slug);
@@ -65,23 +67,23 @@ export default async function Page({
                   dangerouslySetInnerHTML={{ __html: event.description }}
                 />
                 <div className="hidden lg:block">
-                  {/* <h2 className="text-black text-xl font-semibold my-4">
+                  <h2 className="text-black text-xl font-semibold my-4">
                     Related Events
-                  </h2> */}
-                  {/*<GoToVenue talk={event} />*/}
-                  {/*<GoToGenre event={event} />*/}
+                  </h2>
+                  <GoToVenue eventWithSessions={event} />
+                  <GoToGenre eventWithSessions={event} />
                 </div>
               </div>
               <div className="lg:w-1/3 flex flex-col gap-4 md:p-4 md:pl-0">
-                <EventDetails talk={event} />
+                <EventDetails eventWithSessions={event} />
                 <Share talk={event} />
               </div>
               <div className="block lg:hidden">
-                {/* <h2 className="text-black text-xl font-semibold my-4">
+                <h2 className="text-black text-xl font-semibold my-4">
                   Related Events
-                </h2> */}
-                {/*<GoToVenue event={event} />*/}
-                {/*<GoToGenre event={event} />*/}
+                </h2>
+                <GoToVenue eventWithSessions={event} />
+                <GoToGenre eventWithSessions={event} />
               </div>
             </div>
           </div>

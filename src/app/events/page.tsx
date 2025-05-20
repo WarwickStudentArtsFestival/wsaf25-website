@@ -4,6 +4,7 @@ import PageHeader from '../components/page-header';
 import { fetchEventSessions } from '@/lib/events';
 import EventSessionsList from '@/app/events/components/event-sessions-list/event-sessions-list';
 import getContext from './components/event-sessions-list/event-sessions-list-context';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'WSAF Events',
@@ -30,7 +31,9 @@ export default async function EventsPage() {
   return (
     <main className="w-full">
       <PageHeader />
-      <EventSessionsList eventSessions={eventSessions} context={context} />
+      <Suspense fallback={<div>Loading events...</div>}>
+        <EventSessionsList eventSessions={eventSessions} context={context} />
+      </Suspense>
     </main>
   );
 }

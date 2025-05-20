@@ -5,6 +5,7 @@ import Performers from '@/assets/home/performers.jpg';
 import Crew from '@/assets/home/crew.jpg';
 import Guests from '@/assets/home/guests.jpg';
 import InfoCard from './InfoCard';
+import HighlightCountdown from './highlight-countdown';
 
 export default function About() {
   const cards = [
@@ -49,7 +50,11 @@ export default function About() {
 
   return (
     <section className="px-4 my-4 sm:my-8 sm:px-8">
-      <HighlightedHeading text="What is WSAF?" />
+      <HighlightCountdown />
+
+      <div className="mt-4">
+        <HighlightedHeading text="What is WSAF?" />
+      </div>
       <h2 className="text-teal text-xl pt-2 sm:text-2xl font-semibold">
         The Warwick Student Arts Festival 2025
       </h2>
@@ -62,8 +67,6 @@ export default function About() {
         Join us during Week 8-9 for our free festival of performances,
         exhibitions, workshops and more.
       </div>
-
-      {/* <HighlightCountdown /> */}
 
       <div className="flex gap-2 justify-center">
         <a

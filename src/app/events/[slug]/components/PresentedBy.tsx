@@ -1,9 +1,9 @@
-import { EventAdmin } from '@/lib/events';
+// import { EventAdmin } from '@/lib/events';
 
-type PresentedByProps = {
-  speakers: EventAdmin[];
-};
-
+// type PresentedByProps = {
+//   speakers: EventAdmin[];
+// };
+// 
 // export default function PresentedBy({ speakers }: PresentedByProps) {
 //   const speakerNames = speakers.map((speaker) => speaker.name);
 

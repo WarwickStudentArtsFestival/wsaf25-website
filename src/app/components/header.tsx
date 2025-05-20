@@ -4,27 +4,27 @@
 // import { FiMenu, FiX } from 'react-icons/fi';
 import Link from 'next/link';
 import NavLinks from './NavLinks';
-import SubmitButton from './SubmitButton';
+// import SubmitButton from './SubmitButton';
 
 export default function Header() {
   // const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   // const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-teal h-16 border-b border-b-white flex justify-between items-center text-white px-4">
+    <header className="sticky top-0 z-100 w-full bg-teal h-16 border-b border-b-white flex justify-between items-center text-white px-4">
       <div className="w-48 text-left">
         <Link href="/" className="text-xl font-semibold">
           WSAF <span className="text-yellow">2025</span>
         </Link>
       </div>
 
-      <nav className=""> 
+      <nav className="align-center">
         <NavLinks />
       </nav>
 
-      <div className="md:block hidden md:visible w-48 mr-4 text-right">
+      {/* <div className="md:block hidden md:visible w-48 mr-4 text-right">
         <SubmitButton />
-      </div>
+      </div> */}
 
       {/* <div className="md:hidden flex items-center ml-auto">
         <button

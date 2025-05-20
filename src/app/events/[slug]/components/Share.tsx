@@ -1,23 +1,23 @@
 'use client';
-import { Talk } from '@/app/lib/types';
 import { FiShare2 } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
+import type { Event } from '@/lib/events';
 
 type ShareProps = {
-  talk: Talk;
+  talk: Event;
 };
 
 export default function Share({ talk }: ShareProps) {
   const shareUrl =
     typeof window !== 'undefined'
-      ? `${window.location.origin}/events/${talk.code}`
-      : `/events/${talk.code}`;
+      ? `${window.location.origin}/events/${talk.id}`
+      : `/events/${talk.id}`;
 
   const handleShare = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: talk.title,
+          title: talk.name,
           url: shareUrl,
         });
         toast.success('Shared successfully!');

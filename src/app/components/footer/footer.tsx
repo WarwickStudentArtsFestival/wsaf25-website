@@ -5,7 +5,7 @@ import footerData from './footerData';
 
 export default function Footer() {
   return (
-    <footer className="bg-teal text-white w-full border-t">
+    <footer className="bg-teal z-30 text-white w-full border-t">
       <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
           <FooterSection

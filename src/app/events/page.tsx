@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import { fetchTalks } from '@/app/lib/fetchTalks';
 import ErrorMessage from '../components/ErrorMessage';
 import PageHeader from '../components/page-header';
-import EventsList from './components/events-list/EventsList';
+import { fetchEventSessions } from '@/lib/events';
+import EventSessionsList from '@/app/events/components/event-sessions-list/event-sessions-list';
+import getContext from './components/event-sessions-list/event-sessions-list-context';
 
 export const metadata: Metadata = {
   title: 'WSAF Events',
@@ -10,26 +11,26 @@ export const metadata: Metadata = {
 };
 
 export default async function EventsPage() {
-  let talks = await fetchTalks();
-  if (talks === 'API_ERROR') {
-    console.error('Error fetching talks from API');
+  let eventSessions, context;
+
+  try {
+    eventSessions = await fetchEventSessions();
+  } catch (error) {
+    console.error('Error fetching talks from API', error);
     return <ErrorMessage msg="w-please-set-the-api-token" />;
   }
-  talks = talks.sort(
-    (a, b) =>
-      new Date(a.slot?.start || 0).getTime() -
-      new Date(b.slot?.start || 0).getTime(),
-  );
-  const publicVisibleTalks = talks.filter((talk) =>
-    (process.env.NEXT_PUBLIC_TALK_STATE_TO_SHOW || '')
-      .split(',')
-      .includes(talk.state),
-  );
+
+  try {
+    context = await getContext(eventSessions);
+  } catch (error) {
+    console.error('Error fetching context from API', error);
+    return <ErrorMessage msg="w-please-set-the-api-token" />;
+  }
 
   return (
     <main className="w-full">
       <PageHeader />
-      <EventsList allTalks={publicVisibleTalks} />
+      <EventSessionsList eventSessions={eventSessions} context={context} />
     </main>
   );
 }

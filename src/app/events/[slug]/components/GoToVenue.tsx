@@ -1,22 +1,21 @@
 import ErrorMessage from '@/app/components/ErrorMessage';
-import { EventSession } from '@/lib/events';
+import { EventWithSessions } from '@/lib/events';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 import React from 'react';
-import { fetchVenue } from '@/lib/venues';
+import { fetchVenueFromName } from '@/lib/venues';
 
 export default async function GoToVenue({
-  eventSession,
+  eventWithSessions,
 }: {
-  eventSession: EventSession;
+  eventWithSessions: EventWithSessions;
 }) {
-  let venue;
-  try {
-    venue = await fetchVenue(String(talk.slot?.room_id));
-  } catch (error) {
-    console.error('Error fetching room', error);
-    return <ErrorMessage msg="Room not found" />;
+  const venue = await fetchVenueFromName(
+    eventWithSessions.sessions[0].venueName,
+  );
+  if (!venue) {
+    return <ErrorMessage msg="Venue not found" />;
   }
 
   return (

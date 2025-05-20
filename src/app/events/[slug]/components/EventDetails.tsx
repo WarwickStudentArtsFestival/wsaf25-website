@@ -1,15 +1,15 @@
 import { FiCalendar, FiClock, FiMapPin } from 'react-icons/fi';
 import { formatDate, formatTime } from '@/lib/dates';
-import { Event } from '@/lib/events';
+import { EventWithSessions } from '@/lib/events';
 
 type EventDetailsProps = {
-  talk: Event;
+  eventWithSessions: EventWithSessions;
 };
 
-export default function EventDetails({ talk }: EventDetailsProps) {
-  const room = talk.slot?.room?.en;
-  const start = talk.slot?.start;
-  const end = talk.slot?.end;
+export default function EventDetails({ eventWithSessions }: EventDetailsProps) {
+  const room = eventWithSessions.sessions[0].venueName;
+  const start = eventWithSessions.sessions[0].start;
+  const end = eventWithSessions.sessions[0].end;
 
   const talkDetails = [
     {

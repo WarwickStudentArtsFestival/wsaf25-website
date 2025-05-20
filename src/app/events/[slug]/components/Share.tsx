@@ -10,14 +10,14 @@ type ShareProps = {
 export default function Share({ talk }: ShareProps) {
   const shareUrl =
     typeof window !== 'undefined'
-      ? `${window.location.origin}/events/${talk.code}`
-      : `/events/${talk.code}`;
+      ? `${window.location.origin}/events/${talk.id}`
+      : `/events/${talk.id}`;
 
   const handleShare = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: talk.title,
+          title: talk.name,
           url: shareUrl,
         });
         toast.success('Shared successfully!');

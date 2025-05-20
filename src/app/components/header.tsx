@@ -11,14 +11,14 @@ export default function Header() {
   // const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-teal h-16 border-b border-b-white flex justify-between items-center text-white px-4">
+    <header className="sticky top-0 z-100 w-full bg-teal h-16 border-b border-b-white flex justify-between items-center text-white px-4">
       <div className="w-48 text-left">
         <Link href="/" className="text-xl font-semibold">
           WSAF <span className="text-yellow">2025</span>
         </Link>
       </div>
 
-      <nav className=""> 
+      <nav className="">
         <NavLinks />
       </nav>
 

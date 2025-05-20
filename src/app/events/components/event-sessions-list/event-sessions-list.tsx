@@ -42,7 +42,7 @@ export default function EventSessionsList({
       />
 
       <div className="flex flex-row px-2 sm:px-4 relative">
-        <aside className="w-1/6 hidden lg:block">
+        <aside className="hidden sticky top-40 lg:block h-12">
           <OptionsSidebar
             filteredCount={filteredSessionCount}
             totalCount={eventSessions.length}

@@ -30,7 +30,7 @@ export default function DatetimeSlider({
   };
 
   return (
-    <div className="px-8 py-2">
+    <div className="px-8 py-2 sticky bg-white z-60 top-16">
       <div className="inline-flex gap-1.5 items-center text-sm text-black">
         <span>Showing</span>
         <span className="font-medium">{eventCount}</span>

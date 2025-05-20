@@ -8,7 +8,7 @@ import React from 'react';
 import EventDetails from '@/app/events/[slug]/components/EventDetails';
 import Share from '@/app/events/[slug]/components/Share';
 import GoToVenue from '@/app/events/[slug]/components/GoToVenue';
-// import GoToGenre from '@/app/events/[slug]/components/GoToGenre';
+import GoToGenre from '@/app/events/[slug]/components/GoToGenre';
 
 export default async function Page({
   params,
@@ -71,7 +71,7 @@ export default async function Page({
                     Related Events
                   </h2>
                   <GoToVenue eventWithSessions={event} />
-                  {/* <GoToGenre event={event} /> */}
+                  <GoToGenre eventWithSessions={event} />
                 </div>
               </div>
               <div className="lg:w-1/3 flex flex-col gap-4 md:p-4 md:pl-0">
@@ -83,7 +83,7 @@ export default async function Page({
                   Related Events
                 </h2>
                 <GoToVenue eventWithSessions={event} />
-                {/* <GoToGenre event={event} /> */}
+                <GoToGenre eventWithSessions={event} />
               </div>
             </div>
           </div>

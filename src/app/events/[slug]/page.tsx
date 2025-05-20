@@ -10,6 +10,7 @@ import Share from '@/app/events/[slug]/components/Share';
 import GoToVenue from '@/app/events/[slug]/components/GoToVenue';
 import GoToGenre from '@/app/events/[slug]/components/GoToGenre';
 
+
 export default async function Page({
   params,
 }: {
@@ -18,7 +19,6 @@ export default async function Page({
   const { slug } = await params;
 
   let event: EventWithSessions | null = null;
-
   // TODO: Better 404 page
   try {
     event = await fetchEvent(slug);

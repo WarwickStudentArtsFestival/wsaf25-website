@@ -4,8 +4,8 @@ import organisers from '@/app/components/people-involved/organisers';
 
 export default function PeopleInvolved({}) {
   return (
-    <div className="mb-4 w-full mx-auto md:px-16">
-      <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-10 gap-2 px-2 text-white justify-center">
+    <div className="mb-4 w-full mx-auto xl:px-16">
+      <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-7 xl:grid-cols-10 gap-2 px-2 text-white justify-center">
         {organisers.map((person) => (
           <IdCard
             key={person.name}
@@ -25,7 +25,7 @@ export default function PeopleInvolved({}) {
           />
         </div>
       </div>
-      <div className="sm:block hidden lg:w-1/11 sm:w-1/5 mx-auto m-4">
+      <div className="sm:block hidden  sm:w-1/5 lg:w-1/7 xl:w-1/10 mx-auto m-4">
         <IdCard
           name="You?"
           role="Volunteer"

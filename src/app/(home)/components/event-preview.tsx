@@ -24,7 +24,7 @@ export default async function KeyDates() {
         <div
           className="flex gap-4 animate-marquee whitespace-nowrap"
           style={{
-            animationDuration: '60s',
+            animationDuration: '15s',
             animationTimingFunction: 'linear',
             animationIterationCount: 'infinite',
           }}

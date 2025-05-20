@@ -64,7 +64,7 @@ export default async function VenuePage({
         <div className="p-6">
           <div className=" flex flex-col gap-6 text-left lg:flex-row">
             <div className="lg:w-2/3">
-              {/* <h2 className="mb-4 text-xl font-semibold text-black">Description</h2> */}
+              <h2 className="mb-4 text-xl font-semibold text-black">Description</h2>
               <p className="prose max-w-none">
                 {venue.description || 'No description available.'}
               </p>
@@ -99,7 +99,7 @@ export default async function VenuePage({
         <h3 className="text-teal pt-4 font-semibold italic">
           What&apos;s on at...
         </h3>
-        <h1 className="text-4xl font-bold text-teal-600 mb-4 px-2">
+        <h1 className="text-4xl sticky top-25 font-bold text-teal-600 mb-4 px-2">
           {venue.name || 'Unnamed Venue'}
         </h1>
       </div>

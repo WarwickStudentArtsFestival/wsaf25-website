@@ -4,7 +4,7 @@
 // import { FiMenu, FiX } from 'react-icons/fi';
 import Link from 'next/link';
 import NavLinks from './NavLinks';
-import SubmitButton from './SubmitButton';
+// import SubmitButton from './SubmitButton';
 
 export default function Header() {
   // const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,13 +18,13 @@ export default function Header() {
         </Link>
       </div>
 
-      <nav className="">
+      <nav className="align-center">
         <NavLinks />
       </nav>
 
-      <div className="md:block hidden md:visible w-48 mr-4 text-right">
+      {/* <div className="md:block hidden md:visible w-48 mr-4 text-right">
         <SubmitButton />
-      </div>
+      </div> */}
 
       {/* <div className="md:hidden flex items-center ml-auto">
         <button

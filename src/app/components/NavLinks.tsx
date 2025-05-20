@@ -12,13 +12,13 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  // { shortLabel: 'Venues', href: '/venues' },
-  // { shortLabel: 'Events', href: '/events' },
-  {
-    shortLabel: 'Perform',
-    longLabel: 'Perform or Exhibit',
-    href: '/perform',
-  },
+  { shortLabel: 'Venues', href: '/venues' },
+  { shortLabel: 'Events', href: '/events' },
+  // {
+  //   shortLabel: 'Perform',
+  //   longLabel: 'Perform or Exhibit',
+  //   href: '/perform',
+  // },
   {
     shortLabel: 'Crew',
     longLabel: 'Join the Crew',
@@ -40,7 +40,7 @@ export default function NavLinks({ onClick }: Props) {
             <Link
               href={href}
               onClick={onClick}
-              className={`block p-2 underline-offset-4 hover:underline ${
+              className={`block p-2 align-center underline-offset-4 hover:underline ${
                 active ? 'text-yellow-400' : 'text-white'
               }`}
               title={longLabel ?? shortLabel}

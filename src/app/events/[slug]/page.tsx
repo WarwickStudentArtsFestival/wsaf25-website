@@ -65,9 +65,9 @@ export default async function Page({
                   dangerouslySetInnerHTML={{ __html: event.description }}
                 />
                 <div className="hidden lg:block">
-                  <h2 className="text-black text-xl font-semibold my-4">
+                  {/* <h2 className="text-black text-xl font-semibold my-4">
                     Related Events
-                  </h2>
+                  </h2> */}
                   {/*<GoToVenue talk={event} />*/}
                   {/*<GoToGenre event={event} />*/}
                 </div>
@@ -77,9 +77,9 @@ export default async function Page({
                 <Share talk={event} />
               </div>
               <div className="block lg:hidden">
-                <h2 className="text-black text-xl font-semibold my-4">
+                {/* <h2 className="text-black text-xl font-semibold my-4">
                   Related Events
-                </h2>
+                </h2> */}
                 {/*<GoToVenue event={event} />*/}
                 {/*<GoToGenre event={event} />*/}
               </div>

@@ -39,12 +39,10 @@ export default function Share({ talk }: ShareProps) {
     <div className=" bg-white p-4 h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-105 transition duration-100 ease-in-out">
       <button
         onClick={handleShare}
-        className="flex items-center justify-between w-full cursor-pointer hover:text-purple-500 transition-colors duration-100"
+        className="flex items-center justify-between w-full cursor-pointer transition-colors duration-100"
       >
         <div className="flex items-center gap-4">
-          <div className="text-purple-500">
-            <FiShare2 className="h-5 w-5" />
-          </div>
+          <FiShare2 className="h-5 w-5" />
           <h3 className="text-black text-lg font-semibold">Share</h3>
         </div>
       </button>

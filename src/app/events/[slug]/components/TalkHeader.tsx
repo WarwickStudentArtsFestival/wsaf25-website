@@ -13,14 +13,14 @@ const TalkHeader: React.FC<TalkHeaderProps> = ({ track }) => {
       <div className="my-4 text-left">
         <Link
           href="/events"
-          className="inline-flex p-0 b-0 text-black items-center text-sm hover:underline"
+          className="inline-flex p-0 b-0  items-center text-sm hover:underline"
         >
-          <FaArrowLeft className="mr-2 text-purple-500" />
-          Back to All Events
+          <FaArrowLeft className="mr-2" />
+          <span className="text-black">Back to All Events</span>
         </Link>
       </div>
       <div className="pt-4">
-        <TrackPill track={track} ltr={true} />
+        <TrackPill track={track} leftToRight={true} />
       </div>
     </div>
   );

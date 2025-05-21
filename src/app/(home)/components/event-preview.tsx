@@ -33,7 +33,7 @@ export default async function KeyDates() {
             (eventSession, index) => (
               <div
                 key={`${eventSession.id}-${index}`}
-                className="inline-block min-w-[300px] max-w-[300px]"
+                className="inline-block min-w-[300px] max-w-[300px] border order-slate-300 rounded-md bg-white"
               >
                 <EventSessionCard eventSession={eventSession} />
               </div>

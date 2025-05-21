@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 import React from 'react';
 import { fetchVenueFromName } from '@/lib/venues';
+import { trackColourMap } from '@/lib/trackTypes';
 
 export default async function GoToVenue({
   eventWithSessions,
@@ -17,9 +18,13 @@ export default async function GoToVenue({
   if (!venue) {
     return <ErrorMessage msg="Venue not found" />;
   }
+  const rawTrack = eventWithSessions.categoryPretalxTrack;
+  const trackKey = rawTrack.replace(/\s/g, '');
+  const trackColor = trackColourMap[trackKey] || '#000';
+  const lightBg = `${trackColor}10`;
 
   return (
-    <div className="my-4 bg-white p-4 h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-105 transition duration-100 ease-in-out">
+    <div className="my-4 bg-white p-4  h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-105 transition duration-100 ease-in-out">
       <Link
         href={`/venues/${venue.id}`}
         passHref
@@ -38,13 +43,16 @@ export default async function GoToVenue({
               />
             )}
           </div>
-          <div className="flex flex-col text-left m-2 items-start gap-1 text-black font-medium group-hover:underline">
-            <span className="italic pt-2 text-teal font-semibold text-lg -my-2">
+          <div className="flex flex-col text-left m-2 items-start gap-1  font-medium ">
+            <span className="italic text-teal pt-2 font-semibold text-lg -my-2">
               More events in...
             </span>
-            <span className="font-semibold pt-0">{venue.name}</span>
+            <span className="font-semibold pt-0 text-black">{venue.name}</span>
           </div>
-          <div className="text-purple-500">
+          <div
+            style={{ backgroundColor: lightBg }}
+            className="flex-1 flex justify-end pr-4"
+          >
             <FaArrowRight />
           </div>
         </div>

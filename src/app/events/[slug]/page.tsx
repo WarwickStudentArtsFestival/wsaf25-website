@@ -9,7 +9,7 @@ import EventDetails from '@/app/events/[slug]/components/EventDetails';
 import Share from '@/app/events/[slug]/components/Share';
 import GoToVenue from '@/app/events/[slug]/components/GoToVenue';
 import GoToGenre from '@/app/events/[slug]/components/GoToGenre';
-
+import { trackColourMap } from '@/lib/trackTypes';
 
 export default async function Page({
   params,
@@ -29,18 +29,32 @@ export default async function Page({
 
   if (!event) return <ErrorMessage msg={`Event '${slug}' not found!`} />;
 
+  const rawTrack = event.categoryPretalxTrack;
+  const trackKey = rawTrack.replace(/\s/g, '');
+  const trackColor = trackColourMap[trackKey] || '#000';
+  const lightBg = `${trackColor}10`;
+  // const darkBg = `${trackColor}15`;
+
   return (
-    <>
+    <div>
       <Toaster position="top-center" />
       <PageHeader />
-      <div className="max-w-4xl mx-auto md:px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl my-8 mx-auto md:px-4 sm:px-6 lg:px-8">
         <div className="mb-4">
-          <div className="bg-white p-6 py-0 mb-4 h-fit rounded-lg  md:border md:border-gray-200">
-            <TalkHeader track={event.categoryPretalxTrack} />
+          <div
+            style={{ backgroundColor: lightBg }}
+            className="bg-white p-6 py-0 mb-4 h-fit rounded-lg  md:border md:border-gray-200"
+          >
+            <div style={{ color: trackColor }}>
+              <TalkHeader track={event.categoryPretalxTrack} />
+            </div>
 
             <div className="my-4">
               {/* <PresentedBy speakers={event.speakers} /> */}
-              <h1 className="text-4xl font-bold break-words text-teal-600 px-2 -mx-6 sm:mx-auto ">
+              <h1
+                style={{ color: trackColor }}
+                className="text-4xl font-bold break-words px-2 -mx-6 sm:mx-auto "
+              >
                 &ldquo;{event.name}&rdquo;
               </h1>
             </div>
@@ -63,19 +77,26 @@ export default async function Page({
                   Description
                 </h2>
                 <div
-                  className="prose max-w-none"
+                  className="prose text-gray-700 max-w-none"
                   dangerouslySetInnerHTML={{ __html: event.description }}
                 />
                 <div className="hidden lg:block">
                   <h2 className="text-black text-xl font-semibold my-4">
                     Related Events
                   </h2>
-                  <GoToVenue eventWithSessions={event} />
-                  <GoToGenre eventWithSessions={event} />
+                  <div style={{ color: trackColor }}>
+                    <GoToVenue eventWithSessions={event} />
+                    <GoToGenre eventWithSessions={event} />
+                  </div>
                 </div>
               </div>
-              <div className="lg:w-1/3 flex flex-col gap-4 md:p-4 md:pl-0">
+              <div
+                style={{ color: trackColor }}
+                className="lg:w-1/3 flex flex-col gap-4 md:p-4 md:pl-0"
+              >
+                {/* <div style={{ backgroundColor: darkBg }}> */}
                 <EventDetails eventWithSessions={event} />
+                {/* </div> */}
                 <Share talk={event} />
               </div>
               <div className="block lg:hidden">
@@ -89,6 +110,6 @@ export default async function Page({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

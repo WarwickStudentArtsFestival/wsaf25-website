@@ -1,9 +1,9 @@
-import { trackTypes } from '@/lib/types';
+import { trackTypes } from '@/lib/trackTypes';
 import { EventWithSessions } from '@/lib/events';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
-import TrackIcon from '../../../components/track/TrackIcon';
 import ErrorMessage from '@/app/components/ErrorMessage';
+import TrackPill from '@/app/components/track/TrackPill';
 
 export default async function GoToGenre({
   eventWithSessions,
@@ -23,22 +23,22 @@ export default async function GoToGenre({
         className=" cursor-pointer group"
         title={`View more ${eventWithSessions.categoryPretalxTrack}`}
       >
-        <div className="flex items-center gap-2">
-          <div className="bg-purple-200 text-purple-800 border border-purple-800 rounded-full p-4">
-            <TrackIcon
-              track={eventWithSessions.categoryPretalxTrack}
-              size={20}
-            />
-          </div>
-          <div className="flex flex-col text-left m-2 items-start gap-1 text-black font-medium group-hover:underline">
-            <span className="italic pt-2 text-teal font-semibold text-lg -my-2">
+        <div className="flex items-center justify-center gap-2">
+          <TrackPill
+            showName={false}
+            track={eventWithSessions.categoryPretalxTrack}
+            padding={13}
+            size={25}
+          />
+          <div className="flex flex-col text-left m-2 items-start gap-1  font-medium ">
+            <span className="italic pt-2 text-black font-semibold text-lg -my-2">
               See more...
             </span>
-            <span className="font-semibold pt-0">
+            <span className="font-semibold text-black pt-0">
               {eventWithSessions.categoryPretalxTrack}
             </span>
           </div>
-          <div className="text-purple-500">
+          <div className="flex-1 flex justify-end pr-4">
             <FaArrowRight />
           </div>
         </div>

@@ -29,7 +29,7 @@ export default async function VenuesPage() {
         Venues and Spaces
       </h1>
 
-      <div className="mt-2 grid px-4 gap-8 md:px-16 mx-auto py-4 grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 sm:gap-4 justify-center">
+      <div className="mt-2 grid px-4 gap-8 md:px-16 mx-auto py-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 sm:gap-4 justify-center">
         {venues.map((venue) => (
           <VenueCard key={venue.id} venue={venue} />
         ))}

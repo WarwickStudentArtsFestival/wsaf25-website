@@ -1,6 +1,7 @@
 'use client';
 import { FiCalendar } from 'react-icons/fi';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 // Submissions close end of Friday 2nd May
 const targetDate = new Date('2025-06-13T00:59Z').getTime();
@@ -33,10 +34,9 @@ export default function HighlightCountdown() {
   }, []);
 
   return (
-    <a
-      href="https://submit.wsaf.org.uk/2025/cfp"
+    <Link
+      href="/events"
       className="inline-block mb-1 bg-purple px-6 py-4 rounded-md drop-shadow-xs hover:scale-105 text-white mx-2 text-center w-full max-w-md"
-      target="_blank"
     >
       <div className="flex flex-col items-center justify-center gap-2">
         <p className="flex items-center gap-2 text-yellow text-xl">
@@ -48,6 +48,6 @@ export default function HighlightCountdown() {
           WSAF Begins Friday Week 8 (13th June)
         </p>
       </div>
-    </a>
+    </Link>
   );
 }

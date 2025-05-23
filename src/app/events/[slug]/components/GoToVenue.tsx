@@ -44,6 +44,7 @@ export default async function GoToVenue({
           </div>
           <div className="flex flex-col text-left m-2 items-start gap-1  font-medium ">
             <span className="italic pt-2 font-semibold text-lg -my-2 text-black">
+
               More events in...
             </span>
             <span className="font-semibold pt-0 text-black">{venue.name}</span>

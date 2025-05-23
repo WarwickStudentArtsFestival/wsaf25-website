@@ -9,7 +9,7 @@ export default function VenueCard({ venue }: { venue: VenueWithEventCount }) {
       href={`/venues/${venue.id}`}
       className="transform transition-transform hover:scale-[1.02] h-full"
     >
-      <div className="border text-left border-slate-300 rounded-md overflow-hidden flex flex-col w-full max-w-sm mx-auto h-full min-h-[450px]">
+      <div className="border text-left border-slate-300 rounded-md overflow-hidden flex flex-col w-full sm:mx-auto h-full min-h-[450px]">
         <div className="relative w-full aspect-[4/3]">
           {venue.image ? (
             <Image

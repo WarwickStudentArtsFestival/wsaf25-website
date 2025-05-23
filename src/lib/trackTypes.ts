@@ -23,3 +23,17 @@ export const trackColourMap: { [key: string]: string } = {
   Film: '#64748b', // slate-500
   SpokenWord: '#ec4899', // pink-500
 };
+
+// export const trackColourMap: { [key: string]: string } = {
+//   Theatre: '#e80000',
+//   MTWStagefest: '#000000',
+//   Dance: '#ff9900',
+//   Music: '#ff008a',
+//   VisualArt: '#0d00ff',
+//   Comedy: '#9600b4',
+//   SpokenWord: '#78c200',
+//   Film: '#00b5ff',
+//   Mixed: '#af5d08',
+//   Creation: '#af5d08',
+// };
+

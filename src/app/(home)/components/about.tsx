@@ -89,7 +89,7 @@ export default function About() {
       </div>
 
       {/* <HighlightedHeading text="Can I get involved?" /> */}
-      <div className="flex flex-col md:flex-row gap-4 p-4 justify-center text-left text-sm">
+      <div className="flex flex-col md:flex-row gap-4 p-2 justify-center text-left text-sm">
         {cards.map((card, index) => (
           <InfoCard key={index} {...card} />
         ))}

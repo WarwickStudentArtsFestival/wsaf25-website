@@ -1,4 +1,5 @@
 import { FilterOption } from '@/app/events/components/event-sessions-list/event-sessions-filters';
+import { trackColourMap } from '@/lib/trackTypes';
 
 type FilterOptionsProps = {
   label: string;
@@ -46,28 +47,33 @@ export default function FilterOptions({
         </button>
       </div>
       <ul className="space-y-1">
-        {options.map((option) => (
-          <li key={option.value} className="flex items-center gap-2">
-            <label className="flex items-center cursor-pointer w-full">
-              <input
-                type="checkbox"
-                checked={
-                  !selectedFilterValues ||
-                  selectedFilterValues.includes(option.value)
-                }
-                onChange={() => handleOptionToggle(option.value)}
-                className="mr-2 h-4 w-4"
-              />
-              <div className="flex items-center gap-2 flex-1">
-                {option.icon}
-                <span className="text-sm">{option.label}</span>
-                <span className="text-xs text-gray-500 ml-auto">
-                  ({option.count})
-                </span>
-              </div>
-            </label>
-          </li>
-        ))}
+        {options.map((option) => {
+          const trackKey = option.value.replace(/\s/g, '');
+          const trackColor = trackColourMap[trackKey];
+
+          return (
+            <li key={option.value} className="flex items-center gap-2">
+              <label className="flex items-center cursor-pointer w-full">
+                <input
+                  type="checkbox"
+                  checked={
+                    !selectedFilterValues ||
+                    selectedFilterValues.includes(option.value)
+                  }
+                  onChange={() => handleOptionToggle(option.value)}
+                  className="mr-2 h-4 w-4"
+                />
+                <div className="flex items-center gap-2 flex-1">
+                  <span style={{ color: trackColor }}>{option.icon}</span>
+                  <span className="text-sm">{option.label}</span>
+                  <span className="text-xs text-gray-500 ml-auto">
+                    ({option.count})
+                  </span>
+                </div>
+              </label>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

@@ -3,12 +3,17 @@
 // import { useState } from 'react';
 // import { FiMenu, FiX } from 'react-icons/fi';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import NavLinks from './NavLinks';
 // import SubmitButton from './SubmitButton';
+import Image from 'next/image';
+import PaintBrush from '@/assets/icons/paintbrush.png';
 
 export default function Header() {
   // const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   // const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
+
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-100 w-full bg-teal h-16 border-b border-b-white flex justify-between items-center text-white px-4">
@@ -21,6 +26,23 @@ export default function Header() {
       <nav className="">
         <NavLinks />
       </nav>
+
+      <div className="flex items-center gap-2">
+        <Link
+          href="/wpaint"
+          className={`flex items-center rounded hover:underline uppercase ${
+            pathname === '/wpaint' ? 'text-yellow-400' : 'text-white'
+          }`}
+        >
+          <div className="font-bold">W-Paint</div>
+          <Image
+            src={PaintBrush}
+            alt="Paint brush icon"
+            width={25}
+            height={25}
+          />
+        </Link>
+      </div>
 
       {/* <div className="md:block hidden md:visible w-48 mr-4 text-right">
         <SubmitButton />

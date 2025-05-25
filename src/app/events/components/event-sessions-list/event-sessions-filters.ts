@@ -14,6 +14,7 @@ export type FilterOption = {
 };
 
 export type SelectedFilters = {
+  view: 'list' | 'timeline';
   sort: 'random' | 'time' | 'venue';
   randomSeed: number | null;
   search: string | null;
@@ -26,6 +27,7 @@ export type SelectedFilters = {
 };
 
 export type SelectedFilterValues = {
+  view: 'list' | 'timeline';
   sort: 'random' | 'time' | 'venue';
   randomSeed: number | null;
   search: string | null;
@@ -43,6 +45,7 @@ export type EventSessionGroup = {
 };
 
 const defaultFilters: SelectedFilters = {
+  view: 'list',
   sort: 'random',
   randomSeed: new Date().getTime(),
   search: null,
@@ -87,6 +90,7 @@ export default function useEventSessionsFilters(
   useEffect(() => {
     if (selectedFiltersUrlParams === searchParams.toString()) return;
 
+    const timelineParam = searchParams.get('timeline');
     const sortParam = searchParams.get('sort');
     const searchParam = searchParams.get('search');
     const categoryParam = searchParams.get('category');
@@ -116,6 +120,7 @@ export default function useEventSessionsFilters(
     }
 
     setSelectedFilters({
+      view: timelineParam !== null ? 'timeline' : 'list',
       sort: (sortParam && ['random', 'time', 'venue'].includes(sortParam)
         ? sortParam
         : 'random') as 'random' | 'time' | 'venue',
@@ -132,6 +137,7 @@ export default function useEventSessionsFilters(
 
   const selectedFilterValues = useMemo<SelectedFilterValues>(
     () => ({
+      view: selectedFilters.view,
       sort: selectedFilters.sort,
       randomSeed: selectedFilters.randomSeed,
       search: selectedFilters.search
@@ -161,6 +167,7 @@ export default function useEventSessionsFilters(
 
     const params = new URLSearchParams();
 
+    if (filters.view === 'timeline') params.set('timeline', '');
     if (filters.sort !== 'random') params.set('sort', filters.sort);
     if (filters.search) params.set('search', filters.search);
     if (filters.category) {
@@ -272,51 +279,56 @@ export default function useEventSessionsFilters(
   ): { sessionGroups: EventSessionGroup[]; sessionCount: number } => {
     let sessionGroups: EventSessionGroup[] = [];
 
-    switch (selectedFilters.sort) {
-      case 'time': {
-        const orderedSessions = eventSessions.sort(
-          (a, b) => a.start.getTime() - b.start.getTime(),
-        );
-
-        let currentGroup: EventSessionGroup | null = null;
-        let currentGroupDate: number | null = null;
-        for (const session of orderedSessions) {
-          const sessionGroupDate = session.start.getUTCDate();
-          if (currentGroupDate !== sessionGroupDate) {
-            if (currentGroup) sessionGroups.push(currentGroup);
-            currentGroup = {
-              name: formatDate(session.start),
-              sessions: [session],
-            };
-            currentGroupDate = sessionGroupDate;
-          } else {
-            currentGroup?.sessions.push(session);
-          }
-        }
-        if (currentGroup) sessionGroups.push(currentGroup);
-        break;
-      }
-      case 'venue':
-        const orderedSessions = eventSessions.sort(
-          (a, b) => a.start.getTime() - b.start.getTime(),
-        );
-        sessionGroups = venuesOptions.map((venue) => ({
-          name: venue.label,
-          sessions: orderedSessions.filter(
-            (session) => session.venueName === venue.value,
+    if (selectedFilters.view === 'timeline') {
+      sessionGroups = [
+        {
+          name: null,
+          sessions: eventSessions.sort(
+            (a, b) => a.start.getTime() - b.start.getTime(),
           ),
-        }));
-        break;
-      default:
-        sessionGroups = [
-          {
-            name: null,
-            sessions: eventSessions
-              .map((session) => ({ sort: Math.random(), session }))
-              .sort((a, b) => a.sort - b.sort)
-              .map((item) => item.session),
-          },
-        ];
+        },
+      ];
+    } else if (selectedFilters.sort === 'venue') {
+      const orderedSessions = eventSessions.sort(
+        (a, b) => a.start.getTime() - b.start.getTime(),
+      );
+      sessionGroups = venuesOptions.map((venue) => ({
+        name: venue.label,
+        sessions: orderedSessions.filter(
+          (session) => session.venueName === venue.value,
+        ),
+      }));
+    } else if (selectedFilters.sort === 'time') {
+      const orderedSessions = eventSessions.sort(
+        (a, b) => a.start.getTime() - b.start.getTime(),
+      );
+
+      let currentGroup: EventSessionGroup | null = null;
+      let currentGroupDate: number | null = null;
+      for (const session of orderedSessions) {
+        const sessionGroupDate = session.start.getUTCDate();
+        if (currentGroupDate !== sessionGroupDate) {
+          if (currentGroup) sessionGroups.push(currentGroup);
+          currentGroup = {
+            name: formatDate(session.start),
+            sessions: [session],
+          };
+          currentGroupDate = sessionGroupDate;
+        } else {
+          currentGroup?.sessions.push(session);
+        }
+      }
+      if (currentGroup) sessionGroups.push(currentGroup);
+    } else {
+      sessionGroups = [
+        {
+          name: null,
+          sessions: eventSessions
+            .map((session) => ({ sort: Math.random(), session }))
+            .sort((a, b) => a.sort - b.sort)
+            .map((item) => item.session),
+        },
+      ];
     }
 
     return {

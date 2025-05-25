@@ -40,7 +40,7 @@ export default function OptionsSidebar({
     selectedFilters.dropInOnly;
 
   return (
-    <div className="border p-4 pt-0 text-left h-[calc(100vh-15rem)]  text-black border-slate-300 rounded-md overflow-auto max-h-screen shadow-lg mb-4">
+    <div className="p-4 pt-0 text-left h-[calc(100vh-15rem)] text-black overflow-auto max-h-screen">
       <div className="border-b flex gap-2 items-center pb-2 pt-4 sticky top-0 bg-white z-60">
         <h3 className="font-bold text-lg">Filters</h3>
         {hasFilters && (

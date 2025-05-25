@@ -152,7 +152,7 @@ export default function TimelineView({
 
   return (
     <main className="max-w-full overflow-x-auto">
-      <table className="mt-2 mx-4 mb-12 table-fixed">
+      <table className="mt-2 mx-4 mb-24 table-fixed">
         <thead>
           <tr className="text-black">
             <th className="py-1 px-2">

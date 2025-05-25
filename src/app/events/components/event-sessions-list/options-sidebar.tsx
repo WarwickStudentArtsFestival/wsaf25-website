@@ -76,16 +76,18 @@ export default function OptionsSidebar({
           />
         )}
 
-        <div>
-          <h4 className="font-semibold mb-1">Search</h4>
-          <input
-            type="text"
-            placeholder="Search by title or speaker"
-            className="w-full px-2 py-1.5 border border-slate-300 rounded-md text-sm"
-            value={selectedFilters.search || ''}
-            onChange={(e) => setFilter({ search: e.target.value })}
-          />
-        </div>
+        {selectedFilters.view === 'list' && (
+          <div>
+            <h4 className="font-semibold mb-1">Search</h4>
+            <input
+              type="text"
+              placeholder="Search by title or speaker"
+              className="w-full px-2 py-1.5 border border-slate-300 rounded-md text-sm"
+              value={selectedFilters.search || ''}
+              onChange={(e) => setFilter({ search: e.target.value })}
+            />
+          </div>
+        )}
 
         <TimeOptions
           from={selectedFilters.dateFrom}

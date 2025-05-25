@@ -25,7 +25,7 @@ export default async function GoToVenue({
   return (
     <div className="my-4 bg-white p-4  h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-105 transition duration-100 ease-in-out">
       <Link
-        href={`/venues/${venue.id}`}
+        href={`/venues/${venue.slug}`}
         passHref
         className="cursor-pointer group"
         title={`View more events at ${venue.name}`}
@@ -44,7 +44,6 @@ export default async function GoToVenue({
           </div>
           <div className="flex flex-col text-left m-2 items-start gap-1  font-medium ">
             <span className="italic pt-2 font-semibold text-lg -my-2 text-black">
-
               More events in...
             </span>
             <span className="font-semibold pt-0 text-black">{venue.name}</span>

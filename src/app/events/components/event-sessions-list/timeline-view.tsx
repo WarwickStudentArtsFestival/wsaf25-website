@@ -15,6 +15,7 @@ type TimelineDataTime = {
 };
 
 type TimelineDataTimeVenueSession = {
+  rowSpan: number;
   eventSessions: string[];
 };
 
@@ -23,13 +24,11 @@ export default function TimelineView({
   sessionCount,
   resetFilters,
   sessionGroups,
-  disableVenues = false,
 }: {
   filteredSessionCount: number;
   sessionCount: number;
   resetFilters: () => void;
   sessionGroups: EventSessionGroup[];
-  disableVenues?: boolean;
 }) {
   const timeline = useMemo<TimelineData>(() => {
     const eventDateTimeIntervalTimes = eventDateTimeIntervals.all.map(
@@ -49,16 +48,12 @@ export default function TimelineView({
     // Sort venues somehow
     const venues = Array.from(venuesSet);
 
-    const defaultVenueSessions: TimelineDataTimeVenueSession[] = venues.map(
-      () => ({ eventSessions: [] }),
-    );
-
     const timelineTimes: TimelineDataTime[] = Array.from(timesSet)
       .sort((a, b) => a - b)
       .map((time) => ({
         keyTime: time % 3600000 === 0, // Show label every hour
         startTime: time,
-        venueSessions: venues.map(() => ({ eventSessions: [] })),
+        venueSessions: venues.map(() => ({ rowSpan: 1, eventSessions: [] })),
       }));
 
     let inProgressSessions: { endTime: number; session: EventSession }[] = [];
@@ -93,6 +88,33 @@ export default function TimelineView({
       }
     }
 
+    // Iterate back through the timeline times to set rowSpan
+    for (let i = 0; i < venues.length; i++) {
+      let firstOccurrenceIndex = 0;
+      let occurrenceKey = '';
+
+      for (let j = timelineTimes.length - 1; j >= 0; j--) {
+        const venueSession = timelineTimes[j].venueSessions[i];
+
+        const currentOccurrenceKey = venueSession.eventSessions.join(',');
+        if (currentOccurrenceKey !== occurrenceKey) {
+          // The session has changed, so set the rowSpan of the previous fields
+          if (occurrenceKey) {
+            const rowSpan = -(j - 1 - firstOccurrenceIndex);
+            console.log(rowSpan);
+            if (rowSpan > 1) {
+              for (let k = firstOccurrenceIndex; k <= j - 1; k++) {
+                timelineTimes[k].venueSessions[i].rowSpan = rowSpan;
+              }
+            }
+          }
+
+          firstOccurrenceIndex = j;
+          occurrenceKey = currentOccurrenceKey;
+        }
+      }
+    }
+
     return {
       venues,
       times: timelineTimes,
@@ -101,7 +123,7 @@ export default function TimelineView({
 
   return (
     <main>
-      <table>
+      <table className="mt-2 mx-4 mb-12">
         <thead>
           <tr>
             <th className="py-1 px-2">Time</th>
@@ -114,7 +136,7 @@ export default function TimelineView({
         </thead>
         <tbody>
           {timeline.times.map((time, i) => (
-            <tr key={i}>
+            <tr key={i} className={time.keyTime ? 'border-t' : ''}>
               <th>
                 {time.keyTime &&
                   new Date(time.startTime).toLocaleTimeString('en-gb', {
@@ -128,6 +150,7 @@ export default function TimelineView({
                   {venueSession.eventSessions.map((session) => (
                     <span key={session}>{session}</span>
                   ))}
+                  ({venueSession.rowSpan})
                 </td>
               ))}
             </tr>

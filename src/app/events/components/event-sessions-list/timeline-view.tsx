@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { EventSession } from '@/lib/events';
 import { eventDateTimeIntervals } from '@/lib/dates';
 import TimelineEventSessionCard from '@/app/events/components/event-sessions-list/timeline-event-session-card';
+import Link from 'next/link';
 
 type TimelineData = {
   venues: string[];
@@ -10,7 +11,10 @@ type TimelineData = {
 };
 
 type TimelineDataTime = {
-  keyTime: boolean; // Indicates whether to show this time label
+  // Type of time: 'keytime' is shown as a label,
+  // 'session' is for additional custom times when sessions start/end
+  // 'day' is a special type for the start of a day
+  type: 'keytime' | 'session' | 'day';
   startTime: number;
   venueSessions: TimelineDataTimeVenueSession[];
 };
@@ -26,11 +30,13 @@ export default function TimelineView({
   sessionCount,
   resetFilters,
   sessionGroups,
+  venueInfo,
 }: {
   filteredSessionCount: number;
   sessionCount: number;
   resetFilters: () => void;
   sessionGroups: EventSessionGroup[];
+  venueInfo: Record<string, { order: number; name: string; slug: string }>;
 }) {
   const timeline = useMemo<TimelineData>(() => {
     const eventDateTimeIntervalTimes = eventDateTimeIntervals.all.map(
@@ -48,15 +54,32 @@ export default function TimelineView({
     }
 
     // Sort venues somehow
-    const venues = Array.from(venuesSet);
+    const venues = Array.from(venuesSet).sort(
+      (a, b) => (venueInfo[a]?.order || 0) - (venueInfo[b]?.order || 0),
+    );
 
-    const timelineTimes: TimelineDataTime[] = Array.from(timesSet)
-      .sort((a, b) => a - b)
-      .map((time) => ({
-        keyTime: time % 3600000 === 0, // Show label every hour
+    let timelineTimes: TimelineDataTime[] = Array.from(timesSet).map(
+      (time) => ({
+        type: time % 3600000 === 0 ? 'keytime' : 'session', // Show label every hour
         startTime: time,
         venueSessions: venues.map(() => ({ rowSpan: 1, eventSessions: [] })),
-      }));
+      }),
+    );
+
+    // Add a special 'day' type for the start of each day
+    // NOTE - events should not coincide with this otherwise it will probably
+    // break stuff
+    for (const day of eventDateTimeIntervals.days) {
+      timelineTimes.push({
+        type: 'day',
+        // This is one hour before the first minute interval of the day
+        startTime: day.hours[0].minuteIntervals[0].date - 3600000,
+        venueSessions: venues.map(() => ({ rowSpan: 1, eventSessions: [] })),
+      });
+    }
+
+    // Sort the timeline times by start time
+    timelineTimes = timelineTimes.sort((a, b) => a.startTime - b.startTime);
 
     let inProgressSessions: { endTime: number; session: EventSession }[] = [];
 
@@ -135,40 +158,68 @@ export default function TimelineView({
             <th className="py-1 px-2 w-24">Time</th>
             {timeline.venues.map((venue) => (
               <th key={venue} className="py-1 px-2">
-                {venue}
+                <Link
+                  href={`/venues/${venueInfo[venue]?.slug || ''}`}
+                  className="block cursor-pointer hover:scale-[1.02]"
+                >
+                  {venue}
+                </Link>
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {timeline.times.map((time, i) => (
-            <tr key={i} className={`${time.keyTime ? 'border-t' : ''} h-full`}>
-              <th className="text-black text-sm font-semibold">
-                <p className="min-h-[0.5rem]">
-                  {time.keyTime &&
-                    new Date(time.startTime).toLocaleTimeString('en-gb', {
-                      hour: 'numeric',
-                      minute: '2-digit',
-                      hour12: true,
-                    })}
-                </p>
-              </th>
-              {time.venueSessions
-                .filter(
-                  (venueSession) =>
-                    venueSession.rowSpan === 1 || venueSession.eventStart,
-                )
-                .map((venueSession, j) => (
-                  <td key={j} rowSpan={venueSession.rowSpan} className="h-full">
-                    {venueSession.eventSessions.length > 0 && (
-                      <TimelineEventSessionCard
-                        eventSession={venueSession.eventSessions[0]}
-                      />
-                    )}
-                  </td>
-                ))}
-            </tr>
-          ))}
+          {timeline.times.map((time) =>
+            time.type === 'day' ? (
+              <tr key={time.startTime} className="border-b-2 border-slate-300">
+                <th colSpan={timeline.venues.length + 1}>
+                  <div className="pt-6">
+                    <h3 className="text-black uppercase">
+                      {new Date(time.startTime).toLocaleDateString('en-gb', {
+                        weekday: 'long',
+                        day: 'numeric',
+                        month: 'long',
+                      })}
+                    </h3>
+                  </div>
+                </th>
+              </tr>
+            ) : (
+              <tr
+                key={time.startTime}
+                className={`${time.type === 'keytime' ? 'border-t border-slate-200' : ''} h-full`}
+              >
+                <th className="text-black text-sm font-semibold">
+                  <p className="min-h-[0.5rem]">
+                    {time.type === 'keytime' &&
+                      new Date(time.startTime).toLocaleTimeString('en-gb', {
+                        hour: 'numeric',
+                        minute: '2-digit',
+                        hour12: true,
+                      })}
+                  </p>
+                </th>
+                {time.venueSessions
+                  .filter(
+                    (venueSession) =>
+                      venueSession.rowSpan === 1 || venueSession.eventStart,
+                  )
+                  .map((venueSession, j) => (
+                    <td
+                      key={j}
+                      rowSpan={venueSession.rowSpan}
+                      className="h-full"
+                    >
+                      {venueSession.eventSessions.length > 0 && (
+                        <TimelineEventSessionCard
+                          eventSession={venueSession.eventSessions[0]}
+                        />
+                      )}
+                    </td>
+                  ))}
+              </tr>
+            ),
+          )}
         </tbody>
       </table>
     </main>

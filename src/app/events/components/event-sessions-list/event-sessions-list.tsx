@@ -60,6 +60,7 @@ export default function EventSessionsList({
             sessionCount={eventSessions.length}
             resetFilters={resetFilters}
             sessionGroups={sessionGroups}
+            venueInfo={context.venueInfo}
           />
         ) : (
           <ListView

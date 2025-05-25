@@ -6,7 +6,7 @@ import { VenueWithEventCount } from '@/lib/venues';
 export default function VenueCard({ venue }: { venue: VenueWithEventCount }) {
   return (
     <Link
-      href={`/venues/${venue.id}`}
+      href={`/venues/${venue.slug}`}
       className="transform transition-transform hover:scale-[1.02] h-full"
     >
       <div className="border text-left border-slate-300 rounded-md overflow-hidden flex flex-col w-full sm:mx-auto h-full min-h-[450px]">

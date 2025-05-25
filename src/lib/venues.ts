@@ -72,9 +72,14 @@ export async function fetchVenuesWithEventCount(): Promise<
   return venuesWithEventCount;
 }
 
-export async function fetchVenue(slug: string): Promise<Venue | null> {
+export async function fetchVenue(id: string): Promise<Venue | null> {
   const venues = await fetchVenues();
-  return venues.find((v) => v.id === slug) || null;
+  return venues.find((v) => v.id === id) || null;
+}
+
+export async function fetchVenueFromSlug(slug: string): Promise<Venue | null> {
+  const venues = await fetchVenues();
+  return venues.find((v) => v.slug === slug) || null;
 }
 
 export async function fetchVenueFromName(name: string): Promise<Venue | null> {

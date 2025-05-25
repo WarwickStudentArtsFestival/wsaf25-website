@@ -10,6 +10,7 @@ import {
 import SortOptions from '@/app/events/components/event-sessions-list/sort-options';
 import TimeOptions from '@/app/events/components/event-sessions-list/time-options';
 import { eventDateTimeIntervals } from '@/lib/dates';
+import ViewOptions from '@/app/events/components/event-sessions-list/view-options';
 
 export default function OptionsSidebar({
   context,
@@ -57,27 +58,36 @@ export default function OptionsSidebar({
       </div>
 
       <div className="mt-4 space-y-4">
-        <SortOptions
-          selectedSort={selectedFilters.sort}
-          setSort={(value) =>
-            setFilter({ sort: value as 'random' | 'time' | 'venue' })
-          }
-          randomiseSessions={() =>
-            setFilter({ randomSeed: new Date().getTime() })
-          }
-          disableVenues={disableVenues}
+        <ViewOptions
+          selectedView={selectedFilters.view}
+          setView={(value) => setFilter({ view: value })}
         />
 
-        <div>
-          <h4 className="font-semibold mb-1">Search</h4>
-          <input
-            type="text"
-            placeholder="Search by title or speaker"
-            className="w-full px-2 py-1.5 border border-slate-300 rounded-md text-sm"
-            value={selectedFilters.search || ''}
-            onChange={(e) => setFilter({ search: e.target.value })}
+        {selectedFilters.view === 'list' && (
+          <SortOptions
+            selectedSort={selectedFilters.sort}
+            setSort={(value) =>
+              setFilter({ sort: value as 'random' | 'time' | 'venue' })
+            }
+            randomiseSessions={() =>
+              setFilter({ randomSeed: new Date().getTime() })
+            }
+            disableVenues={disableVenues}
           />
-        </div>
+        )}
+
+        {selectedFilters.view === 'list' && (
+          <div>
+            <h4 className="font-semibold mb-1">Search</h4>
+            <input
+              type="text"
+              placeholder="Search by title or speaker"
+              className="w-full px-2 py-1.5 border border-slate-300 rounded-md text-sm"
+              value={selectedFilters.search || ''}
+              onChange={(e) => setFilter({ search: e.target.value })}
+            />
+          </div>
+        )}
 
         <TimeOptions
           from={selectedFilters.dateFrom}

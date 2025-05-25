@@ -26,6 +26,7 @@ const navItems: NavItem[] = [
     // longLabel: 'Join the Crew',
     href: '/crew',
   },
+  { shortLabel: 'Performers Portal', href: 'https://pretalx.wsaf.org.uk/' },
 ];
 
 export default function NavLinks({ onClick }: Props) {
@@ -33,7 +34,7 @@ export default function NavLinks({ onClick }: Props) {
   const isActive = (href: string) => pathname === href;
 
   return (
-    <ul className="flex flex-col sm:flex-row flex-1 gap-4 md:gap-8 font-semibold uppercase">
+    <ul className="flex flex-col sm:flex-row z-65 flex-1 gap-4 md:gap-8 font-semibold uppercase">
       {navItems.map(({ shortLabel, longLabel, href }) => {
         const active = isActive(href);
         return (

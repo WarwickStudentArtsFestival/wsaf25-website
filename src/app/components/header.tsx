@@ -60,7 +60,7 @@ export default function Header() {
         </button>
       </div>
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-teal border-b border-b-white p-4 z-50">
+        <div className="md:hidden absolute top-16 z-100 left-0 right-0 bg-teal border-b border-b-white p-4">
           <nav
             className="flex flex-col gap-4 items-start w-full"
             role="navigation"

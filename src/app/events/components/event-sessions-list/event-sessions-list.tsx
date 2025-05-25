@@ -30,7 +30,12 @@ export default function EventSessionsList({
   const { sessionCount: filteredSessionCount, sessionGroups } = useMemo(() => {
     const filteredSessions = eventSessions.filter(isEventSessionInFilter);
     return sortAndGroupEventSessions(filteredSessions, context.venues);
-  }, [eventSessions, selectedFilterValues]);
+  }, [
+    eventSessions,
+    context.venues,
+    isEventSessionInFilter,
+    sortAndGroupEventSessions,
+  ]);
 
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);
 
@@ -78,9 +83,6 @@ export default function EventSessionsList({
 
         {selectedFilters.view === 'timeline' ? (
           <TimelineView
-            filteredSessionCount={filteredSessionCount}
-            sessionCount={eventSessions.length}
-            resetFilters={resetFilters}
             sessionGroups={sessionGroups}
             venueInfo={context.venueInfo}
           />

@@ -26,19 +26,17 @@ type TimelineDataTimeVenueSession = {
 };
 
 export default function TimelineView({
-  filteredSessionCount,
-  sessionCount,
-  resetFilters,
   sessionGroups,
   venueInfo,
 }: {
-  filteredSessionCount: number;
-  sessionCount: number;
-  resetFilters: () => void;
   sessionGroups: EventSessionGroup[];
   venueInfo: Record<string, { order: number; name: string; slug: string }>;
 }) {
   const timeline = useMemo<TimelineData>(() => {
+    if (sessionGroups.length === 0) {
+      return { venues: [], times: [] };
+    }
+
     const eventDateTimeIntervalTimes = eventDateTimeIntervals.all.map(
       (interval) => interval.date,
     );
@@ -148,7 +146,7 @@ export default function TimelineView({
       venues,
       times: timelineTimes,
     };
-  }, [sessionGroups]);
+  }, [sessionGroups, venueInfo]);
 
   return (
     <main className="max-w-full overflow-x-auto">

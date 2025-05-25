@@ -86,6 +86,42 @@ export default function useEventSessionsFilters(
     useState<SelectedFilters>(defaultFilters);
 
   const searchParams = useSearchParams();
+
+  const selectedFiltersUrlParams = useMemo(() => {
+    const params = new URLSearchParams();
+
+    if (selectedFilters.view === 'timeline') params.set('timeline', '');
+    if (selectedFilters.sort !== 'random')
+      params.set('sort', selectedFilters.sort);
+    if (selectedFilters.search) params.set('search', selectedFilters.search);
+    if (selectedFilters.category) {
+      params.set(
+        'category',
+        getBitFieldFromFilterOptions(selectedFilters.category),
+      );
+    }
+    if (selectedFilters.venue) {
+      params.set('venue', getBitFieldFromFilterOptions(selectedFilters.venue));
+    }
+    if (selectedFilters.duration) {
+      params.set(
+        'duration',
+        getBitFieldFromFilterOptions(selectedFilters.duration),
+      );
+    }
+    if (selectedFilters.dateFrom !== 0) {
+      params.set('from', selectedFilters.dateFrom.toString());
+    }
+    if (selectedFilters.dateTo !== eventDateTimeIntervals.all.length - 1) {
+      params.set('to', selectedFilters.dateTo.toString());
+    }
+    if (selectedFilters.dropInOnly) {
+      params.set('dropInOnly', '');
+    }
+
+    return params.toString();
+  }, [selectedFilters]);
+
   // Update selected filters from URL search params when URL search params updated
   useEffect(() => {
     if (selectedFiltersUrlParams === searchParams.toString()) return;
@@ -133,7 +169,8 @@ export default function useEventSessionsFilters(
       dateTo,
       dropInOnly: dropInOnlyParam !== null,
     });
-  }, [searchParams]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, context]);
 
   const selectedFilterValues = useMemo<SelectedFilterValues>(
     () => ({
@@ -156,44 +193,6 @@ export default function useEventSessionsFilters(
       dateTo: selectedFilters.dateTo,
       dropInOnly: selectedFilters.dropInOnly,
     }),
-    [selectedFilters],
-  );
-
-  const getSearchParams = (newFilters: Partial<SelectedFilters>) => {
-    const filters = {
-      ...selectedFilters,
-      ...newFilters,
-    };
-
-    const params = new URLSearchParams();
-
-    if (filters.view === 'timeline') params.set('timeline', '');
-    if (filters.sort !== 'random') params.set('sort', filters.sort);
-    if (filters.search) params.set('search', filters.search);
-    if (filters.category) {
-      params.set('category', getBitFieldFromFilterOptions(filters.category));
-    }
-    if (filters.venue) {
-      params.set('venue', getBitFieldFromFilterOptions(filters.venue));
-    }
-    if (filters.duration) {
-      params.set('duration', getBitFieldFromFilterOptions(filters.duration));
-    }
-    if (filters.dateFrom !== 0) {
-      params.set('from', filters.dateFrom.toString());
-    }
-    if (filters.dateTo !== eventDateTimeIntervals.all.length - 1) {
-      params.set('to', filters.dateTo.toString());
-    }
-    if (filters.dropInOnly) {
-      params.set('dropInOnly', '');
-    }
-
-    return params.toString();
-  };
-
-  const selectedFiltersUrlParams = useMemo(
-    () => getSearchParams(selectedFilters),
     [selectedFilters],
   );
 

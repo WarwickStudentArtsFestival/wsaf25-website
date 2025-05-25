@@ -16,10 +16,10 @@ export default function TimelineEventSessionCard({
     <div className="w-full h-full flex flex-col p-1">
       <Link
         href={`/events/${eventSession.event.id}`}
-        className="w-56 h-full p-1 block border text-black border-slate-300 rounded-md overflow-hidden"
+        className="min-w-32 h-full p-1 block border text-black border-slate-300 rounded-md overflow-hidden hover:shadow-sm"
         style={{ background: bgColor }}
       >
-        <p className="text-sm">{eventSession.event.name}</p>
+        <p className="text-sm font-semibold">{eventSession.event.name}</p>
         <p className="text-xs">
           {eventSession.start.toLocaleTimeString('en-gb', {
             hour: 'numeric',

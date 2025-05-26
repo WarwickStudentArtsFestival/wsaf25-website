@@ -4,6 +4,7 @@ import { EventSession } from '@/lib/events';
 import { eventDateTimeIntervals } from '@/lib/dates';
 import TimelineEventSessionCard from '@/app/events/components/event-sessions-list/timeline-event-session-card';
 import Link from 'next/link';
+import HighlightedHeading from '@/app/components/highlighted-heading';
 
 type TimelineData = {
   venues: string[];
@@ -153,12 +154,12 @@ export default function TimelineView({
       <table className="mt-2 mb-24 table-fixed">
         <thead className="sticky top-0 bg-white">
           <tr className=" text-black">
-            <th className="py-1 px-2 bg-white sticky left-2 z-10">
+            <th className="py-1 px-2 bg-white sticky left-2 z-10 w-[150px]">
               <p className="min-w-15">Time</p>
             </th>
             {/* venue header */}
             {timeline.venues.map((venue) => (
-              <th key={venue} className="py-1 px-2">
+              <th key={venue} className="py-1 px-2 w-[150px]">
                 <Link
                   href={`/venues/${venueInfo[venue]?.slug || ''}`}
                   className="block cursor-pointer hover:scale-[1.02]"
@@ -176,13 +177,17 @@ export default function TimelineView({
               <tr key={time.startTime} className="border-b-2 border-slate-300">
                 <th colSpan={timeline.venues.length + 1}>
                   <div className="pt-6">
-                    <h3 className="text-black uppercase">
-                      {new Date(time.startTime).toLocaleDateString('en-gb', {
-                        weekday: 'long',
-                        day: 'numeric',
-                        month: 'long',
-                      })}
-                    </h3>
+                    <HighlightedHeading
+                      text={new Date(time.startTime).toLocaleDateString(
+                        'en-gb',
+                        {
+                          weekday: 'long',
+                          day: 'numeric',
+                          month: 'long',
+                        },
+                      )}
+                      className="text-black"
+                    />
                   </div>
                 </th>
               </tr>

@@ -14,7 +14,7 @@ import { trackColourMap } from '@/lib/trackTypes';
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: number }>;
 }) {
   const { slug } = await params;
 

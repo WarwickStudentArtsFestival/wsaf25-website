@@ -7,7 +7,7 @@ import { durationCategories } from '@/data/events';
 import { ReactNode } from 'react';
 
 export type Event = {
-  id: string;
+  id: number;
   name: string;
   categoryPretalxTrack: string;
 
@@ -87,7 +87,7 @@ function constructEventSessionFromPretalxEvent(
     id: sessionId,
 
     event: {
-      id: event.guid,
+      id: event.id,
       name: event.title,
       categoryPretalxTrack: event.track,
 
@@ -131,11 +131,11 @@ export async function fetchEventSessionsInVenue(
 }
 
 export async function fetchEvent(
-  slug: string,
+  slug: number,
 ): Promise<EventWithSessions | null> {
   const eventsSessions = await fetchEventSessions();
   const eventSessions = eventsSessions.filter(
-    (event) => event.event.id === slug,
+    (session) => session.event.id == slug,
   );
   if (eventSessions.length === 0) return null;
 

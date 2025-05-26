@@ -25,21 +25,24 @@ export default function InfoCard({
     'border border-slate-300 rounded-md overflow-hidden w-full md:max-w-96 hover:scale-105 transition duration-100 ease-in-out';
 
   const cardContent = (
-    <>
-      <Image src={image} alt={imageAlt} className="object-contain w-full" />
-      <div className="p-4">
-        <h3 className="text-teal text-2xl font-semibold">{title}</h3>
-        {description.map((paragraph, index) => (
-          <p key={index} className={index === 0 ? 'mb-2' : ''}>
-            {paragraph}
-          </p>
-        ))}
-        <p className="mt-4 text-black flex items-center">
-          <FiArrowRight className="mr-1" />
-          {footer}
-        </p>
+    <div className="flex flex-col h-full">
+      {' '}
+      <div>
+        <Image src={image} alt={imageAlt} className="object-contain w-full" />
+        <div className="p-4">
+          <h3 className="text-teal text-2xl font-semibold">{title}</h3>
+          {description.map((paragraph, index) => (
+            <p key={index} className={index === 0 ? 'mb-2' : ''}>
+              {paragraph}
+            </p>
+          ))}
+        </div>
       </div>
-    </>
+      <div className="mt-auto text-black pt-0 p-4 flex items-center">
+        <FiArrowRight className="mr-1" />
+        {footer}
+      </div>
+    </div>
   );
 
   return isExternalLink ? (

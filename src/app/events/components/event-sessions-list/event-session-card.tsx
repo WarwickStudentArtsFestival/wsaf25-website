@@ -4,6 +4,7 @@ import {
   FiCalendar,
   FiClock,
   FiMapPin,
+  FiRepeat,
   FiUsers,
 } from 'react-icons/fi';
 import Link from 'next/link';
@@ -15,9 +16,11 @@ import { trackColourMap } from '@/lib/trackTypes';
 export default function EventSessionCard({
   eventSession,
   hideVenue,
+  numberOfSessions,
 }: {
   eventSession: EventSession;
   hideVenue?: boolean;
+  numberOfSessions?: number;
 }) {
   const rawTrack = eventSession.event.categoryPretalxTrack;
   const trackKey = rawTrack.replace(/\s/g, '');
@@ -88,6 +91,12 @@ export default function EventSessionCard({
                 })}
               </span>
             </li>
+            {numberOfSessions && (
+              <li className="flex items-center gap-2">
+                <FiRepeat style={{ color: trackColor }} />
+                <span>{numberOfSessions} Showings</span>
+              </li>
+            )}
           </ul>
         </div>
         <div className="flex items-center gap-2 mt-4 text-sm font-medium">

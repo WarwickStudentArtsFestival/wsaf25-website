@@ -37,16 +37,18 @@ export default function TimeOptions({
       </div>
 
       <div>
-        <div className="inline-flex gap-2 items-center">
+        <div className="inline-flex gap-1 items-center text-sm">
           <span>From</span>
           <DatetimeSelector
             dateTimeIndex={from}
             onChange={(value: number) => onChange({ dateFrom: value })}
+            small
           />
           <span>to</span>
           <DatetimeSelector
             dateTimeIndex={to}
             onChange={(value: number) => onChange({ dateTo: value })}
+            small
           />
         </div>
         <label className="mt-1 flex items-center cursor-pointer w-full">

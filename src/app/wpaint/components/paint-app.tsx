@@ -15,6 +15,29 @@ import ActionButton from './ActionButton';
 import { saveImage } from '../lib/saveImage';
 import SubmissionModal from './SubmissionModal';
 
+const saveCanvasState = () => {
+  const canvas = document.querySelector('canvas') as HTMLCanvasElement;
+  if (canvas) {
+    const dataURL = canvas.toDataURL();
+    localStorage.setItem('canvasState', dataURL);
+  }
+};
+
+const loadCanvasState = () => {
+  const savedCanvasState = localStorage.getItem('canvasState');
+  if (savedCanvasState) {
+    const canvas = document.querySelector('canvas') as HTMLCanvasElement;
+    const ctx = canvas?.getContext('2d');
+    if (ctx && canvas) {
+      const img = new window.Image();
+      img.onload = () => {
+        ctx.drawImage(img, 0, 0);
+      };
+      img.src = savedCanvasState;
+    }
+  }
+};
+
 const PaintApp = () => {
   const [brushSettings, setBrushSettings] = useState({
     color: '#4f1d75',
@@ -46,29 +69,6 @@ const PaintApp = () => {
   const undoCanvas = () => {
     canvasRef.current?.undo();
     saveCanvasState();
-  };
-
-  const saveCanvasState = () => {
-    const canvas = document.querySelector('canvas') as HTMLCanvasElement;
-    if (canvas) {
-      const dataURL = canvas.toDataURL();
-      localStorage.setItem('canvasState', dataURL);
-    }
-  };
-
-  const loadCanvasState = () => {
-    const savedCanvasState = localStorage.getItem('canvasState');
-    if (savedCanvasState) {
-      const canvas = document.querySelector('canvas') as HTMLCanvasElement;
-      const ctx = canvas?.getContext('2d');
-      if (ctx && canvas) {
-        const img = new window.Image();
-        img.onload = () => {
-          ctx.drawImage(img, 0, 0);
-        }; 
-        img.src = savedCanvasState;
-      }
-    }
   };
 
   useEffect(() => {

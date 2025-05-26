@@ -30,36 +30,57 @@ export default function DatetimeSlider({
   };
 
   return (
-    <div className="px-8 py-2 sticky bg-white z-60 top-16">
-      <div className="inline-flex gap-1.5 items-center text-sm text-black">
-        <span>Showing</span>
-        <span className="font-medium">{eventCount}</span>
-        <span>WSAF events from</span>
-        <DatetimeSelector
-          dateTimeIndex={fromIndex}
-          onChange={(value: number) => onChange({ dateFrom: value })}
-          small
-        />
-        <span>to</span>
-        <DatetimeSelector
-          dateTimeIndex={toIndex}
-          onChange={(value: number) => onChange({ dateTo: value })}
-          small
-        />
+    <div className="px-8 sm:pt-2 pb-1 lg:sticky bg-white z-20 top-0">
+      <div className="inline-flex gap-0.5 items-center text-sm text-black flex-wrap justify-center">
+        <div className="inline-flex gap-1.5 items-center">
+          <span>Showing</span>
+          <span className="font-medium">{eventCount}</span>
+          <span>WSAF events from</span>
+        </div>
+        <div className="inline-flex gap-1.5 items-center">
+          <DatetimeSelector
+            dateTimeIndex={fromIndex}
+            onChange={(value: number) => onChange({ dateFrom: value })}
+            small
+          />
+          <span>to</span>
+          <DatetimeSelector
+            dateTimeIndex={toIndex}
+            onChange={(value: number) => onChange({ dateTo: value })}
+            small
+          />
+        </div>
       </div>
 
-      <Slider
-        value={[fromIndex, toIndex]}
-        min={0}
-        max={eventDateTimeIntervals.all.length - 1}
-        step={1}
-        onChange={onSliderChange}
-        valueLabelDisplay="auto"
-        getAriaLabel={() => 'Date Range'}
-        getAriaValueText={sliderValueLabel}
-        valueLabelFormat={sliderValueLabel}
-        marks={marks}
-      />
+      <div className="xs:hidden !-mt-2">
+        <Slider
+          value={[fromIndex, toIndex]}
+          min={0}
+          max={eventDateTimeIntervals.all.length - 1}
+          step={1}
+          onChange={onSliderChange}
+          valueLabelDisplay="auto"
+          getAriaLabel={() => 'Date Range'}
+          getAriaValueText={sliderValueLabel}
+          valueLabelFormat={sliderValueLabel}
+          marks={marks}
+          size="small"
+        />
+      </div>
+      <div className="hidden xs:block !-mt-2">
+        <Slider
+          value={[fromIndex, toIndex]}
+          min={0}
+          max={eventDateTimeIntervals.all.length - 1}
+          step={1}
+          onChange={onSliderChange}
+          valueLabelDisplay="auto"
+          getAriaLabel={() => 'Date Range'}
+          getAriaValueText={sliderValueLabel}
+          valueLabelFormat={sliderValueLabel}
+          marks={marks}
+        />
+      </div>
     </div>
   );
 }

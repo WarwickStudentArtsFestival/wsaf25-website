@@ -14,6 +14,7 @@ export type FilterOption = {
 };
 
 export type SelectedFilters = {
+  view: 'list' | 'timeline';
   sort: 'random' | 'time' | 'venue';
   randomSeed: number | null;
   search: string | null;
@@ -26,6 +27,7 @@ export type SelectedFilters = {
 };
 
 export type SelectedFilterValues = {
+  view: 'list' | 'timeline';
   sort: 'random' | 'time' | 'venue';
   randomSeed: number | null;
   search: string | null;
@@ -43,6 +45,7 @@ export type EventSessionGroup = {
 };
 
 const defaultFilters: SelectedFilters = {
+  view: 'list',
   sort: 'random',
   randomSeed: new Date().getTime(),
   search: null,
@@ -83,10 +86,47 @@ export default function useEventSessionsFilters(
     useState<SelectedFilters>(defaultFilters);
 
   const searchParams = useSearchParams();
+
+  const selectedFiltersUrlParams = useMemo(() => {
+    const params = new URLSearchParams();
+
+    if (selectedFilters.view === 'timeline') params.set('timeline', '');
+    if (selectedFilters.sort !== 'random')
+      params.set('sort', selectedFilters.sort);
+    if (selectedFilters.search) params.set('search', selectedFilters.search);
+    if (selectedFilters.category) {
+      params.set(
+        'category',
+        getBitFieldFromFilterOptions(selectedFilters.category),
+      );
+    }
+    if (selectedFilters.venue) {
+      params.set('venue', getBitFieldFromFilterOptions(selectedFilters.venue));
+    }
+    if (selectedFilters.duration) {
+      params.set(
+        'duration',
+        getBitFieldFromFilterOptions(selectedFilters.duration),
+      );
+    }
+    if (selectedFilters.dateFrom !== 0) {
+      params.set('from', selectedFilters.dateFrom.toString());
+    }
+    if (selectedFilters.dateTo !== eventDateTimeIntervals.all.length - 1) {
+      params.set('to', selectedFilters.dateTo.toString());
+    }
+    if (selectedFilters.dropInOnly) {
+      params.set('dropInOnly', '');
+    }
+
+    return params.toString();
+  }, [selectedFilters]);
+
   // Update selected filters from URL search params when URL search params updated
   useEffect(() => {
     if (selectedFiltersUrlParams === searchParams.toString()) return;
 
+    const timelineParam = searchParams.get('timeline');
     const sortParam = searchParams.get('sort');
     const searchParam = searchParams.get('search');
     const categoryParam = searchParams.get('category');
@@ -116,6 +156,7 @@ export default function useEventSessionsFilters(
     }
 
     setSelectedFilters({
+      view: timelineParam !== null ? 'timeline' : 'list',
       sort: (sortParam && ['random', 'time', 'venue'].includes(sortParam)
         ? sortParam
         : 'random') as 'random' | 'time' | 'venue',
@@ -128,10 +169,12 @@ export default function useEventSessionsFilters(
       dateTo,
       dropInOnly: dropInOnlyParam !== null,
     });
-  }, [searchParams]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, context]);
 
   const selectedFilterValues = useMemo<SelectedFilterValues>(
     () => ({
+      view: selectedFilters.view,
       sort: selectedFilters.sort,
       randomSeed: selectedFilters.randomSeed,
       search: selectedFilters.search
@@ -150,43 +193,6 @@ export default function useEventSessionsFilters(
       dateTo: selectedFilters.dateTo,
       dropInOnly: selectedFilters.dropInOnly,
     }),
-    [selectedFilters],
-  );
-
-  const getSearchParams = (newFilters: Partial<SelectedFilters>) => {
-    const filters = {
-      ...selectedFilters,
-      ...newFilters,
-    };
-
-    const params = new URLSearchParams();
-
-    if (filters.sort !== 'random') params.set('sort', filters.sort);
-    if (filters.search) params.set('search', filters.search);
-    if (filters.category) {
-      params.set('category', getBitFieldFromFilterOptions(filters.category));
-    }
-    if (filters.venue) {
-      params.set('venue', getBitFieldFromFilterOptions(filters.venue));
-    }
-    if (filters.duration) {
-      params.set('duration', getBitFieldFromFilterOptions(filters.duration));
-    }
-    if (filters.dateFrom !== 0) {
-      params.set('from', filters.dateFrom.toString());
-    }
-    if (filters.dateTo !== eventDateTimeIntervals.all.length - 1) {
-      params.set('to', filters.dateTo.toString());
-    }
-    if (filters.dropInOnly) {
-      params.set('dropInOnly', '');
-    }
-
-    return params.toString();
-  };
-
-  const selectedFiltersUrlParams = useMemo(
-    () => getSearchParams(selectedFilters),
     [selectedFilters],
   );
 
@@ -272,51 +278,56 @@ export default function useEventSessionsFilters(
   ): { sessionGroups: EventSessionGroup[]; sessionCount: number } => {
     let sessionGroups: EventSessionGroup[] = [];
 
-    switch (selectedFilters.sort) {
-      case 'time': {
-        const orderedSessions = eventSessions.sort(
-          (a, b) => a.start.getTime() - b.start.getTime(),
-        );
-
-        let currentGroup: EventSessionGroup | null = null;
-        let currentGroupDate: number | null = null;
-        for (const session of orderedSessions) {
-          const sessionGroupDate = session.start.getUTCDate();
-          if (currentGroupDate !== sessionGroupDate) {
-            if (currentGroup) sessionGroups.push(currentGroup);
-            currentGroup = {
-              name: formatDate(session.start),
-              sessions: [session],
-            };
-            currentGroupDate = sessionGroupDate;
-          } else {
-            currentGroup?.sessions.push(session);
-          }
-        }
-        if (currentGroup) sessionGroups.push(currentGroup);
-        break;
-      }
-      case 'venue':
-        const orderedSessions = eventSessions.sort(
-          (a, b) => a.start.getTime() - b.start.getTime(),
-        );
-        sessionGroups = venuesOptions.map((venue) => ({
-          name: venue.label,
-          sessions: orderedSessions.filter(
-            (session) => session.venueName === venue.value,
+    if (selectedFilters.view === 'timeline') {
+      sessionGroups = [
+        {
+          name: null,
+          sessions: eventSessions.sort(
+            (a, b) => a.start.getTime() - b.start.getTime(),
           ),
-        }));
-        break;
-      default:
-        sessionGroups = [
-          {
-            name: null,
-            sessions: eventSessions
-              .map((session) => ({ sort: Math.random(), session }))
-              .sort((a, b) => a.sort - b.sort)
-              .map((item) => item.session),
-          },
-        ];
+        },
+      ];
+    } else if (selectedFilters.sort === 'venue') {
+      const orderedSessions = eventSessions.sort(
+        (a, b) => a.start.getTime() - b.start.getTime(),
+      );
+      sessionGroups = venuesOptions.map((venue) => ({
+        name: venue.label,
+        sessions: orderedSessions.filter(
+          (session) => session.venueName === venue.value,
+        ),
+      }));
+    } else if (selectedFilters.sort === 'time') {
+      const orderedSessions = eventSessions.sort(
+        (a, b) => a.start.getTime() - b.start.getTime(),
+      );
+
+      let currentGroup: EventSessionGroup | null = null;
+      let currentGroupDate: number | null = null;
+      for (const session of orderedSessions) {
+        const sessionGroupDate = session.start.getUTCDate();
+        if (currentGroupDate !== sessionGroupDate) {
+          if (currentGroup) sessionGroups.push(currentGroup);
+          currentGroup = {
+            name: formatDate(session.start),
+            sessions: [session],
+          };
+          currentGroupDate = sessionGroupDate;
+        } else {
+          currentGroup?.sessions.push(session);
+        }
+      }
+      if (currentGroup) sessionGroups.push(currentGroup);
+    } else {
+      sessionGroups = [
+        {
+          name: null,
+          sessions: eventSessions
+            .map((session) => ({ sort: Math.random(), session }))
+            .sort((a, b) => a.sort - b.sort)
+            .map((item) => item.session),
+        },
+      ];
     }
 
     return {

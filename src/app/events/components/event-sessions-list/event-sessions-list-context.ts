@@ -9,12 +9,25 @@ export type EventSessionsListContext = {
   venues: FilterOption[];
   durations: FilterOption[];
   dropInCount: number;
+  venueInfo: Record<string, { order: number; name: string; slug: string }>;
 };
 
 export default async function getContext(
   eventSessions: EventSession[],
 ): Promise<EventSessionsListContext> {
   const venues = await fetchVenuesWithEventCount();
+
+  const venueInfo: Record<
+    string,
+    { order: number; name: string; slug: string }
+  > = {};
+  for (let i = 0; i < venues.length; i++) {
+    venueInfo[venues[i].name] = {
+      order: i,
+      name: venues[i].name,
+      slug: venues[i].slug,
+    };
+  }
 
   return {
     eventSessions,
@@ -43,5 +56,6 @@ export default async function getContext(
       bitFieldIndex: duration.filterBitFieldIndex,
     })),
     dropInCount: eventSessions.filter((session) => session.event.dropIn).length,
+    venueInfo,
   };
 }

@@ -1,6 +1,6 @@
 import PageHeader from '@/app/components/page-header';
 import ErrorMessage from '@/app/components/ErrorMessage';
-import { fetchVenue } from '@/lib/venues';
+import { fetchVenueFromSlug } from '@/lib/venues';
 import React from 'react';
 import { fetchEventSessionsInVenue } from '@/lib/events';
 import Image from 'next/image';
@@ -21,7 +21,7 @@ export default async function VenuePage({
 
   // TODO: Better 404 page
   try {
-    venue = await fetchVenue(slug);
+    venue = await fetchVenueFromSlug(slug);
   } catch (error) {
     console.error('Error fetching rooms from API', error);
     return <ErrorMessage msg="Unknown error" />;

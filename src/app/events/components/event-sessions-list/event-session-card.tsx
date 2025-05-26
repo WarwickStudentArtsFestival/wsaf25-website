@@ -23,7 +23,6 @@ export default function EventSessionCard({
   const trackKey = rawTrack.replace(/\s/g, '');
   const trackColor = trackColourMap[trackKey] || '#000';
   const bgColor = `${trackColor}10`;
-
   return (
     <Link href={`/events/${eventSession.event.id}`}>
       <div

@@ -117,7 +117,7 @@ export default function DatetimeSelector({
     <>
       <button
         ref={refs.setReference}
-        className={`flex items-center hover:cursor-pointer border border-slate-300 rounded-md hover:bg-slate-100 justify-center ${small ? 'min-w-24 text-xs px-1 py-0.5' : 'min-w-28 text-sm px-2 py-1'}`}
+        className={`flex items-center cursor-pointer border border-slate-300 rounded-md hover:bg-slate-100 justify-center ${small ? 'min-w-24 text-xs px-1 py-0.5' : 'min-w-28 text-sm px-2 py-1'}`}
         {...getReferenceProps()}
       >
         {eventDateTimeIntervals.all[dateTimeIndex].dateTimeLabel}

@@ -150,10 +150,10 @@ export default function TimelineView({
 
   return (
     <main className="max-w-full sm:mx-2 -mx-4 overflow-x-auto">
-      <table className="mt-2 mx-4 mb-24 table-fixed">
+      <table className="mt-2 mb-24 table-fixed">
         <thead>
           <tr className="text-black">
-            <th className="py-1 px-2 bg-white sticky left-0 z-10">
+            <th className="py-1 px-2 bg-white sticky left-2 z-10">
               <p className="min-w-15">Time</p>
             </th>
             {timeline.venues.map((venue) => (
@@ -169,6 +169,7 @@ export default function TimelineView({
           </tr>
         </thead>
         <tbody>
+          {/* Day header row */}
           {timeline.times.map((time) =>
             time.type === 'day' ? (
               <tr key={time.startTime} className="border-b-2 border-slate-300">
@@ -189,7 +190,8 @@ export default function TimelineView({
                 key={time.startTime}
                 className={`${time.type === 'keytime' ? 'border-t border-slate-200' : ''} h-full`}
               >
-                <th className="text-black text-sm font-semibold">
+                {/* time header */}
+                <th className="text-black text-sm font-semibold sticky left-2 bg-white z-10">
                   <p className="min-h-[0.5rem]">
                     {time.type === 'keytime' &&
                       new Date(time.startTime).toLocaleTimeString('en-gb', {

@@ -149,15 +149,16 @@ export default function TimelineView({
   }, [sessionGroups, venueInfo]);
 
   return (
-    <main className="max-w-full sm:mx-2 -mx-4 overflow-x-auto">
+    <main className="max-w-full sm:mx-2 -mx-4 w-full overflow-x-auto">
       <table className="mt-2 mb-24 table-fixed">
         <thead>
           <tr className="text-black">
             <th className="py-1 px-2 bg-white sticky left-2 z-10">
               <p className="min-w-15">Time</p>
             </th>
+            {/* venue header */}
             {timeline.venues.map((venue) => (
-              <th key={venue} className="py-1 w-5 px-2">
+              <th key={venue} className="py-1 px-2">
                 <Link
                   href={`/venues/${venueInfo[venue]?.slug || ''}`}
                   className="block cursor-pointer hover:scale-[1.02]"
@@ -191,7 +192,7 @@ export default function TimelineView({
                 className={`${time.type === 'keytime' ? 'border-t border-slate-200' : ''} h-full`}
               >
                 {/* time header */}
-                <th className="text-black text-sm font-semibold sticky left-2 bg-white z-10">
+                <th className="text-black text-sm w-1/11 font-semibold sticky left-2 bg-white z-10">
                   <p className="min-h-[0.5rem]">
                     {time.type === 'keytime' &&
                       new Date(time.startTime).toLocaleTimeString('en-gb', {

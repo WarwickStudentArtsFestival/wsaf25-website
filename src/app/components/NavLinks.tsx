@@ -26,7 +26,10 @@ const navItems: NavItem[] = [
     // longLabel: 'Join the Crew',
     href: '/crew',
   },
-  { shortLabel: 'Performers Portal', href: 'https://pretalx.wsaf.org.uk/' },
+  {
+    shortLabel: 'Performers Portal',
+    href: 'https://pretalx.wsaf.org.uk/orga/login/',
+  },
 ];
 
 export default function NavLinks({ onClick }: Props) {

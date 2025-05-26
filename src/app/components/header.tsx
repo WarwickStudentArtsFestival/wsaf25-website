@@ -15,7 +15,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="top-0 z-50 sticky top-0 w-full bg-teal h-16 border-b border-b-white flex items-center text-white px-4 relative">
+    <header className="z-50 sticky top-0 w-full bg-teal h-16 border-b border-b-white flex items-center text-white px-4">
       {/* WSAF logo (left) */}
       <div className="text-left w-32 flex-shrink-0">
         <Link href="/" className="text-xl font-semibold">

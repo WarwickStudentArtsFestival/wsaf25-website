@@ -51,17 +51,17 @@ export default function EventSessionsList({
       )}
 
       <div className="flex flex-row px-2 sm:px-4 relative">
-        <aside className="sticky top-10 lg:top-24 h-[calc(100vh-15rem)] w-0 lg:w-auto z-20 mb-4">
+        <aside className="sticky top-24 h-[calc(100vh-15rem)] w-0 lg:w-auto z-20 mb-4">
           <div
             className={`transition-all duration-150 ease-in-out relative -left-80 lg:left-0 -ml-4 lg:ml-0 ${showMobileSidebar ? 'left-0' : '-left-80'}`}
           >
             <button
-              className="lg:hidden top-10 -z-10 left-72 w-20 h-12 pl-8 absolute bg-white border border-slate-300 rounded-md flex text-black justify-center items-center rounded-md cursor-pointer"
+              className="lg:hidden top-24 -z-10 left-72 w-20 h-12 pl-8 absolute bg-white border border-slate-300 flex text-black justify-center items-center rounded-md cursor-pointer"
               onClick={() => setShowMobileSidebar((prev) => !prev)}
             >
               <FaFilter />
             </button>
-            <div className="relative border border-slate-300 rounded-md bg-white w-80 pb-2 lg:pb-0">
+            <div className="relative border border-slate-300 rounded-md bg-white w-80 pb-2 lg:pb-0 pl-2 sm:pl-0">
               <OptionsSidebar
                 filteredCount={filteredSessionCount}
                 totalCount={eventSessions.length}

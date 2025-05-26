@@ -149,15 +149,15 @@ export default function TimelineView({
   }, [sessionGroups, venueInfo]);
 
   return (
-    <main className="max-w-full overflow-x-auto">
+    <main className="max-w-full sm:mx-2 -mx-4 overflow-x-auto">
       <table className="mt-2 mx-4 mb-24 table-fixed">
         <thead>
           <tr className="text-black">
-            <th className="py-1 px-2">
-              <p className="min-w-16">Time</p>
+            <th className="py-1 px-2 bg-white sticky left-0 z-10">
+              <p className="min-w-15">Time</p>
             </th>
             {timeline.venues.map((venue) => (
-              <th key={venue} className="py-1 px-2 w-96">
+              <th key={venue} className="py-1 w-5 px-2">
                 <Link
                   href={`/venues/${venueInfo[venue]?.slug || ''}`}
                   className="block cursor-pointer hover:scale-[1.02]"

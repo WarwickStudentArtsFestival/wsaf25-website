@@ -41,12 +41,14 @@ export default function EventSessionsList({
 
   return (
     <>
-      <DatetimeSlider
-        fromIndex={selectedFilterValues.dateFrom}
-        toIndex={selectedFilterValues.dateTo}
-        onChange={setFilter}
-        eventCount={filteredSessionCount}
-      />
+      {selectedFilters.view === 'list' && (
+        <DatetimeSlider
+          fromIndex={selectedFilterValues.dateFrom}
+          toIndex={selectedFilterValues.dateTo}
+          onChange={setFilter}
+          eventCount={filteredSessionCount}
+        />
+      )}
 
       <div className="flex flex-row px-2 sm:px-4 relative">
         <aside className="sticky top-10 lg:top-24 h-[calc(100vh-15rem)] w-0 lg:w-auto z-20 mb-4">

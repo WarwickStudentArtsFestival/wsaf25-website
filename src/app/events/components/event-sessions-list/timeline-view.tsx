@@ -149,10 +149,10 @@ export default function TimelineView({
   }, [sessionGroups, venueInfo]);
 
   return (
-    <main className="max-w-full sm:mx-2 -mx-4 w-full overflow-x-auto">
+    <main className="max-w-full lg:mx-2 -mx-4 w-full overflow-x-auto">
       <table className="mt-2 mb-24 table-fixed">
-        <thead>
-          <tr className="text-black">
+        <thead className="sticky top-0 bg-white">
+          <tr className=" text-black">
             <th className="py-1 px-2 bg-white sticky left-2 z-10">
               <p className="min-w-15">Time</p>
             </th>
@@ -192,7 +192,7 @@ export default function TimelineView({
                 className={`${time.type === 'keytime' ? 'border-t border-slate-200' : ''} h-full`}
               >
                 {/* time header */}
-                <th className="text-black text-sm w-1/11 font-semibold sticky left-2 bg-white z-10">
+                <th className="text-black text-sm w-1/12 font-semibold bg-white sticky left-2 z-10">
                   <p className="min-h-[0.5rem]">
                     {time.type === 'keytime' &&
                       new Date(time.startTime).toLocaleTimeString('en-gb', {
@@ -211,7 +211,7 @@ export default function TimelineView({
                     <td
                       key={j}
                       rowSpan={venueSession.rowSpan}
-                      className="h-full"
+                      className="h-full p-1"
                     >
                       {venueSession.eventSessions.length > 0 && (
                         <TimelineEventSessionCard

@@ -17,7 +17,7 @@ export default function TimelineEventSessionCard({
       <Link
         href={`/events/${eventSession.event.id}`}
         className="h-full p-1 block border text-black border-slate-300 rounded-md overflow-hidden hover:shadow-sm"
-        style={{ background: bgColor }}
+        style={{ background: bgColor, color: trackColor }}
       >
         <p className="text-sm font-semibold">{eventSession.event.name}</p>
         <p className="text-xs">

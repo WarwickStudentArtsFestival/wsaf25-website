@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ReactNode, ComponentType } from 'react';
+import { ComponentType, ReactNode } from 'react';
 
 type FooterLinkProps = {
   href: string;
@@ -20,7 +20,7 @@ export default function FooterLink({
     <li>
       <Link
         href={href}
-        className="text-muted-foreground hover:underline hover:text-slate-200"
+        className={`text-muted-foreground hover:underline hover:text-slate-200`}
         target={newTab ? '_blank' : undefined}
         rel={newTab ? 'noopener noreferrer' : undefined}
       >

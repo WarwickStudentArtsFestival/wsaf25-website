@@ -24,14 +24,14 @@ export default function Header() {
       </div>
 
       {/* Centered nav links (desktop only) */}
-      <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2">
+      <div className="hidden sm:flex absolute left-1/2 transform -translate-x-1/2">
         <nav className="flex gap-4">
           <NavLinks />
         </nav>
       </div>
 
-      {/* W-Paint (right on desktop) */}
-      <div className="hidden md:flex items-center gap-2 ml-auto">
+      {/* Right links (desktop) */}
+      <div className="hidden sm:flex items-center gap-2 ml-auto">
         <Link
           href="/wpaint"
           className={`flex items-center rounded hover:underline uppercase ${
@@ -46,23 +46,30 @@ export default function Header() {
             height={25}
           />
         </Link>
+
+        <Link
+          href="/crew"
+          className={`uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] ${pathname === '/crew' ? 'text-yellow-400' : 'bg-yellow text-black'}`}
+        >
+          <span className="hidden lg:inline">Join the </span>Crew
+        </Link>
       </div>
 
       {/* Hamburger button (mobile only) */}
-      <div className="md:hidden ml-auto">
+      <div className="sm:hidden ml-auto">
         <button
           onClick={toggleMobileMenu}
           aria-label="Toggle mobile menu"
           aria-expanded={mobileMenuOpen}
-          className="text-white p-2"
+          className="text-white p-2 cursor-pointer"
         >
           {mobileMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
         </button>
       </div>
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-16 z-100 left-0 right-0 bg-teal border-b border-b-white p-4">
+        <div className="sm:hidden absolute top-16 z-100 left-0 right-0 bg-teal border-b border-b-white p-4">
           <nav
-            className="flex flex-col gap-4 items-start w-full"
+            className="flex flex-col gap-6 items-start w-full"
             role="navigation"
           >
             <div className="flex flex-col gap-4 w-full">
@@ -84,6 +91,14 @@ export default function Header() {
                 width={25}
                 height={25}
               />
+            </Link>
+
+            <Link
+              href="/crew"
+              className={`uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] ${pathname === '/crew' ? 'text-yellow-400' : 'bg-yellow text-black'}`}
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Join the Crew
             </Link>
           </nav>
         </div>

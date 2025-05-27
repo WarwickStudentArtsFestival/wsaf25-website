@@ -17,9 +17,10 @@ export type FooterLinks = {
 
 const footerData: FooterLinks = {
   quick: [
-    { href: '/perform', label: 'Perform or Exhibit' },
+    { href: '/events', label: 'Events' },
+    { href: '/venues', label: 'Venues' },
     { href: '/crew', label: 'Join the Crew' },
-    { href: '/submit', label: 'Submit to WSAF' },
+    { href: '/perform', label: 'Perform or Exhibit' },
     { href: '/wpaint', label: 'W-Paint' },
   ],
   info: [

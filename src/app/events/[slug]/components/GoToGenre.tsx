@@ -1,4 +1,4 @@
-import { trackTypes, trackColourMap } from '@/lib/trackTypes';
+import { trackColourMap } from '@/lib/trackTypes';
 import { EventWithSessions } from '@/lib/events';
 import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';

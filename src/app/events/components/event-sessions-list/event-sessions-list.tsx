@@ -44,7 +44,7 @@ export default function EventSessionsList({
       <div className="flex flex-row px-2 sm:px-4 relative">
         <aside className="sticky top-24 h-[calc(100vh-15rem)] w-0 lg:w-auto z-20 my-4">
           <div
-            className={`transition-all duration-150 ease-in-out relative -left-80 lg:left-0 -ml-4 lg:ml-0 ${showMobileSidebar ? 'left-0' : '-left-80'}`}
+            className={`max-h-full transition-all duration-150 ease-in-out relative -left-80 lg:left-0 -ml-4 lg:ml-0 ${showMobileSidebar ? 'left-0' : '-left-80'}`}
           >
             <button
               className="lg:hidden top-24 -z-10 left-72 w-20 h-12 pl-8 absolute bg-white border border-slate-300 flex text-black justify-center items-center rounded-md cursor-pointer"

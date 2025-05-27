@@ -38,7 +38,7 @@ export default function EventDetails({ eventWithSessions }: EventDetailsProps) {
             <div key={idx} className="mb-6 ">
               {eventWithSessions.sessions.length > 1 && (
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  Session {idx + 1}
+                  Showing {idx + 1}
                 </h3>
               )}
               {talkDetails.map((detail, index) => (

@@ -41,17 +41,8 @@ export default function EventSessionsList({
 
   return (
     <>
-      {selectedFilters.view === 'list' && (
-        <DatetimeSlider
-          fromIndex={selectedFilterValues.dateFrom}
-          toIndex={selectedFilterValues.dateTo}
-          onChange={setFilter}
-          eventCount={filteredSessionCount}
-        />
-      )}
-
       <div className="flex flex-row px-2 sm:px-4 relative">
-        <aside className="sticky top-24 h-[calc(100vh-15rem)] w-0 lg:w-auto z-20 mb-4">
+        <aside className="sticky top-24 h-[calc(100vh-15rem)] w-0 lg:w-auto z-20 my-4">
           <div
             className={`transition-all duration-150 ease-in-out relative -left-80 lg:left-0 -ml-4 lg:ml-0 ${showMobileSidebar ? 'left-0' : '-left-80'}`}
           >
@@ -83,19 +74,30 @@ export default function EventSessionsList({
           ></div>
         )}
 
-        {selectedFilters.view === 'timeline' ? (
-          <TimelineView
-            sessionGroups={sessionGroups}
-            venueInfo={context.venueInfo}
-          />
-        ) : (
-          <ListView
-            filteredSessionCount={filteredSessionCount}
-            sessionCount={eventSessions.length}
-            resetFilters={resetFilters}
-            sessionGroups={sessionGroups}
-          />
-        )}
+        <div>
+          {selectedFilters.view === 'list' && (
+            <DatetimeSlider
+              fromIndex={selectedFilterValues.dateFrom}
+              toIndex={selectedFilterValues.dateTo}
+              onChange={setFilter}
+              eventCount={filteredSessionCount}
+            />
+          )}
+
+          {selectedFilters.view === 'timeline' ? (
+            <TimelineView
+              sessionGroups={sessionGroups}
+              venueInfo={context.venueInfo}
+            />
+          ) : (
+            <ListView
+              filteredSessionCount={filteredSessionCount}
+              sessionCount={eventSessions.length}
+              resetFilters={resetFilters}
+              sessionGroups={sessionGroups}
+            />
+          )}
+        </div>
 
         <footer className="absolute left-1/2 transform -translate-x-1/2 bottom-4 text-sm text-gray-500">
           Showing {filteredSessionCount} of {eventSessions.length} events

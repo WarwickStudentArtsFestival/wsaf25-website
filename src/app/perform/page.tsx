@@ -11,6 +11,7 @@ import Drama from '@/assets/perform/lastorders.jpg';
 import Music from '@/assets/perform/orch.jpg';
 import Dance from '@/assets/perform/dance.jpg';
 import SpokenWord from '@/assets/perform/spoken-word.jpg';
+import { FaPaintBrush } from 'react-icons/fa';
 
 export const metadata: Metadata = {
   title: 'Perform or Exhibit',
@@ -77,6 +78,18 @@ export default function Perform() {
           guarantee an available slot or inclusion in any promotional or
           physical material.
         </p>
+
+        <a
+          href="https://submit.wsaf.org.uk/2025/cfp"
+          target="_blank"
+          className="inline-block bg-secondary px-4 py-1 drop-shadow-sm my-4 hover:scale-105 bg-purple text-white"
+        >
+          <span className="block text-xl lg:text-2xl font-bold uppercase">
+            <FaPaintBrush className="inline-block mb-1 mr-2" /> Performers
+            Portal
+          </span>
+          <span className="block text-sm">Create or edit your submission</span>
+        </a>
       </div>
 
       <section className="my-4 max-w-8xl mx-auto">

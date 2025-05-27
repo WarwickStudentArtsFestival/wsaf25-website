@@ -89,13 +89,15 @@ export default function OptionsSidebar({
           </div>
         )}
 
-        <TimeOptions
-          from={selectedFilters.dateFrom}
-          to={selectedFilters.dateTo}
-          dropInOnly={selectedFilters.dropInOnly}
-          onChange={setFilter}
-          dropInCount={context.dropInCount}
-        />
+        {selectedFilters.view === 'list' && (
+          <TimeOptions
+            from={selectedFilters.dateFrom}
+            to={selectedFilters.dateTo}
+            dropInOnly={selectedFilters.dropInOnly}
+            onChange={setFilter}
+            dropInCount={context.dropInCount}
+          />
+        )}
 
         <FilterOptions
           label="Category"

@@ -12,24 +12,20 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { shortLabel: 'Venues', href: '/venues' },
   { shortLabel: 'Events', href: '/events' },
+  { shortLabel: 'Venues', href: '/venues' },
   // {
   //   shortLabel: 'Perform',
   //   longLabel: 'Perform or Exhibit',
   //   href: '/perform',
   // },
-  {
-    shortLabel: 'Join the Crew',
-    // longLabel: 'Join the Crew',
-    // shortLabel: 'Crew',
-    // longLabel: 'Join the Crew',
-    href: '/crew',
-  },
-  {
-    shortLabel: 'Performers Portal',
-    href: 'https://pretalx.wsaf.org.uk/orga/login/',
-  },
+  // {
+  // shortLabel: 'Join the Crew',
+  // longLabel: 'Join the Crew',
+  // shortLabel: 'Crew',
+  // longLabel: 'Join the Crew',
+  // href: '/crew',
+  // },
 ];
 
 export default function NavLinks({ onClick }: Props) {

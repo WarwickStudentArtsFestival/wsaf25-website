@@ -227,7 +227,7 @@ export default function TimelineView({
               time.type === 'day' ? (
                 <tr key={time.startTime}>
                   <th
-                    className={`border-t border-t-slate-200 border-b-2 border-b-slate-300 bg-white sticky ${i === 0 ? 'top-8' : 'top-4'}`}
+                    className={`border-t border-t-slate-200 border-b-2 border-b-slate-300 border-r border-r-slate-200 bg-white sticky ${i === 0 ? 'top-8' : 'top-4'}`}
                   />
                   <th
                     colSpan={timeline.venues.length}

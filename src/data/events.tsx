@@ -8,7 +8,6 @@ import {
   FaPaintBrush,
   FaPersonBooth,
   FaTheaterMasks,
-  FaUsers,
   FaWalking,
 } from 'react-icons/fa';
 
@@ -59,14 +58,14 @@ export const eventCategories: EventCategory[] = [
     colour: '#f59e0b', // amber-500
     filterBitFieldIndex: 3,
   },
-  {
-    pretalxTrack: 'Mixed',
-    slug: 'mixed',
-    label: 'Mixed',
-    icon: <FaUsers />,
-    colour: '#10b981', // emerald-500
-    filterBitFieldIndex: 4,
-  },
+  // {
+  //   pretalxTrack: 'Mixed',
+  //   slug: 'mixed',
+  //   label: 'Mixed',
+  //   icon: <FaUsers />,
+  //   colour: '#10b981', // emerald-500
+  //   filterBitFieldIndex: 4,
+  // },
   {
     pretalxTrack: 'Dance',
     slug: 'dance',
@@ -84,9 +83,9 @@ export const eventCategories: EventCategory[] = [
     filterBitFieldIndex: 6,
   },
   {
-    pretalxTrack: 'Creation',
-    slug: 'creation',
-    label: 'Creation',
+    pretalxTrack: 'Workshop',
+    slug: 'workshop',
+    label: 'Workshop',
     icon: <FaMagic />,
     colour: '#8b5cf6', // violet-500
     filterBitFieldIndex: 7,

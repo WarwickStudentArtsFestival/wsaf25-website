@@ -18,7 +18,7 @@ export default function ListView({
   disableVenues?: boolean;
 }) {
   return (
-    <main className="flex-1 mb-16 space-y-8">
+    <main className="flex flex-1 space-y-8 flex-col h-full">
       {filteredSessionCount === 0 ? (
         sessionCount === 0 ? (
           <p>No events were found. Please check back later!</p>
@@ -40,12 +40,12 @@ export default function ListView({
             {group.name && <HighlightedHeading text={group.name} />}
             <div
               className={`
-        relative w-full grid gap-2
-        grid-cols-2 md:grid-cols-3 xl:grid-cols-5 px-2
+        relative w-full grid gap-2 sm:gap-4
+        grid-cols-2 md:grid-cols-3 xl:grid-cols-5
       `}
             >
               {group.sessions.map((eventSession) => (
-                <div key={eventSession.id} className="w-full sm:p-2">
+                <div key={eventSession.id} className="w-full">
                   <EventSessionCard
                     eventSession={eventSession}
                     hideVenue={disableVenues}
@@ -56,6 +56,10 @@ export default function ListView({
           </div>
         ))
       )}
+
+      <footer className="mt-auto pt-16 mb-4 text-sm text-gray-500">
+        Showing {filteredSessionCount} of {sessionCount} events
+      </footer>
     </main>
   );
 }

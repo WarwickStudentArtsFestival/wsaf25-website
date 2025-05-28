@@ -11,6 +11,8 @@ import { FaArrowRight, FaWarehouse } from 'react-icons/fa';
 import EventSessionsList from '@/app/events/components/event-sessions-list/event-sessions-list';
 import getContext from '@/app/events/components/event-sessions-list/event-sessions-list-context';
 
+export const revalidate = 3600; // Fetch new information every hour
+
 export default async function VenuePage({
   params,
 }: {

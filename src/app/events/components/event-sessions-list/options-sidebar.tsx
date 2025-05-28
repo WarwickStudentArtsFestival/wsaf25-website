@@ -40,7 +40,7 @@ export default function OptionsSidebar({
     selectedFilters.dropInOnly;
 
   return (
-    <div className="p-4 pt-0 text-left h-[calc(100vh-15rem)] text-black overflow-auto max-h-screen">
+    <div className="p-4 pt-0 text-left max-h-[calc(100vh-10rem)] text-black overflow-auto">
       <div className="border-b flex gap-2 items-center pb-2 pt-4 sticky top-0 bg-white z-60">
         <h3 className="font-bold text-lg">Filters</h3>
         {hasFilters && (
@@ -119,15 +119,18 @@ export default function OptionsSidebar({
             }
           />
         )}
-        <FilterOptions
-          label="Duration"
-          options={context.durations}
-          selectedFilters={selectedFilters.duration}
-          selectedFilterValues={selectedFilterValues.duration}
-          onChange={(value: FilterOption[] | null) =>
-            setFilter({ duration: value })
-          }
-        />
+
+        {selectedFilters.view === 'list' && (
+          <FilterOptions
+            label="Duration"
+            options={context.durations}
+            selectedFilters={selectedFilters.duration}
+            selectedFilterValues={selectedFilterValues.duration}
+            onChange={(value: FilterOption[] | null) =>
+              setFilter({ duration: value })
+            }
+          />
+        )}
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ export default function TimelineEventSessionCard({
   const bgColor = `${trackColor}10`;
 
   return (
-    <div className="w-full h-full flex flex-col p-1">
+    <div className="w-full h-full flex flex-col my-0.5">
       <Link
         href={`/events/${eventSession.event.id}`}
         className="h-full p-1 block border text-black border-slate-300 rounded-md overflow-hidden hover:shadow-sm"

@@ -11,6 +11,8 @@ import GoToVenue from '@/app/events/[slug]/components/GoToVenue';
 import GoToGenre from '@/app/events/[slug]/components/GoToGenre';
 import { trackColourMap } from '@/lib/trackTypes';
 
+export const revalidate = 3600; // Fetch new information every hour
+
 export default async function Page({
   params,
 }: {

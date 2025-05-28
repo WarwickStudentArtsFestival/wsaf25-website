@@ -6,6 +6,8 @@ import { fetchVenuesWithEventCount } from '@/lib/venues';
 import VenueCard from '@/app/venues/venue-card';
 import React from 'react';
 
+export const revalidate = 3600; // Fetch new information every hour
+
 export const metadata: Metadata = {
   title: 'WSAF Venues',
   description: 'List of Venues, Rooms and Spaces in use at WSAF 2025',

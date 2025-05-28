@@ -1,10 +1,11 @@
 import { EventSessionGroup } from '@/app/events/components/event-sessions-list/event-sessions-filters';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { EventSession } from '@/lib/events';
 import { eventDateTimeIntervals } from '@/lib/dates';
 import TimelineEventSessionCard from '@/app/events/components/event-sessions-list/timeline-event-session-card';
 import Link from 'next/link';
 import HighlightedHeading from '@/app/components/highlighted-heading';
+import { FaArrowLeft } from 'react-icons/fa';
 
 type TimelineData = {
   venues: string[];
@@ -17,6 +18,7 @@ type TimelineDataTime = {
   // 'day' is a special type for the start of a day
   type: 'keytime' | 'session' | 'day';
   startTime: number;
+  startTimeSpan?: number;
   venueSessions: TimelineDataTimeVenueSession[];
 };
 
@@ -29,9 +31,13 @@ type TimelineDataTimeVenueSession = {
 export default function TimelineView({
   sessionGroups,
   venueInfo,
+  sessionCount,
+  resetFilters,
 }: {
   sessionGroups: EventSessionGroup[];
   venueInfo: Record<string, { order: number; name: string; slug: string }>;
+  sessionCount: number;
+  resetFilters: () => void;
 }) {
   const timeline = useMemo<TimelineData>(() => {
     if (sessionGroups.length === 0) {
@@ -143,93 +149,153 @@ export default function TimelineView({
       }
     }
 
+    // Set rowSpan for times
+    let lastKeytimeIndex = -1;
+    for (let i = 0; i < timelineTimes.length; i++) {
+      if (
+        timelineTimes[i].type === 'keytime' ||
+        timelineTimes[i].type === 'day'
+      ) {
+        if (lastKeytimeIndex !== -1) {
+          const rowSpan = i - lastKeytimeIndex;
+          for (let j = lastKeytimeIndex; j < i; j++) {
+            timelineTimes[j].startTimeSpan = rowSpan;
+          }
+        }
+
+        lastKeytimeIndex = i;
+      }
+    }
+
     return {
       venues,
       times: timelineTimes,
     };
   }, [sessionGroups, venueInfo]);
 
+  if (sessionGroups.length === 0) {
+    return (
+      <main className="flex flex-1 space-y-8 flex-col flex-grow mt-4">
+        {sessionCount === 0 ? (
+          <p>No events were found. Please check back later!</p>
+        ) : (
+          <div className="flex items-center flex-col gap-2">
+            <p>No events were found using your filters.</p>
+            <button
+              className="text-black gap-1 flex items-center hover:cursor-pointer border border-slate-300 rounded-md hover:bg-slate-100 justify-center px-4 py-1"
+              onClick={resetFilters}
+            >
+              <FaArrowLeft />
+              Clear Filters
+            </button>
+          </div>
+        )}
+      </main>
+    );
+  }
+
   return (
-    <main className="max-w-full lg:mx-2 -mx-4 w-full overflow-x-auto">
-      <table className="mt-4 mb-24 table-fixed">
-        <thead className="sticky top-0 bg-white">
-          <tr className=" text-black">
-            <th className="py-1 px-2 bg-white sticky left-2 z-10 w-[150px]">
-              <p className="min-w-15">Time</p>
-            </th>
-            {/* venue header */}
-            {timeline.venues.map((venue) => (
-              <th key={venue} className="py-1 px-2 w-[150px]">
-                <Link
-                  href={`/venues/${venueInfo[venue]?.slug || ''}`}
-                  className="block cursor-pointer hover:scale-[1.02]"
-                >
-                  {venue}
-                </Link>
+    <main className="lg:pt-4 pb-4 max-w-full">
+      {/* Parent element with border */}
+      <div className="overflow-x-auto border-2 border-slate-300 w-max max-w-full overflow-y-auto max-h-[calc(100vh-9rem)]">
+        {/* Table (scrollable) */}
+        <table className="table-fixed border-separate border-spacing-0">
+          <thead className="bg-white">
+            <tr className="text-black">
+              <th className="py-1 px-2 bg-white sticky left-0 top-0 z-[3] w-[150px] border-b border-r border-slate-200">
+                <p className="min-w-15">Time</p>
               </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {/* Day header row */}
-          {timeline.times.map((time) =>
-            time.type === 'day' ? (
-              <tr key={time.startTime} className="border-b-2 border-slate-300">
-                <th colSpan={timeline.venues.length + 1}>
-                  <div className="pt-6">
-                    <HighlightedHeading
-                      text={new Date(time.startTime).toLocaleDateString(
-                        'en-gb',
-                        {
-                          weekday: 'long',
-                          day: 'numeric',
-                          month: 'long',
-                        },
-                      )}
-                      className="text-black"
-                    />
-                  </div>
+              {/* venue header */}
+              {timeline.venues.map((venue) => (
+                <th
+                  key={venue}
+                  className="py-1 px-2 bg-white sticky top-0 z-[1] w-[150px] border-b border-slate-200"
+                >
+                  <Link
+                    href={`/venues/${venueInfo[venue]?.slug || ''}`}
+                    className="block cursor-pointer hover:scale-[1.02] w-max mx-auto"
+                  >
+                    {venue}
+                  </Link>
                 </th>
-              </tr>
-            ) : (
-              <tr
-                key={time.startTime}
-                className={`${time.type === 'keytime' ? 'border-t border-slate-200' : ''} h-full`}
-              >
-                {/* time header */}
-                <th className="text-black text-sm w-1/12 font-semibold bg-white sticky left-2 z-10">
-                  <p className="min-h-[0.5rem]">
-                    {time.type === 'keytime' &&
-                      new Date(time.startTime).toLocaleTimeString('en-gb', {
-                        hour: 'numeric',
-                        minute: '2-digit',
-                        hour12: true,
-                      })}
-                  </p>
-                </th>
-                {time.venueSessions
-                  .filter(
-                    (venueSession) =>
-                      venueSession.rowSpan === 1 || venueSession.eventStart,
-                  )
-                  .map((venueSession, j) => (
-                    <td
-                      key={j}
-                      rowSpan={venueSession.rowSpan}
-                      className="h-full p-1"
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {/* Day header row */}
+            {timeline.times.map((time, i) =>
+              time.type === 'day' ? (
+                <tr key={time.startTime}>
+                  <th
+                    className={`border-t border-t-slate-200 border-b-2 border-b-slate-300 border-r border-r-slate-200 bg-white sticky ${i === 0 ? 'top-8' : 'top-4'}`}
+                  />
+                  <th
+                    colSpan={timeline.venues.length}
+                    className={`border-t border-t-slate-200 border-b-2 border-slate-300 bg-white sticky ${i === 0 ? 'top-8' : 'top-4'}`}
+                  >
+                    <div className={i === 0 ? '' : 'pt-4'}>
+                      <HighlightedHeading
+                        text={new Date(time.startTime).toLocaleDateString(
+                          'en-gb',
+                          {
+                            weekday: 'long',
+                            day: 'numeric',
+                            month: 'long',
+                          },
+                        )}
+                        className="text-black"
+                      />
+                    </div>
+                  </th>
+                </tr>
+              ) : (
+                <tr key={time.startTime} className="h-full">
+                  {/* time header */}
+                  {time.type === 'keytime' && (
+                    <th
+                      className={`text-black text-sm w-1/12 font-semibold bg-white sticky left-0 z-[2] border-r border-slate-200 align-top pt-0.5 ${time.type === 'keytime' ? 'border-t' : ''}`}
+                      rowSpan={time.startTimeSpan}
                     >
-                      {venueSession.eventSessions.length > 0 && (
-                        <TimelineEventSessionCard
-                          eventSession={venueSession.eventSessions[0]}
-                        />
-                      )}
-                    </td>
-                  ))}
-              </tr>
-            ),
-          )}
-        </tbody>
-      </table>
+                      <p className="min-h-[0.5rem] border-slate-200">
+                        {new Date(time.startTime).toLocaleTimeString('en-gb', {
+                          hour: 'numeric',
+                          minute: '2-digit',
+                          hour12: true,
+                        })}
+                      </p>
+                    </th>
+                  )}
+
+                  {time.venueSessions
+                    .filter(
+                      (venueSession) =>
+                        venueSession.rowSpan === 1 || venueSession.eventStart,
+                    )
+                    .map((venueSession, j) => (
+                      <td
+                        key={j}
+                        rowSpan={venueSession.rowSpan}
+                        className={`px-1 ${time.type === 'keytime' ? 'border-t border-slate-200' : ''}`}
+                      >
+                        {venueSession.eventSessions.length > 0 ? (
+                          <TimelineEventSessionCard
+                            eventSession={
+                              venueSession.eventSessions[
+                                venueSession.eventSessions.length - 1
+                              ]
+                            }
+                          />
+                        ) : (
+                          <span className="block min-h-[0.5rem]"></span>
+                        )}
+                      </td>
+                    ))}
+                </tr>
+              ),
+            )}
+          </tbody>
+        </table>
+      </div>
     </main>
   );
 }

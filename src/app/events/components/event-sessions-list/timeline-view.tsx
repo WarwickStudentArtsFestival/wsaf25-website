@@ -152,7 +152,10 @@ export default function TimelineView({
     // Set rowSpan for times
     let lastKeytimeIndex = -1;
     for (let i = 0; i < timelineTimes.length; i++) {
-      if (timelineTimes[i].type === 'keytime') {
+      if (
+        timelineTimes[i].type === 'keytime' ||
+        timelineTimes[i].type === 'day'
+      ) {
         if (lastKeytimeIndex !== -1) {
           const rowSpan = i - lastKeytimeIndex;
           for (let j = lastKeytimeIndex; j < i; j++) {

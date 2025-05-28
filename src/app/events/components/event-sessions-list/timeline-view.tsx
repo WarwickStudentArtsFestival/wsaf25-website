@@ -276,7 +276,11 @@ export default function TimelineView({
                       >
                         {venueSession.eventSessions.length > 0 ? (
                           <TimelineEventSessionCard
-                            eventSession={venueSession.eventSessions[0]}
+                            eventSession={
+                              venueSession.eventSessions[
+                                venueSession.eventSessions.length - 1
+                              ]
+                            }
                           />
                         ) : (
                           <span className="block min-h-[0.5rem]"></span>

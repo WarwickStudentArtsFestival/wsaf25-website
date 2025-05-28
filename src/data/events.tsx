@@ -8,7 +8,6 @@ import {
   FaPaintBrush,
   FaPersonBooth,
   FaTheaterMasks,
-  FaUsers,
   FaWalking,
 } from 'react-icons/fa';
 

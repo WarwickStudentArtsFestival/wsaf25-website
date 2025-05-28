@@ -18,6 +18,7 @@ type TimelineDataTime = {
   // 'day' is a special type for the start of a day
   type: 'keytime' | 'session' | 'day';
   startTime: number;
+  startTimeSpan?: number;
   venueSessions: TimelineDataTimeVenueSession[];
 };
 
@@ -148,6 +149,21 @@ export default function TimelineView({
       }
     }
 
+    // Set rowSpan for times
+    let lastKeytimeIndex = -1;
+    for (let i = 0; i < timelineTimes.length; i++) {
+      if (timelineTimes[i].type === 'keytime') {
+        if (lastKeytimeIndex !== -1) {
+          const rowSpan = i - lastKeytimeIndex;
+          for (let j = lastKeytimeIndex; j < i; j++) {
+            timelineTimes[j].startTimeSpan = rowSpan;
+          }
+        }
+
+        lastKeytimeIndex = i;
+      }
+    }
+
     return {
       venues,
       times: timelineTimes,
@@ -232,18 +248,21 @@ export default function TimelineView({
               ) : (
                 <tr key={time.startTime} className="h-full">
                   {/* time header */}
-                  <th
-                    className={`text-black text-sm w-1/12 font-semibold bg-white sticky left-0 z-[2] border-r border-slate-200 ${time.type === 'keytime' ? 'border-t' : ''}`}
-                  >
-                    <p className="min-h-[0.5rem] border-slate-200">
-                      {time.type === 'keytime' &&
-                        new Date(time.startTime).toLocaleTimeString('en-gb', {
+                  {time.type === 'keytime' && (
+                    <th
+                      className={`text-black text-sm w-1/12 font-semibold bg-white sticky left-0 z-[2] border-r border-slate-200 align-top pt-0.5 ${time.type === 'keytime' ? 'border-t' : ''}`}
+                      rowSpan={time.startTimeSpan}
+                    >
+                      <p className="min-h-[0.5rem] border-slate-200">
+                        {new Date(time.startTime).toLocaleTimeString('en-gb', {
                           hour: 'numeric',
                           minute: '2-digit',
                           hour12: true,
                         })}
-                    </p>
-                  </th>
+                      </p>
+                    </th>
+                  )}
+
                   {time.venueSessions
                     .filter(
                       (venueSession) =>
@@ -253,12 +272,14 @@ export default function TimelineView({
                       <td
                         key={j}
                         rowSpan={venueSession.rowSpan}
-                        className={`h-full p-1 ${time.type === 'keytime' ? 'border-t border-slate-200' : ''}`}
+                        className={`px-1 ${time.type === 'keytime' ? 'border-t border-slate-200' : ''}`}
                       >
-                        {venueSession.eventSessions.length > 0 && (
+                        {venueSession.eventSessions.length > 0 ? (
                           <TimelineEventSessionCard
                             eventSession={venueSession.eventSessions[0]}
                           />
+                        ) : (
+                          <span className="block min-h-[0.5rem]"></span>
                         )}
                       </td>
                     ))}

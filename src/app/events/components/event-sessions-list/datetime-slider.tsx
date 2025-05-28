@@ -1,6 +1,6 @@
 'use client';
-
 import { Slider } from '@mui/material';
+import { useRef, useCallback, useState } from 'react';
 import { SelectedFilters } from '@/app/events/components/event-sessions-list/event-sessions-filters';
 import { eventDateTimeIntervals } from '@/lib/dates';
 import DatetimeSelector from '@/app/events/components/event-sessions-list/datetime-selector';
@@ -25,8 +25,26 @@ export default function DatetimeSlider({
   onChange: (value: Partial<SelectedFilters>) => void;
   eventCount: number;
 }) {
-  const onSliderChange = (event: Event, newValue: number[]) => {
-    onChange({ dateFrom: newValue[0], dateTo: newValue[1] });
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [localFromIndex, setLocalFromIndex] = useState(fromIndex);
+  const [localToIndex, setLocalToIndex] = useState(toIndex);
+
+  const debouncedOnChange = useCallback(
+    (value: Partial<SelectedFilters>) => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      timeoutRef.current = setTimeout(() => {
+        onChange(value);
+      }, 100);
+    },
+    [onChange],
+  );
+
+  const onSliderChange = (_event: Event, newValue: number[]) => {
+    setLocalFromIndex(newValue[0]);
+    setLocalToIndex(newValue[1]);
+    debouncedOnChange({ dateFrom: newValue[0], dateTo: newValue[1] });
   };
 
   return (
@@ -39,22 +57,21 @@ export default function DatetimeSlider({
         </div>
         <div className="inline-flex gap-1.5 items-center">
           <DatetimeSelector
-            dateTimeIndex={fromIndex}
+            dateTimeIndex={localFromIndex}
             onChange={(value: number) => onChange({ dateFrom: value })}
             small
           />
           <span>to</span>
           <DatetimeSelector
-            dateTimeIndex={toIndex}
+            dateTimeIndex={localToIndex}
             onChange={(value: number) => onChange({ dateTo: value })}
             small
           />
         </div>
       </div>
-
       <div className="xs:hidden !-mt-2">
         <Slider
-          value={[fromIndex, toIndex]}
+          value={[localFromIndex, localToIndex]}
           min={0}
           max={eventDateTimeIntervals.all.length - 1}
           step={1}
@@ -69,7 +86,7 @@ export default function DatetimeSlider({
       </div>
       <div className="hidden xs:block !-mt-2">
         <Slider
-          value={[fromIndex, toIndex]}
+          value={[localFromIndex, localToIndex]}
           min={0}
           max={eventDateTimeIntervals.all.length - 1}
           step={1}

@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: 'List of all the events on in WSAF 2025',
 };
 
+export const revalidate = 3600; // Fetch new information every hour
+
 export default async function EventsPage() {
   let eventSessions, context;
 

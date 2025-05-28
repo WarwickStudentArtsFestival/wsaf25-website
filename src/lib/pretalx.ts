@@ -79,7 +79,7 @@ export const pretalxHttpRequest = cache(async function pretalxHttpRequest<
         Authorization: `Token ${process.env.PRETALX_PRIVATE_API_TOKEN}`,
         Accept: 'application/json',
       },
-      next: { revalidate: 3600 },
+      next: { revalidate: 3600, tags: ['pretalx-schedule'] },
     });
 
     if (!res.ok) {

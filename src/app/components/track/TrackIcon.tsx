@@ -24,7 +24,7 @@ const iconMap: { [key: string]: JSX.Element } = {
   Mixed: <FaUsers />,
   Dance: <FaWalking />,
   VisualArt: <FaPaintBrush />,
-  Creation: <FaMagic />,
+  Workshop: <FaMagic />,
   MTWStagefest: <FaPersonBooth />,
   Film: <FaFilm />,
   SpokenWord: <FaMicrophoneAlt />,

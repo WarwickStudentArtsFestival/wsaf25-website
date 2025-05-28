@@ -84,9 +84,9 @@ export const eventCategories: EventCategory[] = [
     filterBitFieldIndex: 6,
   },
   {
-    pretalxTrack: 'Creation',
-    slug: 'creation',
-    label: 'Creation',
+    pretalxTrack: 'Workshop',
+    slug: 'workshop',
+    label: 'Workshop',
     icon: <FaMagic />,
     colour: '#8b5cf6', // violet-500
     filterBitFieldIndex: 7,

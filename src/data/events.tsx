@@ -59,14 +59,14 @@ export const eventCategories: EventCategory[] = [
     colour: '#f59e0b', // amber-500
     filterBitFieldIndex: 3,
   },
-  {
-    pretalxTrack: 'Mixed',
-    slug: 'mixed',
-    label: 'Mixed',
-    icon: <FaUsers />,
-    colour: '#10b981', // emerald-500
-    filterBitFieldIndex: 4,
-  },
+  // {
+  //   pretalxTrack: 'Mixed',
+  //   slug: 'mixed',
+  //   label: 'Mixed',
+  //   icon: <FaUsers />,
+  //   colour: '#10b981', // emerald-500
+  //   filterBitFieldIndex: 4,
+  // },
   {
     pretalxTrack: 'Dance',
     slug: 'dance',

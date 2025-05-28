@@ -52,7 +52,7 @@ export default function EventSessionsList({
             >
               <FaFilter />
             </button>
-            <div className="relative border border-slate-300 rounded-md bg-white w-80 pb-2 lg:pb-0 pl-2 sm:pl-0">
+            <div className="relative border border-slate-300 rounded-md bg-white w-80 pb-2 lg:pb-0 pl-2 sm:pl-0 mr-4">
               <OptionsSidebar
                 filteredCount={filteredSessionCount}
                 totalCount={eventSessions.length}
@@ -74,7 +74,7 @@ export default function EventSessionsList({
           ></div>
         )}
 
-        <div>
+        <div className="w-64 grow flex flex-col">
           {selectedFilters.view === 'list' && (
             <DatetimeSlider
               fromIndex={selectedFilterValues.dateFrom}
@@ -88,6 +88,8 @@ export default function EventSessionsList({
             <TimelineView
               sessionGroups={sessionGroups}
               venueInfo={context.venueInfo}
+              resetFilters={resetFilters}
+              sessionCount={eventSessions.length}
             />
           ) : (
             <ListView
@@ -98,10 +100,6 @@ export default function EventSessionsList({
             />
           )}
         </div>
-
-        <footer className="absolute left-1/2 transform -translate-x-1/2 bottom-4 text-sm text-gray-500">
-          Showing {filteredSessionCount} of {eventSessions.length} events
-        </footer>
       </div>
     </>
   );

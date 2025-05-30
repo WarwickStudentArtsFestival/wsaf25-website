@@ -90,6 +90,24 @@ const nextConfig = {
       permanent: true,
     },
     {
+      source: '/qr/p01',
+      destination:
+        'https://wsaf.org.uk/events?venue=2&from=49&to=97&utm_campaign=sat_schedule&utm_medium=print&utm_source=booklet',
+      permanent: true,
+    },
+    {
+      source: '/qr/p02',
+      destination:
+        'https://wsaf.org.uk/events?category=512&utm_campaign=screenings&utm_medium=print&utm_source=booklet',
+      permanent: true,
+    },
+    {
+      source: '/qr/p03',
+      destination:
+        'https://wsaf.org.uk/events?category=64&utm_campaign=gallery&utm_medium=print&utm_source=booklet',
+      permanent: true,
+    },
+    {
       source: '/submit',
       destination: 'https://submit.wsaf.org.uk/2025/cfp',
       permanent: true,

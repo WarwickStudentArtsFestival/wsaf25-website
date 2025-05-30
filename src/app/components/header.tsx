@@ -5,8 +5,6 @@ import { FiMenu, FiX } from 'react-icons/fi';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import NavLinks from './NavLinks';
-import Image from 'next/image';
-import PaintBrush from '@/assets/icons/paintbrush.png';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -33,25 +31,17 @@ export default function Header() {
       {/* Right links (desktop) */}
       <div className="hidden sm:flex items-center gap-2 ml-auto">
         <Link
-          href="/wpaint"
-          className={`flex items-center rounded hover:underline uppercase ${
-            pathname === '/wpaint' ? 'text-yellow-400' : 'text-white'
-          }`}
-        >
-          <div className="font-bold">W-Paint</div>
-          <Image
-            src={PaintBrush}
-            alt="Paint brush icon"
-            width={25}
-            height={25}
-          />
-        </Link>
-
-        <Link
           href="/crew"
           className={`uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] ${pathname === '/crew' ? 'text-yellow-400' : 'bg-yellow text-black'}`}
         >
           <span className="hidden lg:inline">Join the </span>Crew
+        </Link>
+
+        <Link
+          href="https://submit.wsaf.org.uk/2025/cfp"
+          className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
+        >
+          Performers <span className="hidden lg:inline">Portal</span>
         </Link>
       </div>
 
@@ -76,29 +66,19 @@ export default function Header() {
               <NavLinks onClick={() => setMobileMenuOpen(false)} />
             </div>
 
-            {/* W-Paint Link */}
-            <Link
-              href="/wpaint"
-              onClick={() => setMobileMenuOpen(false)}
-              className={`flex items-center mx-auto gap-2 rounded hover:underline uppercase ${
-                pathname === '/wpaint' ? 'text-yellow-400' : 'text-white'
-              }`}
-            >
-              <div className="font-bold">W-Paint</div>
-              <Image
-                src={PaintBrush}
-                alt="Paint brush icon"
-                width={25}
-                height={25}
-              />
-            </Link>
-
             <Link
               href="/crew"
               className={`uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] ${pathname === '/crew' ? 'text-yellow-400' : 'bg-yellow text-black'}`}
               onClick={() => setMobileMenuOpen(false)}
             >
               Join the Crew
+            </Link>
+            <Link
+              href="https://submit.wsaf.org.uk/2025/cfp"
+              className="uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] bg-yellow text-black"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Performers Portal
             </Link>
           </nav>
         </div>

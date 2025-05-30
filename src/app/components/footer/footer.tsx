@@ -1,4 +1,4 @@
-import { FaGithub, FaPaintBrush } from 'react-icons/fa';
+import { FaGithub } from 'react-icons/fa';
 import FooterSection from './FooterSection';
 import FooterLink from './FooterLink';
 import footerData from './footerData';
@@ -19,16 +19,19 @@ export default function Footer() {
               Celebrating student creativity at the University of Warwick
             </p>
 
-            <div className="text-left mt-4">
-              <a
-                href="https://submit.wsaf.org.uk/2025/cfp"
-                target="_blank"
-                className="inline-flex items-center gap-2 bg-yellow px-2 py-1 sm:px-4 sm:py-2 text-black font-semibold uppercase mr-auto hover:scale-[102%] text-sm lg:text-base"
-              >
-                <FaPaintBrush />
-                Performers Portal
-              </a>
-            </div>
+            {/* W-Paint Link TODO: fix styles */}
+            {/* <Link
+              href="/wpaint"
+              className="flex items-center mx-auto gap-2 rounded hover:underline uppercase text-black bg-yellow"
+            >
+              <div className="font-bold">W-Paint</div>
+              <Image
+                src={PaintBrush}
+                alt="Paint brush icon"
+                width={25}
+                height={25}
+              />
+            </Link> */}
           </FooterSection>
 
           <FooterSection title="Quick Links">

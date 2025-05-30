@@ -3,13 +3,24 @@ import FabGallery from '@/assets/venues/fab-gallery.jpg';
 import Avon from '@/assets/venues/avon.jpg';
 import Fab1 from '@/assets/venues/fab1.jpg';
 import Fab2 from '@/assets/venues/fab2.jpg';
-import Cinema from '@/assets/venues/fab2.jpg';
 import Rehearsal from '@/assets/venues/rehersal.jpg';
 import Terrace from '@/assets/venues/terrace.jpg';
+import Placeholder from '@/assets/hero.jpg';
 import { AdditionalVenueData } from '@/lib/venues';
 
 // Mapping from venue GUID to additional data
 const venues: Record<string, AdditionalVenueData> = {
+  // Milburn G55
+  '038ea818-8093-57c0-8bd8-1ca2927b488c': {
+    mapUrl:
+      'https://campus.warwick.ac.uk/search/623c889d421e6f5928c0d3d2?projectId=warwick',
+    image: Placeholder,
+    imageAlt: 'Placeholder',
+    roomLocation: 'Milburn G55',
+    slug: 'milburn-g55',
+    filterBitFieldIndex: 10,
+  },
+
   // Benefactors Place Stage
   'd629fdd8-158b-52e9-87a3-2491c02d2bb2': {
     mapUrl:
@@ -69,7 +80,7 @@ const venues: Record<string, AdditionalVenueData> = {
   '825706ae-0ef1-501b-a4a6-ca7026e2de75': {
     mapUrl:
       'https://campus.warwick.ac.uk/search/623c896e421e6f5928c0fe27?projectId=warwick',
-    image: Cinema,
+    image: Rehearsal,
     imageAlt: 'Image of FAB Cinema',
     roomLocation: 'Unknown',
     slug: 'fab-cinema',
@@ -102,7 +113,7 @@ const venues: Record<string, AdditionalVenueData> = {
   '01cbe95d-0b59-58a6-a7f2-3e2365e88a03': {
     mapUrl:
       'https://campus.warwick.ac.uk/search/623c889c421e6f5928c0d3a7?projectId=warwick',
-    image: Avon,
+    image: Placeholder,
     imageAlt:
       'Picture of a performance in a room that looks like Avon Drama Studio',
     roomLocation: 'The Graduate',

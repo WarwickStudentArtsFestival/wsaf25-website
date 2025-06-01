@@ -1,6 +1,6 @@
 # Workflow to build and push both static and container websites
 
-name: Build, Release and Publish Website (prod)
+name: 'Production build and deploy'
 
 on:
   # Runs on pushes targeting the default branch

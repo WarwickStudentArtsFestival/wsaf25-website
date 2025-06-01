@@ -134,7 +134,7 @@ jobs:
     needs: build-container
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.ref_name }}
+      name: main
 
     permissions:
       packages: write

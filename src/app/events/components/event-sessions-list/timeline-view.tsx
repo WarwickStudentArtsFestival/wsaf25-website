@@ -275,7 +275,7 @@ export default function TimelineView({
                       <td
                         key={j}
                         rowSpan={venueSession.rowSpan}
-                        className={`px-1 ${time.type === 'keytime' ? 'border-t border-slate-200' : ''}`}
+                        className={`h-full px-1 ${time.type === 'keytime' ? 'border-t border-slate-200' : ''}`}
                       >
                         {venueSession.eventSessions.length > 0 ? (
                           <TimelineEventSessionCard

@@ -5,7 +5,7 @@ name: Build, Release and Publish Website
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ['main', 'production']
+    branches: ['production']
 
   release:
     types: [published]
@@ -34,7 +34,7 @@ jobs:
     name: 'Build Website'
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.ref_name }}
+      name: production
 
     permissions:
       contents: read
@@ -182,26 +182,10 @@ jobs:
   #        id: deployment
   #        uses: actions/deploy-pages@v4
 
-  deploy-main:
-    name: 'Deploy to Dev'
-    needs: release-container
-    if: github.ref == 'refs/heads/main'
-
-    runs-on: ubuntu-latest
-    environment:
-      name: main
-      url: https://wsaf25-dev.containers.uwcs.co.uk
-    steps:
-      - name: Trigger Portainer Deployment
-        uses: newarifrh/portainer-service-webhook@v1
-        with:
-          webhook_url: ${{ secrets.PORTAINER_WEBHOOK_URL }}
-
   deploy-production:
     name: 'Deploy to Production'
     needs: release-container
     runs-on: ubuntu-latest
-    if: (github.event_name == 'push' && github.ref == 'refs/heads/production') || github.event_name == 'release'
     environment:
       name: production
       url: https://wsaf.org.uk

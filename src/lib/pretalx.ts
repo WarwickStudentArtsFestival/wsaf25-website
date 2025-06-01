@@ -13,7 +13,7 @@ export type PretalxScheduleTrack = {
 };
 
 export type PretalxScheduleDay = {
-  index: number;
+  index: number | string; // Use string for "gallery" day
   day_start: string;
   day_end: string;
   rooms: Record<string, PretalxScheduleEvent[]>;
@@ -103,6 +103,6 @@ export const pretalxApiRequest = (path: string): Promise<Response> => {
 
 export const fetchPretalxSchedule = (): Promise<PretalxScheduleJson> => {
   return pretalxHttpRequest<PretalxScheduleJson>(
-    `${process.env.PRETALX_EVENT_SLUG}/schedule/export/schedule.json`,
+    `${process.env.PRETALX_EVENT_SLUG}/p/broadcast-tools/wsaf_schedule.json`,
   );
 };

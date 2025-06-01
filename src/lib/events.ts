@@ -114,7 +114,10 @@ export async function fetchEventSessions(): Promise<EventSession[]> {
   const events = schedule.schedule.conference.days
     // Map over each day
     .flatMap((day: PretalxScheduleDay): EventSession[] =>
-      // Map over each room in the day
+      // Map over each room in the day, excluding the "gallery" day
+      day.index === "gallery"
+        ? []
+        :
       Object.values(day.rooms).flatMap((roomEvents) =>
         roomEvents.map(constructEventSessionFromPretalxEvent),
       ),

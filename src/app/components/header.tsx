@@ -3,14 +3,11 @@
 import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import NavLinks from './NavLinks';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
-
-  const pathname = usePathname();
 
   return (
     <header className="z-50 sticky top-0 w-full bg-teal h-16 border-b border-b-white flex items-center text-white px-4">

@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { FaCalendarPlus, FaDiscord } from 'react-icons/fa';
+import { FaCalendarPlus } from 'react-icons/fa';
 
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '@/app/components/highlighted-heading';
@@ -115,14 +115,14 @@ export default function Team() {
               for easier communication and to stay up to date!
             </p>
             <div className="flex gap-2 justify-center md:justify-end flex-wrap">
-              <a
+              {/*<a
                 href="/discord"
                 target="_blank"
                 className="inline-block bg-purple text-white uppercase font-bold px-3 py-1.5 drop-shadow-sm hover:scale-105 text-xl lg:text-2xl"
               >
                 <FaDiscord className="inline-block mb-1 mr-2" />
                 Join Discord
-              </a>
+              </a>*/}
               <a
                 href="https://helfertool.wsaf.org.uk/wsaf2025/"
                 target="_blank"

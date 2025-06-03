@@ -30,15 +30,24 @@ export default function Header() {
 
       {/* Right links (desktop) */}
       <div className="hidden sm:flex items-center gap-2 ml-auto">
-        <Link
+        {/*<Link
           href="/crew"
           className={`uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] ${pathname === '/crew' ? 'text-yellow-400' : 'bg-yellow text-black'}`}
         >
           <span className="hidden lg:inline">Join the </span>Crew
+        </Link>*/}
+
+        <Link
+          href="https://helfertool.wsaf.org.uk/wsaf2025/"
+          target="_blank"
+          className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
+        >
+          Crew <span className="hidden lg:inline">Signup</span>
         </Link>
 
         <Link
           href="https://submit.wsaf.org.uk/2025/cfp"
+          target="_blank"
           className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
         >
           Performers <span className="hidden lg:inline">Portal</span>
@@ -66,15 +75,24 @@ export default function Header() {
               <NavLinks onClick={() => setMobileMenuOpen(false)} />
             </div>
 
-            <Link
+            {/* <Link
               href="/crew"
               className={`uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] ${pathname === '/crew' ? 'text-yellow-400' : 'bg-yellow text-black'}`}
               onClick={() => setMobileMenuOpen(false)}
             >
               Join the Crew
+            </Link>*/}
+            <Link
+              href="https://helfertool.wsaf.org.uk/wsaf2025/"
+              target="_blank"
+              className="uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] bg-yellow text-black"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Crew Signup
             </Link>
             <Link
               href="https://submit.wsaf.org.uk/2025/cfp"
+              target="_blank"
               className="uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] bg-yellow text-black"
               onClick={() => setMobileMenuOpen(false)}
             >

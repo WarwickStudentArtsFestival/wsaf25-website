@@ -60,6 +60,11 @@ const nextConfig = {
       permanent: true,
     },
     {
+      source: '/volunteer',
+      destination: 'https://helfertool.wsaf.org.uk/wsaf2025/',
+      permanent: true,
+    },
+    {
       source: '/qr/d62',
       destination:
         'https://2024.wsaf.org.uk/schedule?utm_campaign=schedule&utm_medium=ds&utm_source=screens',

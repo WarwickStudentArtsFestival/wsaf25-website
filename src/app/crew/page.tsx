@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import { FaDiscord } from 'react-icons/fa';
+import { FaCalendarPlus, FaDiscord } from 'react-icons/fa';
 
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '@/app/components/highlighted-heading';
@@ -15,6 +15,7 @@ import Stewards from '@/assets/crew/circle-team.jpg';
 import Tech from '@/assets/crew/colourful-stage.jpg';
 import VenueManager from '@/assets/crew/fab-terrace-drone.jpg';
 import Operations from '@/assets/crew/flight-cases.jpg';
+import WBar from '@/assets/crew/wbar.jpg';
 
 export const metadata: Metadata = {
   title: 'Crew',
@@ -53,6 +54,12 @@ const crewRoles = [
       'The operations and logistics team ensures that the event runs smoothly and are on hand to resolve any issues that can crop up. This can range from transporting equipment between venues to sorting last-minute scheduling issues.',
     image: Operations,
   },
+  {
+    name: 'Catering & WBar Team',
+    description:
+      'Our catering team ensures that all volunteers are well fed and hydrated throughout the day. New for 2025, WSAF will also be running an outdoor bar on Benefactors Place which will also be staffed by volunteers.',
+    image: WBar,
+  },
 ];
 
 export default function Team() {
@@ -81,32 +88,48 @@ export default function Team() {
             <p className="mb-4">
               Not only do volunteers get to meet new people and gain new
               experience, but all crew receive a <strong>free T-shirt</strong>{' '}
-              and <strong>lunch</strong> on each day. If you&apos;d be
-              interested in helping out in any of the listed roles (or feel like
-              you could contribute in a different way), join the{' '}
-              <a href="/discord" target="_blank" className="text-accent">
-                Discord
-              </a>{' '}
-              or contact us at{' '}
+              and <strong>food</strong> each day.{' '}
+              <a href="/discord" target="_blank" className="text-teal">
+                Sign up to join our crew now
+              </a>
+              , or if you feel like you could contribute in a different way,
+              contact us at{' '}
               <a
                 href="mailto:info@wsaf.org.uk"
                 target="_blank"
                 className="text-teal"
               >
                 info@wsaf.org.uk
+              </a>{' '}
+              or{' '}
+              <a href="/discord" target="_blank" className="text-teal">
+                Discord
               </a>
               .
+            </p>
+            <p className="mb-4">
+              We also recommend that all volunteers join our{' '}
+              <a href="/discord" target="_blank" className="text-teal">
+                Discord
+              </a>{' '}
+              for easier communication and to stay up to date!
             </p>
             <div className="flex gap-2 justify-center md:justify-end flex-wrap">
               <a
                 href="/discord"
                 target="_blank"
-                className="inline-block bg-secondary px-4 py-1 rounded-sm drop-shadow-sm hover:scale-105"
+                className="inline-block bg-purple text-white uppercase font-bold px-3 py-1.5 drop-shadow-sm hover:scale-105 text-xl lg:text-2xl"
               >
-                <span className="text-xl lg:text-2xl bg-purple text-white p-2 uppercase font-bold">
-                  <FaDiscord className="inline-block mb-1 mr-2" />
-                  Join Discord
-                </span>
+                <FaDiscord className="inline-block mb-1 mr-2" />
+                Join Discord
+              </a>
+              <a
+                href="https://helfertool.wsaf.org.uk/wsaf2025/"
+                target="_blank"
+                className="inline-block bg-purple text-white uppercase font-bold px-3 py-1.5 drop-shadow-sm hover:scale-105 text-xl lg:text-2xl"
+              >
+                <FaCalendarPlus className="inline-block mb-1 mr-2" />
+                Sign Up Now
               </a>
             </div>
           </div>
@@ -123,7 +146,7 @@ export default function Team() {
 
       <section className="my-4 max-w-8xl mx-auto">
         <HighlightedHeading text="Crew Roles" />
-        <div className="mt-2 grid w-full px-2 xl:px-16 sm:py-4 sm:grid-cols-3 grid-cols-1 lg:grid-cols-5 gap-4">
+        <div className="mt-2 grid w-full px-2 xl:px-16 sm:py-4 xs:grid-cols-2 sm:grid-cols-3 grid-cols-1 lg:grid-cols-6 gap-4">
           {crewRoles.map((role) => (
             <RoleCard
               key={role.name}

@@ -2,6 +2,8 @@ import BandsocLogo from '@/assets/press/bandsoc.png';
 import MtwLogo from '@/assets/press/mtw-square.png';
 import MtwWhiteLogo from '@/assets/press/mtw-white.png';
 import TechCrewLogo from '@/assets/press/techcrew-logo-light-medium.png';
+import WarwickLifesavingLogo from '@/assets/press/warwick-lifesaving.png';
+import WarwickLifesavingWhiteLogo from '@/assets/press/warwick-lifesaving-white.png';
 import WarwickSuLogo from '@/assets/press/warwick-su.png';
 import { LogoDownload } from '@/app/press/LogoDownload';
 
@@ -27,6 +29,18 @@ export function PartnerLogos() {
       <LogoDownload
         image={MtwWhiteLogo}
         name="Music Theatre Warwick (White)"
+        size="w-24 max-w-48"
+        style="bg-slate-400 p-2"
+      />
+      <LogoDownload
+        image={WarwickLifesavingLogo}
+        name="Warwick Lifesaving (Colour)"
+        size="w-24 max-w-48"
+        style="bg-slate-400 p-2"
+      />
+      <LogoDownload
+        image={WarwickLifesavingWhiteLogo}
+        name="Warwick Lifesaving (White)"
         size="w-24 max-w-48"
         style="bg-slate-400 p-2"
       />

@@ -2,6 +2,7 @@ import { FaGithub } from 'react-icons/fa';
 import FooterSection from './FooterSection';
 import FooterLink from './FooterLink';
 import footerData from './footerData';
+import DeliveryPartners from '@/app/components/footer/delivery-partners';
 
 export default function Footer() {
   return (
@@ -50,13 +51,19 @@ export default function Footer() {
             </ul>
           </FooterSection>
 
-          <FooterSection title="Follow Us">
-            <ul className="flex align-center space-x-4">
-              {footerData.social.map((social, index) => (
-                <FooterLink key={index} {...social} />
-              ))}
-            </ul>
-          </FooterSection>
+          <div className="space-y-7">
+            <FooterSection title="Follow Us">
+              <ul className="flex align-center space-x-4">
+                {footerData.social.map((social, index) => (
+                  <FooterLink key={index} {...social} />
+                ))}
+              </ul>
+            </FooterSection>
+
+            <FooterSection title="Delivery Partners">
+              <DeliveryPartners />
+            </FooterSection>
+          </div>
         </div>
 
         <div className="mt-10 border-t pt-6 text-center text-sm">

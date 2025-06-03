@@ -119,6 +119,18 @@ const nextConfig = {
       permanent: true,
     },
     {
+      source: '/qr/p05',
+      destination:
+        'https://wsaf.org.uk/events?utm_campaign=schedule&utm_medium=print&utm_source=poster3',
+      permanent: true,
+    },
+    {
+      source: '/qr/p06',
+      destination:
+        'https://wsaf.org.uk?utm_campaign=main&utm_medium=print&utm_source=poster3',
+      permanent: true,
+    },
+    {
       source: '/submit',
       destination: 'https://submit.wsaf.org.uk/2025/cfp',
       permanent: true,

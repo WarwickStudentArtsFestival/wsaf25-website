@@ -7,7 +7,6 @@ type EventDetailsProps = {
 };
 
 export default function EventDetails({ eventWithSessions }: EventDetailsProps) {
-  console.log(eventWithSessions.sessions.length, 'sessions length');
   return (
     <div className="flex-1 h-fit text-left w-full overflow-hidden border bg-white border-gray-200 p-4">
       <h2 className="text-black text-xl font-semibold mb-4">Event Details</h2>

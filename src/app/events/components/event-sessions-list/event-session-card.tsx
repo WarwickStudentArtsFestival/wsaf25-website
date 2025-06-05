@@ -55,10 +55,10 @@ export default function EventSessionCard({
             {eventSession.event.name}
           </h3>
           <ul className="text-sm space-y-1">
-            {eventSession.event.artistName && (
+            {eventSession.event.artist.name && (
               <li className="flex items-center gap-2">
                 <FiUsers style={{ color: trackColor }} />
-                <span>{eventSession.event.artistName}</span>
+                <span>{eventSession.event.artist.name}</span>
               </li>
             )}
             {!hideVenue && (

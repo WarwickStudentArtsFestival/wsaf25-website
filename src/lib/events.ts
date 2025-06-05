@@ -11,13 +11,20 @@ export type Event = {
   name: string;
   categoryPretalxTrack: string;
 
-  abstract: string;
+  shortDescription: string;
   description: string;
 
   image: string;
 
   dropIn: boolean;
-  artistName: string | null;
+
+  artist: {
+    name?: string;
+    description?: string;
+    image?: string;
+    website?: string;
+    instagramHandle?: string;
+  };
 };
 
 export type Session = {
@@ -79,9 +86,6 @@ function constructEventSessionFromPretalxEvent(
 
   const dropIn = !!event.answers.find((answer) => answer.question === 11)
     ?.answer;
-  const artistName = event.answers.find(
-    (answer) => answer.question === 8,
-  )?.answer;
 
   return {
     id: sessionId,
@@ -91,13 +95,31 @@ function constructEventSessionFromPretalxEvent(
       name: event.title,
       categoryPretalxTrack: event.track,
 
-      abstract: event.abstract || '',
+      shortDescription: event.abstract || '',
       description: event.description,
 
       image: event.logo || '',
 
       dropIn,
-      artistName: artistName || null,
+
+      artist: {
+        name:
+          event.answers.find((answer) => answer.question === 8)?.answer || '',
+        description:
+          event.answers.find((answer) => answer.question === 12)?.answer || '',
+        website:
+          event.answers.find((answer) => answer.question === 14)?.answer || '',
+        instagramHandle:
+          event.answers.find((answer) => answer.question === 15)?.answer || '',
+
+        // It seems like this is returning e.g. file://Logo_.... which doesn't work
+        // Will probably need to use pretalx API here
+        image:
+          event.answers.find((answer) => answer.question === 13)?.answer || '',
+        // image: event.speakers[0]?.avatar || '',
+        // website: event.speakers[0]?.links?.find((link) => link.type === 'website')?.url || '',
+        // instagramHandle: event.answers.find((answer) => answer.question === 10)?.answer || '',
+      },
     },
 
     start,
@@ -115,12 +137,11 @@ export async function fetchEventSessions(): Promise<EventSession[]> {
     // Map over each day
     .flatMap((day: PretalxScheduleDay): EventSession[] =>
       // Map over each room in the day, excluding the "gallery" day
-      day.index === "gallery"
+      day.index === 'gallery'
         ? []
-        :
-      Object.values(day.rooms).flatMap((roomEvents) =>
-        roomEvents.map(constructEventSessionFromPretalxEvent),
-      ),
+        : Object.values(day.rooms).flatMap((roomEvents) =>
+            roomEvents.map(constructEventSessionFromPretalxEvent),
+          ),
     );
 
   return events;

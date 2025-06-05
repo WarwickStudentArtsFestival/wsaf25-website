@@ -52,6 +52,9 @@ export default async function Page({
 
           <div className="my-4">
             {/* <PresentedBy speakers={event.speakers} /> */}
+            {event.artist.name && (
+              <span className="italic text-lgçç">{event.artist.name}</span>
+            )}
             <h1
               style={{ color: trackColor }}
               className="text-4xl font-bold break-words px-2 -mx-6 sm:mx-auto "
@@ -77,10 +80,50 @@ export default async function Page({
               <h2 className="text-black text-xl font-semibold mb-4">
                 Description
               </h2>
+              {event.shortDescription && (
+                <div
+                  className="prose text-black font-semibold max-w-none mb-2"
+                  dangerouslySetInnerHTML={{ __html: event.shortDescription }}
+                />
+              )}
+
               <div
                 className="prose text-gray-700 max-w-none"
                 dangerouslySetInnerHTML={{ __html: event.description }}
               />
+
+              {event.artist.description && (
+                <div className="my-4">
+                  <h2 className="text-lg font-semibold">{event.artist.name}</h2>
+
+                  {event.artist.description && (
+                    <div>{event.artist.description}</div>
+                  )}
+
+                  {event.artist.instagramHandle && (
+                    <a
+                      href={`https://instagram.com/${event.artist.instagramHandle.replace('@', '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block mt-2 text-blue-500 hover:underline"
+                    >
+                      {event.artist.instagramHandle}
+                    </a>
+                  )}
+
+                  {event.artist.website && (
+                    <a
+                      href={event.artist.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block mt-2 text-blue-500 hover:underline"
+                    >
+                      {event.artist.website}
+                    </a>
+                  )}
+                </div>
+              )}
+
               <div className="hidden lg:block">
                 <h2 className="text-black text-xl font-semibold my-4">
                   Related Events

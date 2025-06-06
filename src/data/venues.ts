@@ -55,15 +55,15 @@ const venues: Record<string, AdditionalVenueData> = {
   },
 
   // FAB Rehearsal Rooms (0.16, 0.18)
-  '80629533-8164-5bcd-b21f-2874991078c2': {
-    mapUrl:
-      'https://campus.warwick.ac.uk/search/623c8961421e6f5928c0fb6d?projectId=warwick',
-    image: Rehearsal,
-    imageAlt: 'FAB Rehearsal Rooms (0.16, 0.18)',
-    roomLocation: 'FAB 0.16 & 0.18',
-    slug: 'fab-rehearsal-rooms',
-    filterBitFieldIndex: 4,
-  },
+  // '80629533-8164-5bcd-b21f-2874991078c2': {
+  //   mapUrl:
+  //     'https://campus.warwick.ac.uk/search/623c8961421e6f5928c0fb6d?projectId=warwick',
+  //   image: Rehearsal,
+  //   imageAlt: 'FAB Rehearsal Rooms (0.16, 0.18)',
+  //   roomLocation: 'FAB 0.16 & 0.18',
+  //   slug: 'fab-rehearsal-rooms',
+  //   filterBitFieldIndex: 4,
+  // },
 
   // FAB Terrace
   'fa0c1623-0556-5ee1-9768-546e34ee897c': {

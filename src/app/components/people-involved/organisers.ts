@@ -20,6 +20,8 @@ import NaomiPhoto from '@/assets/people/naiomi.jpg';
 import DanaiPhoto from '@/assets/people/danai.jpg';
 import StanPhoto from '@/assets/people/stan.jpg';
 import AliaPhoto from '@/assets/people/alia.jpg';
+import MaxPhoto from '@/assets/people/max.jpg';
+import DaePhoto from '@/assets/people/dae.jpg';
 
 interface RefactoredIdCardProps extends Omit<IdCardProps, 'description'> {
   year: string;
@@ -41,13 +43,18 @@ const organisers: RefactoredIdCardProps[] = [
     course: 'Chemistry (PhD)',
     image: AlexPhoto,
   },
-  // {
-  //   name: 'Dae',
-  //   role: 'WSAF Lead (Communications)',
-  //   year: '3rd Year',
-  //   course: 'Liberal Arts',
-  //   image: DaePhoto,
-  // },
+  {
+    name: 'Dae',
+    year: '3rd Year',
+    course: 'Liberal Arts',
+    image: DaePhoto,
+  },
+  {
+    name: 'Max',
+    year: 'Final Year',
+    course: 'Politics and International Studies',
+    image: MaxPhoto,
+  },
   {
     name: 'Maximus',
     role: 'WSAF Lead (Finance & Data)',

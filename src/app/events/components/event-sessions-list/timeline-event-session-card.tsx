@@ -23,19 +23,21 @@ export default function TimelineEventSessionCard({
         style={{ background: `${category.colour}10`, color: category.colour }}
       >
         <p className="text-sm font-semibold">{eventSession.event.name}</p>
-        <p className="text-xs">
-          {eventSession.start.toLocaleTimeString('en-gb', {
-            hour: 'numeric',
-            hour12: true,
-            minute: '2-digit',
-          })}{' '}
-          -{' '}
-          {eventSession.end.toLocaleTimeString('en-gb', {
-            hour: 'numeric',
-            hour12: true,
-            minute: '2-digit',
-          })}
-        </p>
+        {eventSession.start && eventSession.end && (
+          <p className="text-xs">
+            {eventSession.start.toLocaleTimeString('en-gb', {
+              hour: 'numeric',
+              hour12: true,
+              minute: '2-digit',
+            })}{' '}
+            -{' '}
+            {eventSession.end.toLocaleTimeString('en-gb', {
+              hour: 'numeric',
+              hour12: true,
+              minute: '2-digit',
+            })}
+          </p>
+        )}
       </Link>
     </div>
   );

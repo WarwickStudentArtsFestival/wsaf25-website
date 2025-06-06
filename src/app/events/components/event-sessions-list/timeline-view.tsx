@@ -41,6 +41,13 @@ export default function TimelineView({
   sessionCount: number;
   resetFilters: () => void;
 }) {
+  sessionGroups = sessionGroups.map((group) => ({
+    ...group,
+    sessions: group.sessions.filter(
+      (session) => session.venueName !== 'FAB Art Gallery',
+    ),
+  }));
+
   const contentRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({
     contentRef,
@@ -116,9 +123,11 @@ export default function TimelineView({
     const timesSet = new Set<number>(eventDateTimeIntervalTimes);
     const venuesSet = new Set<string>();
     for (const event of sessionGroups[0].sessions) {
-      timesSet.add(event.start.getTime());
-      timesSet.add(event.end.getTime());
-      venuesSet.add(event.venueName);
+      if (event.start && event.end) {
+        timesSet.add(event.start.getTime());
+        timesSet.add(event.end.getTime());
+        venuesSet.add(event.venueName);
+      }
     }
 
     // Sort venues somehow
@@ -161,7 +170,11 @@ export default function TimelineView({
       // Add any new sessions that start at this time
       while (nextSessionIndex < sessionGroups[0].sessions.length) {
         const nextSession = sessionGroups[0].sessions[nextSessionIndex];
-        if (nextSession.start.getTime() <= timelineTime.startTime) {
+        if (
+          nextSession.start &&
+          nextSession.end &&
+          nextSession.start.getTime() <= timelineTime.startTime
+        ) {
           inProgressSessions.push({
             endTime: nextSession.end.getTime(),
             session: nextSession,

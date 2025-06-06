@@ -109,7 +109,6 @@ const venues: Record<string, AdditionalVenueData> = {
     slug: 'avon-drama-studio',
     filterBitFieldIndex: 8,
   },
-
   // The Graduate
   // '01cbe95d-0b59-58a6-a7f2-3e2365e88a03': {
   //   mapUrl:

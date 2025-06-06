@@ -51,9 +51,17 @@ export default async function Page({
           </div>
 
           <div className="my-4">
-            {/* <PresentedBy speakers={event.speakers} /> */}
-            {event.artist.name && (
-              <span className="italic text-lgçç">{event.artist.name}</span>
+            {event.artist && event.artist.name && (
+              // <PresentedBy speaker={event.artist.name} />
+              <div
+                className="flex gap-4  italic text-2xl"
+                style={{ color: trackColor }}
+              >
+                <div className="flex flex-wrap">
+                  <span>{event.artist.name}</span>
+                  <span>&nbsp;presents...</span>
+                </div>
+              </div>
             )}
             <h1
               style={{ color: trackColor }}

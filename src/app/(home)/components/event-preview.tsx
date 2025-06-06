@@ -24,7 +24,7 @@ export default async function EventPreview() {
 
       <div className="bg-teal pb-8 overflow-hidden">
         <AutoScrollContainer>
-          <div className="flex gap-4 px-4 py-2 whitespace-nowrap">
+          <div className="flex gap-4 px-4 py-2">
             {eventSessions.map((eventSession, index) => (
               <div
                 key={`${eventSession.id}-${index}`}

@@ -10,14 +10,14 @@ import { AdditionalVenueData } from '@/lib/venues';
 
 // Mapping from venue GUID to additional data
 const venues: Record<string, AdditionalVenueData> = {
-  // Milburn G55
+  // Millburn G55
   '038ea818-8093-57c0-8bd8-1ca2927b488c': {
     mapUrl:
       'https://campus.warwick.ac.uk/search/623c889d421e6f5928c0d3d2?projectId=warwick',
     image: Placeholder,
     imageAlt: 'Placeholder',
-    roomLocation: 'Milburn G55',
-    slug: 'milburn-g55',
+    roomLocation: 'Millburn G55',
+    slug: 'Millburn-g55',
     filterBitFieldIndex: 10,
   },
 

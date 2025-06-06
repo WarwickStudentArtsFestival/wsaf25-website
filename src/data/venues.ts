@@ -82,17 +82,18 @@ const venues: Record<string, AdditionalVenueData> = {
       'https://campus.warwick.ac.uk/search/623c896e421e6f5928c0fe27?projectId=warwick',
     image: Rehearsal,
     imageAlt: 'Image of FAB Cinema',
-    roomLocation: 'Unknown',
+    roomLocation: 'FAB0.21',
     slug: 'fab-cinema',
     filterBitFieldIndex: 6,
   },
 
   // FAB Art Gallery
   'a818f296-8e34-5ee2-bd5a-728b35144d5d': {
-    mapUrl: '',
+    mapUrl:
+      'https://campus.warwick.ac.uk/search/623c8962421e6f5928c0fbcb?projectId=warwick',
     image: FabGallery,
     imageAlt: 'Picture of FAB Art Gallery',
-    roomLocation: 'Unknown',
+    roomLocation: 'TBD',
     slug: 'fab-art-gallery',
     filterBitFieldIndex: 7,
   },

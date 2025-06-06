@@ -5,7 +5,9 @@ import { eventDateTimeIntervals } from '@/lib/dates';
 import TimelineEventSessionCard from '@/app/events/components/event-sessions-list/timeline-event-session-card';
 import Link from 'next/link';
 import HighlightedHeading from '@/app/components/highlighted-heading';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaPrint } from 'react-icons/fa';
+import { useReactToPrint } from 'react-to-print';
+import { useRef } from 'react';
 
 type TimelineData = {
   venues: string[];
@@ -39,6 +41,67 @@ export default function TimelineView({
   sessionCount: number;
   resetFilters: () => void;
 }) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const reactToPrintFn = useReactToPrint({
+    contentRef,
+    documentTitle: `WSAF Event Sessions Timeline - ${new Date().toISOString()}`,
+    pageStyle: `
+    @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap');
+
+    body {
+      font-family: 'Lexend', sans-serif;
+    }
+
+    @page {
+      size: A4 landscape; 
+      margin: 0; 
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      page-break-after: avoid;
+      page-break-inside: avoid;
+      font-weight: 700; 
+      color: #000; 
+    }
+
+    .highlighted-heading {
+      background-color: #FFBD00 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    table {
+      width: 100%; 
+      border-collapse: collapse; 
+      page-break-inside: auto;
+    }
+
+    .timeline-event-session-card {
+      page-break-inside: avoid;
+      break-inside: avoid; 
+    }
+
+    .sticky {
+      position: static !important; 
+    }
+
+    .w-max {
+      width: auto !important; 
+    }
+
+    .max-w-full {
+      max-width: 100% !important;
+    }
+    .overflow-x-auto, .overflow-y-auto {
+      overflow: visible !important;
+    }
+
+    .h-full {
+      height: auto !important; 
+    }
+  `,
+  });
+
   const timeline = useMemo<TimelineData>(() => {
     if (sessionGroups.length === 0) {
       return { venues: [], times: [] };
@@ -196,8 +259,22 @@ export default function TimelineView({
 
   return (
     <main className="lg:pt-4 pb-4 max-w-full">
+      <div className="flex align-right justify-end mb-4 2xl:mr-8">
+        <button
+          className="text-black gap-1 flex items-center hover:cursor-pointer border border-slate-300 rounded-md hover:bg-slate-100 justify-center px-4 py-1"
+          onClick={reactToPrintFn}
+        >
+          <FaPrint />
+          Print
+        </button>
+      </div>
+
       {/* Parent element with border */}
-      <div className="overflow-x-auto border-2 border-slate-300 w-max max-w-full overflow-y-auto max-h-[calc(100vh-9rem)]">
+      <div
+        ref={contentRef}
+        className="overflow-x-auto border-2 border-slate-300 w-max max-w-full overflow-y-auto max-h-[calc(100vh-9rem)]"
+        // className="border-2 border-slate-300 w-max max-w-full"
+      >
         {/* Table (scrollable) */}
         <table className="table-fixed border-separate border-spacing-0">
           <thead className="bg-white">

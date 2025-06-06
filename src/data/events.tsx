@@ -77,7 +77,7 @@ export const eventCategories: EventCategory[] = [
   {
     pretalxTrack: 'Visual Art (displayed)',
     slug: 'visual-art',
-    label: 'Visual Art (displayed)',
+    label: 'Visual Art',
     icon: <FaPaintBrush />,
     colour: '#f97316', // orange-500
     filterBitFieldIndex: 6,

@@ -249,9 +249,11 @@ export default function useEventSessionsFilters(
         eventDateTimeIntervals.all[selectedFilterValues.dateFrom].date;
 
       if (eventSession.event.dropIn) {
-        if (eventSession.end.getTime() < earliestTime) return false;
+        if (eventSession.end && eventSession.end.getTime() < earliestTime)
+          return false;
       } else {
-        if (eventSession.start.getTime() < earliestTime) return false;
+        if (eventSession.start && eventSession.start.getTime() < earliestTime)
+          return false;
       }
     }
     if (!eventDateTimeIntervals.all[selectedFilterValues.dateTo].allowAfter) {
@@ -259,9 +261,11 @@ export default function useEventSessionsFilters(
         eventDateTimeIntervals.all[selectedFilterValues.dateTo].date;
 
       if (eventSession.event.dropIn) {
-        if (eventSession.start.getTime() > latestTime) return false;
+        if (eventSession.start && eventSession.start.getTime() > latestTime)
+          return false;
       } else {
-        if (eventSession.end.getTime() > latestTime) return false;
+        if (eventSession.end && eventSession.end.getTime() > latestTime)
+          return false;
       }
     }
 
@@ -283,13 +287,16 @@ export default function useEventSessionsFilters(
         {
           name: null,
           sessions: eventSessions.sort(
-            (a, b) => a.start.getTime() - b.start.getTime(),
+            (a, b) =>
+              (a.start ? a.start.getTime() : 0) -
+              (b.start ? b.start.getTime() : 0),
           ),
         },
       ];
     } else if (selectedFilters.sort === 'venue') {
       const orderedSessions = eventSessions.sort(
-        (a, b) => a.start.getTime() - b.start.getTime(),
+        (a, b) =>
+          (a.start ? a.start.getTime() : 0) - (b.start ? b.start.getTime() : 0),
       );
       sessionGroups = venuesOptions.map((venue) => ({
         name: venue.label,
@@ -299,17 +306,20 @@ export default function useEventSessionsFilters(
       }));
     } else if (selectedFilters.sort === 'time') {
       const orderedSessions = eventSessions.sort(
-        (a, b) => a.start.getTime() - b.start.getTime(),
+        (a, b) =>
+          (a.start ? a.start.getTime() : 0) - (b.start ? b.start.getTime() : 0),
       );
 
       let currentGroup: EventSessionGroup | null = null;
       let currentGroupDate: number | null = null;
       for (const session of orderedSessions) {
-        const sessionGroupDate = session.start.getUTCDate();
+        const sessionGroupDate = session.start
+          ? session.start.getUTCDate()
+          : null;
         if (currentGroupDate !== sessionGroupDate) {
           if (currentGroup) sessionGroups.push(currentGroup);
           currentGroup = {
-            name: formatDate(session.start),
+            name: session.start ? formatDate(session.start) : 'TBD',
             sessions: [session],
           };
           currentGroupDate = sessionGroupDate;

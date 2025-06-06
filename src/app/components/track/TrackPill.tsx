@@ -29,7 +29,7 @@ const TrackPill: React.FC<TrackPillProps> = ({
         border: `1px solid ${category.colour}`,
       }}
     >
-      {track}
+      {category.label}
     </span>
   ) : null;
 

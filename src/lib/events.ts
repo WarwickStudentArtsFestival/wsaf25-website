@@ -30,9 +30,9 @@ export type Event = {
 export type Session = {
   id: string;
 
-  start: Date;
-  end: Date;
-  minutes: number;
+  start: Date | null;
+  end: Date | null;
+  minutes: number | null;
   durationCategory: string;
 
   venueName: string;
@@ -65,24 +65,28 @@ export type EventCategory = {
 function constructEventSessionFromPretalxEvent(
   event: PretalxScheduleEvent,
 ): EventSession {
-  const start = new Date(event.date);
+  let start = null;
+  let end = null;
+  let minutes: number | null = null;
+  let durationCategory = null;
+  let sessionId = event.guid;
 
-  // Convert duration from hours:minutes to minutes
-  const splitDuration = event.duration.split(':');
-  const minutes = parseInt(splitDuration[1]) + parseInt(splitDuration[0]) * 60;
-
-  const end = new Date(event.date);
-  end.setMinutes(end.getMinutes() + minutes);
-
-  const durationCategory = durationCategories.findLast(
-    (category) => category.minMinutes <= minutes,
-  );
-
-  // Generate ID based on the event ID and day + (hour mod 2).
-  // This means that this will BREAK if there is any event with sessions within
-  // two hours of each other. But if a session is moved to a different room or
-  // shifted by up to an hour, everything else will be persisted.
-  const sessionId = `${event.guid}-${start.getUTCDay()}-${start.getUTCHours() % 2}`;
+  if (event.date) {
+    start = new Date(event.date);
+    const splitDuration = event.duration.split(':');
+    // Convert duration from hours:minutes to minutes
+    end = new Date(event.date);
+    minutes = parseInt(splitDuration[1]) + parseInt(splitDuration[0]) * 60;
+    end.setMinutes(end.getMinutes() + minutes);
+    durationCategory = durationCategories.findLast(
+      (category) => category.minMinutes <= (minutes as number),
+    );
+    // Generate ID based on the event ID and day + (hour mod 2).
+    // This means that this will BREAK if there is any event with sessions within
+    // two hours of each other. But if a session is moved to a different room or
+    // shifted by up to an hour, everything else will be persisted.
+    sessionId = `${event.guid}-${start.getUTCDay()}-${start.getUTCHours() % 2}`;
+  }
 
   const dropIn = !!event.answers.find((answer) => answer.question === 11)
     ?.answer;
@@ -132,19 +136,16 @@ function constructEventSessionFromPretalxEvent(
 
 export async function fetchEventSessions(): Promise<EventSession[]> {
   const schedule = await fetchPretalxSchedule();
-
-  const events = schedule.schedule.conference.days
-    // Map over each day
-    .flatMap((day: PretalxScheduleDay): EventSession[] =>
-      // Map over each room in the day, excluding the "gallery" day
-      day.index === 'gallery'
-        ? []
-        : Object.values(day.rooms).flatMap((roomEvents) =>
-            roomEvents.map(constructEventSessionFromPretalxEvent),
-          ),
-    );
-
-  return events;
+  return (
+    schedule.schedule.conference.days
+      // Map over each day
+      .flatMap((day: PretalxScheduleDay): EventSession[] =>
+        // Map over each room in the day, excluding the "gallery" day
+        Object.values(day.rooms).flatMap((roomEvents) =>
+          roomEvents.map(constructEventSessionFromPretalxEvent),
+        ),
+      )
+  );
 }
 
 export async function fetchEventSessionsInVenue(

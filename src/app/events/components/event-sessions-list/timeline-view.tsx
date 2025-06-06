@@ -6,6 +6,8 @@ import TimelineEventSessionCard from '@/app/events/components/event-sessions-lis
 import Link from 'next/link';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import { FaArrowLeft } from 'react-icons/fa';
+import { useReactToPrint } from 'react-to-print';
+import { useRef } from 'react';
 
 type TimelineData = {
   venues: string[];
@@ -39,6 +41,20 @@ export default function TimelineView({
   sessionCount: number;
   resetFilters: () => void;
 }) {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const reactToPrintFn = useReactToPrint({
+    contentRef,
+    documentTitle: 'WSAF Event Sessions Timeline',
+    pageStyle: `
+      @import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+      body {
+        font-family: 'Lexend', sans-serif;
+      }
+    `,
+  });
+
   const timeline = useMemo<TimelineData>(() => {
     if (sessionGroups.length === 0) {
       return { venues: [], times: [] };
@@ -196,8 +212,13 @@ export default function TimelineView({
 
   return (
     <main className="lg:pt-4 pb-4 max-w-full">
+      <button onClick={reactToPrintFn}>Print</button>
       {/* Parent element with border */}
-      <div className="overflow-x-auto border-2 border-slate-300 w-max max-w-full overflow-y-auto max-h-[calc(100vh-9rem)]">
+      <div
+        ref={contentRef}
+        // className="overflow-x-auto border-2 border-slate-300 w-max max-w-full overflow-y-auto max-h-[calc(100vh-9rem)]"
+        className="border-2 border-slate-300 w-max max-w-full"
+      >
         {/* Table (scrollable) */}
         <table className="table-fixed border-separate border-spacing-0">
           <thead className="bg-white">

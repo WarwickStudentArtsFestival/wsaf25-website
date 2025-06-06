@@ -4,6 +4,8 @@ import MtwLogo from '@/assets/delivery-partners/mtw-white-small.png';
 import BandsocLogo from '@/assets/delivery-partners/bandsoc-small.jpg';
 import LifesavingLogo from '@/assets/delivery-partners/warwick-lifesaving-small.png';
 import SuLogo from '@/assets/delivery-partners/warwick-su.svg';
+import RawLogo from '@/assets/delivery-partners/raw.jpg';
+import UwcsLogo from '@/assets/delivery-partners/uwcs.svg';
 
 export default function DeliveryPartners() {
   return (
@@ -18,6 +20,24 @@ export default function DeliveryPartners() {
             src={WarwickTechCrewLogo}
             alt="Warwick Tech Crew Logo"
             className="w-8 group-hover:scale-105"
+          />
+        </a>
+        <a href="https://uwcs.co.uk/" target="_blank" className="group">
+          <Image
+            src={UwcsLogo}
+            alt="University of Warwick Computing Society Logo"
+            className="w-20 group-hover:scale-105"
+          />
+        </a>
+        <a
+          href="https://radio.warwick.ac.uk/"
+          target="_blank"
+          className="group"
+        >
+          <Image
+            src={RawLogo}
+            alt="Radio at Warwick Logo"
+            className="w-16 group-hover:scale-105"
           />
         </a>
         <a

@@ -5,6 +5,8 @@ import TechCrewLogo from '@/assets/press/techcrew-logo-light-medium.png';
 import WarwickLifesavingLogo from '@/assets/press/warwick-lifesaving.png';
 import WarwickLifesavingWhiteLogo from '@/assets/press/warwick-lifesaving-white.png';
 import WarwickSuLogo from '@/assets/press/warwick-su.png';
+import UwcsLogo from '@/assets/press/uwcs.png';
+import RawLogo from '@/assets/press/raw.jpg';
 import { LogoDownload } from '@/app/press/LogoDownload';
 
 export function PartnerLogos() {
@@ -16,6 +18,13 @@ export function PartnerLogos() {
         size="w-18 max-w-32"
         href="https://wwtc.uk/brand"
       />
+      <LogoDownload
+        image={UwcsLogo}
+        name="University of Warwick Computing Society"
+        size="w-32 max-w-48"
+        style="bg-slate-400 p-2"
+      />
+      <LogoDownload image={RawLogo} name="RAW" size="w-32 max-w-48" />
       <LogoDownload
         image={BandsocLogo}
         name="Warwick Bandsoc"

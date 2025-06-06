@@ -70,76 +70,34 @@ export default function TimelineView({
       print-color-adjust: exact;
     }
 
-    .print-title {
-      font-family: 'Lexend', sans-serif;
-      font-size: 24pt; /* Larger font size for the main title */
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 1cm;
-      padding-bottom: 0.5cm;
-      border-bottom: 2px solid #ccc; /* Subtle line under the title */
-      color: #000;
-      page-break-after: avoid; /* Keep the title with the content that follows */
-    }
-
-    /* Table Specific Print Styles */
     table {
-      width: 100%; /* Make sure the table takes full width */
-      border-collapse: collapse; /* For clean borders */
-      page-break-inside: auto; /* Allow tables to break across pages if necessary */
+      width: 100%; 
+      border-collapse: collapse; 
+      page-break-inside: auto;
     }
 
-    thead {
-      display: table-header-group; /* Ensure the table header repeats on each page */
-    }
-
-    th, td {
-      border: 1px solid #eee; /* Lighter borders for a cleaner look */
-      padding: 8px; /* Consistent padding */
-      vertical-align: top; /* Align content to the top within cells */
-    }
-
-    th {
-      background-color: #f8f8f8; /* Slightly shaded header cells */
-      font-weight: 700;
-      color: #000;
-    }
-
-    /* Ensure event cards don't break across pages */
     .timeline-event-session-card {
       page-break-inside: avoid;
-      break-inside: avoid; /* Newer syntax for fragmentation */
-      box-shadow: none !important; /* Remove shadows for print */
-      border: 1px solid #ddd; /* Add a subtle border if desired */
-      padding: 5px;
-      margin-bottom: 5px; /* Small margin between cards */
-      background-color: #fefefe; /* Light background for cards */
+      break-inside: avoid; 
     }
 
-    /* Specific adjustments for your timeline structure */
     .sticky {
-      position: static !important; /* Remove sticky positioning for print */
+      position: static !important; 
     }
+
     .w-max {
-      width: auto !important; /* Allow width to adjust naturally for print */
+      width: auto !important; 
     }
+
     .max-w-full {
       max-width: 100% !important;
     }
     .overflow-x-auto, .overflow-y-auto {
-      overflow: visible !important; /* Ensure content is not clipped by scroll */
-    }
-    .h-full {
-      height: auto !important; /* Allow height to adjust */
+      overflow: visible !important;
     }
 
-    /* Adjust specific element sizing/visibility for print */
-    .min-h-\[0\.5rem\] { /* Target the dynamically generated class for empty spans */
-      min-height: 0.5rem; /* Keep a minimal height for spacing */
-      display: block; /* Ensure it takes up space */
-    }
-    .min-w-15 { /* Target the dynamically generated class for Time column header */
-        min-width: 100px !important; /* Adjust if 150px is too wide for print */
+    .h-full {
+      height: auto !important; 
     }
   `,
   });

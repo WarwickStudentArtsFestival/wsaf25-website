@@ -11,7 +11,8 @@ import Link from 'next/link';
 import TrackPill from '../../../components/track/TrackPill';
 import { EventSession } from '@/lib/events';
 import { FaWalking } from 'react-icons/fa';
-import { trackColourMap } from '@/lib/trackTypes';
+import { eventCategories } from '@/data/events';
+import ErrorMessage from '@/app/components/ErrorMessage';
 
 export default function EventSessionCard({
   eventSession,
@@ -22,15 +23,17 @@ export default function EventSessionCard({
   hideVenue?: boolean;
   numberOfSessions?: number;
 }) {
-  const rawTrack = eventSession.event.categoryPretalxTrack;
-  const trackKey = rawTrack.replace(/\s/g, '');
-  const trackColor = trackColourMap[trackKey] || '#000';
-  const bgColor = `${trackColor}10`;
+  const category = eventCategories.find(
+    (c) => c.pretalxTrack === eventSession.event.categoryPretalxTrack,
+  );
+  if (!category) {
+    return <ErrorMessage msg="Track category not found" />;
+  }
   return (
     <Link href={`/events/${eventSession.event.id}`}>
       <div
         className="border py-4 px-2 md:p-4 text-left text-black border-slate-300 rounded-md overflow-hidden w-full h-full flex flex-col hover:scale-[1.02] transition duration-150 ease-in-out shadow-lg"
-        style={{ background: bgColor }}
+        style={{ background: `${category.colour}10` }}
       >
         <div className="flex justify-between">
           <TrackPill
@@ -50,25 +53,25 @@ export default function EventSessionCard({
         <div className="flex mt-3 flex-col flex-grow">
           <h3
             className="text-xl font-semibold mb-2"
-            style={{ color: trackColor }}
+            style={{ color: category.colour }}
           >
             {eventSession.event.name}
           </h3>
           <ul className="text-sm space-y-1">
             {eventSession.event.artist.name && (
               <li className="flex items-center gap-2">
-                <FiUsers style={{ color: trackColor }} />
+                <FiUsers style={{ color: category.colour }} />
                 <span>{eventSession.event.artist.name}</span>
               </li>
             )}
             {!hideVenue && (
               <li className="flex items-center gap-2">
-                <FiMapPin style={{ color: trackColor }} />
+                <FiMapPin style={{ color: category.colour }} />
                 <span>{eventSession.venueName}</span>
               </li>
             )}
             <li className="flex items-center gap-2">
-              <FiCalendar style={{ color: trackColor }} />
+              <FiCalendar style={{ color: category.colour }} />
               <span>
                 {eventSession.start.toLocaleDateString('en-gb', {
                   weekday: 'long',
@@ -76,7 +79,7 @@ export default function EventSessionCard({
               </span>
             </li>
             <li className="flex items-center gap-2">
-              <FiClock style={{ color: trackColor }} />
+              <FiClock style={{ color: category.colour }} />
               <span>
                 {eventSession.start.toLocaleTimeString('en-gb', {
                   hour: 'numeric',
@@ -93,7 +96,7 @@ export default function EventSessionCard({
             </li>
             {numberOfSessions && (
               <li className="flex items-center gap-2">
-                <FiRepeat style={{ color: trackColor }} />
+                <FiRepeat style={{ color: category.colour }} />
                 <span>{numberOfSessions} Showings</span>
               </li>
             )}
@@ -101,7 +104,7 @@ export default function EventSessionCard({
         </div>
         <div className="flex items-center gap-2 mt-4 text-sm font-medium">
           <span>View Details</span>
-          <FiArrowRight style={{ color: trackColor }} />
+          <FiArrowRight style={{ color: category.colour }} />
         </div>
       </div>
     </Link>

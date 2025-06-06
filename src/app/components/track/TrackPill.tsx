@@ -1,6 +1,5 @@
 import React from 'react';
-import TrackIcon from './TrackIcon';
-import { trackColourMap } from '@/lib/trackTypes';
+import { eventCategories } from '@/data/events';
 
 type TrackPillProps = {
   size?: number; // Icon size
@@ -12,27 +11,24 @@ type TrackPillProps = {
 
 const TrackPill: React.FC<TrackPillProps> = ({
   track,
-  size = 25,
-  padding = 8, // default to p-2 (approx. 0.5rem or 8px)
+  padding = 8,
   leftToRight = false,
   showName = true,
 }) => {
   if (!track) return null;
 
-  const key = track.replace(/\s+/g, '');
-  const color = trackColourMap[key] || '#a855f7'; // default purple
-  const bg = `${color}20`; // semi-transparent
-  const border = color;
-  const text = color;
-
-  const pillStyle: React.CSSProperties = {
-    backgroundColor: bg,
-    color: text,
-    border: `1px solid ${border}`,
-  };
+  const category = eventCategories.find((c) => c.pretalxTrack === track);
+  if (!category) return null;
 
   const nameElement = showName ? (
-    <span className="px-3 py-1 rounded-full font-bold" style={pillStyle}>
+    <span
+      className="px-3 py-1 rounded-full font-bold"
+      style={{
+        backgroundColor: `${category.colour}20`,
+        color: category.colour,
+        border: `1px solid ${category.colour}`,
+      }}
+    >
       {track}
     </span>
   ) : null;
@@ -41,14 +37,16 @@ const TrackPill: React.FC<TrackPillProps> = ({
     <span
       className="rounded-full"
       style={{
-        ...pillStyle,
+        backgroundColor: `${category.colour}20`,
+        color: category.colour,
+        border: `1px solid ${category.colour}`,
         padding: `${padding}px`,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
     >
-      <TrackIcon track={track} size={size} />
+      {category.icon}
     </span>
   );
 

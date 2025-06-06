@@ -6,10 +6,10 @@ import { Toaster } from 'react-hot-toast';
 import { EventWithSessions, fetchEvent } from '@/lib/events';
 import React from 'react';
 import EventDetails from '@/app/events/[slug]/components/EventDetails';
+import { eventCategories } from '@/data/events';
 import Share from '@/app/events/[slug]/components/Share';
 import GoToVenue from '@/app/events/[slug]/components/GoToVenue';
 import GoToGenre from '@/app/events/[slug]/components/GoToGenre';
-import { trackColourMap } from '@/lib/trackTypes';
 
 export const revalidate = 3600; // Fetch new information every hour
 
@@ -31,22 +31,27 @@ export default async function Page({
 
   if (!event) return <ErrorMessage msg={`Event '${slug}' not found!`} />;
 
-  const rawTrack = event.categoryPretalxTrack;
-  const trackKey = rawTrack.replace(/\s/g, '');
-  const trackColor = trackColourMap[trackKey] || '#000';
-  const lightBg = `${trackColor}10`;
-  // const darkBg = `${trackColor}15`;
+  const category = eventCategories.find(
+    (c) => c.pretalxTrack === event.categoryPretalxTrack,
+  );
 
+  if (!category) {
+    return (
+      <ErrorMessage
+        msg={`Track category '${event.categoryPretalxTrack}' not found!`}
+      />
+    );
+  }
   return (
     <div className="-mb-2">
       <Toaster position="top-center" />
       <PageHeader />
       <div className="max-w-4xl sm:my-8 -my-2 mx-auto md:px-4 sm:px-6 lg:px-8">
         <div
-          style={{ backgroundColor: lightBg }}
+          style={{ backgroundColor: `${category.colour}10` }}
           className="bg-white p-6 py-0 h-fit rounded-lg  md:border md:border-gray-200"
         >
-          <div style={{ color: trackColor }}>
+          <div style={{ color: category.colour }}>
             <TalkHeader track={event.categoryPretalxTrack} />
           </div>
 
@@ -55,7 +60,7 @@ export default async function Page({
               // <PresentedBy speaker={event.artist.name} />
               <div
                 className="flex gap-4  italic text-2xl"
-                style={{ color: trackColor }}
+                style={{ color: category.colour }}
               >
                 <div className="flex flex-wrap">
                   <span>{event.artist.name}</span>
@@ -64,7 +69,7 @@ export default async function Page({
               </div>
             )}
             <h1
-              style={{ color: trackColor }}
+              style={{ color: category.colour }}
               className="text-4xl font-bold break-words px-2 -mx-6 sm:mx-auto "
             >
               &ldquo;{event.name}&rdquo;
@@ -136,14 +141,14 @@ export default async function Page({
                 <h2 className="text-black text-xl font-semibold my-4">
                   Related Events
                 </h2>
-                <div style={{ color: trackColor }}>
+                <div style={{ color: category.colour }}>
                   <GoToVenue eventWithSessions={event} />
                   <GoToGenre eventWithSessions={event} />
                 </div>
               </div>
             </div>
             <div
-              style={{ color: trackColor }}
+              style={{ color: category.colour }}
               className="lg:w-1/3 flex flex-col gap-4 md:p-4 md:pl-0"
             >
               {/* <div style={{ backgroundColor: darkBg }}> */}

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { FaArrowRight } from 'react-icons/fa';
 import React from 'react';
 import { fetchVenueFromName } from '@/lib/venues';
-import { trackColourMap } from '@/lib/trackTypes';
+import { eventCategories } from '@/data/events';
 
 export default async function GoToVenue({
   eventWithSessions,
@@ -18,9 +18,14 @@ export default async function GoToVenue({
   if (!venue) {
     return <ErrorMessage msg="Venue not found" />;
   }
-  const rawTrack = eventWithSessions.categoryPretalxTrack;
-  const trackKey = rawTrack.replace(/\s/g, '');
-  const trackColor = trackColourMap[trackKey] || '#000';
+
+  const category = eventCategories.find(
+    (c) => c.pretalxTrack === eventWithSessions.categoryPretalxTrack,
+  );
+
+  if (!category) {
+    return <ErrorMessage msg="Track category not found" />;
+  }
 
   return (
     <div className="my-4 bg-white p-4  h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-105 transition duration-100 ease-in-out">
@@ -49,7 +54,7 @@ export default async function GoToVenue({
             <span className="font-semibold pt-0 text-black">{venue.name}</span>
           </div>
           <div
-            style={{ color: trackColor }}
+            style={{ color: category.colour }}
             className="flex-1 flex justify-end pr-4"
           >
             <FaArrowRight />

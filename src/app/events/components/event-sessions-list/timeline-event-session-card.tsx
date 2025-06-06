@@ -1,23 +1,25 @@
 import { EventSession } from '@/lib/events';
 import Link from 'next/link';
-import { trackColourMap } from '@/lib/trackTypes';
+import { eventCategories } from '@/data/events';
+import ErrorMessage from '@/app/components/ErrorMessage';
 
 export default function TimelineEventSessionCard({
   eventSession,
 }: {
   eventSession: EventSession;
 }) {
-  const rawTrack = eventSession.event.categoryPretalxTrack;
-  const trackKey = rawTrack.replace(/\s/g, '');
-  const trackColor = trackColourMap[trackKey] || '#000';
-  const bgColor = `${trackColor}10`;
-
+  const category = eventCategories.find(
+    (c) => c.pretalxTrack === eventSession.event.categoryPretalxTrack,
+  );
+  if (!category) {
+    return <ErrorMessage msg="Track category not found" />;
+  }
   return (
     <div className="w-full h-full flex flex-col my-0.5">
       <Link
         href={`/events/${eventSession.event.id}`}
         className="h-full p-1 block border text-black border-slate-300 rounded-md overflow-hidden hover:shadow-sm"
-        style={{ background: bgColor, color: trackColor }}
+        style={{ background: `${category.colour}10`, color: category.colour }}
       >
         <p className="text-sm font-semibold">{eventSession.event.name}</p>
         <p className="text-xs">

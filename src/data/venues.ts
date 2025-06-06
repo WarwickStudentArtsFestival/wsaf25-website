@@ -110,16 +110,16 @@ const venues: Record<string, AdditionalVenueData> = {
   },
 
   // The Graduate
-  '01cbe95d-0b59-58a6-a7f2-3e2365e88a03': {
-    mapUrl:
-      'https://campus.warwick.ac.uk/search/623c889c421e6f5928c0d3a7?projectId=warwick',
-    image: Placeholder,
-    imageAlt:
-      'Picture of a performance in a room that looks like Avon Drama Studio',
-    roomLocation: 'The Graduate',
-    slug: 'the-graduate',
-    filterBitFieldIndex: 9,
-  },
+  // '01cbe95d-0b59-58a6-a7f2-3e2365e88a03': {
+  //   mapUrl:
+  //     'https://campus.warwick.ac.uk/search/623c889c421e6f5928c0d3a7?projectId=warwick',
+  //   image: Placeholder,
+  //   imageAlt:
+  //     'Picture of a performance in a room that looks like Avon Drama Studio',
+  //   roomLocation: 'The Graduate',
+  //   slug: 'the-graduate',
+  //   filterBitFieldIndex: 9,
+  // },
 };
 
 export default venues;

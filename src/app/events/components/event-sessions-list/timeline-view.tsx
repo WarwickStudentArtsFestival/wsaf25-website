@@ -273,7 +273,6 @@ export default function TimelineView({
       <div
         ref={contentRef}
         className="overflow-x-auto border-2 border-slate-300 w-max max-w-full overflow-y-auto max-h-[calc(100vh-9rem)]"
-        // className="border-2 border-slate-300 w-max max-w-full"
       >
         {/* Table (scrollable) */}
         <table className="table-fixed border-separate border-spacing-0">

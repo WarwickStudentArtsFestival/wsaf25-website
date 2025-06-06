@@ -70,30 +70,34 @@ export default function EventSessionCard({
                 <span>{eventSession.venueName}</span>
               </li>
             )}
-            <li className="flex items-center gap-2">
-              <FiCalendar style={{ color: category.colour }} />
-              <span>
-                {eventSession.start.toLocaleDateString('en-gb', {
-                  weekday: 'long',
-                })}
-              </span>
-            </li>
-            <li className="flex items-center gap-2">
-              <FiClock style={{ color: category.colour }} />
-              <span>
-                {eventSession.start.toLocaleTimeString('en-gb', {
-                  hour: 'numeric',
-                  hour12: true,
-                  minute: '2-digit',
-                })}{' '}
-                -{' '}
-                {eventSession.end.toLocaleTimeString('en-gb', {
-                  hour: 'numeric',
-                  hour12: true,
-                  minute: '2-digit',
-                })}
-              </span>
-            </li>
+            {eventSession.start && eventSession.end && (
+              <>
+                <li className="flex items-center gap-2">
+                  <FiCalendar style={{ color: category.colour }} />
+                  <span>
+                    {eventSession.start.toLocaleDateString('en-gb', {
+                      weekday: 'long',
+                    })}
+                  </span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <FiClock style={{ color: category.colour }} />
+                  <span>
+                    {eventSession.start.toLocaleTimeString('en-gb', {
+                      hour: 'numeric',
+                      hour12: true,
+                      minute: '2-digit',
+                    })}{' '}
+                    -{' '}
+                    {eventSession.end.toLocaleTimeString('en-gb', {
+                      hour: 'numeric',
+                      hour12: true,
+                      minute: '2-digit',
+                    })}
+                  </span>
+                </li>
+              </>
+            )}
             {numberOfSessions && (
               <li className="flex items-center gap-2">
                 <FiRepeat style={{ color: category.colour }} />

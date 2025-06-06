@@ -5,7 +5,7 @@ import { eventDateTimeIntervals } from '@/lib/dates';
 import TimelineEventSessionCard from '@/app/events/components/event-sessions-list/timeline-event-session-card';
 import Link from 'next/link';
 import HighlightedHeading from '@/app/components/highlighted-heading';
-import { FaArrowLeft } from 'react-icons/fa';
+import { FaArrowLeft, FaPrint } from 'react-icons/fa';
 import { useReactToPrint } from 'react-to-print';
 import { useRef } from 'react';
 
@@ -44,7 +44,7 @@ export default function TimelineView({
   const contentRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useReactToPrint({
     contentRef,
-    documentTitle: 'WSAF Event Sessions Timeline',
+    documentTitle: `WSAF Event Sessions Timeline - ${new Date().toISOString()}`,
     pageStyle: `
     @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap');
 
@@ -259,7 +259,16 @@ export default function TimelineView({
 
   return (
     <main className="lg:pt-4 pb-4 max-w-full">
-      <button onClick={reactToPrintFn}>Print</button>
+      <div className="flex align-right justify-end mb-4 2xl:mr-8">
+        <button
+          className="text-black gap-1 flex items-center hover:cursor-pointer border border-slate-300 rounded-md hover:bg-slate-100 justify-center px-4 py-1"
+          onClick={reactToPrintFn}
+        >
+          <FaPrint />
+          Print
+        </button>
+      </div>
+
       {/* Parent element with border */}
       <div
         ref={contentRef}

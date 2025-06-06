@@ -9,7 +9,7 @@ export default function HighlightedHeading({
 }: HighlightedHeadingProps) {
   return (
     <div
-      className={`uppercase text-xl font-bold text-black bg-yellow py-1 px-8 m-2 inline-block ${className || ''}`}
+      className={`highlighted-heading uppercase text-xl font-bold text-black bg-yellow py-1 px-8 m-2 inline-block ${className || ''}`}
     >
       {text}
     </div>

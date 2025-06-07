@@ -3,7 +3,7 @@ import ErrorMessage from '@/app/components/ErrorMessage';
 import { fetchVenueFromSlug } from '@/lib/venues';
 import React from 'react';
 import { fetchEventSessionsInVenue } from '@/lib/events';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import { FiExternalLink, FiMapPin } from 'react-icons/fi';
 import Link from 'next/link';
@@ -12,6 +12,41 @@ import EventSessionsList from '@/app/events/components/event-sessions-list/event
 import getContext from '@/app/events/components/event-sessions-list/event-sessions-list-context';
 
 export const revalidate = 3600; // Fetch new information every hour
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+
+  try {
+    const venue = await fetchVenueFromSlug(slug);
+    if (!venue) {
+      return {
+        title: 'Venues',
+        description: `View the Warwick Student Arts Festival's venues and spaces`,
+      };
+    }
+
+    const eventSessions = await fetchEventSessionsInVenue(venue.name);
+    return {
+      title: venue.name,
+      description: `View the ${eventSessions.length} events happening at ${venue.name} during the Warwick Student Arts Festival.`,
+      openGraph: venue.image
+        ? {
+            images: [(venue.image as StaticImageData).src],
+          }
+        : {},
+    };
+  } catch (error) {
+    console.error('Error fetching rooms from API', error);
+    return {
+      title: 'Venues',
+      description: `View the Warwick Student Arts Festival's venues and spaces`,
+    };
+  }
+}
 
 export default async function VenuePage({
   params,

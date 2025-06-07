@@ -22,6 +22,7 @@ export type PretalxScheduleDay = {
 export type PretalxScheduleEvent = {
   url: string;
   id: number;
+  code: string;
   guid: string;
   date: string;
   start: string | null;

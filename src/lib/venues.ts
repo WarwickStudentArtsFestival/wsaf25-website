@@ -5,7 +5,7 @@ import venues from '@/data/venues';
 export type AdditionalVenueData = {
   imageAlt: string;
   mapUrl: string;
-  image: StaticImageData | string;
+  image: StaticImageData;
   roomLocation: string;
   slug: string;
   filterBitFieldIndex: number;

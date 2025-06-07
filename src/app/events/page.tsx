@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import ErrorMessage from '../components/ErrorMessage';
 import PageHeader from '../components/page-header';
 import { fetchEventSessions } from '@/lib/events';
@@ -7,10 +6,24 @@ import LoadingPage from '@/app/events/components/loading-page';
 import { Suspense } from 'react';
 import EventSessionsList from '@/app/events/components/event-sessions-list/event-sessions-list';
 
-export const metadata: Metadata = {
-  title: 'WSAF Events',
-  description: 'List of all the events on in WSAF 2025',
-};
+export async function generateMetadata() {
+  try {
+    const eventSessions = await fetchEventSessions();
+
+    return {
+      title: 'Events',
+      description: `Find out about the ${eventSessions.length} events happening at the Warwick Student Arts Festival 2025, running from Friday 13th June to Monday 16th June 2025!`,
+    };
+  } catch (error) {
+    console.error('Error fetching talks from API', error);
+
+    return {
+      title: 'Events',
+      description:
+        "Find out what's happening at the Warwick Student Arts Festival 2025, running from Friday 13th June to Monday 16th June 2025!",
+    };
+  }
+}
 
 export const revalidate = 3600; // Fetch new information every hour
 

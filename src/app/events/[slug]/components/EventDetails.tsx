@@ -21,15 +21,12 @@ export default function EventDetails({ eventWithSessions }: EventDetailsProps) {
             {
               icon: <FiCalendar className="h-5 w-5" />,
               title: 'Date',
-              value: session.start ? formatDate(session.start) : 'TBD',
+              value: formatDate(session.start),
             },
             {
               icon: <FiClock className="h-5 w-5" />,
               title: 'Time',
-              value:
-                session.start && session.end
-                  ? `${formatTime(session.start)} - ${formatTime(session.end)}`
-                  : 'TBD',
+              value: `${formatTime(session.start)} - ${formatTime(session.end)}`,
             },
           ];
           if (session.parent) {

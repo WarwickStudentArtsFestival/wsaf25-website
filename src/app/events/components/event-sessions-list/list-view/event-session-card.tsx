@@ -29,7 +29,7 @@ export default function EventSessionCard({
     return <ErrorMessage msg="Track category not found" />;
   }
   return (
-    <Link href={`/events/${eventSession.event.id}`}>
+    <Link href={`/events/${eventSession.event.slug}`}>
       <div
         className="border py-4 px-2 md:p-4 text-left text-black border-slate-300 rounded-md overflow-hidden w-full h-full flex flex-col hover:scale-[1.02] transition duration-150 ease-in-out shadow-lg"
         style={{ background: `${category.colour}10` }}

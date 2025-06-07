@@ -8,6 +8,7 @@ import { ReactNode } from 'react';
 
 export type Event = {
   id: number;
+  slug: string;
   name: string;
   categoryPretalxTrack: string;
 
@@ -124,6 +125,7 @@ function constructEventSessionFromPretalxEvent(
 
     event: {
       id: event.id,
+      slug: event.code,
       name: event.title,
       categoryPretalxTrack: event.track,
 
@@ -258,11 +260,11 @@ export async function fetchEventSessionsInVenue(
 }
 
 export async function fetchEvent(
-  slug: number,
+  slug: number | string,
 ): Promise<EventWithSessions | null> {
   const eventsSessions = await fetchEventSessions();
   const eventSessions = eventsSessions.filter(
-    (session) => session.event.id == slug,
+    (session) => session.event.id === slug || session.event.slug === slug,
   );
   if (eventSessions.length === 0) return null;
 

@@ -10,8 +10,65 @@ import { eventCategories } from '@/data/events';
 import Share from '@/app/events/[slug]/components/Share';
 import GoToVenue from '@/app/events/[slug]/components/GoToVenue';
 import GoToGenre from '@/app/events/[slug]/components/GoToGenre';
+import { ResolvingMetadata } from 'next';
+import { formatTime } from '@/lib/dates';
 
 export const revalidate = 3600; // Fetch new information every hour
+
+export async function generateMetadata(
+  {
+    params,
+  }: {
+    params: Promise<{ slug: string }>;
+  },
+  parent: ResolvingMetadata,
+) {
+  const { slug } = await params;
+
+  try {
+    const event = await fetchEvent(slug);
+    if (!event) {
+      return {
+        title: 'Events',
+        description:
+          "Find out what's happening at the Warwick Student Arts Festival 2025, running from Friday 13th June to Monday 16th June 2025!",
+      };
+    }
+
+    const parents = [
+      ...new Set(
+        event.sessions
+          .map((session) => session.parent)
+          .filter((parent) => !!parent),
+      ),
+    ];
+
+    const sessionDescription = event.sessions
+      .map(
+        (session) =>
+          `${session.start.toLocaleDateString('en-GB', { weekday: 'short' })} ${formatTime(session.start).replace(' ', '')} - ${formatTime(session.end).replace(' ', '')} (${session.venueName})`,
+      )
+      .join('\n');
+
+    const previousImages = (await parent).openGraph?.images || [];
+    return {
+      title: `${parents.length === 1 ? `${parents[0].event.name}: ` : ''}${event.name}${event.artist.name ? ` (${event.artist.name})` : ''}`,
+      description: `${sessionDescription}\n\n${event.shortDescription || event.description}`,
+      openGraph: event.image
+        ? {
+            images: [event.image, ...previousImages],
+          }
+        : {},
+    };
+  } catch (error) {
+    console.error('Error fetching event from API', error);
+    return {
+      title: 'Events',
+      description:
+        "Find out what's happening at the Warwick Student Arts Festival 2025, running from Friday 13th June to Monday 16th June 2025!",
+    };
+  }
+}
 
 export default async function Page({
   params,

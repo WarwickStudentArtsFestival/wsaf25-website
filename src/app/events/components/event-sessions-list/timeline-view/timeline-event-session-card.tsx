@@ -18,7 +18,7 @@ export default function TimelineEventSessionCard({
     // timeline-event-session-card class used for printing
     <div className="timeline-event-session-card w-full h-full flex flex-col my-0.5">
       <Link
-        href={`/events/${eventSession.event.id}`}
+        href={`/events/${eventSession.event.slug}`}
         className="h-full p-1 block border text-black border-slate-300 rounded-md overflow-hidden hover:shadow-sm"
         style={{ background: `${category.colour}10`, color: category.colour }}
       >

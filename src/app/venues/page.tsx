@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import PageHeader from '../components/page-header';
 import HighlightedHeading from '../components/highlighted-heading';
 import ErrorMessage from '../components/ErrorMessage';
@@ -8,10 +7,22 @@ import React from 'react';
 
 export const revalidate = 3600; // Fetch new information every hour
 
-export const metadata: Metadata = {
-  title: 'WSAF Venues',
-  description: 'List of Venues, Rooms and Spaces in use at WSAF 2025',
-};
+export async function generateMetadata() {
+  try {
+    const venues = await fetchVenuesWithEventCount();
+
+    return {
+      title: 'Venues',
+      description: `View the Warwick Student Arts Festival's ${venues.length} venues and spaces`,
+    };
+  } catch (error) {
+    console.error('Error fetching rooms from API', error);
+    return {
+      title: 'Venues',
+      description: `View the Warwick Student Arts Festival's venues and spaces`,
+    };
+  }
+}
 
 export default async function VenuesPage() {
   let venues;

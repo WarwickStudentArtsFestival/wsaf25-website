@@ -1,16 +1,16 @@
 'use client';
 import React from 'react';
 import { EventSessionsListContext } from '@/app/events/components/event-sessions-list/event-sessions-list-context';
-import FilterOptions from '@/app/events/components/event-sessions-list/filter-options';
+import FilterOptions from '@/app/events/components/event-sessions-list/options/filter-options';
 import {
   FilterOption,
   SelectedFilters,
   SelectedFilterValues,
 } from '@/app/events/components/event-sessions-list/event-sessions-filters';
-import SortOptions from '@/app/events/components/event-sessions-list/sort-options';
-import TimeOptions from '@/app/events/components/event-sessions-list/time-options';
+import SortOptions from '@/app/events/components/event-sessions-list/options/sort-options';
+import TimeOptions from '@/app/events/components/event-sessions-list/options/time-options';
 import { eventDateTimeIntervals } from '@/lib/dates';
-import ViewOptions from '@/app/events/components/event-sessions-list/view-options';
+import ViewOptions from '@/app/events/components/event-sessions-list/options/view-options';
 
 export default function OptionsSidebar({
   context,

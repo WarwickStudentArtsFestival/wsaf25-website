@@ -31,6 +31,14 @@ export default async function Page({
 
   if (!event) return <ErrorMessage msg={`Event '${slug}' not found!`} />;
 
+  const parents = [
+    ...new Set(
+      event.sessions
+        .map((session) => session.parent)
+        .filter((parent) => !!parent),
+    ),
+  ];
+
   const category = eventCategories.find(
     (c) => c.pretalxTrack === event.categoryPretalxTrack,
   );
@@ -72,7 +80,8 @@ export default async function Page({
               style={{ color: category.colour }}
               className="text-4xl font-bold break-words px-2 -mx-6 sm:mx-auto "
             >
-              &ldquo;{event.name}&rdquo;
+              &ldquo;{parents.length === 1 && `${parents[0].event.name}: `}
+              {event.name}&rdquo;
             </h1>
           </div>
           {event.image && (

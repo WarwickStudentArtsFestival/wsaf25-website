@@ -115,3 +115,6 @@ export const eventCategories: EventCategory[] = [
     filterBitFieldIndex: 10,
   },
 ];
+
+// Minimum minutes between children events before the parent event will be shown
+export const minimumMinutesToShowParentBetweenChildrenEvents = 10;

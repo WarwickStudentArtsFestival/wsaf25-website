@@ -1,7 +1,7 @@
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import ErrorMessage from '@/app/components/ErrorMessage';
 import { fetchEventSessions } from '@/lib/events';
-import EventSessionCard from '@/app/events/components/event-sessions-list/event-session-card';
+import EventSessionCard from '@/app/events/components/event-sessions-list/list-view/event-session-card';
 import AutoScrollContainer from './auto-scroller';
 
 export default async function EventPreview() {

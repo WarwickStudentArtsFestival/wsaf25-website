@@ -1,13 +1,13 @@
 'use client';
 import React, { useMemo, useState } from 'react';
-import OptionsSidebar from './options-sidebar';
+import OptionsSidebar from './options/options-sidebar';
 import { EventSession } from '@/lib/events';
 import { EventSessionsListContext } from '@/app/events/components/event-sessions-list/event-sessions-list-context';
 import useEventSessionsFilters from '@/app/events/components/event-sessions-list/event-sessions-filters';
-import DatetimeSlider from '@/app/events/components/event-sessions-list/datetime-slider';
+import DatetimeSlider from '@/app/events/components/event-sessions-list/options/datetime-slider';
 import { FaFilter } from 'react-icons/fa';
-import ListView from '@/app/events/components/event-sessions-list/list-view';
-import TimelineView from '@/app/events/components/event-sessions-list/timeline-view';
+import ListView from '@/app/events/components/event-sessions-list/list-view/list-view';
+import TimelineView from '@/app/events/components/event-sessions-list/timeline-view/timeline-view';
 
 export default function EventSessionsList({
   eventSessions,

@@ -1,6 +1,6 @@
 import { FaArrowLeft } from 'react-icons/fa';
 import HighlightedHeading from '@/app/components/highlighted-heading';
-import EventSessionCard from '@/app/events/components/event-sessions-list/event-session-card';
+import EventSessionCard from '@/app/events/components/event-sessions-list/list-view/event-session-card';
 import React from 'react';
 import { EventSessionGroup } from '@/app/events/components/event-sessions-list/event-sessions-filters';
 

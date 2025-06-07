@@ -13,7 +13,7 @@ export type PretalxScheduleTrack = {
 };
 
 export type PretalxScheduleDay = {
-  index: number | string; // Use string for "gallery" day
+  index: number | 'gallery';
   day_start: string;
   day_end: string;
   rooms: Record<string, PretalxScheduleEvent[]>;
@@ -24,9 +24,9 @@ export type PretalxScheduleEvent = {
   id: number;
   guid: string;
   date: string;
-  start: string;
-  logo: string;
-  duration: string;
+  start: string | null;
+  logo: string | null;
+  duration: string | null;
   room: string;
   slug: string;
   title: string;

@@ -3,7 +3,7 @@ import { Slider } from '@mui/material';
 import { useRef, useCallback, useState } from 'react';
 import { SelectedFilters } from '@/app/events/components/event-sessions-list/event-sessions-filters';
 import { eventDateTimeIntervals } from '@/lib/dates';
-import DatetimeSelector from '@/app/events/components/event-sessions-list/datetime-selector';
+import DatetimeSelector from '@/app/events/components/event-sessions-list/options/datetime-selector';
 
 function sliderValueLabel(value: number) {
   return eventDateTimeIntervals.all[value].dateTimeLabel;

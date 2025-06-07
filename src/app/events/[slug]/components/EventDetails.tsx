@@ -1,4 +1,4 @@
-import { FiCalendar, FiClock, FiMapPin } from 'react-icons/fi';
+import { FiCalendar, FiClock, FiGrid, FiMapPin } from 'react-icons/fi';
 import { formatDate, formatTime } from '@/lib/dates';
 import { EventWithSessions } from '@/lib/events';
 
@@ -32,6 +32,13 @@ export default function EventDetails({ eventWithSessions }: EventDetailsProps) {
                   : 'TBD',
             },
           ];
+          if (session.parent) {
+            talkDetails.unshift({
+              icon: <FiGrid className="h-5 w-5" />,
+              title: 'Event',
+              value: `Part of ${session.parent.event.name}`,
+            });
+          }
 
           return (
             <div key={idx} className="mb-6 ">

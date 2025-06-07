@@ -3,12 +3,13 @@ import {
   FiArrowRight,
   FiCalendar,
   FiClock,
+  FiGrid,
   FiMapPin,
   FiRepeat,
   FiUsers,
 } from 'react-icons/fi';
 import Link from 'next/link';
-import TrackPill from '../../../components/track/TrackPill';
+import TrackPill from '../../../../components/track/TrackPill';
 import { EventSession } from '@/lib/events';
 import { FaWalking } from 'react-icons/fa';
 import { eventCategories } from '@/data/events';
@@ -17,11 +18,9 @@ import ErrorMessage from '@/app/components/ErrorMessage';
 export default function EventSessionCard({
   eventSession,
   hideVenue,
-  numberOfSessions,
 }: {
   eventSession: EventSession;
   hideVenue?: boolean;
-  numberOfSessions?: number;
 }) {
   const category = eventCategories.find(
     (c) => c.pretalxTrack === eventSession.event.categoryPretalxTrack,
@@ -55,9 +54,16 @@ export default function EventSessionCard({
             className="text-xl font-semibold mb-2"
             style={{ color: category.colour }}
           >
+            {eventSession.parent && `${eventSession.parent.event.name}: `}
             {eventSession.event.name}
           </h3>
           <ul className="text-sm space-y-1">
+            {eventSession.parent && (
+              <li className="flex items-center gap-2">
+                <FiGrid style={{ color: category.colour }} />
+                <span>Part of {eventSession.parent.event.name}</span>
+              </li>
+            )}
             {eventSession.event.artist.name && (
               <li className="flex items-center gap-2">
                 <FiUsers style={{ color: category.colour }} />
@@ -98,10 +104,10 @@ export default function EventSessionCard({
                 </li>
               </>
             )}
-            {numberOfSessions && (
+            {eventSession.event.sessionCount > 1 && (
               <li className="flex items-center gap-2">
                 <FiRepeat style={{ color: category.colour }} />
-                <span>{numberOfSessions} Showings</span>
+                <span>{eventSession.event.sessionCount} Showings</span>
               </li>
             )}
           </ul>

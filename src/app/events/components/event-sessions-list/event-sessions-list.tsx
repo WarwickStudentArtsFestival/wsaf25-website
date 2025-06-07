@@ -13,10 +13,12 @@ export default function EventSessionsList({
   eventSessions,
   context,
   disableVenues = false,
+  sortByTime = false,
 }: {
   eventSessions: EventSession[];
   context: EventSessionsListContext;
   disableVenues?: boolean;
+  sortByTime?: boolean;
 }) {
   const {
     isEventSessionInFilter,
@@ -25,7 +27,7 @@ export default function EventSessionsList({
     setFilter,
     selectedFilters,
     resetFilters,
-  } = useEventSessionsFilters(context);
+  } = useEventSessionsFilters(context, sortByTime);
 
   const { sessionCount: filteredSessionCount, sessionGroups } = useMemo(() => {
     const filteredSessions = eventSessions.filter(isEventSessionInFilter);

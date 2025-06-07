@@ -3,7 +3,11 @@ import ErrorMessage from '../../components/ErrorMessage';
 import Image from 'next/image';
 import TalkHeader from './components/TalkHeader';
 import { Toaster } from 'react-hot-toast';
-import { EventWithSessions, fetchEvent } from '@/lib/events';
+import {
+  EventWithSessions,
+  fetchEvent,
+  fetchEventSessions,
+} from '@/lib/events';
 import React from 'react';
 import EventDetails from '@/app/events/[slug]/components/EventDetails';
 import { eventCategories } from '@/data/events';
@@ -14,6 +18,17 @@ import { ResolvingMetadata } from 'next';
 import { formatTime } from '@/lib/dates';
 
 export const revalidate = 3600; // Fetch new information every hour
+
+export async function generateStaticParams() {
+  const sessions = await fetchEventSessions();
+  const eventSlugs = [
+    ...new Set(sessions.map((session) => session.event.slug)),
+  ];
+
+  return eventSlugs.map((eventSlug) => ({
+    slug: eventSlug,
+  }));
+}
 
 export async function generateMetadata(
   {

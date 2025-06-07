@@ -1,7 +1,7 @@
 import PageHeader from '@/app/components/page-header';
 import ErrorMessage from '@/app/components/ErrorMessage';
-import { fetchVenueFromSlug } from '@/lib/venues';
-import React from 'react';
+import { fetchVenueFromSlug, fetchVenues } from '@/lib/venues';
+import React, { Suspense } from 'react';
 import { fetchEventSessionsInVenue } from '@/lib/events';
 import Image, { StaticImageData } from 'next/image';
 import HighlightedHeading from '@/app/components/highlighted-heading';
@@ -10,8 +10,17 @@ import Link from 'next/link';
 import { FaArrowRight, FaWarehouse } from 'react-icons/fa';
 import EventSessionsList from '@/app/events/components/event-sessions-list/event-sessions-list';
 import getContext from '@/app/events/components/event-sessions-list/event-sessions-list-context';
+import LoadingPage from '@/app/events/components/loading-page';
 
 export const revalidate = 3600; // Fetch new information every hour
+
+export async function generateStaticParams() {
+  const venues = await fetchVenues();
+
+  return venues.map((venue) => ({
+    slug: venue.slug,
+  }));
+}
 
 export async function generateMetadata({
   params,
@@ -143,11 +152,14 @@ export default async function VenuePage({
         </h1>
       </div>
       <div className="w-full">
-        <EventSessionsList
-          eventSessions={eventSessions}
-          context={eventSessionsListContext}
-          disableVenues
-        />
+        <Suspense fallback={<LoadingPage eventCount={eventSessions.length} />}>
+          <EventSessionsList
+            eventSessions={eventSessions}
+            context={eventSessionsListContext}
+            disableVenues
+            sortByTime
+          />
+        </Suspense>
       </div>
       <div className="flex my-4 w-full flex-col items-center justify-center mx-auto">
         <h2 className="text-black text-xl font-semibold">Related Events</h2>

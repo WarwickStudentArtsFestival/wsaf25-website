@@ -82,6 +82,7 @@ function getBitFieldFromFilterOptions(options: FilterOption[]): string {
 function getSelectedFiltersFromUrlParams(
   searchParams: URLSearchParams,
   context: EventSessionsListContext,
+  defaultSortByTime = false,
 ): SelectedFilters {
   const timelineParam = searchParams.get('timeline');
   const sortParam = searchParams.get('sort');
@@ -115,7 +116,9 @@ function getSelectedFiltersFromUrlParams(
     view: timelineParam !== null ? 'timeline' : 'list',
     sort: (sortParam && ['random', 'time', 'venue'].includes(sortParam)
       ? sortParam
-      : 'random') as 'random' | 'time' | 'venue',
+      : defaultSortByTime
+        ? 'time'
+        : 'random') as 'random' | 'time' | 'venue',
     randomSeed: sortParam === 'random' ? new Date().getTime() : null,
     search: searchParam || null,
     category: getFilterOptionsFromBitField(categoryParam, context.categories),
@@ -129,11 +132,12 @@ function getSelectedFiltersFromUrlParams(
 
 export default function useEventSessionsFilters(
   context: EventSessionsListContext,
+  defaultSortByTime = false,
 ) {
   const searchParams = useSearchParams();
 
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>(
-    getSelectedFiltersFromUrlParams(searchParams, context),
+    getSelectedFiltersFromUrlParams(searchParams, context, defaultSortByTime),
   );
 
   // URL search parameters that represent the selected filters
@@ -141,7 +145,7 @@ export default function useEventSessionsFilters(
     const params = new URLSearchParams();
 
     if (selectedFilters.view === 'timeline') params.set('timeline', '');
-    if (selectedFilters.sort !== 'random')
+    if (selectedFilters.sort !== (defaultSortByTime ? 'time' : 'random'))
       params.set('sort', selectedFilters.sort);
     if (selectedFilters.search) params.set('search', selectedFilters.search);
     if (selectedFilters.category) {
@@ -170,9 +174,9 @@ export default function useEventSessionsFilters(
     }
 
     return params.toString();
-  }, [selectedFilters]);
+  }, [selectedFilters, defaultSortByTime]);
 
-  // When URL search params change => update the selected filters
+  // When URL search params change, update the selected filters
   useEffect(() => {
     // If the URL search params are the same as the selected filters, do nothing
     if (selectedFiltersUrlParams === searchParams.toString()) return;

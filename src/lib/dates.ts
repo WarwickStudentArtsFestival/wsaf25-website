@@ -10,6 +10,7 @@ export const formatDate = (date: Date) => {
   const day = date.getDate();
 
   const getOrdinal = (n: number) => {
+    if(n>=4 && n<=20) return 'th';
     const mod = n % 10;
     if (mod === 1) return 'st';
     if (mod === 2) return 'nd';

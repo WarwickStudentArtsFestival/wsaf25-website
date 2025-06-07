@@ -65,6 +65,11 @@ const nextConfig = {
       permanent: true,
     },
     {
+      source: '/schedule',
+      destination: '/events?timeline=',
+      permanent: true,
+    },
+    {
       source: '/qr/d62',
       destination:
         'https://2024.wsaf.org.uk/schedule?utm_campaign=schedule&utm_medium=ds&utm_source=screens',

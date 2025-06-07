@@ -215,14 +215,55 @@ export default function useEventSessionsFilters(
   };
 
   const isEventSessionInFilter = (eventSession: EventSession) => {
-    if (selectedFilterValues.search) {
+    if (selectedFilters.view === 'list') {
+      if (selectedFilterValues.search) {
+        if (
+          !eventSession.event.name
+            .toLowerCase()
+            .includes(selectedFilterValues.search)
+        )
+          return false;
+      }
+
+      if (selectedFilterValues.duration) {
+        if (
+          !selectedFilterValues.duration.includes(eventSession.durationCategory)
+        )
+          return false;
+      }
+
       if (
-        !eventSession.event.name
-          .toLowerCase()
-          .includes(selectedFilterValues.search)
-      )
-        return false;
+        !eventDateTimeIntervals.all[selectedFilterValues.dateFrom].allowBefore
+      ) {
+        const earliestTime =
+          eventDateTimeIntervals.all[selectedFilterValues.dateFrom].date;
+
+        if (eventSession.event.dropIn) {
+          if (eventSession.end && eventSession.end.getTime() < earliestTime)
+            return false;
+        } else {
+          if (eventSession.start && eventSession.start.getTime() < earliestTime)
+            return false;
+        }
+      }
+      if (!eventDateTimeIntervals.all[selectedFilterValues.dateTo].allowAfter) {
+        const latestTime =
+          eventDateTimeIntervals.all[selectedFilterValues.dateTo].date;
+
+        if (eventSession.event.dropIn) {
+          if (eventSession.start && eventSession.start.getTime() > latestTime)
+            return false;
+        } else {
+          if (eventSession.end && eventSession.end.getTime() > latestTime)
+            return false;
+        }
+      }
+
+      if (selectedFilterValues.dropInOnly) {
+        if (!eventSession.event.dropIn) return false;
+      }
     }
+
     if (selectedFilterValues.category) {
       if (
         !selectedFilterValues.category.includes(
@@ -231,46 +272,10 @@ export default function useEventSessionsFilters(
       )
         return false;
     }
+
     if (selectedFilterValues.venue) {
       if (!selectedFilterValues.venue.includes(eventSession.venueName))
         return false;
-    }
-    if (selectedFilterValues.duration) {
-      if (
-        !selectedFilterValues.duration.includes(eventSession.durationCategory)
-      )
-        return false;
-    }
-
-    if (
-      !eventDateTimeIntervals.all[selectedFilterValues.dateFrom].allowBefore
-    ) {
-      const earliestTime =
-        eventDateTimeIntervals.all[selectedFilterValues.dateFrom].date;
-
-      if (eventSession.event.dropIn) {
-        if (eventSession.end && eventSession.end.getTime() < earliestTime)
-          return false;
-      } else {
-        if (eventSession.start && eventSession.start.getTime() < earliestTime)
-          return false;
-      }
-    }
-    if (!eventDateTimeIntervals.all[selectedFilterValues.dateTo].allowAfter) {
-      const latestTime =
-        eventDateTimeIntervals.all[selectedFilterValues.dateTo].date;
-
-      if (eventSession.event.dropIn) {
-        if (eventSession.start && eventSession.start.getTime() > latestTime)
-          return false;
-      } else {
-        if (eventSession.end && eventSession.end.getTime() > latestTime)
-          return false;
-      }
-    }
-
-    if (selectedFilterValues.dropInOnly) {
-      if (!eventSession.event.dropIn) return false;
     }
 
     return true;
@@ -287,16 +292,13 @@ export default function useEventSessionsFilters(
         {
           name: null,
           sessions: eventSessions.sort(
-            (a, b) =>
-              (a.start ? a.start.getTime() : 0) -
-              (b.start ? b.start.getTime() : 0),
+            (a, b) => a.start.getTime() - b.start.getTime(),
           ),
         },
       ];
     } else if (selectedFilters.sort === 'venue') {
       const orderedSessions = eventSessions.sort(
-        (a, b) =>
-          (a.start ? a.start.getTime() : 0) - (b.start ? b.start.getTime() : 0),
+        (a, b) => a.start.getTime() - b.start.getTime(),
       );
       sessionGroups = venuesOptions.map((venue) => ({
         name: venue.label,
@@ -306,8 +308,7 @@ export default function useEventSessionsFilters(
       }));
     } else if (selectedFilters.sort === 'time') {
       const orderedSessions = eventSessions.sort(
-        (a, b) =>
-          (a.start ? a.start.getTime() : 0) - (b.start ? b.start.getTime() : 0),
+        (a, b) => a.start.getTime() - b.start.getTime(),
       );
 
       let currentGroup: EventSessionGroup | null = null;
@@ -319,7 +320,7 @@ export default function useEventSessionsFilters(
         if (currentGroupDate !== sessionGroupDate) {
           if (currentGroup) sessionGroups.push(currentGroup);
           currentGroup = {
-            name: session.start ? formatDate(session.start) : 'TBD',
+            name: formatDate(session.start),
             sessions: [session],
           };
           currentGroupDate = sessionGroupDate;

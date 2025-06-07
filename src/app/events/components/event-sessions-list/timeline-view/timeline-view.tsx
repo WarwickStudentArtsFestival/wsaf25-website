@@ -67,7 +67,7 @@ export default function TimelineView({
         className="overflow-x-auto border-2 border-slate-300 w-max max-w-full overflow-y-auto max-h-[calc(100vh-9rem)]"
       >
         {/* Table (scrollable) */}
-        <table className="table-fixed border-separate border-spacing-0">
+        <table className="table-fixed border-separate border-spacing-0 3xl:w-full">
           <thead className="bg-white">
             <tr className="text-black">
               <th className="py-1 px-2 bg-white sticky left-0 top-0 z-[3] w-[150px] border-b border-r border-slate-200">

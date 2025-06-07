@@ -54,7 +54,6 @@ export default function EventSessionCard({
             className="text-xl font-semibold mb-2"
             style={{ color: category.colour }}
           >
-            {eventSession.parent && `${eventSession.parent.event.name}: `}
             {eventSession.event.name}
           </h3>
           <ul className="text-sm space-y-1">

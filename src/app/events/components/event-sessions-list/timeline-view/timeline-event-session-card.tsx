@@ -22,10 +22,7 @@ export default function TimelineEventSessionCard({
         className="h-full p-1 block border text-black border-slate-300 rounded-md overflow-hidden hover:shadow-sm"
         style={{ background: `${category.colour}10`, color: category.colour }}
       >
-        <p className="text-sm font-semibold">
-          {eventSession.parent && `${eventSession.parent.event.name}: `}
-          {eventSession.event.name}
-        </p>
+        <p className="text-sm font-semibold">{eventSession.event.name}</p>
         {eventSession.start && eventSession.end && (
           <p className="text-xs">
             {eventSession.start.toLocaleTimeString('en-gb', {

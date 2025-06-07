@@ -50,14 +50,6 @@ export async function generateMetadata(
       };
     }
 
-    const parents = [
-      ...new Set(
-        event.sessions
-          .map((session) => session.parent)
-          .filter((parent) => !!parent),
-      ),
-    ];
-
     const sessionDescription = event.sessions
       .map(
         (session) =>
@@ -67,7 +59,7 @@ export async function generateMetadata(
 
     const previousImages = (await parent).openGraph?.images || [];
     return {
-      title: `${parents.length === 1 ? `${parents[0].event.name}: ` : ''}${event.name}${event.artist.name ? ` (${event.artist.name})` : ''}`,
+      title: `${event.name}${event.artist.name ? ` (${event.artist.name})` : ''}`,
       description: `${sessionDescription}\n\n${event.shortDescription || event.description}`,
       openGraph: event.image
         ? {
@@ -103,13 +95,13 @@ export default async function Page({
 
   if (!event) return <ErrorMessage msg={`Event '${slug}' not found!`} />;
 
-  const parents = [
-    ...new Set(
-      event.sessions
-        .map((session) => session.parent)
-        .filter((parent) => !!parent),
-    ),
-  ];
+  // const parents = [
+  //   ...new Set(
+  //     event.sessions
+  //       .map((session) => session.parent)
+  //       .filter((parent) => !!parent),
+  //   ),
+  // ];
 
   const category = eventCategories.find(
     (c) => c.pretalxTrack === event.categoryPretalxTrack,
@@ -152,7 +144,7 @@ export default async function Page({
               style={{ color: category.colour }}
               className="text-4xl font-bold break-words px-2 -mx-6 sm:mx-auto "
             >
-              &ldquo;{parents.length === 1 && `${parents[0].event.name}: `}
+              &ldquo;
               {event.name}&rdquo;
             </h1>
           </div>

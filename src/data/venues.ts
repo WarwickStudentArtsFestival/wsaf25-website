@@ -55,15 +55,15 @@ const venues: Record<string, AdditionalVenueData> = {
   },
 
   // FAB Rehearsal Rooms (0.16, 0.18)
-  // '80629533-8164-5bcd-b21f-2874991078c2': {
-  //   mapUrl:
-  //     'https://campus.warwick.ac.uk/search/623c8961421e6f5928c0fb6d?projectId=warwick',
-  //   image: Rehearsal,
-  //   imageAlt: 'FAB Rehearsal Rooms (0.16, 0.18)',
-  //   roomLocation: 'FAB 0.16 & 0.18',
-  //   slug: 'fab-rehearsal-rooms',
-  //   filterBitFieldIndex: 4,
-  // },
+  '80629533-8164-5bcd-b21f-2874991078c2': {
+    mapUrl:
+      'https://campus.warwick.ac.uk/search/623c8961421e6f5928c0fb6d?projectId=warwick',
+    image: Rehearsal,
+    imageAlt: 'FAB Rehearsal Rooms (0.16, 0.18)',
+    roomLocation: 'FAB 0.16 & 0.18',
+    slug: 'fab-rehearsal-rooms',
+    filterBitFieldIndex: 4,
+  },
 
   // FAB Terrace
   'fa0c1623-0556-5ee1-9768-546e34ee897c': {
@@ -109,17 +109,18 @@ const venues: Record<string, AdditionalVenueData> = {
     slug: 'avon-drama-studio',
     filterBitFieldIndex: 8,
   },
+
   // The Graduate
-  // '01cbe95d-0b59-58a6-a7f2-3e2365e88a03': {
-  //   mapUrl:
-  //     'https://campus.warwick.ac.uk/search/623c889c421e6f5928c0d3a7?projectId=warwick',
-  //   image: Placeholder,
-  //   imageAlt:
-  //     'Picture of a performance in a room that looks like Avon Drama Studio',
-  //   roomLocation: 'The Graduate',
-  //   slug: 'the-graduate',
-  //   filterBitFieldIndex: 9,
-  // },
+  '01cbe95d-0b59-58a6-a7f2-3e2365e88a03': {
+    mapUrl:
+      'https://campus.warwick.ac.uk/search/623c889c421e6f5928c0d3a7?projectId=warwick',
+    image: Placeholder,
+    imageAlt:
+      'Picture of a performance in a room that looks like Avon Drama Studio',
+    roomLocation: 'The Graduate',
+    slug: 'the-graduate',
+    filterBitFieldIndex: 9,
+  },
 };
 
 export default venues;

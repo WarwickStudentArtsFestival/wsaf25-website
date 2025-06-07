@@ -36,7 +36,7 @@ export default function ListView({
         )
       ) : (
         sessionGroups.map((group, i) => (
-          <div key={i}>
+          <div key={`${i}-${group.name}`}>
             {group.name && <HighlightedHeading text={group.name} />}
             <div
               className={`
@@ -44,7 +44,7 @@ export default function ListView({
         grid-cols-2 md:grid-cols-3 xl:grid-cols-5
       `}
             >
-              {group.sessions.map((eventSession) => (
+              {group.sessions.map((eventSession, i) => (
                 <div key={eventSession.id} className="w-full">
                   <EventSessionCard
                     eventSession={eventSession}

@@ -79,14 +79,64 @@ function getBitFieldFromFilterOptions(options: FilterOption[]): string {
     .toString();
 }
 
+function getSelectedFiltersFromUrlParams(
+  searchParams: URLSearchParams,
+  context: EventSessionsListContext,
+): SelectedFilters {
+  const timelineParam = searchParams.get('timeline');
+  const sortParam = searchParams.get('sort');
+  const searchParam = searchParams.get('search');
+  const categoryParam = searchParams.get('category');
+  const venueParam = searchParams.get('venue');
+  const durationParam = searchParams.get('duration');
+  const dateFromParam = searchParams.get('from');
+  const dateToParam = searchParams.get('to');
+  const dropInOnlyParam = searchParams.get('dropInOnly');
+
+  let dateFrom = dateFromParam && parseInt(dateFromParam);
+  if (!dateFrom || isNaN(dateFrom)) dateFrom = 0;
+  else {
+    dateFrom = Math.max(
+      Math.min(dateFrom, eventDateTimeIntervals.all.length - 1),
+      0,
+    );
+  }
+
+  let dateTo = dateToParam && parseInt(dateToParam);
+  if (!dateTo || isNaN(dateTo)) dateTo = eventDateTimeIntervals.all.length - 1;
+  else {
+    dateTo = Math.min(
+      Math.max(dateTo, dateFrom + 1),
+      eventDateTimeIntervals.all.length - 1,
+    );
+  }
+
+  return {
+    view: timelineParam !== null ? 'timeline' : 'list',
+    sort: (sortParam && ['random', 'time', 'venue'].includes(sortParam)
+      ? sortParam
+      : 'random') as 'random' | 'time' | 'venue',
+    randomSeed: sortParam === 'random' ? new Date().getTime() : null,
+    search: searchParam || null,
+    category: getFilterOptionsFromBitField(categoryParam, context.categories),
+    venue: getFilterOptionsFromBitField(venueParam, context.venues),
+    duration: getFilterOptionsFromBitField(durationParam, context.durations),
+    dateFrom,
+    dateTo,
+    dropInOnly: dropInOnlyParam !== null,
+  };
+}
+
 export default function useEventSessionsFilters(
   context: EventSessionsListContext,
 ) {
-  const [selectedFilters, setSelectedFilters] =
-    useState<SelectedFilters>(defaultFilters);
-
   const searchParams = useSearchParams();
 
+  const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>(
+    getSelectedFiltersFromUrlParams(searchParams, context),
+  );
+
+  // URL search parameters that represent the selected filters
   const selectedFiltersUrlParams = useMemo(() => {
     const params = new URLSearchParams();
 
@@ -122,55 +172,27 @@ export default function useEventSessionsFilters(
     return params.toString();
   }, [selectedFilters]);
 
-  // Update selected filters from URL search params when URL search params updated
+  // When URL search params change => update the selected filters
   useEffect(() => {
+    // If the URL search params are the same as the selected filters, do nothing
     if (selectedFiltersUrlParams === searchParams.toString()) return;
 
-    const timelineParam = searchParams.get('timeline');
-    const sortParam = searchParams.get('sort');
-    const searchParam = searchParams.get('search');
-    const categoryParam = searchParams.get('category');
-    const venueParam = searchParams.get('venue');
-    const durationParam = searchParams.get('duration');
-    const dateFromParam = searchParams.get('from');
-    const dateToParam = searchParams.get('to');
-    const dropInOnlyParam = searchParams.get('dropInOnly');
+    const newFilters = getSelectedFiltersFromUrlParams(searchParams, context);
+    setSelectedFilters(newFilters);
 
-    let dateFrom = dateFromParam && parseInt(dateFromParam);
-    if (!dateFrom || isNaN(dateFrom)) dateFrom = 0;
-    else {
-      dateFrom = Math.max(
-        Math.min(dateFrom, eventDateTimeIntervals.all.length - 1),
-        0,
-      );
-    }
-
-    let dateTo = dateToParam && parseInt(dateToParam);
-    if (!dateTo || isNaN(dateTo))
-      dateTo = eventDateTimeIntervals.all.length - 1;
-    else {
-      dateTo = Math.min(
-        Math.max(dateTo, dateFrom + 1),
-        eventDateTimeIntervals.all.length - 1,
-      );
-    }
-
-    setSelectedFilters({
-      view: timelineParam !== null ? 'timeline' : 'list',
-      sort: (sortParam && ['random', 'time', 'venue'].includes(sortParam)
-        ? sortParam
-        : 'random') as 'random' | 'time' | 'venue',
-      randomSeed: sortParam === 'random' ? new Date().getTime() : null,
-      search: searchParam || null,
-      category: getFilterOptionsFromBitField(categoryParam, context.categories),
-      venue: getFilterOptionsFromBitField(venueParam, context.venues),
-      duration: getFilterOptionsFromBitField(durationParam, context.durations),
-      dateFrom,
-      dateTo,
-      dropInOnly: dropInOnlyParam !== null,
-    });
+    // We only want to update this from the searchParams, not if selectedFilters change
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams, context]);
+
+  // When selected filters change => update the URL search params (debounce to
+  // avoid errors with updating the URL too frequently)
+  const updateUrlFromFilters = useDebouncedCallback(() => {
+    if (selectedFiltersUrlParams !== searchParams.toString()) {
+      // Use window.state instead of router to avoid reloading the page
+      window.history.pushState(null, '', `?${selectedFiltersUrlParams}`);
+    }
+    // Wait for 200ms of no movement before updating the URL
+  }, 200);
 
   const selectedFilterValues = useMemo<SelectedFilterValues>(
     () => ({
@@ -195,24 +217,6 @@ export default function useEventSessionsFilters(
     }),
     [selectedFilters],
   );
-
-  const updateUrlFromFilters = useDebouncedCallback(() => {
-    if (selectedFiltersUrlParams !== searchParams.toString()) {
-      // Use window.state instead of router to avoid reloading the page
-      window.history.replaceState(null, '', `?${selectedFiltersUrlParams}`);
-    }
-    // Wait for 200ms of no movement before updating the URL
-  }, 200);
-
-  const setFilter = (newFilters: Partial<SelectedFilters>) => {
-    const updatedFilters = {
-      ...selectedFilters,
-      ...newFilters,
-    };
-
-    setSelectedFilters(updatedFilters);
-    updateUrlFromFilters();
-  };
 
   const isEventSessionInFilter = (eventSession: EventSession) => {
     if (selectedFilters.view === 'list') {
@@ -345,6 +349,16 @@ export default function useEventSessionsFilters(
       sessionGroups: sessionGroups.filter((group) => group.sessions.length > 0),
       sessionCount: eventSessions.length,
     };
+  };
+
+  const setFilter = (newFilters: Partial<SelectedFilters>) => {
+    const updatedFilters = {
+      ...selectedFilters,
+      ...newFilters,
+    };
+
+    setSelectedFilters(updatedFilters);
+    updateUrlFromFilters();
   };
 
   const resetFilters = () => {

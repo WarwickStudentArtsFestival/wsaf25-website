@@ -44,7 +44,7 @@ export default function ListView({
         grid-cols-2 md:grid-cols-3 xl:grid-cols-5
       `}
             >
-              {group.sessions.map((eventSession, i) => (
+              {group.sessions.map((eventSession) => (
                 <div key={eventSession.id} className="w-full">
                   <EventSessionCard
                     eventSession={eventSession}

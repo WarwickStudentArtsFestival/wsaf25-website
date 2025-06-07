@@ -5,8 +5,10 @@ import ErrorMessage from '@/app/components/ErrorMessage';
 
 export default function TimelineEventSessionCard({
   eventSession,
+  parentEventStyling = false,
 }: {
   eventSession: EventSession;
+  parentEventStyling?: boolean;
 }) {
   const category = eventCategories.find(
     (c) => c.pretalxTrack === eventSession.event.categoryPretalxTrack,
@@ -16,11 +18,18 @@ export default function TimelineEventSessionCard({
   }
   return (
     // timeline-event-session-card class used for printing
-    <div className="timeline-event-session-card w-full h-full flex flex-col my-0.5">
+    <div
+      className={`timeline-event-session-card h-full flex flex-col ${parentEventStyling ? '-mx-2 mb-0.5' : 'my-0.5'}`}
+    >
       <Link
         href={`/events/${eventSession.event.slug}`}
-        className="h-full p-1 block border text-black border-slate-300 rounded-md overflow-hidden hover:shadow-sm"
-        style={{ background: `${category.colour}10`, color: category.colour }}
+        className={`h-full p-1 block  border-slate-300 overflow-hidden hover:shadow-sm ${parentEventStyling ? 'border-b' : 'border rounded-md'}`}
+        style={{
+          background: parentEventStyling
+            ? `${category.colour}20`
+            : `${category.colour}10`,
+          color: category.colour,
+        }}
       >
         <p className="text-sm font-semibold">{eventSession.event.name}</p>
         {eventSession.start && eventSession.end && (

@@ -21,6 +21,9 @@ export type TimelineDataTimeVenueSession = {
   rowSpan: number;
   eventStart?: boolean;
   eventSessions: EventSession[];
+  parentSession?: EventSession;
+  // How to render the parent session in the timeline
+  parentSessionMode?: 'top' | 'middle' | 'bottom' | 'single';
 };
 
 export default function constructTimelineData(
@@ -116,9 +119,12 @@ export default function constructTimelineData(
   }
 
   // Iterate back through the timeline times to set rowSpan
+  // Also categorise parent sessions if they exist here
   for (let i = 0; i < venues.length; i++) {
     let firstOccurrenceIndex = 0;
     let occurrenceKey = '';
+    let lastParentSessionId = '';
+    let lastParentSessionCellIndex = -1;
 
     for (let j = 0; j < timelineTimes.length; j++) {
       const venueSession = timelineTimes[j].venueSessions[i];
@@ -137,6 +143,65 @@ export default function constructTimelineData(
             for (let k = firstOccurrenceIndex; k <= j - 1; k++) {
               timelineTimes[k].venueSessions[i].rowSpan = rowSpan;
             }
+          }
+
+          // If the first occurrence has a parent, set the parent and remove it
+          // from the main eventSessions array
+          const parentSession = timelineTimes[
+            firstOccurrenceIndex
+          ].venueSessions[i].eventSessions.find(
+            (session) => session.childrenIds,
+          );
+          if (parentSession) {
+            timelineTimes[firstOccurrenceIndex].venueSessions[i].parentSession =
+              parentSession;
+            timelineTimes[firstOccurrenceIndex].venueSessions[i].eventSessions =
+              timelineTimes[firstOccurrenceIndex].venueSessions[
+                i
+              ].eventSessions.filter(
+                (session) => session.id !== parentSession.id,
+              );
+
+            // Set the parent session mode
+            if (lastParentSessionId === parentSession.id) {
+              // Same as the last parent session, so set to 'bottom' (could
+              // also be 'middle' which will be set later)
+              timelineTimes[firstOccurrenceIndex].venueSessions[
+                i
+              ].parentSessionMode = 'bottom';
+
+              // If there was a previous parent session, set it to 'top' if it
+              // was previously 'single', otherwise 'middle'
+              if (lastParentSessionCellIndex !== -1) {
+                timelineTimes[lastParentSessionCellIndex].venueSessions[
+                  i
+                ].parentSessionMode =
+                  timelineTimes[lastParentSessionCellIndex].venueSessions[i]
+                    .parentSessionMode === 'single'
+                    ? 'top'
+                    : 'middle';
+              }
+
+              lastParentSessionCellIndex = firstOccurrenceIndex;
+            } else {
+              // First occurrence of this parent session. Set to 'single', and
+              // this may be changed to 'top' later
+              timelineTimes[firstOccurrenceIndex].venueSessions[
+                i
+              ].parentSessionMode = 'single';
+
+              // If there was a previous parent session, set it to 'bottom'
+              if (lastParentSessionCellIndex !== -1) {
+                timelineTimes[lastParentSessionCellIndex].venueSessions[
+                  i
+                ].parentSessionMode = 'bottom';
+              }
+
+              lastParentSessionId = parentSession.id;
+              lastParentSessionCellIndex = firstOccurrenceIndex;
+            }
+          } else if (lastParentSessionCellIndex !== -1) {
+            lastParentSessionCellIndex = -1;
           }
         }
 

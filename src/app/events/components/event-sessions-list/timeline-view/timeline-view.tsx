@@ -8,6 +8,69 @@ import useTimelinePrinting from '@/app/events/components/event-sessions-list/tim
 import constructTimelineData, {
   TimelineData,
 } from '@/app/events/components/event-sessions-list/timeline-view/construct-timeline-data';
+import { EventSession } from '@/lib/events';
+import { eventCategories } from '@/data/events';
+import ErrorMessage from '@/app/components/ErrorMessage';
+
+function CellTimelineEventSessionCards({
+  eventSessions,
+}: {
+  eventSessions: EventSession[];
+}) {
+  if (eventSessions.length === 0)
+    return <span className="block min-h-[0.5rem]"></span>;
+
+  return eventSessions.map((eventSession) => (
+    <TimelineEventSessionCard
+      eventSession={eventSession}
+      key={eventSession.id}
+    />
+  ));
+}
+
+function ParentCellTimelineEventSessionCards({
+  parentSession,
+  parentSessionMode,
+  eventSessions,
+}: {
+  parentSession: EventSession;
+  parentSessionMode: 'top' | 'middle' | 'bottom' | 'single';
+  eventSessions: EventSession[];
+}) {
+  const category = eventCategories.find(
+    (c) => c.pretalxTrack === parentSession.event.categoryPretalxTrack,
+  );
+  if (!category) {
+    return <ErrorMessage msg="Track category not found" />;
+  }
+
+  let borderClass = 'border-slate-300 border-l-2 border-r-2';
+  if (parentSessionMode === 'top') {
+    // Round top corners, top border
+    borderClass += ' rounded-tl-md rounded-tr-md border-t-2';
+  } else if (parentSessionMode === 'bottom') {
+    // Round bottom corners, bottom border
+    borderClass += ' rounded-bl-md rounded-br-md border-b-2';
+  } else if (parentSessionMode === 'single') {
+    // Round all corners, top and bottom border
+    borderClass += ' rounded-md border-t border-b';
+  }
+
+  return (
+    <div
+      className={`w-full h-full flex flex-col px-2 ${borderClass}`}
+      style={{ background: `${category.colour}05`, color: category.colour }}
+    >
+      {(parentSessionMode === 'top' || parentSessionMode === 'single') && (
+        <TimelineEventSessionCard
+          eventSession={parentSession}
+          parentEventStyling
+        />
+      )}
+      <CellTimelineEventSessionCards eventSessions={eventSessions} />
+    </div>
+  );
+}
 
 export default function TimelineView({
   sessionGroups,
@@ -145,16 +208,18 @@ export default function TimelineView({
                         rowSpan={venueSession.rowSpan}
                         className={`h-full px-1 ${time.type === 'keytime' ? 'border-t border-slate-200' : ''}`}
                       >
-                        {venueSession.eventSessions.length > 0 ? (
-                          <TimelineEventSessionCard
-                            eventSession={
-                              venueSession.eventSessions[
-                                venueSession.eventSessions.length - 1
-                              ]
+                        {venueSession.parentSession ? (
+                          <ParentCellTimelineEventSessionCards
+                            parentSession={venueSession.parentSession}
+                            eventSessions={venueSession.eventSessions}
+                            parentSessionMode={
+                              venueSession.parentSessionMode || 'single'
                             }
                           />
                         ) : (
-                          <span className="block min-h-[0.5rem]"></span>
+                          <CellTimelineEventSessionCards
+                            eventSessions={venueSession.eventSessions}
+                          />
                         )}
                       </td>
                     ))}

@@ -2,9 +2,10 @@ import type { Metadata } from 'next';
 import ErrorMessage from '../components/ErrorMessage';
 import PageHeader from '../components/page-header';
 import { fetchEventSessions } from '@/lib/events';
-import EventSessionsList from '@/app/events/components/event-sessions-list/event-sessions-list';
 import getContext from './components/event-sessions-list/event-sessions-list-context';
+import LoadingPage from '@/app/events/components/loading-page';
 import { Suspense } from 'react';
+import EventSessionsList from '@/app/events/components/event-sessions-list/event-sessions-list';
 
 export const metadata: Metadata = {
   title: 'WSAF Events',
@@ -31,9 +32,9 @@ export default async function EventsPage() {
   }
 
   return (
-    <main className="w-full">
+    <main className="w-full grow">
       <PageHeader />
-      <Suspense fallback={<div>Loading events...</div>}>
+      <Suspense fallback={<LoadingPage eventCount={eventSessions.length} />}>
         <EventSessionsList eventSessions={eventSessions} context={context} />
       </Suspense>
     </main>

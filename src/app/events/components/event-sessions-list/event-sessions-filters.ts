@@ -24,6 +24,7 @@ export type SelectedFilters = {
   dateFrom: number;
   dateTo: number;
   dropInOnly: boolean;
+  selectedEvent?: string;
 };
 
 export type SelectedFilterValues = {
@@ -37,6 +38,7 @@ export type SelectedFilterValues = {
   dateFrom: number;
   dateTo: number;
   dropInOnly: boolean;
+  selectedEvent?: string;
 };
 
 export type EventSessionGroup = {
@@ -93,6 +95,7 @@ function getSelectedFiltersFromUrlParams(
   const dateFromParam = searchParams.get('from');
   const dateToParam = searchParams.get('to');
   const dropInOnlyParam = searchParams.get('dropInOnly');
+  const selectedEvent = searchParams.get('event');
 
   let dateFrom = dateFromParam && parseInt(dateFromParam);
   if (!dateFrom || isNaN(dateFrom)) dateFrom = 0;
@@ -127,6 +130,7 @@ function getSelectedFiltersFromUrlParams(
     dateFrom,
     dateTo,
     dropInOnly: dropInOnlyParam !== null,
+    selectedEvent: selectedEvent || undefined,
   };
 }
 
@@ -171,6 +175,9 @@ export default function useEventSessionsFilters(
     }
     if (selectedFilters.dropInOnly) {
       params.set('dropInOnly', '');
+    }
+    if (selectedFilters.selectedEvent) {
+      params.set('event', selectedFilters.selectedEvent);
     }
 
     return params.toString();
@@ -218,6 +225,7 @@ export default function useEventSessionsFilters(
       dateFrom: selectedFilters.dateFrom,
       dateTo: selectedFilters.dateTo,
       dropInOnly: selectedFilters.dropInOnly,
+      selectedEvent: selectedFilters.selectedEvent,
     }),
     [selectedFilters],
   );
@@ -282,7 +290,7 @@ export default function useEventSessionsFilters(
     }
 
     if (selectedFilterValues.venue) {
-      if (!selectedFilterValues.venue.includes(eventSession.venueName))
+      if (!selectedFilterValues.venue.includes(eventSession.venue.name))
         return false;
     }
 
@@ -311,7 +319,7 @@ export default function useEventSessionsFilters(
       sessionGroups = venuesOptions.map((venue) => ({
         name: venue.label,
         sessions: orderedSessions.filter(
-          (session) => session.venueName === venue.value,
+          (session) => session.venue.name === venue.value,
         ),
       }));
     } else if (selectedFilters.sort === 'time') {

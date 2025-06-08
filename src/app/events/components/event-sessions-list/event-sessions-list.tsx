@@ -8,6 +8,7 @@ import DatetimeSlider from '@/app/events/components/event-sessions-list/options/
 import { FaFilter } from 'react-icons/fa';
 import ListView from '@/app/events/components/event-sessions-list/list-view/list-view';
 import TimelineView from '@/app/events/components/event-sessions-list/timeline-view/timeline-view';
+import EventPopup from '@/app/events/components/event-sessions-list/event-popup';
 
 export default function EventSessionsList({
   eventSessions,
@@ -92,6 +93,7 @@ export default function EventSessionsList({
               venueInfo={context.venueInfo}
               resetFilters={resetFilters}
               sessionCount={eventSessions.length}
+              selectEvent={(slug: string) => setFilter({ selectedEvent: slug })}
             />
           ) : (
             <ListView
@@ -99,10 +101,18 @@ export default function EventSessionsList({
               sessionCount={eventSessions.length}
               resetFilters={resetFilters}
               sessionGroups={sessionGroups}
+              selectEvent={(slug: string) => setFilter({ selectedEvent: slug })}
             />
           )}
         </div>
       </div>
+
+      {selectedFilters.selectedEvent && (
+        <EventPopup
+          selectedEventSlug={selectedFilters.selectedEvent}
+          onClose={() => setFilter({ selectedEvent: undefined })}
+        />
+      )}
     </>
   );
 }

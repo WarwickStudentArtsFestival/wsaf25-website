@@ -7,6 +7,8 @@ import { durationCategories, eventCategories } from '@/data/events';
 import { ReactNode } from 'react';
 import { fetchVenues, findVenueFromName, Venue } from '@/lib/venues';
 
+// WARNING - This is all exposed to the client, so makes sure not to include
+// private or sensitive information here without properly securing it!
 export type Event = {
   id: number;
   slug: string;

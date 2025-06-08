@@ -143,7 +143,7 @@ export default async function VenuePage({
         </div>
       </div>
 
-      <div className="sticky top-15 z-40 bg-white w-full">
+      <div className="sticky top-15 z-20 bg-white w-full">
         <h3 className="text-teal pt-4 font-semibold italic">
           What&apos;s on at...
         </h3>

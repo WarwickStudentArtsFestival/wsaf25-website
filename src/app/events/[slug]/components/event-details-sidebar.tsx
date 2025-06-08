@@ -1,8 +1,8 @@
 import { EventWithSessions, Session } from '@/lib/events';
 import { FiCalendar, FiClock, FiGrid, FiMapPin } from 'react-icons/fi';
-import { formatDate, formatTime } from '@/lib/dates';
 import Link from 'next/link';
 import { FaWalking } from 'react-icons/fa';
+import { formatDate, formatTime } from '@/lib/dates';
 
 function EventSession({
   dropIn,
@@ -15,6 +15,13 @@ function EventSession({
   showingNumber: number;
   accentColour: string;
 }) {
+  // This is a bit bodged, but is needed because dates can't be sent over API
+  // request. The types should probably be updated to reflect this, but I cba
+  const startDate =
+    typeof session.start === 'string' ? new Date(session.start) : session.start;
+  const endDate =
+    typeof session.end === 'string' ? new Date(session.end) : session.end;
+
   return (
     <div>
       {showingNumber ? (
@@ -52,12 +59,12 @@ function EventSession({
         </li>
         <li className="flex gap-2">
           <FiCalendar className="h-5 w-5 mt-[1px]" />
-          <span className="text-black">{formatDate(session.start)}</span>
+          <span className="text-black">{formatDate(startDate)}</span>
         </li>
         <li className="flex gap-2">
           <FiClock className="h-5 w-5 mt-[1px]" />
           <span className="text-black">
-            {formatTime(session.start)} - {formatTime(session.end)}
+            {formatTime(startDate)} - {formatTime(endDate)}
           </span>
         </li>
         {dropIn && (

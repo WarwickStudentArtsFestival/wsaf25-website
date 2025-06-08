@@ -5,6 +5,7 @@ import Footer from '@/app/components/footer/footer';
 import React from 'react';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Header from '@/app/components/header';
+import LayoutClient from '@/app/layout-client';
 
 const lexend = Lexend({
   subsets: ['latin'],
@@ -42,15 +43,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
-      )}
-      <body className={`${lexend.className} flex flex-col min-h-screen`}>
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <LayoutClient>
+      <html lang="en">
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
+        )}
+        <body className={`${lexend.className} flex flex-col min-h-screen`}>
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </LayoutClient>
   );
 }

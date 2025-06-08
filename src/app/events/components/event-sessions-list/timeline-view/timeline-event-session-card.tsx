@@ -6,9 +6,11 @@ import ErrorMessage from '@/app/components/ErrorMessage';
 export default function TimelineEventSessionCard({
   eventSession,
   parentEventStyling = false,
+  selectEvent,
 }: {
   eventSession: EventSession;
   parentEventStyling?: boolean;
+  selectEvent: (slug: string) => void;
 }) {
   const category = eventCategories.find(
     (c) => c.pretalxTrack === eventSession.event.categoryPretalxTrack,
@@ -23,6 +25,10 @@ export default function TimelineEventSessionCard({
     >
       <Link
         href={`/events/${eventSession.event.slug}`}
+        onClick={(e) => {
+          e.preventDefault();
+          selectEvent(eventSession.event.slug);
+        }}
         className={`h-full p-1 block  border-slate-300 overflow-hidden hover:shadow-sm ${parentEventStyling ? 'border-b' : 'border rounded-md'}`}
         style={{
           background: parentEventStyling

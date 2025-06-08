@@ -14,8 +14,10 @@ import ErrorMessage from '@/app/components/ErrorMessage';
 
 function CellTimelineEventSessionCards({
   eventSessions,
+  selectEvent,
 }: {
   eventSessions: EventSession[];
+  selectEvent: (slug: string) => void;
 }) {
   if (eventSessions.length === 0)
     return <span className="block min-h-[0.5rem]"></span>;
@@ -24,6 +26,7 @@ function CellTimelineEventSessionCards({
     <TimelineEventSessionCard
       eventSession={eventSession}
       key={eventSession.id}
+      selectEvent={selectEvent}
     />
   ));
 }
@@ -32,10 +35,12 @@ function ParentCellTimelineEventSessionCards({
   parentSession,
   parentSessionMode,
   eventSessions,
+  selectEvent,
 }: {
   parentSession: EventSession;
   parentSessionMode: 'top' | 'middle' | 'bottom' | 'single';
   eventSessions: EventSession[];
+  selectEvent: (slug: string) => void;
 }) {
   const category = eventCategories.find(
     (c) => c.pretalxTrack === parentSession.event.categoryPretalxTrack,
@@ -65,9 +70,13 @@ function ParentCellTimelineEventSessionCards({
         <TimelineEventSessionCard
           eventSession={parentSession}
           parentEventStyling
+          selectEvent={selectEvent}
         />
       )}
-      <CellTimelineEventSessionCards eventSessions={eventSessions} />
+      <CellTimelineEventSessionCards
+        eventSessions={eventSessions}
+        selectEvent={selectEvent}
+      />
     </div>
   );
 }
@@ -77,11 +86,13 @@ export default function TimelineView({
   venueInfo,
   sessionCount,
   resetFilters,
+  selectEvent,
 }: {
   sessionGroups: EventSessionGroup[];
   venueInfo: Record<string, { order: number; name: string; slug: string }>;
   sessionCount: number;
   resetFilters: () => void;
+  selectEvent: (slug: string) => void;
 }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const reactToPrintFn = useTimelinePrinting(contentRef);
@@ -215,10 +226,12 @@ export default function TimelineView({
                             parentSessionMode={
                               venueSession.parentSessionMode || 'single'
                             }
+                            selectEvent={selectEvent}
                           />
                         ) : (
                           <CellTimelineEventSessionCards
                             eventSessions={venueSession.eventSessions}
+                            selectEvent={selectEvent}
                           />
                         )}
                       </td>

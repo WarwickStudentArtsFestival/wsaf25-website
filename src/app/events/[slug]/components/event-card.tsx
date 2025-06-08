@@ -10,13 +10,16 @@ import TrackPill from '@/app/components/track/TrackPill';
 import RelatedEvents from '@/app/events/[slug]/components/related-events';
 import { Venue } from '@/lib/venues';
 import EventParent from '@/app/events/[slug]/components/event-parent';
+import { FiMaximize2 } from 'react-icons/fi';
 
 export default function EventCard({
   event,
   venues,
+  onClose,
 }: {
   event: EventWithSessions;
-  venues: Venue[];
+  venues?: Venue[];
+  onClose?: () => void;
 }) {
   const category = getEventCategory(event);
 
@@ -24,18 +27,38 @@ export default function EventCard({
 
   return (
     <div
-      className="bg-white p-2 md:p-6 border border-gray-200 max-w-4xl mx-auto rounded-md"
+      className="bg-white p-2 md:p-6 border border-gray-200 max-w-4xl mx-auto rounded-md w-full"
       style={{ backgroundColor: `${category.colour}15` }}
     >
       <div className="flex flex-row justify-between mb-2">
         <Link
           href="/events"
           className="inline-flex gap-2 items-center text-sm hover:underline"
+          onClick={
+            onClose
+              ? (e) => {
+                  e.preventDefault();
+                  onClose();
+                }
+              : undefined
+          }
         >
           <FaArrowLeft style={{ color: category.colour }} />
           <span className="text-black text-left">Back to All Events</span>
         </Link>
-        <TrackPill track={event.categoryPretalxTrack} leftToRight={true} />
+
+        <div className="flex gap-4 items-center">
+          <TrackPill track={event.categoryPretalxTrack} leftToRight={true} />
+          {onClose && (
+            <Link
+              href={`/events/${event.slug}`}
+              className="hover:scale-105 transition-all duration-150 ease-in-out"
+              style={{ color: category.colour }}
+            >
+              <FiMaximize2 className="w-5 h-5" />
+            </Link>
+          )}
+        </div>
       </div>
 
       <div style={{ color: category.colour }} className="mb-2">
@@ -93,7 +116,7 @@ export default function EventCard({
         </div>
       </div>
 
-      <RelatedEvents event={event} venues={venues} />
+      {venues && <RelatedEvents event={event} venues={venues} />}
     </div>
   );
 }

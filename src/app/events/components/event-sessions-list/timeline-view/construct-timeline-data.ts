@@ -51,7 +51,7 @@ export default function constructTimelineData(
     if (event.start && event.end) {
       timesSet.add(event.start.getTime());
       timesSet.add(event.end.getTime());
-      venuesSet.add(event.venueName);
+      venuesSet.add(event.venue.name);
     }
   }
 
@@ -111,7 +111,7 @@ export default function constructTimelineData(
 
     // Add any in-progress sessions
     for (const inProgressSession of inProgressSessions) {
-      const venueIndex = venues.indexOf(inProgressSession.session.venueName);
+      const venueIndex = venues.indexOf(inProgressSession.session.venue.name);
       timelineTime.venueSessions[venueIndex].eventSessions.push(
         inProgressSession.session,
       );

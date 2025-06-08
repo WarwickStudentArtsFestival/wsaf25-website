@@ -10,12 +10,14 @@ export default function ListView({
   resetFilters,
   sessionGroups,
   disableVenues = false,
+  selectEvent,
 }: {
   filteredSessionCount: number;
   sessionCount: number;
   resetFilters: () => void;
   sessionGroups: EventSessionGroup[];
   disableVenues?: boolean;
+  selectEvent: (slug: string) => void;
 }) {
   return (
     <main className="flex flex-1 space-y-8 flex-col h-full">
@@ -49,6 +51,7 @@ export default function ListView({
                   <EventSessionCard
                     eventSession={eventSession}
                     hideVenue={disableVenues}
+                    selectEvent={() => selectEvent(eventSession.event.slug)}
                   />
                 </div>
               ))}

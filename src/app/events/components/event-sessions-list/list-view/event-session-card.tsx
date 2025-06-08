@@ -22,7 +22,7 @@ export default function EventSessionCard({
 }: {
   eventSession: EventSession;
   hideVenue?: boolean;
-  selectEvent: () => void;
+  selectEvent?: () => void;
 }) {
   const category = eventCategories.find(
     (c) => c.pretalxTrack === eventSession.event.categoryPretalxTrack,
@@ -33,10 +33,14 @@ export default function EventSessionCard({
   return (
     <Link
       href={`/events/${eventSession.event.slug}`}
-      onClick={(e) => {
-        e.preventDefault();
-        selectEvent();
-      }}
+      onClick={
+        selectEvent
+          ? (e) => {
+              e.preventDefault();
+              selectEvent();
+            }
+          : undefined
+      }
     >
       <div
         className="border py-4 px-2 md:p-4 text-left text-black border-slate-300 rounded-md overflow-hidden w-full h-full flex flex-col hover:scale-[1.02] transition duration-150 ease-in-out shadow-lg"

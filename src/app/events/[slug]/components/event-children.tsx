@@ -13,7 +13,7 @@ export default function EventChildren({ event }: { event: EventWithSessions }) {
         <Link
           key={childSession.id}
           href={`/events/${childSession.event.slug}`}
-          className="grow block bg-white shadow-lg border border-gray-200 border-gray-200 p-4 hover:scale-105 transition duration-100 ease-in-out"
+          className="grow block bg-white shadow-lg border border-gray-200 p-4 hover:scale-105 transition duration-100 ease-in-out"
         >
           <h2 className="font-semibold text-sm text-black text-left">
             {childSession.event.name}
@@ -27,13 +27,13 @@ export default function EventChildren({ event }: { event: EventWithSessions }) {
             )}
             <li className="flex items-center gap-1 text-xs">
               <span>
-                {childSession.start.toLocaleTimeString('en-gb', {
+                {new Date(childSession.start).toLocaleTimeString('en-GB', {
                   hour: 'numeric',
                   hour12: true,
                   minute: '2-digit',
                 })}{' '}
                 -{' '}
-                {childSession.end.toLocaleTimeString('en-gb', {
+                {new Date(childSession.end).toLocaleTimeString('en-GB', {
                   hour: 'numeric',
                   hour12: true,
                   minute: '2-digit',

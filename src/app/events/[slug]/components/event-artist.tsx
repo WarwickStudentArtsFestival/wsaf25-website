@@ -10,9 +10,9 @@ export default function EventArtist({
   accentColour: string;
 }) {
   if (
-    !event.artist.description ||
-    !event.artist.website ||
-    !event.artist.instagramHandle ||
+    !event.artist.description &&
+    !event.artist.website &&
+    !event.artist.instagramHandle &&
     !event.artist.image
   ) {
     return null;

@@ -9,6 +9,8 @@ export async function GET() {
   revalidatePath('/venues');
   revalidatePath('/venues/[slug]', 'page');
 
+  console.log('Purging cache for /events and /venues pages');
+
   return NextResponse.json({
     success: true,
     message: 'Cache purged for /events and /venues pages',

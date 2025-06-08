@@ -70,6 +70,16 @@ const nextConfig = {
       permanent: true,
     },
     {
+      source: '/submit',
+      destination: 'https://submit.wsaf.org.uk/2025/cfp',
+      permanent: true,
+    },
+    {
+      source: '/performers-portal',
+      destination: 'https://submit.wsaf.org.uk/2025/cfp',
+      permanent: true,
+    },
+    {
       source: '/qr/d62',
       destination:
         'https://2024.wsaf.org.uk/schedule?utm_campaign=schedule&utm_medium=ds&utm_source=screens',
@@ -133,11 +143,6 @@ const nextConfig = {
       source: '/qr/p06',
       destination:
         'https://wsaf.org.uk?utm_campaign=main&utm_medium=print&utm_source=poster3',
-      permanent: true,
-    },
-    {
-      source: '/submit',
-      destination: 'https://submit.wsaf.org.uk/2025/cfp',
       permanent: true,
     },
   ],

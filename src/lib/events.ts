@@ -214,6 +214,8 @@ function addEventSessionInheritanceAndCounts(
               ? [...session.childrenIds, currentParent.id]
               : [currentParent.id];
             currentParent = session;
+          } else if(session.end.getTime() > currentParent.end.getTime()) {
+            currentParent = session;
           } else {
             // Add the current session as a child of the parent
             session.parent = currentParent;

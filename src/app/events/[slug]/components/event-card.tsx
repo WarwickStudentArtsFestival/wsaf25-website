@@ -110,7 +110,9 @@ export default function EventCard({
           </div>
         </div>
 
-        <div className="space-y-4 w-64 grow">
+        <div
+          className={`space-y-4 grow ${event.sessions.length > 3 ? 'w-full' : 'w-64'}`}
+        >
           <EventDetailsSidebar event={event} accentColour={category.colour} />
           <EventShare event={event} accentColour={category.colour} />
         </div>

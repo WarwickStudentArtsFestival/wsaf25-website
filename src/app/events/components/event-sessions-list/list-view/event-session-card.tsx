@@ -72,7 +72,7 @@ export default function EventSessionCard({
             {!hideVenue && (
               <li className="flex items-center gap-2">
                 <FiMapPin style={{ color: category.colour }} />
-                <span>{eventSession.venueName}</span>
+                <span>{eventSession.venue.name}</span>
               </li>
             )}
             {eventSession.start && eventSession.end && (

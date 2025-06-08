@@ -3,8 +3,9 @@ import {
   PretalxScheduleDay,
   PretalxScheduleEvent,
 } from '@/lib/pretalx';
-import { durationCategories } from '@/data/events';
+import { durationCategories, eventCategories } from '@/data/events';
 import { ReactNode } from 'react';
+import { fetchVenues, findVenueFromName, Venue } from '@/lib/venues';
 
 export type Event = {
   id: number;
@@ -39,7 +40,11 @@ export type Session = {
   minutes: number;
   durationCategory: string;
 
-  venueName: string;
+  venue: {
+    id: string;
+    name: string;
+    slug: string;
+  };
 
   parent?: EventSession;
   childrenIds?: string[];
@@ -76,6 +81,7 @@ export type EventCategory = {
 function constructEventSessionFromPretalxEvent(
   event: PretalxScheduleEvent,
   day: PretalxScheduleDay,
+  venues: Venue[],
 ): EventSessionWithoutSessionCount {
   let start = null;
   let end = null;
@@ -120,6 +126,12 @@ function constructEventSessionFromPretalxEvent(
     (category) => category.minMinutes <= (minutes as number),
   );
 
+  const venue = findVenueFromName(event.room, venues);
+  if (!venue) {
+    console.error(`Venue not found for event ${event.id} (${event.title})`);
+    throw new Error(`Venue ${event.room} not found`);
+  }
+
   return {
     id: sessionId,
 
@@ -158,7 +170,12 @@ function constructEventSessionFromPretalxEvent(
     end,
     minutes,
     durationCategory: durationCategory?.slug || '',
-    venueName: event.room,
+
+    venue: {
+      name: venue.name,
+      id: venue.id,
+      slug: venue.slug,
+    },
   };
 }
 
@@ -171,7 +188,7 @@ function addEventSessionInheritanceAndCounts(
 ): EventSession[] {
   const sortedSessions = sessions.sort((a, b) => {
     // Sort first by venue, then by start time
-    const venueComparison = a.venueName.localeCompare(b.venueName);
+    const venueComparison = a.venue.name.localeCompare(b.venue.name);
     if (venueComparison !== 0) return venueComparison;
 
     return a.start.getTime() - b.start.getTime() || 0;
@@ -196,8 +213,8 @@ function addEventSessionInheritanceAndCounts(
     if (session.event.artGallery) continue;
 
     // If the venue name has changed, reset the current parent
-    if (session.venueName !== currentVenueName) {
-      currentVenueName = session.venueName;
+    if (session.venue.name !== currentVenueName) {
+      currentVenueName = session.venue.name;
       currentParent = null;
     } else {
       if (currentParent) {
@@ -237,6 +254,7 @@ function addEventSessionInheritanceAndCounts(
 
 export async function fetchEventSessions(): Promise<EventSession[]> {
   const schedule = await fetchPretalxSchedule();
+  const venues = await fetchVenues();
 
   const eventSessions = schedule.schedule.conference.days
     // Map over each day
@@ -244,7 +262,7 @@ export async function fetchEventSessions(): Promise<EventSession[]> {
       Object.values(day.rooms).flatMap(
         (roomEvents): EventSessionWithoutSessionCount[] =>
           roomEvents.map((event) =>
-            constructEventSessionFromPretalxEvent(event, day),
+            constructEventSessionFromPretalxEvent(event, day, venues),
           ),
       ),
     );
@@ -256,7 +274,7 @@ export async function fetchEventSessionsInVenue(
   venueName: string,
 ): Promise<EventSession[]> {
   const events = await fetchEventSessions();
-  return events.filter((event) => event.venueName === venueName);
+  return events.filter((event) => event.venue.name === venueName);
 }
 
 export async function fetchEvent(
@@ -272,4 +290,15 @@ export async function fetchEvent(
     ...eventSessions[0].event,
     sessions: eventSessions.map((session) => ({ ...session, event: null })),
   };
+}
+
+export function getEventCategory(event: Event) {
+  const category = eventCategories.find(
+    (category) => category.pretalxTrack === event.categoryPretalxTrack,
+  );
+  if (!category) {
+    throw new Error('Event category not found');
+  }
+
+  return category;
 }

@@ -3,21 +3,23 @@ import { FiShare2 } from 'react-icons/fi';
 import { toast } from 'react-hot-toast';
 import type { Event } from '@/lib/events';
 
-type ShareProps = {
-  talk: Event;
-};
-
-export default function Share({ talk }: ShareProps) {
+export default function EventShare({
+  event,
+  accentColour,
+}: {
+  event: Event;
+  accentColour: string;
+}) {
   const shareUrl =
     typeof window !== 'undefined'
-      ? `${window.location.origin}/events/${talk.id}`
-      : `/events/${talk.id}`;
+      ? `${window.location.origin}/events/${event.slug}`
+      : `/events/${event.slug}`;
 
   const handleShare = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: talk.name,
+          title: event.name,
           url: shareUrl,
         });
         toast.success('Shared successfully!');
@@ -36,16 +38,12 @@ export default function Share({ talk }: ShareProps) {
   };
 
   return (
-    <div className=" bg-white p-4 h-fit rounded-lg shadow-lg border border-gray-200 hover:scale-105 transition duration-100 ease-in-out">
-      <button
-        onClick={handleShare}
-        className="flex items-center justify-between w-full cursor-pointer transition-colors duration-100"
-      >
-        <div className="flex items-center gap-4">
-          <FiShare2 className="h-5 w-5" />
-          <h3 className="text-black text-lg font-semibold">Share</h3>
-        </div>
-      </button>
-    </div>
+    <button
+      onClick={handleShare}
+      className="flex items-center w-full gap-4 cursor-pointer bg-white p-4 shadow-lg border border-gray-200 hover:scale-105 transition duration-100 ease-in-out"
+    >
+      <FiShare2 className="h-5 w-5" style={{ color: accentColour }} />
+      <h3 className="text-black text-lg font-semibold">Share</h3>
+    </button>
   );
 }

@@ -3,12 +3,10 @@ import { FaRandom, FaRegBuilding, FaRegClock } from 'react-icons/fa';
 export default function SortOptions({
   selectedSort,
   setSort,
-  randomiseSessions,
   disableVenues,
 }: {
   selectedSort: string;
   setSort: (sort: string) => void;
-  randomiseSessions: () => void;
   disableVenues?: boolean;
 }) {
   return (
@@ -19,16 +17,14 @@ export default function SortOptions({
       <div className="inline-flex rounded-md border-slate-300 border justify-center items-center text-sm overflow-hidden">
         <button
           className={`flex items-center gap-2 px-3 py-1.5 hover:cursor-pointer hover:bg-slate-100 ${selectedSort === 'random' ? 'bg-slate-100 drop-shadow-sm' : ''}`}
-          onClick={() =>
-            selectedSort === 'random' ? randomiseSessions() : setSort('random')
-          }
+          onClick={() => setSort('random')}
         >
           <FaRandom />
           Random
         </button>
         <button
           className={`flex items-center gap-2 px-3 py-1.5 hover:cursor-pointer hover:bg-slate-100 ${selectedSort === 'time' ? 'bg-slate-100 drop-shadow-sm' : ''}`}
-          onClick={() => setSort('time')}
+          onClick={selectedSort === 'time' ? undefined : () => setSort('time')}
         >
           <FaRegClock />
           Time
@@ -36,7 +32,9 @@ export default function SortOptions({
         {disableVenues || (
           <button
             className={`flex items-center gap-2 px-3 py-1.5 hover:cursor-pointer hover:bg-slate-100 ${selectedSort === 'venue' ? 'bg-slate-100 drop-shadow-sm' : ''}`}
-            onClick={() => setSort('venue')}
+            onClick={
+              selectedSort === 'venue' ? undefined : () => setSort('venue')
+            }
           >
             <FaRegBuilding />
             Venue

@@ -69,9 +69,6 @@ export default function OptionsSidebar({
             setSort={(value) =>
               setFilter({ sort: value as 'random' | 'time' | 'venue' })
             }
-            randomiseSessions={() =>
-              setFilter({ randomSeed: new Date().getTime() })
-            }
             disableVenues={disableVenues}
           />
         )}

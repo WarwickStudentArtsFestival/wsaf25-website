@@ -16,7 +16,6 @@ export type FilterOption = {
 export type SelectedFilters = {
   view: 'list' | 'timeline';
   sort: 'random' | 'time' | 'venue';
-  randomSeed: number | null;
   search: string | null;
   category: FilterOption[] | null;
   venue: FilterOption[] | null;
@@ -30,7 +29,6 @@ export type SelectedFilters = {
 export type SelectedFilterValues = {
   view: 'list' | 'timeline';
   sort: 'random' | 'time' | 'venue';
-  randomSeed: number | null;
   search: string | null;
   category: string[] | null;
   venue: string[] | null;
@@ -49,7 +47,6 @@ export type EventSessionGroup = {
 const defaultFilters: SelectedFilters = {
   view: 'list',
   sort: 'random',
-  randomSeed: new Date().getTime(),
   search: null,
   category: null,
   venue: null,
@@ -122,7 +119,6 @@ function getSelectedFiltersFromUrlParams(
       : defaultSortByTime
         ? 'time'
         : 'random') as 'random' | 'time' | 'venue',
-    randomSeed: sortParam === 'random' ? new Date().getTime() : null,
     search: searchParam || null,
     category: getFilterOptionsFromBitField(categoryParam, context.categories),
     venue: getFilterOptionsFromBitField(venueParam, context.venues),
@@ -134,6 +130,14 @@ function getSelectedFiltersFromUrlParams(
   };
 }
 
+function getRandomEventOrder(eventSessionCount: number) {
+  const randomSeeds = [];
+  for (let i = 0; i < eventSessionCount; i++) {
+    randomSeeds.push(Math.random());
+  }
+  return randomSeeds;
+}
+
 export default function useEventSessionsFilters(
   context: EventSessionsListContext,
   defaultSortByTime = false,
@@ -143,6 +147,14 @@ export default function useEventSessionsFilters(
   const [selectedFilters, setSelectedFilters] = useState<SelectedFilters>(
     getSelectedFiltersFromUrlParams(searchParams, context, defaultSortByTime),
   );
+
+  const [randomOrderSeed, setRandomOrderSeed] = useState(
+    getRandomEventOrder(context.eventSessions.length),
+  );
+
+  const reshuffleRandomOrder = () => {
+    setRandomOrderSeed(getRandomEventOrder(context.eventSessions.length));
+  };
 
   // URL search parameters that represent the selected filters
   const selectedFiltersUrlParams = useMemo(() => {
@@ -209,7 +221,6 @@ export default function useEventSessionsFilters(
     () => ({
       view: selectedFilters.view,
       sort: selectedFilters.sort,
-      randomSeed: selectedFilters.randomSeed,
       search: selectedFilters.search
         ? selectedFilters.search.toLowerCase()
         : null,
@@ -346,11 +357,12 @@ export default function useEventSessionsFilters(
       }
       if (currentGroup) sessionGroups.push(currentGroup);
     } else {
+      // Random
       sessionGroups = [
         {
           name: null,
           sessions: eventSessions
-            .map((session) => ({ sort: Math.random(), session }))
+            .map((session, i) => ({ sort: randomOrderSeed[i], session }))
             .sort((a, b) => a.sort - b.sort)
             .map((item) => item.session),
         },
@@ -369,6 +381,10 @@ export default function useEventSessionsFilters(
       ...newFilters,
     };
 
+    if (newFilters.sort === 'random') {
+      reshuffleRandomOrder();
+    }
+
     setSelectedFilters(updatedFilters);
     updateUrlFromFilters();
   };
@@ -385,5 +401,6 @@ export default function useEventSessionsFilters(
     resetFilters,
     isEventSessionInFilter,
     sortAndGroupEventSessions,
+    randomOrderSeed,
   };
 }

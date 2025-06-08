@@ -28,6 +28,7 @@ export default function EventSessionsList({
     setFilter,
     selectedFilters,
     resetFilters,
+    randomOrderSeed,
   } = useEventSessionsFilters(context, sortByTime);
 
   const { sessionCount: filteredSessionCount, sessionGroups } = useMemo(() => {
@@ -38,6 +39,7 @@ export default function EventSessionsList({
     context.venues,
     isEventSessionInFilter,
     sortAndGroupEventSessions,
+    randomOrderSeed,
   ]);
 
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);

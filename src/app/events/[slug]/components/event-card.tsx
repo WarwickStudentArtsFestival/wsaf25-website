@@ -11,6 +11,7 @@ import RelatedEvents from '@/app/events/[slug]/components/related-events';
 import { Venue } from '@/lib/venues';
 import EventParent from '@/app/events/[slug]/components/event-parent';
 import { FiMaximize2 } from 'react-icons/fi';
+import EventChildren from '@/app/events/[slug]/components/event-children';
 
 export default function EventCard({
   event,
@@ -117,6 +118,8 @@ export default function EventCard({
           <EventShare event={event} accentColour={category.colour} />
         </div>
       </div>
+
+      <EventChildren event={event} />
 
       {venues && <RelatedEvents event={event} venues={venues} />}
     </div>

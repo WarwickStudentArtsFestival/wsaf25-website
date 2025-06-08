@@ -52,6 +52,10 @@ export type Session = {
   childrenIds?: string[];
 };
 
+export type SessionWithChildren = Session & {
+  children?: EventSession[];
+};
+
 export type EventSession = Session & {
   event: Event;
 };
@@ -61,7 +65,7 @@ type EventSessionWithoutSessionCount = Session & {
 };
 
 export type EventWithSessions = Event & {
-  sessions: Session[];
+  sessions: SessionWithChildren[];
 };
 
 export type EventDurationCategory = {
@@ -233,7 +237,7 @@ function addEventSessionInheritanceAndCounts(
               ? [...session.childrenIds, currentParent.id]
               : [currentParent.id];
             currentParent = session;
-          } else if(session.end.getTime() > currentParent.end.getTime()) {
+          } else if (session.end.getTime() > currentParent.end.getTime()) {
             currentParent = session;
           } else {
             // Add the current session as a child of the parent
@@ -292,7 +296,18 @@ export async function fetchEvent(
 
   return {
     ...eventSessions[0].event,
-    sessions: eventSessions.map((session) => ({ ...session, event: null })),
+    sessions: eventSessions.map((session) => {
+      let children: EventSession[] | undefined = undefined;
+      if (session.childrenIds && session.childrenIds.length > 0) {
+        children = session.childrenIds
+          .map((childId) => {
+            return eventsSessions.find((s) => s.id === childId);
+          })
+          .filter((session) => !!session);
+      }
+
+      return { ...session, children, event: null };
+    }),
   };
 }
 

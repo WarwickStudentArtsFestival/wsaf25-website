@@ -26,8 +26,8 @@ export default function EventTickets({
         Tickets Required
       </h2>
       <p className="text-sm text-black">
-        Due to capacity restrictions, this event requires a ticket to attend.
-        Please ensure you have a book a valid ticket by clicking here.
+        Due to capacity restrictions, this event requires a free ticket to
+        attend. Please ensure you have a book a valid ticket by clicking here.
       </p>
     </Link>
   );

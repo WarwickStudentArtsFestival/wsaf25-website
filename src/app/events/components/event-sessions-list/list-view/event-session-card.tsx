@@ -56,14 +56,28 @@ export default function EventSessionCard({
           <div className="flex gap-2 items-center flex-wrap">
             {(eventSession.event.dropIn ||
               eventSession.parent?.event.dropIn) && (
-              <span className="flex gap-0.5 items-center text-teal rounded-md border-teal border px-1 text-sm bg-teal-50">
-                <FaWalking className="text-teal" /> Drop-in
+              <span
+                className="flex gap-0.5 items-center rounded-md border px-1 text-sm"
+                style={{
+                  background: `${category.colour}10`,
+                  borderColor: category.colour,
+                  color: category.colour,
+                }}
+              >
+                <FaWalking /> Drop-in
               </span>
             )}
             {(eventSession.event.ticketLink ||
               eventSession.parent?.event.ticketLink) && (
-              <span className="flex gap-0.5 items-center text-teal rounded-md border-teal border px-1 text-sm bg-teal-50">
-                <FaTicket className="text-teal" /> Ticket Required
+              <span
+                className="flex gap-0.5 items-center rounded-md border px-1 text-sm"
+                style={{
+                  background: `${category.colour}10`,
+                  borderColor: category.colour,
+                  color: category.colour,
+                }}
+              >
+                <FaTicket /> Ticket Required
               </span>
             )}
           </div>

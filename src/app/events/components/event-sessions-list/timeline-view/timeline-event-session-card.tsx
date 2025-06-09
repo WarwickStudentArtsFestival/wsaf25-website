@@ -42,11 +42,21 @@ export default function TimelineEventSessionCard({
       >
         <div className="flex items-center gap-1 float-right mx-1">
           {(eventSession.event.dropIn || eventSession.parent?.event.dropIn) && (
-            <FaWalking className="text-teal" title="Drop-in" />
+            <FaWalking
+              style={{
+                color: category.colour,
+              }}
+              title="Drop-in"
+            />
           )}
           {(eventSession.event.ticketLink ||
             eventSession.parent?.event.ticketLink) && (
-            <FaTicket className="text-teal" title="Ticket Required" />
+            <FaTicket
+              style={{
+                color: category.colour,
+              }}
+              title="Ticket Required"
+            />
           )}
         </div>
         {/* This is a hacky way to make the title of the event still centered*/}

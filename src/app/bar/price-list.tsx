@@ -160,15 +160,7 @@ export const barMenu = {
       category: 'Softs, Juice & Water',
       items: [
         {
-          name: 'Soda & Tonic',
-          subtitle: 'Schwepps',
-          unit_price: '£1.00',
-          unit_quantity: null,
-          line_1: null,
-          line_2: null,
-        },
-        {
-          name: 'Soda',
+          name: 'Soft Drinks',
           subtitle:
             '7-Up, Fanta, Diet Coke, Coca-Cola, Dr Pepper, Rubicon Sparkling Mango',
           unit_price: '£1.00',
@@ -190,6 +182,14 @@ export const barMenu = {
           unit_price: '£2.00',
           unit_quantity: null,
           line_1: '50p as mixer',
+          line_2: null,
+        },
+        {
+          name: 'Soda & Tonic',
+          subtitle: 'Schwepps',
+          unit_price: '£1.00',
+          unit_quantity: null,
+          line_1: null,
           line_2: null,
         },
         {

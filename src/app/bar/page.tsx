@@ -3,6 +3,9 @@ import PageHeader from '@/app/components/page-header';
 import { barMenu } from './price-list';
 import type { Metadata } from 'next';
 import { FiMapPin } from 'react-icons/fi';
+import Challenge21 from '@/assets/wbar/challenge21.jpg';
+import AskForAngela from '@/assets/wbar/askforangela.jpg';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Bar Menu',
@@ -60,8 +63,22 @@ export default function PriceList() {
           </div>
         ))}
         <div className="text-center mt-8 space-y-2">
-          <p>All drinks served until 10:30 PM</p>
-          <p>ID required for all purchases</p>
+          <p>If you look under 21 be prepared to show ID to purchase alcohol</p>
+          <p>Bar runs until last event ends, usually around 10 PM</p>
+          <div className="flex mt-4">
+            <Image
+              src={AskForAngela}
+              alt="Ask for Angela"
+              className="mx-auto h-20 w-auto"
+              priority
+            />
+            <Image
+              src={Challenge21}
+              alt="Challenge 21"
+              className="mx-auto h-20 w-auto"
+              priority
+            />
+          </div>
         </div>
       </div>
     </div>

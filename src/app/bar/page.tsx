@@ -2,7 +2,7 @@ import React from 'react';
 import PageHeader from '@/app/components/page-header';
 import { barMenu } from './price-list';
 import type { Metadata } from 'next';
-// import { FaMapPin } from 'react-icons/fa';
+import { FiMapPin } from 'react-icons/fi';
 
 export const metadata: Metadata = {
   title: 'Bar Menu',
@@ -12,11 +12,13 @@ export const metadata: Metadata = {
 
 export default function PriceList() {
   return (
-    <div className="bg-purple text-white">
+    <div className="bg-purple sm:bg-orange text-white">
       <PageHeader />
-      <h1 className="text-3xl mt-8 font-semibold">BAR MENU</h1>
-      {/* <FaMapPin /> Benefactors Place */}
-      <div className="mx-auto p-3 sm:p-8 max-w-2xl">
+      <div className="mx-auto bg-purple sm:my-8 p-3 sm:p-8 max-w-2xl">
+        <h1 className="text-3xl font-semibold">BAR MENU</h1>
+        <div className="flex flex-row mx-auto items-center gap-2 w-fit sm:mb-8">
+          <FiMapPin /> Benefactors Place
+        </div>
         {barMenu.menu.map(({ category, items }, categoryIndex) => (
           <div key={categoryIndex} className="mb-6">
             <div className="w-fit mx-auto gap-2 flex flex-row items-center uppercase text-xl font-bold text-black bg-yellow py-1 px-8 m-2">
@@ -26,7 +28,7 @@ export default function PriceList() {
               {items.map((item, index) => (
                 <li
                   key={index}
-                  className="grid w-full grid-cols-[2fr_1fr_1fr] gap-4 border-b pb-2 last:border-b-0 items-start"
+                  className="grid w-full grid-cols-[2fr_1fr_1fr] gap-4 border-b pb-2 items-start"
                 >
                   <div className="text-left flex flex-col w-fit ">
                     <span className="font-medium">{item.name}</span>

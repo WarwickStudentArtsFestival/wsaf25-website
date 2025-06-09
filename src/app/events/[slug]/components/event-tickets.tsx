@@ -1,20 +1,25 @@
-import { Event } from '@/lib/events';
 import Link from 'next/link';
 import React from 'react';
 import { FaTicket } from 'react-icons/fa6';
+import { EventWithSessions, SessionWithChildren } from '@/lib/events';
 
 export default function EventTickets({
   event,
   accentColour,
 }: {
-  event: Event;
+  event: EventWithSessions;
   accentColour: string;
 }) {
-  if (!event.ticketLink) return null;
+  const ticketLink =
+    event.ticketLink ||
+    event.sessions.find(
+      (session: SessionWithChildren) => session.parent?.event.ticketLink,
+    )?.parent?.event.ticketLink;
+  if (!ticketLink) return null;
 
   return (
     <Link
-      href={event.ticketLink}
+      href={ticketLink}
       target="_blank"
       className="block bg-white shadow-lg border border-gray-200 border-gray-200 p-4 text-left my-4 hover:scale-105 transition duration-100 ease-in-out"
     >

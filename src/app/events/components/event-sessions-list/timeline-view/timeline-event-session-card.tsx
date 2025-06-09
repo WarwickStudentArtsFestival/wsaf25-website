@@ -2,6 +2,9 @@ import { EventSession } from '@/lib/events';
 import Link from 'next/link';
 import { eventCategories } from '@/data/events';
 import ErrorMessage from '@/app/components/ErrorMessage';
+import { FaWalking } from 'react-icons/fa';
+import { FaTicket } from 'react-icons/fa6';
+import React from 'react';
 
 export default function TimelineEventSessionCard({
   eventSession,
@@ -37,6 +40,25 @@ export default function TimelineEventSessionCard({
           color: category.colour,
         }}
       >
+        <div className="flex items-center gap-1 float-right mx-1">
+          {(eventSession.event.dropIn || eventSession.parent?.event.dropIn) && (
+            <FaWalking className="text-teal" title="Drop-in" />
+          )}
+          {(eventSession.event.ticketLink ||
+            eventSession.parent?.event.ticketLink) && (
+            <FaTicket className="text-teal" title="Ticket Required" />
+          )}
+        </div>
+        {/* This is a hacky way to make the title of the event still centered*/}
+        <div className="flex items-center gap-1 float-left invisible mx-1">
+          {eventSession.event.dropIn && (
+            <FaWalking className="text-teal" title="Drop-in" />
+          )}
+          {(eventSession.event.ticketLink ||
+            eventSession.parent?.event.ticketLink) && (
+            <FaTicket className="text-teal" title="Ticket Required" />
+          )}
+        </div>
         <p className="text-sm font-semibold">{eventSession.event.name}</p>
         {eventSession.start && eventSession.end && (
           <p className="text-xs">

@@ -32,6 +32,9 @@ export type Event = {
   };
 
   sessionCount: number;
+
+  ticketLink?: string;
+  contentWarnings?: string;
 };
 
 export type Session = {
@@ -170,6 +173,11 @@ function constructEventSessionFromPretalxEvent(
         image:
           event.answers.find((answer) => answer.question === 13)?.answer || '',
       },
+
+      ticketLink: event.answers.find((answer) => answer.question === 17)
+        ?.answer,
+      contentWarnings: event.answers.find((answer) => answer.question === 18)
+        ?.answer,
     },
 
     start,

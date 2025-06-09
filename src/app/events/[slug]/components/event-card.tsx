@@ -12,6 +12,7 @@ import { Venue } from '@/lib/venues';
 import EventParent from '@/app/events/[slug]/components/event-parent';
 import { FiMaximize2 } from 'react-icons/fi';
 import EventChildren from '@/app/events/[slug]/components/event-children';
+import EventTickets from '@/app/events/[slug]/components/event-tickets';
 
 export default function EventCard({
   event,
@@ -86,6 +87,8 @@ export default function EventCard({
         </div>
       )}
 
+      <EventTickets event={event} accentColour={category.colour} />
+
       <div className="flex gap-4 flex-wrap">
         <div className="space-y-4 text-left w-lg grow flex flex-col">
           {event.shortDescription && (
@@ -99,6 +102,13 @@ export default function EventCard({
             className="text-gray-700 px-2"
             dangerouslySetInnerHTML={{ __html: event.description }}
           />
+
+          {event.contentWarnings && (
+            <div className="px-2 text-sm text-gray-700">
+              <h3 className="font-semibold uppercase">Content Warnings</h3>
+              <p>{event.contentWarnings}</p>
+            </div>
+          )}
 
           <div className="mt-auto">
             {/* We only show the event card if there is only one parent (i.e.

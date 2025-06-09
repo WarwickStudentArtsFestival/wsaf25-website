@@ -14,6 +14,7 @@ import { EventSession } from '@/lib/events';
 import { FaWalking } from 'react-icons/fa';
 import { eventCategories } from '@/data/events';
 import ErrorMessage from '@/app/components/ErrorMessage';
+import { FaTicket } from 'react-icons/fa6';
 
 export default function EventSessionCard({
   eventSession,
@@ -52,10 +53,17 @@ export default function EventSessionCard({
             padding={5}
             track={eventSession.event.categoryPretalxTrack}
           />
-          <div>
-            {eventSession.event.dropIn && (
+          <div className="flex gap-2 items-center flex-wrap">
+            {(eventSession.event.dropIn ||
+              eventSession.parent?.event.dropIn) && (
               <span className="flex gap-0.5 items-center text-teal rounded-md border-teal border px-1 text-sm bg-teal-50">
                 <FaWalking className="text-teal" /> Drop-in
+              </span>
+            )}
+            {(eventSession.event.ticketLink ||
+              eventSession.parent?.event.ticketLink) && (
+              <span className="flex gap-0.5 items-center text-teal rounded-md border-teal border px-1 text-sm bg-teal-50">
+                <FaTicket className="text-teal" /> Ticket Required
               </span>
             )}
           </div>

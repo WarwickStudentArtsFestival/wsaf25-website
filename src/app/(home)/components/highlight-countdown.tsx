@@ -3,8 +3,8 @@ import { FiCalendar } from 'react-icons/fi';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
-// Submissions close end of Friday 2nd May
-const targetDate = new Date('2025-06-13T00:59Z').getTime();
+// WSAF starts 10am on Friday 13th June
+const targetDate = new Date('2025-06-13T09:00Z').getTime();
 
 export default function HighlightCountdown() {
   const [timeLeft, setTimeLeft] = useState('');

@@ -14,9 +14,10 @@ export default function PriceList() {
 
   useEffect(() => {
     if (menuContentRef.current) {
-      const contentHeight = menuContentRef.current.offsetHeight;
       const squiggleHeight = 48;
-      const height = Math.ceil(contentHeight / squiggleHeight) * squiggleHeight;
+      const height =
+        Math.ceil(menuContentRef.current.offsetHeight / squiggleHeight) *
+        squiggleHeight;
       menuContentRef.current.style.height = `${height}px`;
       setSquiggleCount(height / squiggleHeight);
     }

@@ -169,7 +169,8 @@ export const barMenu = {
         },
         {
           name: 'Soda',
-          subtitle: '7-Up, Fanta, Diet Coke, Coca-Cola, Dr Pepper, ',
+          subtitle:
+            '7-Up, Fanta, Diet Coke, Coca-Cola, Dr Pepper, Rubicon Sparkling Mango',
           unit_price: '£1.00',
           unit_quantity: '330ml ',
           line_1: null,
@@ -181,15 +182,6 @@ export const barMenu = {
           unit_price: '£1.00',
           unit_quantity: 'Half Pint',
           line_1: 'Pint £1.75',
-          line_2: null,
-        },
-
-        {
-          name: 'Rubicon Sparkling Mango',
-          subtitle: null,
-          unit_price: '£1.00',
-          unit_quantity: null,
-          line_1: null,
           line_2: null,
         },
         {

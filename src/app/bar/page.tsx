@@ -28,7 +28,7 @@ export default function PriceList() {
               {items.map((item, index) => (
                 <li
                   key={index}
-                  className="grid w-full grid-cols-[3fr_1fr_2fr] gap-4 border-b pb-2 items-start"
+                  className="grid w-full grid-cols-[2fr_1fr_2fr] sm:grid-cols-[2fr_1fr_2fr] gap-4 border-b pb-2 items-start"
                 >
                   <div className="text-left flex flex-col w-fit ">
                     <span className="font-medium">{item.name}</span>

@@ -93,18 +93,18 @@ export default function EventCard({
         <div className="space-y-4 text-left w-lg grow flex flex-col">
           {event.shortDescription && (
             <div
-              className="text-black font-semibold mb-2 px-2"
+              className="text-black font-semibold mb-2 px-2 whitespace-pre-wrap"
               dangerouslySetInnerHTML={{ __html: event.shortDescription }}
             />
           )}
 
           <div
-            className="text-gray-700 px-2"
+            className="text-gray-700 px-2 whitespace-pre-wrap"
             dangerouslySetInnerHTML={{ __html: event.description }}
           />
 
           {event.contentWarnings && (
-            <div className="px-2 text-sm text-gray-700">
+            <div className="px-2 text-sm text-gray-700 whitespace-pre-wrap">
               <h3 className="font-semibold uppercase">Content Warnings</h3>
               <p>{event.contentWarnings}</p>
             </div>

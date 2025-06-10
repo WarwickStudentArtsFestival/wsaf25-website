@@ -113,7 +113,7 @@ export default async function VenuePage({
               <h2 className="mb-4 text-xl font-semibold text-black">
                 Description
               </h2>
-              <p className="prose max-w-none">
+              <p className="prose max-w-none whitespace-pre-wrap">
                 {venue.description || 'No description available.'}
               </p>
             </div>

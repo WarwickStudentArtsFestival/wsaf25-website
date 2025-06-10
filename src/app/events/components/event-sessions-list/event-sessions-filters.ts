@@ -244,12 +244,29 @@ export default function useEventSessionsFilters(
   const isEventSessionInFilter = (eventSession: EventSession) => {
     if (selectedFilters.view === 'list') {
       if (selectedFilterValues.search) {
+        let inSearch = false;
         if (
-          !eventSession.event.name
+          eventSession.event.name
             .toLowerCase()
             .includes(selectedFilterValues.search)
         )
-          return false;
+          inSearch = true;
+        else if (
+          eventSession.parent &&
+          eventSession.parent.event.name
+            .toLowerCase()
+            .includes(selectedFilterValues.search)
+        )
+          inSearch = true;
+        else if (
+          eventSession.event.artist.name &&
+          eventSession.event.artist.name
+            .toLowerCase()
+            .includes(selectedFilterValues.search)
+        )
+          inSearch = true;
+
+        if (!inSearch) return false;
       }
 
       if (selectedFilterValues.duration) {

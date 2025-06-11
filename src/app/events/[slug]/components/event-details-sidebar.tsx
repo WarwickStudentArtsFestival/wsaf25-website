@@ -85,6 +85,11 @@ export default function EventDetailsSidebar({
   event: EventWithSessions;
   accentColour: string;
 }) {
+  event.sessions.sort((a, b) => {
+    const startA = new Date(a.start);
+    const startB = new Date(b.start);
+    return startA.getTime() - startB.getTime();
+  });
   return (
     <div className="bg-white border-gray-200 border p-4 text-left">
       <h2 className="text-black text-lg font-semibold mb-2">Event Details</h2>

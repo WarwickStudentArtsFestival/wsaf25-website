@@ -1,6 +1,5 @@
 import AdamPhoto from '@/assets/people/adam.jpg';
 import AlexPhoto from '@/assets/people/alex.jpg';
-// import DaePhoto from '@/assets/people/dae.jpg';
 import MaximusPhoto from '@/assets/people/maximus.jpg';
 import JoshPhoto from '@/assets/people/josh.jpg';
 import ElliePhoto from '@/assets/people/ellie.jpg';
@@ -22,6 +21,7 @@ import StanPhoto from '@/assets/people/stan.jpg';
 import AliaPhoto from '@/assets/people/alia.jpg';
 import MaxPhoto from '@/assets/people/max.jpg';
 import DaePhoto from '@/assets/people/dae.jpg';
+import TrinPhoto from '@/assets/people/trin.jpg';
 
 interface RefactoredIdCardProps extends Omit<IdCardProps, 'description'> {
   year: string;
@@ -29,6 +29,12 @@ interface RefactoredIdCardProps extends Omit<IdCardProps, 'description'> {
 }
 
 const organisers: RefactoredIdCardProps[] = [
+  {
+    name: 'Trin',
+    course: 'Cyber Security',
+    year: '2nd Year',
+    image: TrinPhoto,
+  },
   {
     name: 'Adam',
     role: 'WSAF Lead (Technical)',

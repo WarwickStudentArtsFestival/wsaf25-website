@@ -6,6 +6,7 @@ import Fab2 from '@/assets/venues/fab2.jpg';
 import Rehearsal from '@/assets/venues/rehersal.jpg';
 import Terrace from '@/assets/venues/terrace.jpg';
 import Placeholder from '@/assets/hero.jpg';
+import Fab106 from '@/assets/venues/fab106.jpg';
 import { AdditionalVenueData } from '@/lib/venues';
 
 // Mapping from venue GUID to additional data
@@ -120,6 +121,17 @@ const venues: Record<string, AdditionalVenueData> = {
     roomLocation: 'The Graduate',
     slug: 'the-graduate',
     filterBitFieldIndex: 9,
+  },
+
+  // FAB 1.06
+  'ff238428-4491-53a1-9a22-77fd90d978e9': {
+    mapUrl:
+      'https://campus.warwick.ac.uk/search/623c8964421e6f5928c0fc0f?projectId=warwick',
+    image: Fab106,
+    imageAlt: 'Picture of FAB 1.06',
+    roomLocation: 'FAB 1.06',
+    slug: 'fab-106',
+    filterBitFieldIndex: 10,
   },
 };
 

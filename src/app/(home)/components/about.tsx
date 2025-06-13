@@ -50,7 +50,7 @@ export default function About() {
 
   return (
     <section className="px-4 my-4 sm:my-8 sm:px-8">
-      <HighlightCountdown />
+      {/* <HighlightCountdown /> */}
 
       <div className="mt-4">
         <HighlightedHeading text="What is WSAF?" />

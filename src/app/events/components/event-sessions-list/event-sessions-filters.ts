@@ -281,11 +281,6 @@ export default function useEventSessionsFilters(
       ) {
         const earliestTime =
           eventDateTimeIntervals.all[selectedFilterValues.dateFrom].date;
-        if (
-          eventSession.event.categoryPretalxTrack == 'Visual Art (displayed)'
-        ) {
-          return false;
-        }
 
         if (eventSession.event.dropIn) {
           if (eventSession.end && eventSession.end.getTime() < earliestTime)
@@ -298,6 +293,9 @@ export default function useEventSessionsFilters(
       if (!eventDateTimeIntervals.all[selectedFilterValues.dateTo].allowAfter) {
         const latestTime =
           eventDateTimeIntervals.all[selectedFilterValues.dateTo].date;
+        if (eventSession.event.artGallery) {
+          return false;
+        }
 
         if (eventSession.event.dropIn) {
           if (eventSession.start && eventSession.start.getTime() > latestTime)

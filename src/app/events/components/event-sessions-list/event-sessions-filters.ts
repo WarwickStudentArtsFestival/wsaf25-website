@@ -281,6 +281,11 @@ export default function useEventSessionsFilters(
       ) {
         const earliestTime =
           eventDateTimeIntervals.all[selectedFilterValues.dateFrom].date;
+        if (
+          eventSession.event.categoryPretalxTrack == 'Visual Art (displayed)'
+        ) {
+          return false;
+        }
 
         if (eventSession.event.dropIn) {
           if (eventSession.end && eventSession.end.getTime() < earliestTime)

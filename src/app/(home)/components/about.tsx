@@ -5,7 +5,7 @@ import Performers from '@/assets/home/performers.jpg';
 import Crew from '@/assets/home/crew.jpg';
 import Guests from '@/assets/home/guests.jpg';
 import InfoCard from './InfoCard';
-import HighlightCountdown from './highlight-countdown';
+// import HighlightCountdown from './highlight-countdown';
 
 export default function About() {
   const cards = [

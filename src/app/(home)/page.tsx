@@ -6,6 +6,7 @@ import Faq from '@/app/(home)/components/faq/faq';
 import History from './components/history';
 import EventPreview from './components/event-preview';
 import Feedback from '@/app/(home)/components/feedback';
+import YouTube from '@/app/(home)/components/youtube';
 
 // export const dynamic = 'force-dynamic';
 
@@ -16,6 +17,7 @@ export default function Home() {
       <Feedback />
       <About />
       <EventPreview />
+      <YouTube />
       <WhoInvolved />
       <History />
       <Faq defaultTab="General" />

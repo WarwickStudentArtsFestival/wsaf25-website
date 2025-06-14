@@ -3,6 +3,9 @@ import ErrorMessage from '@/app/components/ErrorMessage';
 import { fetchEventSessions } from '@/lib/events';
 import EventSessionCard from '@/app/events/components/event-sessions-list/list-view/event-session-card';
 import AutoScrollContainer from './auto-scroller';
+import { FiArrowRight } from 'react-icons/fi';
+import Link from 'next/link';
+import React from 'react';
 
 export default async function EventPreview() {
   let eventSessions;
@@ -35,6 +38,16 @@ export default async function EventPreview() {
             ))}
           </div>
         </AutoScrollContainer>
+
+        <Link
+          href="/events"
+          className="inline-block bg-purple px-4 py-1 rounded-xs drop-shadow-xs hover:scale-105 mt-4 mx-4"
+        >
+          <span className="text-xl uppercase text-white font-bold">
+            <FiArrowRight className="inline mr-2 mb-1" />
+            View All Events
+          </span>
+        </Link>
       </div>
     </main>
   );

@@ -44,6 +44,14 @@ export type EventSessionGroup = {
   sessions: EventSession[];
 };
 
+const getCurrentDateInterval = () => {
+  const interval = eventDateTimeIntervals.all.findLastIndex(
+    (interval) => interval.date <= Date.now(),
+  );
+  if (interval === -1) return 0;
+  else return interval;
+};
+
 const defaultFilters: SelectedFilters = {
   view: 'list',
   sort: 'random',
@@ -51,7 +59,7 @@ const defaultFilters: SelectedFilters = {
   category: null,
   venue: null,
   duration: null,
-  dateFrom: 0,
+  dateFrom: getCurrentDateInterval(),
   dateTo: eventDateTimeIntervals.all.length - 1,
   dropInOnly: false,
 };
@@ -95,7 +103,8 @@ function getSelectedFiltersFromUrlParams(
   const selectedEvent = searchParams.get('event');
 
   let dateFrom = dateFromParam && parseInt(dateFromParam);
-  if (!dateFrom || isNaN(dateFrom)) dateFrom = 0;
+  if (dateFrom === null || dateFrom === '' || isNaN(dateFrom))
+    dateFrom = getCurrentDateInterval();
   else {
     dateFrom = Math.max(
       Math.min(dateFrom, eventDateTimeIntervals.all.length - 1),
@@ -179,7 +188,7 @@ export default function useEventSessionsFilters(
         getBitFieldFromFilterOptions(selectedFilters.duration),
       );
     }
-    if (selectedFilters.dateFrom !== 0) {
+    if (selectedFilters.dateFrom !== getCurrentDateInterval()) {
       params.set('from', selectedFilters.dateFrom.toString());
     }
     if (selectedFilters.dateTo !== eventDateTimeIntervals.all.length - 1) {
@@ -243,6 +252,11 @@ export default function useEventSessionsFilters(
 
   const isEventSessionInFilter = (eventSession: EventSession) => {
     if (selectedFilters.view === 'list') {
+      if (selectedFilters.sort === 'time') {
+        // Don't show art gallery events if sorted by time
+        if (eventSession.event.artGallery) return false;
+      }
+
       if (selectedFilterValues.search) {
         let inSearch = false;
         if (

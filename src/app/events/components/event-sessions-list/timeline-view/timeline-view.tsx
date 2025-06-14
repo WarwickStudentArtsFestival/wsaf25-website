@@ -7,6 +7,7 @@ import { FaArrowLeft, FaPrint } from 'react-icons/fa';
 import useTimelinePrinting from '@/app/events/components/event-sessions-list/timeline-view/use-timeline-printing';
 import constructTimelineData, {
   TimelineData,
+  TimelineDataTime,
 } from '@/app/events/components/event-sessions-list/timeline-view/construct-timeline-data';
 import { EventSession } from '@/lib/events';
 import { eventCategories } from '@/data/events';
@@ -81,6 +82,63 @@ function ParentCellTimelineEventSessionCards({
   );
 }
 
+function TimelineRow({
+  time,
+  selectEvent,
+  currentTime,
+}: {
+  time: TimelineDataTime;
+  selectEvent: (slug: string) => void;
+  currentTime: number;
+}) {
+  return (
+    <tr key={time.startTime} className="h-full">
+      {/* time header */}
+      {time.type === 'keytime' && (
+        <th
+          className={`text-black text-sm w-1/12 font-semibold sticky left-0 z-[2] border-r border-slate-200 align-top pt-0.5 ${currentTime > time.startTime ? 'bg-slate-100' : 'bg-white'} ${time.type === 'keytime' ? 'border-t' : ''}`}
+          rowSpan={time.startTimeSpan}
+        >
+          <p className="min-h-[0.5rem] border-slate-200">
+            {new Date(time.startTime).toLocaleTimeString('en-gb', {
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true,
+            })}
+          </p>
+        </th>
+      )}
+
+      {time.venueSessions
+        .filter(
+          (venueSession) =>
+            venueSession.rowSpan === 1 || venueSession.eventStart,
+        )
+        .map((venueSession, j) => (
+          <td
+            key={j}
+            rowSpan={venueSession.rowSpan}
+            className={`h-full px-1 ${currentTime > time.startTime ? 'bg-slate-100' : ''} ${time.type === 'keytime' ? 'border-t border-slate-200' : ''}`}
+          >
+            {venueSession.parentSession ? (
+              <ParentCellTimelineEventSessionCards
+                parentSession={venueSession.parentSession}
+                eventSessions={venueSession.eventSessions}
+                parentSessionMode={venueSession.parentSessionMode || 'single'}
+                selectEvent={selectEvent}
+              />
+            ) : (
+              <CellTimelineEventSessionCards
+                eventSessions={venueSession.eventSessions}
+                selectEvent={selectEvent}
+              />
+            )}
+          </td>
+        ))}
+    </tr>
+  );
+}
+
 export default function TimelineView({
   sessionGroups,
   venueInfo,
@@ -101,6 +159,8 @@ export default function TimelineView({
     () => constructTimelineData(sessionGroups, venueInfo),
     [sessionGroups, venueInfo],
   );
+
+  const currentTime = new Date().getTime();
 
   if (sessionGroups.length === 0) {
     return (
@@ -169,11 +229,11 @@ export default function TimelineView({
               time.type === 'day' ? (
                 <tr key={time.startTime}>
                   <th
-                    className={`border-t border-t-slate-200 border-b-2 border-b-slate-300 border-r border-r-slate-200 bg-white sticky ${i === 0 ? 'top-8' : 'top-4'}`}
+                    className={`border-t border-t-slate-200 border-b-2 border-b-slate-300 border-r border-r-slate-200 ${currentTime > time.startTime ? 'bg-slate-100' : 'bg-white'} sticky ${i === 0 ? 'top-8' : 'top-4'}`}
                   />
                   <th
                     colSpan={timeline.venues.length}
-                    className={`border-t border-t-slate-200 border-b-2 border-slate-300 bg-white sticky ${i === 0 ? 'top-8' : 'top-4'}`}
+                    className={`border-t border-t-slate-200 border-b-2 border-slate-300 ${currentTime > time.startTime ? 'bg-slate-100' : 'bg-white'} sticky ${i === 0 ? 'top-8' : 'top-4'}`}
                   >
                     <div className={i === 0 ? '' : 'pt-4'}>
                       <HighlightedHeading
@@ -191,52 +251,12 @@ export default function TimelineView({
                   </th>
                 </tr>
               ) : (
-                <tr key={time.startTime} className="h-full">
-                  {/* time header */}
-                  {time.type === 'keytime' && (
-                    <th
-                      className={`text-black text-sm w-1/12 font-semibold bg-white sticky left-0 z-[2] border-r border-slate-200 align-top pt-0.5 ${time.type === 'keytime' ? 'border-t' : ''}`}
-                      rowSpan={time.startTimeSpan}
-                    >
-                      <p className="min-h-[0.5rem] border-slate-200">
-                        {new Date(time.startTime).toLocaleTimeString('en-gb', {
-                          hour: 'numeric',
-                          minute: '2-digit',
-                          hour12: true,
-                        })}
-                      </p>
-                    </th>
-                  )}
-
-                  {time.venueSessions
-                    .filter(
-                      (venueSession) =>
-                        venueSession.rowSpan === 1 || venueSession.eventStart,
-                    )
-                    .map((venueSession, j) => (
-                      <td
-                        key={j}
-                        rowSpan={venueSession.rowSpan}
-                        className={`h-full px-1 ${time.type === 'keytime' ? 'border-t border-slate-200' : ''}`}
-                      >
-                        {venueSession.parentSession ? (
-                          <ParentCellTimelineEventSessionCards
-                            parentSession={venueSession.parentSession}
-                            eventSessions={venueSession.eventSessions}
-                            parentSessionMode={
-                              venueSession.parentSessionMode || 'single'
-                            }
-                            selectEvent={selectEvent}
-                          />
-                        ) : (
-                          <CellTimelineEventSessionCards
-                            eventSessions={venueSession.eventSessions}
-                            selectEvent={selectEvent}
-                          />
-                        )}
-                      </td>
-                    ))}
-                </tr>
+                <TimelineRow
+                  time={time}
+                  selectEvent={selectEvent}
+                  key={time.startTime}
+                  currentTime={currentTime}
+                />
               ),
             )}
           </tbody>

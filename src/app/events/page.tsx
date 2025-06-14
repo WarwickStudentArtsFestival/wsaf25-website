@@ -48,7 +48,11 @@ export default async function EventsPage() {
     <main className="w-full grow">
       <PageHeader />
       <Suspense fallback={<LoadingPage eventCount={eventSessions.length} />}>
-        <EventSessionsList eventSessions={eventSessions} context={context} />
+        <EventSessionsList
+          eventSessions={eventSessions}
+          context={context}
+          sortByTime
+        />
       </Suspense>
     </main>
   );

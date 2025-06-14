@@ -35,7 +35,7 @@ export default function VenueCard({ venue }: { venue: VenueWithEventCount }) {
           <div className="flex items-center space-x-2 my-2">
             <FiList className="text-purple-500 flex-shrink-0" />
             <h3 className="text-black font-semibold">
-              {venue.eventCount} Events
+              {venue.eventCount} {venue.eventCount === 1 ? 'Event' : 'Events'}
             </h3>
           </div>
           <p className="text-sm text-gray-700 flex-1 my-2">

@@ -7,6 +7,7 @@ import Rehearsal from '@/assets/venues/rehersal.jpg';
 import Terrace from '@/assets/venues/terrace.jpg';
 import Placeholder from '@/assets/hero.jpg';
 import Fab106 from '@/assets/venues/fab106.jpg';
+import Fusion from '@/assets/venues/fusion.jpg';
 import { AdditionalVenueData } from '@/lib/venues';
 
 // Mapping from venue GUID to additional data
@@ -132,6 +133,17 @@ const venues: Record<string, AdditionalVenueData> = {
     roomLocation: 'FAB 1.06',
     slug: 'fab-106',
     filterBitFieldIndex: 10,
+  },
+
+  // Fusion Bar
+  '17d2a90e-3558-5d31-b12b-d18b62317790': {
+    mapUrl:
+      'https://campus.warwick.ac.uk/search/66167610d8dbf518cbed2bfb?projectId=warwick',
+    image: Fusion,
+    imageAlt: 'Picture of Fusion bar',
+    roomLocation: '1st Floor - Rootes Building',
+    slug: 'fusion',
+    filterBitFieldIndex: 11,
   },
 };
 

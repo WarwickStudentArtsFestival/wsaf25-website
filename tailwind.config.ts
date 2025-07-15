@@ -2,9 +2,7 @@ import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
 const config: Config = {
-  content: [
-    './src/app/**/*.{js,ts,jsx,tsx,mdx,css}',
-  ],
+  content: ['./src/app/**/*.{js,ts,jsx,tsx,mdx,css}'],
   theme: {
     extend: {
       colors: {
@@ -17,7 +15,7 @@ const config: Config = {
         orange: '#FF5400',
         'event-pink': '#B82458',
         'event-orange': '#F5722F',
-        'text-dark': '#737373'
+        'text-dark': '#737373',
       },
       fontSize: {
         '2xs': '0.6rem',
@@ -34,6 +32,12 @@ const config: Config = {
       '4xl': '2050px',
       '5xl': '2300px',
       '6xl': '2550px',
+    },
+    keyframes: {
+      scroll: {
+        '0%': { transform: 'translateX(0)' },
+        '100%': { transform: 'translateX(-50%)' },
+      },
     },
   },
   plugins: [],

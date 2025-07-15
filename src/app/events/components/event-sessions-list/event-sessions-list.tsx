@@ -9,6 +9,7 @@ import { FaFilter } from 'react-icons/fa';
 import ListView from '@/app/events/components/event-sessions-list/list-view/list-view';
 import TimelineView from '@/app/events/components/event-sessions-list/timeline-view/timeline-view';
 import EventPopup from '@/app/events/components/event-sessions-list/event-popup';
+import FeedbackCallout from '@/app/components/feedback-callout';
 
 export default function EventSessionsList({
   eventSessions,
@@ -80,6 +81,8 @@ export default function EventSessionsList({
         )}
 
         <div className="w-64 grow flex flex-col">
+          <FeedbackCallout />
+
           {selectedFilters.view === 'list' && (
             <DatetimeSlider
               fromIndex={selectedFilterValues.dateFrom}

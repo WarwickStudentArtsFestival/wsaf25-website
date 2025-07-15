@@ -6,6 +6,7 @@ import React from 'react';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Header from '@/app/components/header';
 import LayoutClient from '@/app/layout-client';
+import FeedbackPopup from '@/app/components/feedback-popup';
 
 const lexend = Lexend({
   subsets: ['latin'],
@@ -52,6 +53,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <FeedbackPopup />
         </body>
       </html>
     </LayoutClient>

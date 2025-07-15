@@ -35,6 +35,14 @@ export default function Header() {
         </Link>*/}
 
         <Link
+          href="https://docs.google.com/forms/d/e/1FAIpQLSewV74lnEt9Wwm-DqWDHtQgYSJ6WI2jLdvryAmHq1HyVBUfZQ/viewform?usp=sharing&ouid=108184775135612947638p"
+          target="_blank"
+          className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
+        >
+          Feedback
+        </Link>
+
+        {/* <Link
           href="https://helfertool.wsaf.org.uk/wsaf2025/"
           target="_blank"
           className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
@@ -48,7 +56,7 @@ export default function Header() {
           className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
         >
           Performers <span className="hidden lg:inline">Portal</span>
-        </Link>
+        </Link>*/}
       </div>
 
       {/* Hamburger button (mobile only) */}
@@ -72,6 +80,14 @@ export default function Header() {
               <NavLinks onClick={() => setMobileMenuOpen(false)} />
             </div>
 
+            <Link
+              href="https://docs.google.com/forms/d/e/1FAIpQLSewV74lnEt9Wwm-DqWDHtQgYSJ6WI2jLdvryAmHq1HyVBUfZQ/viewform?usp=sharing&ouid=108184775135612947638p"
+              target="_blank"
+              className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
+            >
+              Feedback
+            </Link>
+
             {/* <Link
               href="/crew"
               className={`uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] ${pathname === '/crew' ? 'text-yellow-400' : 'bg-yellow text-black'}`}
@@ -79,7 +95,7 @@ export default function Header() {
             >
               Join the Crew
             </Link>*/}
-            <Link
+            {/*<Link
               href="https://helfertool.wsaf.org.uk/wsaf2025/"
               target="_blank"
               className="uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] bg-yellow text-black"
@@ -94,7 +110,7 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               Performers Portal
-            </Link>
+            </Link>*/}
           </nav>
         </div>
       )}

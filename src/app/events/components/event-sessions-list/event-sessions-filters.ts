@@ -5,6 +5,9 @@ import { EventSession } from '@/lib/events';
 import { eventDateTimeIntervals, formatDate } from '@/lib/dates';
 import { useDebouncedCallback } from 'use-debounce';
 
+// Show all events and don't default filter by current date
+const DEFAULT_FILTER_BY_CURRENT_TIME = false;
+
 export type FilterOption = {
   label: string;
   value: string;
@@ -45,6 +48,8 @@ export type EventSessionGroup = {
 };
 
 const getCurrentDateInterval = () => {
+  if (!DEFAULT_FILTER_BY_CURRENT_TIME) return 0;
+
   const interval = eventDateTimeIntervals.all.findLastIndex(
     (interval) => interval.date <= Date.now(),
   );

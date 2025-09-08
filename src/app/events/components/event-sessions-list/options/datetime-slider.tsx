@@ -1,6 +1,6 @@
 'use client';
 import { Slider } from '@mui/material';
-import { useRef, useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { SelectedFilters } from '@/app/events/components/event-sessions-list/event-sessions-filters';
 import { eventDateTimeIntervals } from '@/lib/dates';
 import DatetimeSelector from '@/app/events/components/event-sessions-list/options/datetime-selector';
@@ -48,7 +48,7 @@ export default function DatetimeSlider({
   };
 
   return (
-    <div className="px-8 sm:pt-2 pb-1 lg:sticky bg-white z-20 top-16">
+    <div className="px-8 sm:pt-2 pb-1 lg:sticky bg-white z-10 top-16">
       <div className="inline-flex gap-0.5 items-center text-sm text-black flex-wrap justify-center">
         <div className="inline-flex gap-1.5 items-center">
           <span>Showing</span>

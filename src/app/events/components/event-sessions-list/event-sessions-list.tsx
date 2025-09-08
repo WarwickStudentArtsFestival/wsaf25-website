@@ -48,7 +48,7 @@ export default function EventSessionsList({
   return (
     <>
       <div className="flex flex-row px-2 sm:px-4 relative">
-        <aside className="sticky top-24 h-[calc(100vh-15rem)] w-0 lg:w-auto z-20 my-4">
+        <aside className="sticky top-24 h-[calc(100vh-15rem)] w-0 lg:w-auto z-30 my-4">
           <div
             className={`max-h-full transition-all duration-150 ease-in-out relative -left-80 lg:left-0 -ml-4 lg:ml-0 ${showMobileSidebar ? 'left-0' : '-left-80'}`}
           >
@@ -75,7 +75,7 @@ export default function EventSessionsList({
 
         {showMobileSidebar && (
           <div
-            className="lg:hidden fixed left-0 right-0 bottom-0 top-0 bg-black/5 z-10"
+            className="lg:hidden fixed left-0 right-0 bottom-0 top-0 bg-black/5 z-20"
             onClick={() => setShowMobileSidebar(false)}
           ></div>
         )}

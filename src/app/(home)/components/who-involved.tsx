@@ -3,6 +3,7 @@ import HighlightedHeading from '@/app/components/highlighted-heading';
 import Link from 'next/link';
 import React from 'react';
 import PeopleInvolved from '@/app/components/people-involved/people-involved';
+import mainConfig from '@config/main-config';
 
 export default function KeyDates() {
   return (
@@ -25,7 +26,7 @@ export default function KeyDates() {
       >
         <span className="text-xl uppercase text-white font-bold">
           <FiArrowRight className="inline mr-2 mb-1" />
-          Join the WSAF 2025 Crew
+          Join the WSAF {mainConfig.dates.year} Crew
         </span>
       </Link>
     </section>

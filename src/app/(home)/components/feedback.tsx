@@ -1,10 +1,11 @@
 import { FiSend } from 'react-icons/fi';
 import Link from 'next/link';
+import mainConfig from '@config/main-config';
 
 export default function Feedback() {
   return (
     <Link
-      href="https://docs.google.com/forms/d/e/1FAIpQLSewV74lnEt9Wwm-DqWDHtQgYSJ6WI2jLdvryAmHq1HyVBUfZQ/viewform?usp=sharing&ouid=108184775135612947638"
+      href={mainConfig.feedback.url}
       target="_blank"
       rel="noopener noreferrer"
       className="inline-block mb-1 bg-purple px-6 py-4 rounded-md drop-shadow-xs hover:scale-105 text-white mx-2 text-center w-full max-w-md"

@@ -1,10 +1,11 @@
 import { FiSend } from 'react-icons/fi';
 import Link from 'next/link';
+import mainConfig from '@config/main-config';
 
 export default function FeedbackCallout() {
   return (
     <Link
-      href="https://docs.google.com/forms/d/e/1FAIpQLSewV74lnEt9Wwm-DqWDHtQgYSJ6WI2jLdvryAmHq1HyVBUfZQ/viewform?usp=sharing&ouid=108184775135612947638"
+      href={mainConfig.feedback.url}
       target="_blank"
       rel="noopener noreferrer"
       className="flex gap-2 border border-slate-300 rounded-md p-2 my-4 drop-shadow-md group"

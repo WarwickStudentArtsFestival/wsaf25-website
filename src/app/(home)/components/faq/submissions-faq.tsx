@@ -1,5 +1,6 @@
 import Question from '@/app/(home)/components/faq/question';
 import Answer from '@/app/(home)/components/faq/answer';
+import mainConfig from '@config/main-config';
 
 export default function SubmissionsFaq() {
   return (
@@ -62,7 +63,7 @@ export default function SubmissionsFaq() {
         <Answer>
           We&apos;re hoping for most shows to be shorter than 60 minutes, to
           allow people to see as much as possible over the weekend. We will,
-          however, do our best to schedule any performance - last year we had a{' '}
+          however, do our best to schedule any performance - in 2024 we had a{' '}
           <a
             href="https://2024.wsaf.org.uk/events/wind-orchestra-charity-playathon"
             target="_blank"
@@ -87,11 +88,11 @@ export default function SubmissionsFaq() {
           </a>{' '}
           or on Instagram at{' '}
           <a
-            href="https://www.instagram.com/wsaf25/"
+            href={`https://www.instagram.com/${mainConfig.socials.instagram}/`}
             target="_blank"
             className="text-teal"
           >
-            @wsaf25
+            @{mainConfig.socials.instagram}
           </a>
           .
         </Answer>

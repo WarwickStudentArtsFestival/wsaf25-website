@@ -7,6 +7,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import Header from '@/app/components/header';
 import LayoutClient from '@/app/layout-client';
 import FeedbackPopup from '@/app/components/feedback-popup';
+import mainConfig from '@config/main-config';
 
 const lexend = Lexend({
   subsets: ['latin'],
@@ -16,11 +17,10 @@ const lexend = Lexend({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Warwick Student Arts Festival 2025',
-    template: '%s | WSAF 2025',
+    default: `Warwick Student Arts Festival ${mainConfig.dates.year}`,
+    template: `%s | WSAF ${mainConfig.dates.year}`,
   },
-  description:
-    'Warwick Student Arts Festival (WSAF) is a fully student-run showcase and celebration of the arts at Warwick, taking place in Week 8-9 of Term 3 (Fri 13th - Mon 16th June).\n\nSubmissions for events are open until Friday 2nd May!',
+  description: mainConfig.defaultMetaDescription,
   category: 'website',
   keywords: [
     'Warwick',
@@ -53,7 +53,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
-          <FeedbackPopup />
+          {mainConfig.feedback.popup && <FeedbackPopup />}
         </body>
       </html>
     </LayoutClient>

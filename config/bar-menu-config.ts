@@ -1,4 +1,12 @@
-export const barMenu = {
+import { BarMenuConfig } from '@config/types/bar-menu-config';
+
+const barMenuConfig: BarMenuConfig = {
+  enabled: true,
+  showInFooter: true,
+
+  location: 'Benefactors Place',
+  endTime: '10 PM',
+
   menu: [
     {
       category: 'Beer & Cider',
@@ -204,3 +212,5 @@ export const barMenu = {
     },
   ],
 };
+
+export default barMenuConfig;

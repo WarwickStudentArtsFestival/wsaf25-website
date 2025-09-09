@@ -1,6 +1,7 @@
 import Question from '@/app/(home)/components/faq/question';
 import Answer from '@/app/(home)/components/faq/answer';
 import Link from 'next/link';
+import mainConfig from '@config/main-config';
 
 export default function GeneralFaq() {
   return (
@@ -90,8 +91,8 @@ export default function GeneralFaq() {
         </Question>
         <Answer>
           Yes! The Warwick Student Arts Festival used to be a yearly event from
-          2004 to 2015, and we brought it back last year in 2024! You can find
-          out more about WSAF&apos;s history on the{' '}
+          2004 to 2015, and we brought it back in 2024! You can find out more
+          about WSAF&apos;s history on the{' '}
           <Link href="/history" className="text-teal">
             history page
           </Link>
@@ -126,11 +127,11 @@ export default function GeneralFaq() {
           </a>{' '}
           or on Instagram at{' '}
           <a
-            href="https://www.instagram.com/wsaf25/"
+            href={`https://www.instagram.com/${mainConfig.socials.instagram}/`}
             target="_blank"
             className="text-teal"
           >
-            @wsaf25
+            @{mainConfig.socials.instagram}
           </a>
           .
         </Answer>

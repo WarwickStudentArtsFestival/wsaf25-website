@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import mainConfig from '@config/main-config';
 
 export default function FeedbackPopup() {
   const [showModal, setShowModal] = useState(false);
@@ -12,11 +13,13 @@ export default function FeedbackPopup() {
 
   function closeFeedback() {
     setShowModal(false);
-    localStorage.setItem('hide2025FeedbackPopup', '1');
+    localStorage.setItem(`hide${mainConfig.dates.year}FeedbackPopup`, '1');
   }
 
   useEffect(() => {
-    if (localStorage.getItem('hide2025FeedbackPopup') !== '1') {
+    if (
+      localStorage.getItem(`hide${mainConfig.dates.year}FeedbackPopup`) !== '1'
+    ) {
       setTimeout(showFeedback, 2000); // Show after 2 seconds
     }
   }, []);
@@ -44,7 +47,7 @@ export default function FeedbackPopup() {
           for future years.
         </p>
         <Link
-          href="https://docs.google.com/forms/d/e/1FAIpQLSewV74lnEt9Wwm-DqWDHtQgYSJ6WI2jLdvryAmHq1HyVBUfZQ/viewform?usp=sharing&ouid=108184775135612947638"
+          href={mainConfig.feedback.url}
           target="_blank"
           rel="noopener noreferrer"
           className="mt-4 inline-block bg-teal text-white px-4 py-2 rounded hover:scale-105"

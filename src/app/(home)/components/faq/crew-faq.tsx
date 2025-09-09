@@ -1,6 +1,7 @@
 import Question from '@/app/(home)/components/faq/question';
 import Answer from '@/app/(home)/components/faq/answer';
 import Link from 'next/link';
+import mainConfig from '@config/main-config';
 
 export default function CrewFaq() {
   return (
@@ -62,11 +63,11 @@ export default function CrewFaq() {
           </a>{' '}
           or on Instagram at{' '}
           <a
-            href="https://www.instagram.com/wsaf25/"
+            href={`https://www.instagram.com/${mainConfig.socials.instagram}/`}
             target="_blank"
             className="text-teal"
           >
-            @wsaf25
+            @{mainConfig.socials.instagram}
           </a>
           .
         </Answer>

@@ -7,6 +7,8 @@ import History from './components/history';
 import EventPreview from './components/event-preview';
 import Feedback from '@/app/(home)/components/feedback';
 import YouTube from '@/app/(home)/components/youtube';
+import mainConfig from '@config/main-config';
+import homepageConfig from '@config/homepage-config';
 
 // export const dynamic = 'force-dynamic';
 
@@ -14,10 +16,10 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      <Feedback />
+      {mainConfig.feedback.homepage && <Feedback />}
       <About />
       <EventPreview />
-      <YouTube />
+      {homepageConfig.youtube.enabled && <YouTube />}
       <WhoInvolved />
       <History />
       <Faq defaultTab="General" />

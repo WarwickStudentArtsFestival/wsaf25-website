@@ -3,6 +3,7 @@ import FooterSection from './FooterSection';
 import FooterLink from './FooterLink';
 import footerData from './footerData';
 import DeliveryPartners from '@/app/components/footer/delivery-partners';
+import mainConfig from '@config/main-config';
 
 export default function Footer() {
   return (
@@ -12,7 +13,8 @@ export default function Footer() {
           <FooterSection
             title={
               <span>
-                <span className="text-white">WSAF</span> 2025
+                <span className="text-white">WSAF</span> $
+                {mainConfig.dates.year}
               </span>
             }
           >
@@ -37,26 +39,32 @@ export default function Footer() {
 
           <FooterSection title="Quick Links">
             <ul className="space-y-3 text-left text-sm">
-              {footerData.quick.map((link, index) => (
-                <FooterLink key={index} {...link} />
-              ))}
+              {footerData.quick
+                .filter((link) => !link.hidden)
+                .map((link, index) => (
+                  <FooterLink key={index} {...link} />
+                ))}
             </ul>
           </FooterSection>
 
           <FooterSection title="Information">
             <ul className="space-y-3 text-left text-sm">
-              {footerData.info.map((link, index) => (
-                <FooterLink key={index} {...link} />
-              ))}
+              {footerData.info
+                .filter((link) => !link.hidden)
+                .map((link, index) => (
+                  <FooterLink key={index} {...link} />
+                ))}
             </ul>
           </FooterSection>
 
           <div className="space-y-7">
             <FooterSection title="Follow Us">
               <ul className="flex align-center space-x-4">
-                {footerData.social.map((social, index) => (
-                  <FooterLink key={index} {...social} />
-                ))}
+                {footerData.social
+                  .filter((link) => !link.hidden)
+                  .map((social, index) => (
+                    <FooterLink key={index} {...social} />
+                  ))}
               </ul>
             </FooterSection>
 
@@ -67,11 +75,14 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 border-t pt-6 text-center text-sm">
-          <p>© 2025 Warwick Student Arts Festival. All rights reserved.</p>
+          <p>
+            © {mainConfig.dates.year} Warwick Student Arts Festival. All rights
+            reserved.
+          </p>
           <p className="mt-2 flex justify-center items-center gap-1">
             <FaGithub className="inline-block" />
             <a
-              href="https://github.com/WarwickStudentArtsFestival/wsaf25-website"
+              href={mainConfig.githubUrl}
               className="hover:underline"
               target="_blank"
               rel="noopener noreferrer"

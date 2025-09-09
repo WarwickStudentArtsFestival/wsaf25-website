@@ -5,6 +5,7 @@ import { fetchVenuesWithEventCount } from '@/lib/venues';
 import VenueCard from '@/app/venues/venue-card';
 import React from 'react';
 import FeedbackCallout from '@/app/components/feedback-callout';
+import mainConfig from '@config/main-config';
 
 export const revalidate = 3600; // Fetch new information every hour
 
@@ -44,7 +45,7 @@ export default async function VenuesPage() {
       </h1>
 
       <div className="mx-auto px-4 gap-8 md:px-16 mx-auto">
-        <FeedbackCallout />
+        {mainConfig.feedback.banner && <FeedbackCallout />}
       </div>
 
       <div className="mt-2 grid px-4 gap-8 md:px-16 mx-auto py-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 sm:gap-4 justify-center">

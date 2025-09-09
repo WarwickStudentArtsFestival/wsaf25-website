@@ -48,7 +48,7 @@ export default function DatetimeSlider({
   };
 
   return (
-    <div className="px-8 sm:pt-2 pb-1 lg:sticky bg-white z-10 top-16">
+    <div className="-mx-4 px-12 sm:pt-2 pb-1 lg:sticky bg-white z-10 top-16">
       <div className="inline-flex gap-0.5 items-center text-sm text-black flex-wrap justify-center">
         <div className="inline-flex gap-1.5 items-center">
           <span>Showing</span>

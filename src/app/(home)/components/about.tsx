@@ -58,16 +58,16 @@ export default function About() {
         <HighlightedHeading text="What is WSAF?" />
       </div>
       <h2 className="text-teal text-xl pt-2 sm:text-2xl font-semibold">
-        The Warwick Student Arts Festival ${mainConfig.dates.year}
+        The Warwick Student Arts Festival {mainConfig.dates.year}
       </h2>
       <div className="max-w-screen-lg mx-auto p-4 pb-0 mb-1">
         <span className="font-semibold">
-          We&apos;re back for ${mainConfig.dates.year}, putting on a fully
-          student-run, free ${mainConfig.dates.durationDaysText}-day showcase
-          and celebration of the arts at Warwick.
+          We&apos;re back for {mainConfig.dates.year}, putting on a fully
+          student-run, free {mainConfig.dates.durationDaysText}-day showcase and
+          celebration of the arts at Warwick.
         </span>
         <br />
-        Join us during ${mainConfig.dates.week} for our free festival of
+        Join us during {mainConfig.dates.week} for our free festival of
         performances, exhibitions, workshops and more.
       </div>
 

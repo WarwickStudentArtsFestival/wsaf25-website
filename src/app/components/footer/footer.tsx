@@ -4,6 +4,9 @@ import FooterLink from './FooterLink';
 import footerData from './footerData';
 import DeliveryPartners from '@/app/components/footer/delivery-partners';
 import mainConfig from '@config/main-config';
+import Link from 'next/link';
+import PaintBrush from '@/assets/icons/paintbrush.png';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -13,8 +16,7 @@ export default function Footer() {
           <FooterSection
             title={
               <span>
-                <span className="text-white">WSAF</span> $
-                {mainConfig.dates.year}
+                <span className="text-white">WSAF</span> {mainConfig.dates.year}
               </span>
             }
           >
@@ -22,19 +24,20 @@ export default function Footer() {
               Celebrating student creativity at the University of Warwick
             </p>
 
-            {/* W-Paint Link TODO: fix styles */}
-            {/* <Link
-              href="/wpaint"
-              className="flex items-center mx-auto gap-2 rounded hover:underline uppercase text-black bg-yellow"
-            >
-              <div className="font-bold">W-Paint</div>
-              <Image
-                src={PaintBrush}
-                alt="Paint brush icon"
-                width={25}
-                height={25}
-              />
-            </Link> */}
+            <div className="text-left">
+              <Link
+                href="/wpaint"
+                className="inline-flex items-center gap-2 hover:underline uppercase text-black bg-yellow px-2 py-1 mt-2"
+              >
+                <div className="font-bold">W-Paint</div>
+                <Image
+                  src={PaintBrush}
+                  alt="Paint brush icon"
+                  width={25}
+                  height={25}
+                />
+              </Link>
+            </div>
           </FooterSection>
 
           <FooterSection title="Quick Links">

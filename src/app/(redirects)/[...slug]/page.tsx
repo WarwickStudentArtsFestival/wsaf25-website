@@ -1,4 +1,4 @@
-import nextConfig from '../../../../next.config.js';
+import nextConfig from '../../../../next.config';
 import { notFound } from 'next/navigation';
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '@/app/components/highlighted-heading';

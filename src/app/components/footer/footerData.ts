@@ -29,7 +29,6 @@ const footerData: FooterLinks = {
       label: 'Bar',
       hidden: !barMenuConfig.enabled || !barMenuConfig.showInFooter,
     },
-    { href: '/wpaint', label: 'W-Paint' },
   ],
   info: [
     { href: '/history', label: 'History' },

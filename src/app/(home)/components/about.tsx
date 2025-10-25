@@ -6,7 +6,8 @@ import Crew from '@/assets/home/crew.jpg';
 import Guests from '@/assets/home/guests.jpg';
 import InfoCard from './InfoCard';
 import mainConfig from '@config/main-config';
-// import HighlightCountdown from './highlight-countdown';
+import HighlightCountdown from './highlight-countdown';
+import homepageConfig from '@config/homepage-config';
 
 export default function About() {
   const cards = [
@@ -52,7 +53,7 @@ export default function About() {
 
   return (
     <section className="px-4 my-4 sm:my-8 sm:px-8">
-      {/* <HighlightCountdown /> */}
+      {homepageConfig.about.countdown.enabled && <HighlightCountdown />}
 
       <div className="mt-4">
         <HighlightedHeading text="What is WSAF?" />
@@ -91,7 +92,6 @@ export default function About() {
         </a>
       </div>
 
-      {/* <HighlightedHeading text="Can I get involved?" /> */}
       <div className="flex flex-col md:flex-row gap-4 p-2 justify-center text-left text-sm">
         {cards.map((card, index) => (
           <InfoCard key={index} {...card} />

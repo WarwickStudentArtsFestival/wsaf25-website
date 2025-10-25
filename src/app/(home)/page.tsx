@@ -18,7 +18,7 @@ export default function Home() {
       <Hero />
       {mainConfig.feedback.homepage && <Feedback />}
       <About />
-      <EventPreview />
+      {homepageConfig.eventPreview.enabled && <EventPreview />}
       {homepageConfig.youtube.enabled && <YouTube />}
       <WhoInvolved />
       <History />

@@ -5,6 +5,19 @@ export type HomepageConfig = {
     youtubeVideoId: string;
   };
 
+  about: {
+    countdown: {
+      enabled: boolean;
+      title: string;
+      subtitle: string;
+      countdownDateIso: string;
+    };
+  };
+
+  eventPreview: {
+    enabled: boolean;
+  };
+
   youtube: {
     enabled: boolean;
   };

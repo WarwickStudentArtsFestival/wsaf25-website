@@ -5,6 +5,19 @@ const homepageConfig: HomepageConfig = {
     youtubeVideoId: '5_doeGYlb-U',
   },
 
+  about: {
+    countdown: {
+      enabled: false,
+      title: 'Countdown',
+      subtitle: 'WSAF Begins Friday Week 8 (13th June)',
+      countdownDateIso: '2025-06-13T09:00Z', // 10am BST on Friday 13th June
+    },
+  },
+
+  eventPreview: {
+    enabled: true,
+  },
+
   youtube: {
     enabled: true,
   },

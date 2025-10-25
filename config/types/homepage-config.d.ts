@@ -20,6 +20,9 @@ export type HomepageConfig = {
 
   youtube: {
     enabled: boolean;
+    heading: title;
+    title: string;
+    description: string;
   };
 
   keyDates: KeyDateProps[];

@@ -20,6 +20,10 @@ const homepageConfig: HomepageConfig = {
 
   youtube: {
     enabled: true,
+    heading: 'Livestream',
+    title: 'Watch or Recap Online',
+    description:
+      'Many of our events are being livestreamed to YouTube. Click here to watch live or on-demand!',
   },
 
   keyDates: [

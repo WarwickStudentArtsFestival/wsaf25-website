@@ -9,9 +9,7 @@ import constructTimelineData, {
   TimelineData,
   TimelineDataTime,
 } from '@/app/events/components/event-sessions-list/timeline-view/construct-timeline-data';
-import { EventSession } from '@/lib/events';
-import { eventCategories } from '@/data/events';
-import ErrorMessage from '@/app/components/ErrorMessage';
+import { EventSession, getEventCategory } from '@/lib/events';
 
 // Grey out past times in the timeline
 const GREY_PAST_TIMES = false;
@@ -46,12 +44,7 @@ function ParentCellTimelineEventSessionCards({
   eventSessions: EventSession[];
   selectEvent: (slug: string) => void;
 }) {
-  const category = eventCategories.find(
-    (c) => c.pretalxTrack === parentSession.event.categoryPretalxTrack,
-  );
-  if (!category) {
-    return <ErrorMessage msg="Track category not found" />;
-  }
+  const category = getEventCategory(parentSession.event);
 
   let borderClass = 'border-slate-300 border-l-2 border-r-2';
   if (parentSessionMode === 'top') {

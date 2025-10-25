@@ -7,7 +7,7 @@ import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import RoleCard from '@/app/components/role-card';
 import PeopleInvolved from '../components/people-involved/people-involved';
-import CrewFaq from '../(home)/components/faq/crew-faq';
+import CrewFaq from '../(home)/components/faq/tabs/crew-faq';
 
 import PosteringImage from '@/assets/images/postering.jpg';
 import Marketing from '@/assets/crew/marketing.jpg';

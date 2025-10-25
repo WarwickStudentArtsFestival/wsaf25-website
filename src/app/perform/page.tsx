@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import RoleCard from '@/app/components/role-card';
-import SubmissionsFaq from '@/app/(home)/components/faq/submissions-faq';
+import SubmissionsFaq from '@/app/(home)/components/faq/tabs/submissions-faq';
 
 import Artwork from '@/assets/perform/fabgallery.jpg';
 import Drama from '@/assets/perform/lastorders.jpg';

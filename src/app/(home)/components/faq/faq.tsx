@@ -1,9 +1,9 @@
 'use client';
 import HighlightedHeading from '@/app/components/highlighted-heading';
-import GeneralFaq from '@/app/(home)/components/faq/general-faq';
+import GeneralFaq from '@/app/(home)/components/faq/tabs/general-faq';
 import { useState } from 'react';
-import SubmissionsFaq from '@/app/(home)/components/faq/submissions-faq';
-import CrewFaq from '@/app/(home)/components/faq/crew-faq';
+import SubmissionsFaq from '@/app/(home)/components/faq/tabs/submissions-faq';
+import CrewFaq from '@/app/(home)/components/faq/tabs/crew-faq';
 
 enum FaqTabs {
   GENERAL = 'General',

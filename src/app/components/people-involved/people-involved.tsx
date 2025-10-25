@@ -1,12 +1,16 @@
 import IdCard from './id-card';
 import AvatarImage from '@/assets/people/avatar.jpg';
-import organisers from '@/app/components/people-involved/organisers';
+import organisersConfig from '@config/organisers-config';
 
 export default function PeopleInvolved({}) {
+  const sortedOrganisers = organisersConfig.organisers.sort((a, b) =>
+    a.name.localeCompare(b.name),
+  );
+
   return (
     <div className="mb-4 w-full mx-auto xl:px-16">
       <div className="grid grid-cols-3 sm:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 2xl:grid-cols-10 gap-2 px-2 text-white justify-center">
-        {organisers.map((person) => (
+        {sortedOrganisers.map((person) => (
           <IdCard
             key={person.name}
             name={person.name}

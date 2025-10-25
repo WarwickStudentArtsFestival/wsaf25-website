@@ -91,11 +91,11 @@ export default function Press() {
             </a>{' '}
             or on Instagram at{' '}
             <a
-              href="https://www.instagram.com/wsaf25/"
+              href={`https://www.instagram.com/${mainConfig.socials.instagram}/`}
               target="_blank"
               className="text-teal"
             >
-              @wsaf25
+              @{mainConfig.socials.instagram}
             </a>
             .
           </p>

@@ -1,4 +1,5 @@
 import LastYearGallery from '@/app/history/components/last-year-gallery';
+import mainConfig from '@config/main-config';
 
 export default function Media() {
   return (
@@ -61,7 +62,7 @@ export default function Media() {
       <p className="mt-6 mb-2 max-w-6xl mx-auto">
         Last year, several of our events were also livestreamed on{' '}
         <a
-          href="https://www.youtube.com/@wsaf25/streams"
+          href={`https://www.youtube.com/@${mainConfig.socials.youtubeHandle}/streams`}
           target="_blank"
           rel="noopener noreferrer"
           className="text-teal"

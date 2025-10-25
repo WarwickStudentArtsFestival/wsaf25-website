@@ -33,11 +33,11 @@ export default function Perform() {
             !<br />
             Please contact us at{' '}
             <a
-              href="https://www.instagram.com/wsaf25/"
+              href={`https://www.instagram.com/${mainConfig.socials.instagram}/`}
               target="_blank"
               className="text-teal"
             >
-              @wsaf25
+              @{mainConfig.socials.instagram}
             </a>{' '}
             if you have any questions.
           </p>
@@ -46,11 +46,11 @@ export default function Perform() {
             While event submissions are now closed, if you are still interested
             in performing please contact us at{' '}
             <a
-              href="https://www.instagram.com/wsaf25/"
+              href={`https://www.instagram.com/${mainConfig.socials.instagram}/`}
               target="_blank"
               className="text-teal"
             >
-              @wsaf25
+              @{mainConfig.socials.instagram}
             </a>{' '}
             or fill in the{' '}
             <a

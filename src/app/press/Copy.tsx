@@ -1,4 +1,5 @@
 import React from 'react';
+import mainConfig from '@config/main-config';
 
 export function Copy() {
   return (
@@ -58,11 +59,11 @@ export function Copy() {
         </a>{' '}
         or at{' '}
         <a
-          href="https://www.instagram.com/wsaf25/"
+          href={`https://www.instagram.com/${mainConfig.socials.instagram}/`}
           target="_blank"
           className="text-teal"
         >
-          @wsaf25
+          @{mainConfig.socials.instagram}
         </a>{' '}
         if you&apos;d like personalised copy or would like us to check copy that
         you have created.

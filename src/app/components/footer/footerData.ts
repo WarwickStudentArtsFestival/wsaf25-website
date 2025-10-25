@@ -3,6 +3,7 @@ import { AiFillInstagram } from 'react-icons/ai';
 import { ComponentType } from 'react';
 import mainConfig from '@config/main-config';
 import barMenuConfig from '@config/bar-menu-config';
+import eventsConfig from '@config/events-config';
 
 export type LinkItem = {
   href: string;
@@ -20,8 +21,8 @@ export type FooterLinks = {
 
 const footerData: FooterLinks = {
   quick: [
-    { href: '/events', label: 'Events' },
-    { href: '/venues', label: 'Venues' },
+    { href: '/events', label: 'Events', hidden: !eventsConfig.enabled },
+    { href: '/venues', label: 'Venues', hidden: !eventsConfig.enabled },
     { href: '/crew', label: 'Join the Crew' },
     { href: '/perform', label: 'Perform or Exhibit' },
     {

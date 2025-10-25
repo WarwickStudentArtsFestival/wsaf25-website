@@ -11,10 +11,14 @@ import { FaArrowRight, FaWarehouse } from 'react-icons/fa';
 import EventSessionsList from '@/app/events/components/event-sessions-list/event-sessions-list';
 import getContext from '@/app/events/components/event-sessions-list/event-sessions-list-context';
 import LoadingPage from '@/app/events/components/loading-page';
+import eventsConfig from '@config/events-config';
+import { notFound } from 'next/navigation';
 
 export const revalidate = 3600; // Fetch new information every hour
 
 export async function generateStaticParams() {
+  if (!eventsConfig.enabled) return [];
+
   const venues = await fetchVenues();
 
   return venues.map((venue) => ({
@@ -27,6 +31,8 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  if (!eventsConfig.enabled) return notFound();
+
   const { slug } = await params;
 
   try {
@@ -62,6 +68,8 @@ export default async function VenuePage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  if (!eventsConfig.enabled) return notFound();
+
   let venue, eventSessions, eventSessionsListContext;
   const { slug } = await params;
 

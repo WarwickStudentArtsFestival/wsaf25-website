@@ -1,5 +1,5 @@
 import React from 'react';
-import { eventCategories } from '@/data/events';
+import eventsConfig from '@config/events-config';
 
 type TrackPillProps = {
   size?: number; // Icon size
@@ -17,7 +17,9 @@ const TrackPill: React.FC<TrackPillProps> = ({
 }) => {
   if (!track) return null;
 
-  const category = eventCategories.find((c) => c.pretalxTrack === track);
+  const category = eventsConfig.filterCategories.categories.find(
+    (c) => c.pretalxTrack === track,
+  );
   if (!category) return null;
 
   const nameElement = showName ? (
@@ -46,7 +48,7 @@ const TrackPill: React.FC<TrackPillProps> = ({
         justifyContent: 'center',
       }}
     >
-      {category.icon}
+      <category.icon />
     </span>
   );
 

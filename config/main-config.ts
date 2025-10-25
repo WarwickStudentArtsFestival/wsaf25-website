@@ -20,10 +20,10 @@ const mainConfig: MainConfig = {
   submissions: {
     open: false,
     closingDate: 'Friday Week 2 (2nd May)',
-    url: 'https://submit.wsaf.org.uk/2025/cfp',
+    submitUrl: 'https://submit.wsaf.org.uk/2025/cfp',
   },
   crew: {
-    url: 'https://helfertool.wsaf.org.uk/wsaf2025/',
+    signupUrl: 'https://helfertool.wsaf.org.uk/wsaf2025/',
   },
   feedback: {
     homepage: true,

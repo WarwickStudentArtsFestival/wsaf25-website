@@ -10,10 +10,8 @@ import {
 } from 'react-icons/fi';
 import Link from 'next/link';
 import TrackPill from '../../../../components/track/TrackPill';
-import { EventSession } from '@/lib/events';
+import { EventSession, getEventCategory } from '@/lib/events';
 import { FaWalking } from 'react-icons/fa';
-import { eventCategories } from '@/data/events';
-import ErrorMessage from '@/app/components/ErrorMessage';
 import { FaTicket } from 'react-icons/fa6';
 
 export default function EventSessionCard({
@@ -25,12 +23,7 @@ export default function EventSessionCard({
   hideVenue?: boolean;
   selectEvent?: () => void;
 }) {
-  const category = eventCategories.find(
-    (c) => c.pretalxTrack === eventSession.event.categoryPretalxTrack,
-  );
-  if (!category) {
-    return <ErrorMessage msg="Track category not found" />;
-  }
+  const category = getEventCategory(eventSession.event);
   return (
     <Link
       href={`/events/${eventSession.event.slug}`}

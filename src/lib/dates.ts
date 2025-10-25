@@ -1,16 +1,10 @@
-import {
-  endDate,
-  endHourUtc,
-  minuteInterval,
-  startDate,
-  startHourUtc,
-} from '@/data/dates';
+import eventsConfig from '@config/events-config';
 
 export const formatDate = (date: Date) => {
   const day = date.getDate();
 
   const getOrdinal = (n: number) => {
-    if(n>=4 && n<=20) return 'th';
+    if (n >= 4 && n <= 20) return 'th';
     const mod = n % 10;
     if (mod === 1) return 'st';
     if (mod === 2) return 'nd';
@@ -86,7 +80,8 @@ function getDateTimeIntervals(): EventDateTimeIntervals {
     days: [],
   };
 
-  const currentDate = new Date(startDate);
+  const currentDate = new Date(eventsConfig.dates.startDateIso);
+  const endDateTime = new Date(eventsConfig.dates.endDateIso).getTime();
   currentDate.setMinutes(0, 0, 0);
 
   let currentDateTimeHour: EventDateTimeHour | null = null;
@@ -94,12 +89,12 @@ function getDateTimeIntervals(): EventDateTimeIntervals {
   let currentDay: number | null = null;
   let currentHour: number | null = null;
 
-  while (currentDate.getTime() <= endDate) {
-    if (currentDate.getUTCHours() < startHourUtc) {
-      currentDate.setUTCHours(startHourUtc, 0, 0, 0);
+  while (currentDate.getTime() <= endDateTime) {
+    if (currentDate.getUTCHours() < eventsConfig.dates.startHourUtc) {
+      currentDate.setUTCHours(eventsConfig.dates.startHourUtc, 0, 0, 0);
     } else if (
-      currentDate.getUTCHours() > endHourUtc ||
-      (currentDate.getUTCHours() === endHourUtc &&
+      currentDate.getUTCHours() > eventsConfig.dates.endHourUtc ||
+      (currentDate.getUTCHours() === eventsConfig.dates.endHourUtc &&
         currentDate.getUTCMinutes() > 0)
     ) {
       currentDate.setUTCHours(24, 0, 0, 0);
@@ -157,7 +152,9 @@ function getDateTimeIntervals(): EventDateTimeIntervals {
       dateTimeIntervals.all.push(dateTimeInterval);
 
       // Increment time by interval
-      currentDate.setMinutes(currentDate.getMinutes() + minuteInterval);
+      currentDate.setMinutes(
+        currentDate.getMinutes() + eventsConfig.dates.intervalMinutes,
+      );
     }
   }
 

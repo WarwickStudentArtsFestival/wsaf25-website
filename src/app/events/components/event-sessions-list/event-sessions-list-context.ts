@@ -1,7 +1,8 @@
 import { fetchVenuesWithEventCount } from '@/lib/venues';
-import { durationCategories, eventCategories } from '@/data/events';
 import { EventSession } from '@/lib/events';
 import { FilterOption } from '@/app/events/components/event-sessions-list/event-sessions-filters';
+import eventsConfig from '@config/events-config';
+import { createElement } from 'react';
 
 export type EventSessionsListContext = {
   eventSessions: EventSession[];
@@ -31,14 +32,14 @@ export default async function getContext(
 
   return {
     eventSessions,
-    categories: eventCategories.map((category) => ({
+    categories: eventsConfig.filterCategories.categories.map((category) => ({
       label: category.label,
       value: category.pretalxTrack,
       count: eventSessions.filter(
         (session) =>
           session.event.categoryPretalxTrack === category.pretalxTrack,
       ).length,
-      icon: category.icon,
+      icon: category.icon && createElement(category.icon),
       bitFieldIndex: category.filterBitFieldIndex,
     })),
     venues: venues.map((venue) => ({
@@ -47,7 +48,7 @@ export default async function getContext(
       count: venue.eventCount,
       bitFieldIndex: venue.filterBitFieldIndex,
     })),
-    durations: durationCategories.map((duration) => ({
+    durations: eventsConfig.filterCategories.duration.map((duration) => ({
       label: duration.label,
       value: duration.slug,
       count: eventSessions.filter(

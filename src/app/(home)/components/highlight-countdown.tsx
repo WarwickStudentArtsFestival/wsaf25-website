@@ -2,9 +2,12 @@
 import { FiCalendar } from 'react-icons/fi';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import homepageConfig from '@config/homepage-config';
 
 // WSAF starts 10am on Friday 13th June
-const targetDate = new Date('2025-06-13T09:00Z').getTime();
+const targetDate = new Date(
+  homepageConfig.about.countdown.countdownDateIso,
+).getTime();
 
 export default function HighlightCountdown() {
   const [timeLeft, setTimeLeft] = useState('');
@@ -41,11 +44,11 @@ export default function HighlightCountdown() {
       <div className="flex flex-col items-center justify-center gap-2">
         <p className="flex items-center gap-2 text-yellow text-xl">
           <FiCalendar className="text-2xl" />
-          Countdown
+          {homepageConfig.about.countdown.title}
         </p>
         <h3 className="text-2xl font-semibold">{timeLeft}</h3>
         <p className="text-base text-slate-300 leading-4 text-center">
-          WSAF Begins Friday Week 8 (13th June)
+          {homepageConfig.about.countdown.subtitle}
         </p>
       </div>
     </Link>

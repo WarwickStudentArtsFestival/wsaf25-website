@@ -6,10 +6,14 @@ import VenueCard from '@/app/venues/venue-card';
 import React from 'react';
 import FeedbackCallout from '@/app/components/feedback-callout';
 import mainConfig from '@config/main-config';
+import eventsConfig from '@config/events-config';
+import { notFound } from 'next/navigation';
 
 export const revalidate = 3600; // Fetch new information every hour
 
 export async function generateMetadata() {
+  if (!eventsConfig.enabled) return notFound();
+
   try {
     const venues = await fetchVenuesWithEventCount();
 
@@ -27,6 +31,8 @@ export async function generateMetadata() {
 }
 
 export default async function VenuesPage() {
+  if (!eventsConfig.enabled) return notFound();
+
   let venues;
 
   try {

@@ -64,7 +64,7 @@ const nextConfig = {
     },
     {
       source: '/volunteer',
-      destination: mainConfig.crew.url,
+      destination: mainConfig.crew.signupUrl,
       permanent: true,
     },
     {
@@ -74,12 +74,12 @@ const nextConfig = {
     },
     {
       source: '/submit',
-      destination: mainConfig.submissions.url,
+      destination: mainConfig.submissions.submitUrl,
       permanent: true,
     },
     {
       source: '/performers-portal',
-      destination: mainConfig.submissions.url,
+      destination: mainConfig.submissions.submitUrl,
       permanent: true,
     },
     ...qrRedirectsConfig.redirects.map((redirect) => {

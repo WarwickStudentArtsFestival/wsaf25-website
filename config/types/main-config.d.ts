@@ -18,10 +18,10 @@ export type MainConfig = {
   submissions: {
     open: boolean;
     closingDate: string;
-    url: string;
+    submitUrl: string;
   };
   crew: {
-    url: string;
+    signupUrl: string;
   };
   feedback: {
     homepage: boolean;

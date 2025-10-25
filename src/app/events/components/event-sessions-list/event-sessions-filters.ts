@@ -4,9 +4,7 @@ import { EventSessionsListContext } from '@/app/events/components/event-sessions
 import { EventSession } from '@/lib/events';
 import { eventDateTimeIntervals, formatDate } from '@/lib/dates';
 import { useDebouncedCallback } from 'use-debounce';
-
-// Show all events and don't default filter by current date
-const DEFAULT_FILTER_BY_CURRENT_TIME = false;
+import eventsConfig from '@config/events-config';
 
 export type FilterOption = {
   label: string;
@@ -48,7 +46,7 @@ export type EventSessionGroup = {
 };
 
 const getCurrentDateInterval = () => {
-  if (!DEFAULT_FILTER_BY_CURRENT_TIME) return 0;
+  if (!eventsConfig.defaultFilters.filterByCurrentTime) return 0;
 
   const interval = eventDateTimeIntervals.all.findLastIndex(
     (interval) => interval.date <= Date.now(),
@@ -58,8 +56,8 @@ const getCurrentDateInterval = () => {
 };
 
 const defaultFilters: SelectedFilters = {
-  view: 'list',
-  sort: 'random',
+  view: eventsConfig.defaultFilters.view,
+  sort: eventsConfig.defaultFilters.sort,
   search: null,
   category: null,
   venue: null,

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import eventsConfig from '@config/events-config';
 
 interface Props {
   onClick?: () => void;
@@ -11,22 +12,23 @@ interface NavItem {
   href: string;
 }
 
-const navItems: NavItem[] = [
-  { shortLabel: 'Events', href: '/events' },
-  { shortLabel: 'Venues', href: '/venues' },
-  // {
-  //   shortLabel: 'Perform',
-  //   longLabel: 'Perform or Exhibit',
-  //   href: '/perform',
-  // },
-  // {
-  // shortLabel: 'Join the Crew',
-  // longLabel: 'Join the Crew',
-  // shortLabel: 'Crew',
-  // longLabel: 'Join the Crew',
-  // href: '/crew',
-  // },
-];
+const navItems: NavItem[] = eventsConfig.enabled
+  ? [
+      { shortLabel: 'Events', href: '/events' },
+      { shortLabel: 'Venues', href: '/venues' },
+    ]
+  : [
+      {
+        shortLabel: 'Perform',
+        longLabel: 'Perform or Exhibit',
+        href: '/perform',
+      },
+      {
+        shortLabel: 'Crew',
+        longLabel: 'Join the Crew',
+        href: '/crew',
+      },
+    ];
 
 export default function NavLinks({ onClick }: Props) {
   const pathname = usePathname();

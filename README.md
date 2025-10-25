@@ -37,6 +37,10 @@ npm run dev
 
 This will start a live-reloading web server at [http://localhost:3000](http://localhost:3000).
 
+## Configuration
+Most of this website should be configurable through the files in the `config/` folder. See
+[config/README.md](./config/README.md) for more information.
+
 ## Code and Commit Style
 
 ### Git Usage

@@ -1,7 +1,5 @@
-import { EventSession } from '@/lib/events';
+import { EventSession, getEventCategory } from '@/lib/events';
 import Link from 'next/link';
-import { eventCategories } from '@/data/events';
-import ErrorMessage from '@/app/components/ErrorMessage';
 import { FaWalking } from 'react-icons/fa';
 import { FaTicket } from 'react-icons/fa6';
 import React from 'react';
@@ -15,12 +13,8 @@ export default function TimelineEventSessionCard({
   parentEventStyling?: boolean;
   selectEvent: (slug: string) => void;
 }) {
-  const category = eventCategories.find(
-    (c) => c.pretalxTrack === eventSession.event.categoryPretalxTrack,
-  );
-  if (!category) {
-    return <ErrorMessage msg="Track category not found" />;
-  }
+  const category = getEventCategory(eventSession.event);
+
   return (
     // timeline-event-session-card class used for printing
     <div

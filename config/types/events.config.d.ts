@@ -19,6 +19,11 @@ export type EventsConfig = {
   // Minimum minutes gap required to show a parent event between two children events
   minimumMinuteGapToShowParentBetweenChildrenEvents: number;
 
+  timeline: {
+    // Whether to grey out past times in the timeline view
+    greyPastTimes: boolean;
+  };
+
   defaultFilters: {
     // Whether to filter future events based on the current time by default.
     // Should be enabled during WSAF and disabled afterwards.

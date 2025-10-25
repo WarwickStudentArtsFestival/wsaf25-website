@@ -27,6 +27,11 @@ const eventsConfig: EventsConfig = {
     intervalMinutes: 15,
   },
 
+  timeline: {
+    // Whether to grey out past times in the timeline view
+    greyPastTimes: false,
+  },
+
   // Minimum minutes gap required to show a parent event between two children events
   minimumMinuteGapToShowParentBetweenChildrenEvents: 10,
 

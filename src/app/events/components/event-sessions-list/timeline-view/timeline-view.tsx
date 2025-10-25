@@ -10,9 +10,7 @@ import constructTimelineData, {
   TimelineDataTime,
 } from '@/app/events/components/event-sessions-list/timeline-view/construct-timeline-data';
 import { EventSession, getEventCategory } from '@/lib/events';
-
-// Grey out past times in the timeline
-const GREY_PAST_TIMES = false;
+import eventsConfig from '@config/events-config';
 
 function CellTimelineEventSessionCards({
   eventSessions,
@@ -92,7 +90,7 @@ function TimelineRow({
       {/* time header */}
       {time.type === 'keytime' && (
         <th
-          className={`text-black text-sm w-1/12 font-semibold sticky left-0 z-[2] border-r border-slate-200 align-top pt-0.5 ${GREY_PAST_TIMES && currentTime > time.startTime ? 'bg-slate-100' : 'bg-white'} ${time.type === 'keytime' ? 'border-t' : ''}`}
+          className={`text-black text-sm w-1/12 font-semibold sticky left-0 z-[2] border-r border-slate-200 align-top pt-0.5 ${eventsConfig.timeline.greyPastTimes && currentTime > time.startTime ? 'bg-slate-100' : 'bg-white'} ${time.type === 'keytime' ? 'border-t' : ''}`}
           rowSpan={time.startTimeSpan}
         >
           <p className="min-h-[0.5rem] border-slate-200">
@@ -114,7 +112,7 @@ function TimelineRow({
           <td
             key={j}
             rowSpan={venueSession.rowSpan}
-            className={`h-full px-1 ${GREY_PAST_TIMES && currentTime > time.startTime ? 'bg-slate-100' : ''} ${time.type === 'keytime' ? 'border-t border-slate-200' : ''}`}
+            className={`h-full px-1 ${eventsConfig.timeline.greyPastTimes && currentTime > time.startTime ? 'bg-slate-100' : ''} ${time.type === 'keytime' ? 'border-t border-slate-200' : ''}`}
           >
             {venueSession.parentSession ? (
               <ParentCellTimelineEventSessionCards
@@ -225,11 +223,11 @@ export default function TimelineView({
               time.type === 'day' ? (
                 <tr key={time.startTime}>
                   <th
-                    className={`border-t border-t-slate-200 border-b-2 border-b-slate-300 border-r border-r-slate-200 ${currentTime > time.startTime ? 'bg-slate-100' : 'bg-white'} sticky ${i === 0 ? 'top-8' : 'top-4'}`}
+                    className={`border-t border-t-slate-200 border-b-2 border-b-slate-300 border-r border-r-slate-200 ${eventsConfig.timeline.greyPastTimes && currentTime > time.startTime ? 'bg-slate-100' : 'bg-white'} sticky ${i === 0 ? 'top-8' : 'top-4'}`}
                   />
                   <th
                     colSpan={timeline.venues.length}
-                    className={`border-t border-t-slate-200 border-b-2 border-slate-300 ${GREY_PAST_TIMES && currentTime > time.startTime ? 'bg-slate-100' : 'bg-white'} sticky ${i === 0 ? 'top-8' : 'top-4'}`}
+                    className={`border-t border-t-slate-200 border-b-2 border-slate-300 ${eventsConfig.timeline.greyPastTimes && currentTime > time.startTime ? 'bg-slate-100' : 'bg-white'} sticky ${i === 0 ? 'top-8' : 'top-4'}`}
                   >
                     <div className={i === 0 ? '' : 'pt-4'}>
                       <HighlightedHeading

@@ -28,6 +28,8 @@ import LuluSmith from '@/assets/team/lulu-smith.jpg';
 import MaxPike from '@/assets/team/max-pike.jpg';
 import EllieStocker from '@/assets/team/ellie-stocker.jpg';
 import NaomiPandey from '@/assets/team/naomi-pandey.jpg';
+import DannyTurner from '@/assets/team/danny-turner.jpg';
+import DanaiMuyambo from '@/assets/team/danai-muyambo.jpg';
 
 const teamConfig: TeamConfig = {
   team: [
@@ -169,7 +171,7 @@ const teamConfig: TeamConfig = {
       roles: ['Venue Manager', 'Tech', 'Organiser'],
       course: 'Data Science',
       year: '1st Year',
-      // waiting
+      image: DanaiMuyambo,
     },
     {
       name: 'Maximus Kaius Leighton',
@@ -211,7 +213,7 @@ const teamConfig: TeamConfig = {
       ],
       course: 'Biological Sciences',
       year: '3rd Year',
-      // waiting
+      image: DannyTurner,
     },
     {
       name: 'Ethan Graham',

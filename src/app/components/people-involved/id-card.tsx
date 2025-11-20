@@ -27,7 +27,7 @@ export default function IdCard({
   image?: StaticImageData;
 }) {
   return (
-    <article className="rounded-xl border text-left border-slate-300 overflow-hidden flex flex-col">
+    <article className="rounded-xl border text-left border-slate-300 overflow-hidden flex flex-col w-40 lg:w-52">
       <Image
         src={image}
         alt={`Image of ${name}`}

@@ -10,6 +10,7 @@ import Media from '@/app/press/Media';
 import Submissions from '@/app/press/Submissions';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import mainConfig from '@config/main-config';
 
 export const metadata: Metadata = {
   title: 'Press Kit',

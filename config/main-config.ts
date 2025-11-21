@@ -26,9 +26,9 @@ const mainConfig: MainConfig = {
     signupUrl: 'https://helfertool.wsaf.org.uk/wsaf2025/',
   },
   feedback: {
-    homepage: true,
-    banner: true,
-    popup: true,
+    homepage: false,
+    banner: false,
+    popup: false,
     url: 'https://docs.google.com/forms/d/e/1FAIpQLSewV74lnEt9Wwm-DqWDHtQgYSJ6WI2jLdvryAmHq1HyVBUfZQ/viewform?usp=sharing&ouid=108184775135612947638',
   },
   githubUrl: 'https://github.com/WarwickStudentArtsFestival/wsaf25-website',

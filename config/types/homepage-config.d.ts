@@ -25,5 +25,9 @@ export type HomepageConfig = {
     description: string;
   };
 
+  crew: {
+    buttonText: string;
+  };
+
   keyDates: KeyDateProps[];
 };

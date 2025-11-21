@@ -23,7 +23,8 @@ const mainConfig: MainConfig = {
     submitUrl: 'https://submit.wsaf.org.uk/2025/cfp',
   },
   crew: {
-    signupUrl: 'https://helfertool.wsaf.org.uk/wsaf2025/',
+    // signupUrl: 'https://helfertool.wsaf.org.uk/wsaf2025/',
+    signupUrl: 'https://discord.gg/TuFwJX4GKM',
   },
   feedback: {
     homepage: false,

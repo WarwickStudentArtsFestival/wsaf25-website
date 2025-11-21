@@ -3,9 +3,9 @@ import HighlightedHeading from '@/app/components/highlighted-heading';
 import Link from 'next/link';
 import React from 'react';
 import PeopleInvolved from '@/app/components/people-involved/people-involved';
-import mainConfig from '@config/main-config';
 import CrewGroupPicture from '@/assets/home/wsaf-crew-group-picture.jpg';
 import Image from 'next/image';
+import homepageConfig from '@config/homepage-config';
 
 export default function KeyDates() {
   return (
@@ -40,7 +40,7 @@ export default function KeyDates() {
       >
         <span className="text-xl uppercase text-white font-bold">
           <FiArrowRight className="inline mr-2 mb-1" />
-          Join the WSAF {mainConfig.dates.year} Crew
+          {homepageConfig.crew.buttonText}
         </span>
       </Link>
     </section>

@@ -26,6 +26,11 @@ const homepageConfig: HomepageConfig = {
       'Many of our events are being livestreamed to YouTube. Click here to watch live or on-demand!',
   },
 
+  crew: {
+    // buttonText: 'Join the WSAF 2025 Crew',
+    buttonText: 'WSAF 2025 Crew',
+  },
+
   keyDates: [
     {
       name: 'Submissions Open',

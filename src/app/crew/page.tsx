@@ -9,7 +9,7 @@ import RoleCard from '@/app/components/role-card';
 import PeopleInvolved from '../components/people-involved/people-involved';
 import CrewFaq from '../(home)/components/faq/tabs/crew-faq';
 
-import PosteringImage from '@/assets/images/postering.jpg';
+import GroupPicture from '@/assets/crew/group-picture.jpg';
 import crewConfig from '@config/crew-config';
 import mainConfig from '@config/main-config';
 
@@ -132,8 +132,8 @@ export default function Team() {
           </div>
 
           <Image
-            src={PosteringImage}
-            alt="Warwick Student Arts Festival volunteers putting up posters on campus."
+            src={GroupPicture}
+            alt="The WSAF crew at the end of WSAF 2025."
             className="hidden sm:block max-w-64 sm:max-w-80 lg:max-w-md float-right"
             priority
             placeholder="blur"

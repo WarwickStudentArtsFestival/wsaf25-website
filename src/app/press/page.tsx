@@ -10,6 +10,7 @@ import Media from '@/app/press/Media';
 import Submissions from '@/app/press/Submissions';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import mainConfig from '@config/main-config';
 
 export const metadata: Metadata = {
   title: 'Press Kit',
@@ -91,11 +92,11 @@ export default function Press() {
             </a>{' '}
             or on Instagram at{' '}
             <a
-              href="https://www.instagram.com/wsaf25/"
+              href={`https://www.instagram.com/${mainConfig.socials.instagram}/`}
               target="_blank"
               className="text-teal"
             >
-              @wsaf25
+              @{mainConfig.socials.instagram}
             </a>
             .
           </p>

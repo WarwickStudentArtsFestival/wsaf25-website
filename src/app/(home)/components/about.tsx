@@ -5,7 +5,9 @@ import Performers from '@/assets/home/performers.jpg';
 import Crew from '@/assets/home/crew.jpg';
 import Guests from '@/assets/home/guests.jpg';
 import InfoCard from './InfoCard';
-// import HighlightCountdown from './highlight-countdown';
+import mainConfig from '@config/main-config';
+import HighlightCountdown from './highlight-countdown';
+import homepageConfig from '@config/homepage-config';
 
 export default function About() {
   const cards = [
@@ -15,8 +17,9 @@ export default function About() {
       title: 'Performers and Exhibitors',
       description: [
         "An arts festival could not take place without art! We're looking for your performances, creations and talents.",
-        // 'Submissions for events are open until Friday Week 2 (2nd May).',
-        "Submissions are now closed, but if you are still interested in performing please submit the form or contact us at @wsaf25 and we'll do our best to fit you in.",
+        mainConfig.submissions.open
+          ? `Submissions for events are open until ${mainConfig.submissions.closingDate}.`
+          : `Submissions are now closed, but if you are still interested in performing please submit the form or contact us at @${mainConfig.socials.instagram} and we'll do our best to fit you in.`,
       ],
       footer: 'Find out more',
       link: '/perform',
@@ -42,44 +45,45 @@ export default function About() {
         "Don't want to perform or help out? You can still come on the day!",
         "More information about what's on will be provided closer to the festival. In the meantime, follow us on instagram to keep updated!",
       ],
-      footer: 'Follow @wsaf25 on Instagram',
-      link: 'https://www.instagram.com/wsaf25/',
+      footer: `Follow @${mainConfig.socials.instagram} on Instagram`,
+      link: `https://www.instagram.com/${mainConfig.socials.instagram}/`,
       isExternalLink: true,
     },
   ];
 
   return (
     <section className="px-4 my-4 sm:my-8 sm:px-8">
-      {/* <HighlightCountdown /> */}
+      {homepageConfig.about.countdown.enabled && <HighlightCountdown />}
 
       <div className="mt-4">
         <HighlightedHeading text="What is WSAF?" />
       </div>
       <h2 className="text-teal text-xl pt-2 sm:text-2xl font-semibold">
-        The Warwick Student Arts Festival 2025
+        The Warwick Student Arts Festival {mainConfig.dates.year}
       </h2>
       <div className="max-w-screen-lg mx-auto p-4 pb-0 mb-1">
         <span className="font-semibold">
-          We&apos;re back for 2025, putting on a fully student-run, free
-          four-day showcase and celebration of the arts at Warwick.
+          We&apos;re back for {mainConfig.dates.year}, putting on a fully
+          student-run, free {mainConfig.dates.durationDaysText}-day showcase and
+          celebration of the arts at Warwick.
         </span>
         <br />
-        Join us during Week 8-9 for our free festival of performances,
-        exhibitions, workshops and more.
+        Join us during {mainConfig.dates.week} for our free festival of
+        performances, exhibitions, workshops and more.
       </div>
 
       <div className="flex gap-2 justify-center">
         <a
-          href="https://www.instagram.com/wsaf25/"
+          href={`https://www.instagram.com/${mainConfig.socials.instagram}`}
           target="_blank"
           className="flex items-center justify-center hover:scale-105"
         >
           <FiInstagram className="inline mr-0.5 mt-1" />
-          wsaf25
+          {mainConfig.socials.instagram}
         </a>
         <span className="font-light">•</span>
         <a
-          href="https://discord.gg/TuFwJX4GKM"
+          href={mainConfig.socials.discordInvite}
           target="_blank"
           className="flex items-center justify-center hover:scale-105"
         >
@@ -88,7 +92,6 @@ export default function About() {
         </a>
       </div>
 
-      {/* <HighlightedHeading text="Can I get involved?" /> */}
       <div className="flex flex-col md:flex-row gap-4 p-2 justify-center text-left text-sm">
         {cards.map((card, index) => (
           <InfoCard key={index} {...card} />

@@ -10,6 +10,7 @@ import ListView from '@/app/events/components/event-sessions-list/list-view/list
 import TimelineView from '@/app/events/components/event-sessions-list/timeline-view/timeline-view';
 import EventPopup from '@/app/events/components/event-sessions-list/event-popup';
 import FeedbackCallout from '@/app/components/feedback-callout';
+import mainConfig from '@config/main-config';
 
 export default function EventSessionsList({
   eventSessions,
@@ -48,7 +49,7 @@ export default function EventSessionsList({
   return (
     <>
       <div className="flex flex-row px-2 sm:px-4 relative">
-        <aside className="sticky top-24 h-[calc(100vh-15rem)] w-0 lg:w-auto z-20 my-4">
+        <aside className="sticky top-24 h-[calc(100vh-15rem)] w-0 lg:w-auto z-30 my-4">
           <div
             className={`max-h-full transition-all duration-150 ease-in-out relative -left-80 lg:left-0 -ml-4 lg:ml-0 ${showMobileSidebar ? 'left-0' : '-left-80'}`}
           >
@@ -75,13 +76,13 @@ export default function EventSessionsList({
 
         {showMobileSidebar && (
           <div
-            className="lg:hidden fixed left-0 right-0 bottom-0 top-0 bg-black/5 z-10"
+            className="lg:hidden fixed left-0 right-0 bottom-0 top-0 bg-black/5 z-20"
             onClick={() => setShowMobileSidebar(false)}
           ></div>
         )}
 
         <div className="w-64 grow flex flex-col">
-          <FeedbackCallout />
+          {mainConfig.feedback.banner && <FeedbackCallout />}
 
           {selectedFilters.view === 'list' && (
             <DatetimeSlider

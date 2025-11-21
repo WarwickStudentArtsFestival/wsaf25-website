@@ -3,9 +3,9 @@ import {
   PretalxScheduleDay,
   PretalxScheduleEvent,
 } from '@/lib/pretalx';
-import { durationCategories, eventCategories } from '@/data/events';
-import { ReactNode } from 'react';
 import { fetchVenues, findVenueFromName, Venue } from '@/lib/venues';
+import { IconType } from 'react-icons';
+import eventsConfig from '@config/events-config';
 
 // WARNING - This is all exposed to the client, so makes sure not to include
 // private or sensitive information here without properly securing it!
@@ -82,7 +82,7 @@ export type EventCategory = {
   pretalxTrack: string;
   slug: string;
   label: string;
-  icon: ReactNode;
+  icon: IconType;
   colour: string;
   filterBitFieldIndex: number;
 };
@@ -131,7 +131,7 @@ function constructEventSessionFromPretalxEvent(
     sessionId = `${event.guid}-${start.getUTCDay()}-${start.getUTCHours() % 2}`;
   }
 
-  const durationCategory = durationCategories.findLast(
+  const durationCategory = eventsConfig.filterCategories.duration.findLast(
     (category) => category.minMinutes <= (minutes as number),
   );
 
@@ -320,7 +320,7 @@ export async function fetchEvent(
 }
 
 export function getEventCategory(event: Event) {
-  const category = eventCategories.find(
+  const category = eventsConfig.filterCategories.categories.find(
     (category) => category.pretalxTrack === event.categoryPretalxTrack,
   );
   if (!category) {

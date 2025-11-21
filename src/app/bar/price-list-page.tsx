@@ -1,12 +1,12 @@
 'use client';
 import React, { useRef, useEffect, useState } from 'react';
 import PageHeader from '@/app/components/page-header';
-import { barMenu } from './price-list';
 import { FiMapPin } from 'react-icons/fi';
 import Challenge21 from '@/assets/wbar/challenge21.jpg';
 import AskForAngela from '@/assets/wbar/askforangela.jpg';
 import Image from 'next/image';
 import { LeftSquiggle, RightSquiggle } from './squiggle';
+import barMenuConfig from '@config/bar-menu-config';
 
 export default function PriceList() {
   const menuContentRef = useRef<HTMLDivElement>(null);
@@ -35,11 +35,11 @@ export default function PriceList() {
             ))}
           </div>
           <div className="p-4 sm:p-8 bg-purple h-fit" ref={menuContentRef}>
-            <h1 className="text-3xl font-semibold">BAR MENU</h1>
+            <h1 className="text-3xl font-semibold uppercase">Bar Menu</h1>
             <div className="flex flex-row mx-auto items-center gap-2 w-fit sm:mb-8">
-              <FiMapPin /> Benefactors Place
+              <FiMapPin /> {barMenuConfig.location}
             </div>
-            {barMenu.menu.map(({ category, items }, categoryIndex) => (
+            {barMenuConfig.menu.map(({ category, items }, categoryIndex) => (
               <div key={categoryIndex} className="mb-6 flex flex-col">
                 <div className="w-fit mx-auto gap-2 flex flex-row items-center uppercase text-xl font-bold text-black bg-yellow py-1 px-8 m-2">
                   {category}
@@ -84,7 +84,10 @@ export default function PriceList() {
               <p>
                 If you look under 21 be prepared to show ID to purchase alcohol
               </p>
-              <p>Bar runs until last event ends, usually around 10 PM</p>
+              <p>
+                Bar runs until last event ends, usually around $
+                {barMenuConfig.endTime}.
+              </p>
               <div className="flex mt-4 mb-8">
                 <Image
                   src={AskForAngela}

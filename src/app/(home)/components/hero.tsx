@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import HeroImage from '@/assets/hero.jpg';
 import Logo from '@/assets/logo.png';
+import mainConfig from '@config/main-config';
+import homepageConfig from '@config/homepage-config';
 
 export default function Hero() {
   return (
@@ -9,29 +11,35 @@ export default function Hero() {
         <div className="mt-12 m-6 flex flex-wrap sm:flex-nowrap justify-center items-center">
           <Image
             src={Logo}
-            alt="WSAF 2025 logo"
+            alt={`WSAF ${mainConfig.dates.year} logo`}
             className="my-6 mr-8 h-32 lg:h-36 w-auto object-contain drop-shadow-xs"
             priority
           />
           <div className="my-6 flex flex-col items-end text-right">
             <h1 className="text-left bg-teal font-bold py-2 px-4">
               <span className="block text-4xl sm:text-5xl lg:text-6xl">
-                WSAF <span className="text-yellow">2025</span>
+                WSAF{' '}
+                <span className="text-yellow">{mainConfig.dates.year}</span>
               </span>
               <span className="block text-sm xs:text-xl lg:text-3xl">
                 Warwick Student Arts Festival
               </span>
             </h1>
             <span className="text-xs 2xs:text-md lg:text-lg pb-2 px-4 block bg-teal text-yellow font-bold">
-              <time dateTime="2025-06-13T10:00:00.000">Fri 13th</time> -{' '}
-              <time dateTime="2025-06-16T22:00:00.000">Mon 16th June</time>
+              <time dateTime={mainConfig.dates.startDateIso}>
+                {mainConfig.dates.startDate}
+              </time>{' '}
+              -{' '}
+              <time dateTime={mainConfig.dates.endDateIso}>
+                {mainConfig.dates.endDate} {mainConfig.dates.month}
+              </time>
             </span>
           </div>
         </div>
 
         <iframe
           className="mx-auto w-full h-auto aspect-video border-yellow border-8 sm:w-[32rem] sm:h-[18.4rem] bg-yellow"
-          src="https://www.youtube.com/embed/5_doeGYlb-U?autoplay=1&mute=1&loop=1&modestbranding=1&rel=0"
+          src={`https://www.youtube.com/embed/${homepageConfig.hero.youtubeVideoId}?autoplay=1&mute=1&loop=1&modestbranding=1&rel=0`}
           title="WSAF Trailer"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"

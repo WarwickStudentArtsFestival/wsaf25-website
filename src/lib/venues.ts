@@ -1,6 +1,6 @@
 import { fetchPretalxSchedule, PretalxScheduleRoom } from '@/lib/pretalx';
 import { StaticImageData } from 'next/image';
-import venues from '@/data/venues';
+import venuesConfig from '@config/venues-config';
 
 export type AdditionalVenueData = {
   imageAlt: string;
@@ -30,7 +30,7 @@ function constructVenueFromPretalxRoom(
     description: room.description,
   };
 
-  const additionalVenueData = venues[room.guid];
+  const additionalVenueData = venuesConfig.venues[room.guid];
   if (!additionalVenueData) {
     console.error(
       `No venue data found for room ID: ${room.guid} (${room.name})`,

@@ -5,8 +5,12 @@ import getContext from './components/event-sessions-list/event-sessions-list-con
 import LoadingPage from '@/app/events/components/loading-page';
 import { Suspense } from 'react';
 import EventSessionsList from '@/app/events/components/event-sessions-list/event-sessions-list';
+import eventsConfig from '@config/events-config';
+import { notFound } from 'next/navigation';
 
 export async function generateMetadata() {
+  if (!eventsConfig.enabled) return notFound();
+
   try {
     const eventSessions = await fetchEventSessions();
 
@@ -28,6 +32,8 @@ export async function generateMetadata() {
 export const revalidate = 3600; // Fetch new information every hour
 
 export default async function EventsPage() {
+  if (!eventsConfig.enabled) return notFound();
+
   let eventSessions, context;
 
   try {

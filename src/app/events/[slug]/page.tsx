@@ -11,10 +11,14 @@ import { ResolvingMetadata } from 'next';
 import { formatTime } from '@/lib/dates';
 import EventCard from '@/app/events/[slug]/components/event-card';
 import { fetchVenues } from '@/lib/venues';
+import eventsConfig from '@config/events-config';
+import { notFound } from 'next/navigation';
 
 export const revalidate = 3600; // Fetch new information every hour
 
 export async function generateStaticParams() {
+  if (!eventsConfig.enabled) return [];
+
   const sessions = await fetchEventSessions();
   const eventSlugs = [
     ...new Set(sessions.map((session) => session.event.slug)),
@@ -33,6 +37,8 @@ export async function generateMetadata(
   },
   parent: ResolvingMetadata,
 ) {
+  if (!eventsConfig.enabled) return notFound();
+
   const { slug } = await params;
 
   try {
@@ -77,6 +83,8 @@ export default async function Page({
 }: {
   params: Promise<{ slug: number }>;
 }) {
+  if (!eventsConfig.enabled) return notFound();
+
   const { slug } = await params;
 
   let event: EventWithSessions | null = null;

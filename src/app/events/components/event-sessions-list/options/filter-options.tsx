@@ -1,6 +1,5 @@
 import { FilterOption } from '@/app/events/components/event-sessions-list/event-sessions-filters';
-
-import { eventCategories } from '@/data/events';
+import eventsConfig from '@config/events-config';
 
 type FilterOptionsProps = {
   label: string;
@@ -50,7 +49,7 @@ export default function FilterOptions({
       <ul className="space-y-1">
         {options.map((option) => {
           // if the option exists in event categories, use its color
-          const category = eventCategories.find(
+          const category = eventsConfig.filterCategories.categories.find(
             (c) => c.pretalxTrack === option.value,
           );
           const color = category ? category.colour : '#000';
@@ -68,7 +67,6 @@ export default function FilterOptions({
                 />
                 <div className="flex items-center gap-2 flex-1">
                   <span style={{ color: color }}>{option.icon}</span>
-                  {/* <span style={{ color: trackColor }}>{option.icon}</span> */}
                   <span className="text-sm">{option.label}</span>
                   <span className="text-xs text-gray-500 ml-auto">
                     ({option.count})

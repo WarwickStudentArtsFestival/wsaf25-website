@@ -28,14 +28,16 @@ export default async function EventPreview() {
       <div className="bg-teal pb-8 overflow-hidden">
         <AutoScrollContainer>
           <div className="flex gap-4 px-4 py-2">
-            {eventSessions.map((eventSession, index) => (
-              <div
-                key={`${eventSession.id}-${index}`}
-                className="min-w-[300px] max-w-[300px] flex-shrink-0 border border-slate-300 rounded-md bg-white"
-              >
-                <EventSessionCard eventSession={eventSession} />
-              </div>
-            ))}
+            {eventSessions
+              .sort(() => Math.random() - 0.5) // shuffle events
+              .map((eventSession, index) => (
+                <div
+                  key={`${eventSession.id}-${index}`}
+                  className="min-w-[300px] max-w-[300px] flex-shrink-0 bg-white border rounded-md"
+                >
+                  <EventSessionCard eventSession={eventSession} />
+                </div>
+              ))}
           </div>
         </AutoScrollContainer>
 

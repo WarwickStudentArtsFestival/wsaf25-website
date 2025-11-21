@@ -13,7 +13,7 @@ const mainConfig: MainConfig = {
     month: 'June',
   },
   socials: {
-    instagram: 'wsaf25',
+    instagram: 'wsaf26',
     discordInvite: 'https://discord.gg/TuFwJX4GKM',
     youtubeHandle: 'wsaf25',
   },

@@ -134,7 +134,7 @@ export default function Team() {
           <Image
             src={GroupPicture}
             alt="The WSAF crew at the end of WSAF 2025."
-            className="hidden sm:block max-w-64 sm:max-w-80 lg:max-w-md float-right"
+            className="xs:max-w-64 sm:max-w-80 lg:max-w-md float-right"
             priority
             placeholder="blur"
           />

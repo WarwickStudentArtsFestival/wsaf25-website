@@ -11,6 +11,12 @@ export type HomepageConfig = {
       title: string;
       subtitle: string;
       countdownDateIso: string;
+      url: string;
+    };
+
+    callToAction: {
+      enabled: boolean;
+      type: 'discord';
     };
   };
 

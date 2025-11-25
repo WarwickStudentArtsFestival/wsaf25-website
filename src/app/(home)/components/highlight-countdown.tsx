@@ -38,7 +38,7 @@ export default function HighlightCountdown() {
 
   return (
     <Link
-      href="/events"
+      href={homepageConfig.about.countdown.url}
       className="inline-block mb-1 bg-purple px-6 py-4 rounded-md drop-shadow-xs hover:scale-105 text-white mx-2 text-center w-full max-w-md"
     >
       <div className="flex flex-col items-center justify-center gap-2">

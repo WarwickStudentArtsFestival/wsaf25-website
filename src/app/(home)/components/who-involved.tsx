@@ -11,7 +11,7 @@ export default function KeyDates() {
   return (
     <section className="py-8">
       <HighlightedHeading text="Who is WSAF?" />
-      <h2 className="text-teal text-2xl mt-4 font-semibold">
+      <h2 className="text-teal text-2xl mt-4 font-semibold mx-2">
         The Team Behind The Warwick Student Arts Festival
       </h2>
 

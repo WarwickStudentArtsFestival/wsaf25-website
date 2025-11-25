@@ -11,6 +11,7 @@ import Submissions from '@/app/press/Submissions';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import mainConfig from '@config/main-config';
+import Wsaf2025Recap from '@/app/press/Wsaf2025Recap';
 
 export const metadata: Metadata = {
   title: 'Press Kit',
@@ -102,6 +103,9 @@ export default function Press() {
           </p>
         </div>
       </div>
+
+      <HighlightedHeading text="WSAF 2025 Recap" />
+      <Wsaf2025Recap />
 
       <HighlightedHeading text="Submissions" />
       <Submissions />

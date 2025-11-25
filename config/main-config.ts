@@ -12,6 +12,16 @@ const mainConfig: MainConfig = {
     endDateIso: '2025-06-16T22:00:00.000',
     month: 'June',
   },
+  header: {
+    rightButtons: {
+      discord: true,
+      feedback: false,
+      crewPage: false,
+
+      crewSignup: false,
+      submissionsPortal: false,
+    },
+  },
   socials: {
     instagram: 'wsaf26',
     discordInvite: 'https://discord.gg/TuFwJX4GKM',

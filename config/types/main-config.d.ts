@@ -10,6 +10,16 @@ export type MainConfig = {
     endDateIso: string;
     month: string;
   };
+  header: {
+    rightButtons: {
+      discord: boolean;
+      feedback: boolean;
+      crewPage: boolean;
+
+      crewSignup: boolean;
+      submissionsPortal: boolean;
+    };
+  };
   socials: {
     instagram: string;
     discordInvite: string;

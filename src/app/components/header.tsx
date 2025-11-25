@@ -4,8 +4,11 @@ import { useState } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import Link from 'next/link';
 import NavLinks from './NavLinks';
+import mainConfig from '@config/main-config';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
 
@@ -14,7 +17,7 @@ export default function Header() {
       {/* WSAF logo (left) */}
       <div className="text-left w-32 flex-shrink-0">
         <Link href="/" className="text-xl font-semibold">
-          WSAF <span className="text-yellow">2025</span>
+          WSAF <span className="text-yellow">{mainConfig.dates.year}</span>
         </Link>
       </div>
 
@@ -27,36 +30,57 @@ export default function Header() {
 
       {/* Right links (desktop) */}
       <div className="hidden sm:flex items-center gap-2 ml-auto">
-        {/*<Link
-          href="/crew"
-          className={`uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] ${pathname === '/crew' ? 'text-yellow-400' : 'bg-yellow text-black'}`}
-        >
-          <span className="hidden lg:inline">Join the </span>Crew
-        </Link>*/}
+        {mainConfig.header.rightButtons.discord &&
+          mainConfig.socials.discordInvite && (
+            <Link
+              href={mainConfig.socials.discordInvite}
+              target="_blank"
+              className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
+            >
+              Discord
+            </Link>
+          )}
 
-        <Link
-          href="https://docs.google.com/forms/d/e/1FAIpQLSewV74lnEt9Wwm-DqWDHtQgYSJ6WI2jLdvryAmHq1HyVBUfZQ/viewform?usp=sharing&ouid=108184775135612947638p"
-          target="_blank"
-          className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
-        >
-          Feedback
-        </Link>
+        {mainConfig.header.rightButtons.feedback && mainConfig.feedback.url && (
+          <Link
+            href={mainConfig.feedback.url}
+            target="_blank"
+            className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
+          >
+            Feedback
+          </Link>
+        )}
 
-        {/* <Link
-          href="https://helfertool.wsaf.org.uk/wsaf2025/"
-          target="_blank"
-          className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
-        >
-          Crew <span className="hidden lg:inline">Signup</span>
-        </Link>
+        {mainConfig.header.rightButtons.crewPage && (
+          <Link
+            href="/crew"
+            className={`uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] ${pathname === '/crew' ? 'text-yellow-400' : 'bg-yellow text-black'}`}
+          >
+            <span className="hidden lg:inline">Join the </span>Crew
+          </Link>
+        )}
 
-        <Link
-          href="https://submit.wsaf.org.uk/2025/cfp"
-          target="_blank"
-          className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
-        >
-          Performers <span className="hidden lg:inline">Portal</span>
-        </Link>*/}
+        {mainConfig.header.rightButtons.crewSignup &&
+          mainConfig.crew.signupUrl && (
+            <Link
+              href={mainConfig.crew.signupUrl}
+              target="_blank"
+              className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
+            >
+              Crew <span className="hidden lg:inline">Signup</span>
+            </Link>
+          )}
+
+        {mainConfig.header.rightButtons.submissionsPortal &&
+          mainConfig.submissions.submitUrl && (
+            <Link
+              href={mainConfig.submissions.submitUrl}
+              target="_blank"
+              className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
+            >
+              Performers <span className="hidden lg:inline">Portal</span>
+            </Link>
+          )}
       </div>
 
       {/* Hamburger button (mobile only) */}
@@ -80,37 +104,60 @@ export default function Header() {
               <NavLinks onClick={() => setMobileMenuOpen(false)} />
             </div>
 
-            <Link
-              href="https://docs.google.com/forms/d/e/1FAIpQLSewV74lnEt9Wwm-DqWDHtQgYSJ6WI2jLdvryAmHq1HyVBUfZQ/viewform?usp=sharing&ouid=108184775135612947638p"
-              target="_blank"
-              className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
-            >
-              Feedback
-            </Link>
+            {mainConfig.header.rightButtons.discord &&
+              mainConfig.socials.discordInvite && (
+                <Link
+                  href={mainConfig.socials.discordInvite}
+                  target="_blank"
+                  className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
+                >
+                  Discord
+                </Link>
+              )}
 
-            {/* <Link
-              href="/crew"
-              className={`uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] ${pathname === '/crew' ? 'text-yellow-400' : 'bg-yellow text-black'}`}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Join the Crew
-            </Link>*/}
-            {/*<Link
-              href="https://helfertool.wsaf.org.uk/wsaf2025/"
-              target="_blank"
-              className="uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] bg-yellow text-black"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Crew Signup
-            </Link>
-            <Link
-              href="https://submit.wsaf.org.uk/2025/cfp"
-              target="_blank"
-              className="uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] bg-yellow text-black"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Performers Portal
-            </Link>*/}
+            {mainConfig.header.rightButtons.feedback &&
+              mainConfig.feedback.url && (
+                <Link
+                  href={mainConfig.feedback.url}
+                  target="_blank"
+                  className="uppercase font-bold px-2.5 py-1.5 hover:scale-[102%] bg-yellow text-black"
+                >
+                  Feedback
+                </Link>
+              )}
+
+            {mainConfig.header.rightButtons.crewPage && (
+              <Link
+                href="/crew"
+                className={`uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] ${pathname === '/crew' ? 'text-yellow-400' : 'bg-yellow text-black'}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Join the Crew
+              </Link>
+            )}
+
+            {mainConfig.header.rightButtons.crewSignup &&
+              mainConfig.crew.signupUrl && (
+                <Link
+                  href={mainConfig.crew.signupUrl}
+                  target="_blank"
+                  className="uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] bg-yellow text-black"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Crew Signup
+                </Link>
+              )}
+            {mainConfig.header.rightButtons.submissionsPortal &&
+              mainConfig.submissions.submitUrl && (
+                <Link
+                  href={mainConfig.submissions.submitUrl}
+                  target="_blank"
+                  className="uppercase mx-auto font-bold px-4 py-2 hover:scale-[102%] bg-yellow text-black"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Performers Portal
+                </Link>
+              )}
           </nav>
         </div>
       )}

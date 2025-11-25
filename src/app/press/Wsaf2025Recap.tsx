@@ -20,7 +20,7 @@ export default function Wsaf2025Recap() {
             Not only did WSAF 2025 give 300+ students the opportunity to
             showcase their talents, but in a post-event survey, over 50% of
             respondents said that WSAF encouraged them to see something they
-            usually wouldn&apos;st see, with 30% of respondents not normally
+            usually wouldn&apos;t see, with 30% of respondents not normally
             attending live arts events or performances at all. Overall, we
             received an average rating of 9/10, with everyone saying they would
             be likely to recommend the festival to their friends and attend the
@@ -31,7 +31,7 @@ export default function Wsaf2025Recap() {
             Thank you to everyone who attended, took part in, or organised
             Warwick Student Arts Festival 2025. Our core goal is to celebrate
             student creativity at the University of Warwick, and we
-            couldn&apos;st have achieved that without the countless hours of
+            couldn&apos;t have achieved that without the countless hours of
             organisation, practise and teamwork going on in the months, weeks
             and days leading up to the festival.
           </p>

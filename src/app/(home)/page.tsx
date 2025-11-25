@@ -10,6 +10,10 @@ import YouTube from '@/app/(home)/components/youtube';
 import mainConfig from '@config/main-config';
 import homepageConfig from '@config/homepage-config';
 import eventsConfig from '@config/events-config';
+import RecapInstagramReels from '@/app/(home)/components/2025-recap/recap-instagram-reels';
+import RecapMessage from '@/app/(home)/components/2025-recap/recap-message';
+import HighlightCountdown from '@/app/(home)/components/highlight-countdown';
+import CallToAction from '@/app/(home)/components/call-to-action';
 
 // export const dynamic = 'force-dynamic';
 
@@ -17,8 +21,18 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      {mainConfig.feedback.homepage && <Feedback />}
+
+      <section className="mx-4 flex flex-col items-center">
+        {mainConfig.feedback.homepage && <Feedback />}
+        {homepageConfig.about.countdown.enabled && <HighlightCountdown />}
+        {homepageConfig.about.callToAction.enabled && <CallToAction />}
+      </section>
+
+      <RecapMessage />
+      <RecapInstagramReels />
+
       <About />
+
       {homepageConfig.eventPreview.enabled && eventsConfig.enabled && (
         <EventPreview />
       )}

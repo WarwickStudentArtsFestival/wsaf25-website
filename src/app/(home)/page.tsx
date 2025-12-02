@@ -10,10 +10,9 @@ import YouTube from '@/app/(home)/components/youtube';
 import mainConfig from '@config/main-config';
 import homepageConfig from '@config/homepage-config';
 import eventsConfig from '@config/events-config';
-import RecapInstagramReels from '@/app/(home)/components/2025-recap/recap-instagram-reels';
-import RecapMessage from '@/app/(home)/components/2025-recap/recap-message';
 import HighlightCountdown from '@/app/(home)/components/highlight-countdown';
 import CallToAction from '@/app/(home)/components/call-to-action';
+import Recap from '@/app/(home)/components/2025-recap/recap';
 
 // export const dynamic = 'force-dynamic';
 
@@ -28,8 +27,7 @@ export default function Home() {
         {homepageConfig.about.callToAction.enabled && <CallToAction />}
       </section>
 
-      <RecapMessage />
-      <RecapInstagramReels />
+      <Recap />
 
       <About />
 

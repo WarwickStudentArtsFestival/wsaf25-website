@@ -51,7 +51,7 @@ export default function About() {
 
   return (
     <section className="px-4 my-4 sm:my-8 sm:px-8">
-      <div className="mt-4">
+      <div>
         <HighlightedHeading text="What is WSAF?" />
       </div>
       <h2 className="text-teal text-xl pt-2 sm:text-2xl font-semibold">

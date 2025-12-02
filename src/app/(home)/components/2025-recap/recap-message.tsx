@@ -68,10 +68,10 @@ export default function RecapMessage() {
           30% of respondents not normally attending live arts events or
           performances at all
         </strong>
-        . Overall, we received an <strong>average rating of 9/10</strong>, with
+        . Overall, we received an <strong>average rating of 9/10</strong>, with{' '}
         <strong>
-          everyone saying they would be likely to recommend the festival to
-          their friends and attend the festival again
+          everyone saying they recommend the festival to their friends and
+          attend again
         </strong>
         .
       </p>
@@ -79,7 +79,7 @@ export default function RecapMessage() {
       <p className="mb-2">
         <strong>
           Thank you to everyone who attended, took part in, or organised Warwick
-          Student Arts Festival 2025. Our core goal is to celebrate student
+          Student Arts Festival 2025. Our goal was to celebrate student
           creativity at the University of Warwick, and we couldn&apos;t have
           achieved that without the countless hours of organisation, practise
           and teamwork going on in the months, weeks and days leading up to the

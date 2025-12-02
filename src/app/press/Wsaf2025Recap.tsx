@@ -23,13 +23,12 @@ export default function Wsaf2025Recap() {
             usually wouldn&apos;t see, with 30% of respondents not normally
             attending live arts events or performances at all. Overall, we
             received an average rating of 9/10, with everyone saying they would
-            be likely to recommend the festival to their friends and attend the
-            festival again.
+            be recommend the festival to their friends and attend again.
           </p>
 
           <p>
             Thank you to everyone who attended, took part in, or organised
-            Warwick Student Arts Festival 2025. Our core goal is to celebrate
+            Warwick Student Arts Festival 2025. Our goal was to celebrate
             student creativity at the University of Warwick, and we
             couldn&apos;t have achieved that without the countless hours of
             organisation, practise and teamwork going on in the months, weeks

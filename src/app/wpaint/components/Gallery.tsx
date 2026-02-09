@@ -1,29 +1,21 @@
 'use client';
 
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
-const Gallery: React.FC = () => {
-  const [imageFilenames, setImageFilenames] = useState<string[]>([]);
+const Gallery: React.FC<{ files: string[] }> = ({ files }) => {
   const [selected, setSelected] = useState<number | null>(null);
 
   const shuffleArray = (array: string[]) => {
-    for (let i = array.length - 1; i > 0; i--) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+      [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    return array;
+    return arr;
   };
 
-  useEffect(() => {
-    fetch('/api/gallery')
-      .then((res) => res.json())
-      .then((data) => {
-        const shuffledFiles = shuffleArray(data.files);
-        setImageFilenames(shuffledFiles);
-      })
-      .catch((err) => console.error('Failed to load images:', err));
-  }, []);
+  const imageFilenames = useMemo(() => shuffleArray(files), [files]);
 
   return (
     <>
@@ -65,6 +57,6 @@ const Gallery: React.FC = () => {
       )}
     </>
   );
-};
+};;
 
 export default Gallery;

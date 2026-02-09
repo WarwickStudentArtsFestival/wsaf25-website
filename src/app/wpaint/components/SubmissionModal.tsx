@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { FiSend } from 'react-icons/fi';
-import ActionButton from './ActionButton';
-import { sendToDiscord } from '../lib/sendToDiscord';
 
 interface SubmissionModalProps {
   caption: string;
@@ -20,16 +17,7 @@ const SubmissionModal: React.FC<SubmissionModalProps> = ({
   const [showModal, setShowModal] = useState(false);
   const [previewDataUrl, setPreviewDataUrl] = useState<string | null>(null);
 
-  const handleSendClick = () => {
-    const canvas = document.querySelector('canvas') as HTMLCanvasElement;
-    if (canvas) {
-      setPreviewDataUrl(canvas.toDataURL('image/png'));
-    }
-    setShowModal(true);
-  };
-
   const handleConfirm = () => {
-    sendToDiscord(caption, author);
     setShowModal(false);
   };
 

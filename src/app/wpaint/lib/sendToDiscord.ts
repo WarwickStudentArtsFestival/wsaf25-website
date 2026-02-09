@@ -10,19 +10,10 @@ export const sendToDiscord = async (
 
   const sendingToast = toast.loading('Sending to WSAF...');
   try {
-    const response = await fetch('/api/sendToDiscord', {
-      method: 'POST',
-      body: formData,
+    // API endpoint removed - no backend available
+    toast.error('Discord submission unavailable', {
+      id: sendingToast,
     });
-
-    const result = await response.json();
-    if (!response.ok) {
-      toast.error(result.error || 'Failed to send image', {
-        id: sendingToast,
-      });
-    } else {
-      toast.success('Image sent to WSAF!', { id: sendingToast });
-    }
   } catch (err) {
     toast.error('Error sending image', { id: sendingToast });
     console.error(err);

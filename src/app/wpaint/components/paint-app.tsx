@@ -38,7 +38,7 @@ const loadCanvasState = () => {
   }
 };
 
-const PaintApp = () => {
+const PaintApp = ({ galleryFiles }: { galleryFiles: string[] }) => {
   const [brushSettings, setBrushSettings] = useState({
     color: '#4f1d75',
     size: 40,
@@ -239,7 +239,7 @@ const PaintApp = () => {
         />
       </div>
       <h1 className="text-teal text-2xl font-semibold mb-2 mt-4">W-Gallery</h1>
-      <Gallery />
+      <Gallery files={galleryFiles} />
     </>
   );
 };

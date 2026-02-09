@@ -116,6 +116,7 @@ export default function EventSessionsList({
       {selectedFilters.selectedEvent && (
         <EventPopup
           selectedEventSlug={selectedFilters.selectedEvent}
+          eventSessions={eventSessions}
           onClose={() => setFilter({ selectedEvent: undefined })}
         />
       )}

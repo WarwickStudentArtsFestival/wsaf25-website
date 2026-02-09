@@ -2,6 +2,9 @@
 
 > This is the public website for the Warwick Student Arts Festival, written in [Next.js](https://nextjs.org/).
 
+**NOTE: This website has now been archived. The main and production branches will both push to 2025.wsaf.org.uk on GitHub
+Pages.**
+
 Development site: [https://wsaf25-dev.containers.uwcs.co.uk/](https://wsaf25-dev.containers.uwcs.co.uk/)
 
 Production site: [https://wsaf.org.uk/](https://wsaf.org.uk/)

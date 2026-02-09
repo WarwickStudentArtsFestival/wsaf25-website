@@ -1,4 +1,5 @@
 import { cache } from 'react';
+import { fetchArchiveJson } from '@/lib/archive';
 
 export type PretalxScheduleRoom = {
   name: string;
@@ -103,7 +104,5 @@ export const pretalxApiRequest = (path: string): Promise<Response> => {
 };
 
 export const fetchPretalxSchedule = (): Promise<PretalxScheduleJson> => {
-  return pretalxHttpRequest<PretalxScheduleJson>(
-    `${process.env.PRETALX_EVENT_SLUG}/p/broadcast-tools/wsaf_schedule.json`,
-  );
+  return fetchArchiveJson('pretalx-fetchPretalxSchedule');
 };

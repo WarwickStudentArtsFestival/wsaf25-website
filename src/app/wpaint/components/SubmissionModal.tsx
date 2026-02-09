@@ -35,12 +35,6 @@ const SubmissionModal: React.FC<SubmissionModalProps> = ({
 
   return (
     <>
-      <ActionButton
-        icon={FiSend}
-        text="Send to WSAF"
-        bgColor="bg-[#7289da]"
-        onClick={handleSendClick}
-      />
 
       {showModal && (
         <div className="fixed inset-0 bg-[#087f8c]/80 z-50 flex justify-center items-center p-2">

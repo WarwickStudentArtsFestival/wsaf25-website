@@ -15,6 +15,7 @@ const SubmissionModal: React.FC<SubmissionModalProps> = ({
   setAuthor,
 }) => {
   const [showModal, setShowModal] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [previewDataUrl, setPreviewDataUrl] = useState<string | null>(null);
 
   const handleConfirm = () => {

@@ -18,9 +18,18 @@ async function getRedirects() {
 }
 
 export async function generateStaticParams() {
-  const redirects = await getRedirects();
+  try {
+    const redirects = await getRedirects();
 
-  return redirects.map(({ path }) => ({ slug: path.split('/') }));
+    return redirects.map(({ path }) => {
+      // Filter out empty strings from split (in case of leading/trailing slashes)
+      const slugParts = path.split('/').filter(Boolean);
+      return { slug: slugParts };
+    });
+  } catch (error) {
+    console.error('Error generating static params for redirects:', error);
+    return [];
+  }
 }
 
 export default async function Redirect(props: {

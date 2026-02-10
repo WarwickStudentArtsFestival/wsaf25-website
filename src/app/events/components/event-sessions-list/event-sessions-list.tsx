@@ -41,7 +41,6 @@ export default function EventSessionsList({
     context.venues,
     isEventSessionInFilter,
     sortAndGroupEventSessions,
-    randomOrderSeed,
   ]);
 
   const [showMobileSidebar, setShowMobileSidebar] = useState(false);

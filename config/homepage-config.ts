@@ -18,6 +18,11 @@ const homepageConfig: HomepageConfig = {
       enabled: true,
       type: 'discord',
     },
+
+    redirect2026: {
+      enabled: true,
+      type: 'wsaf2026',
+    },
   },
 
   eventPreview: {

@@ -12,6 +12,7 @@ import homepageConfig from '@config/homepage-config';
 import eventsConfig from '@config/events-config';
 import HighlightCountdown from '@/app/(home)/components/highlight-countdown';
 import CallToAction from '@/app/(home)/components/call-to-action';
+import Redirect2026 from '@/app/(home)/components/2026-redirect';
 import Recap from '@/app/(home)/components/2025-recap/recap';
 
 // export const dynamic = 'force-dynamic';
@@ -25,6 +26,7 @@ export default function Home() {
         {mainConfig.feedback.homepage && <Feedback />}
         {homepageConfig.about.countdown.enabled && <HighlightCountdown />}
         {homepageConfig.about.callToAction.enabled && <CallToAction />}
+        {homepageConfig.about.redirect2026.enabled && <Redirect2026 />}
       </section>
 
       <Recap />

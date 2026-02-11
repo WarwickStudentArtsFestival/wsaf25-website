@@ -18,6 +18,11 @@ export type HomepageConfig = {
       enabled: boolean;
       type: 'discord';
     };
+
+    redirect2026: {
+      enabled: boolean;
+      type: 'wsaf2026';
+    };
   };
 
   eventPreview: {

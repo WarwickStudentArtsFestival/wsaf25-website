@@ -10,14 +10,35 @@ function getArchiveFileName<P>(name: string, params: P[]): string {
 }
 
 async function readArchiveFile<T>(fileName: string): Promise<T> {
-  const url = new URL(`/data/${fileName}`, ARCHIVE_BASE_URL);
-  const response = await fetch(url.toString(), { cache: 'no-store' });
+  // Try URL-based fetch first
+  if (ARCHIVE_BASE_URL) {
+    try {
+      const url = new URL(`/data/${fileName}`, ARCHIVE_BASE_URL);
+      const response = await fetch(url.toString(), { cache: 'no-store' });
 
-  if (!response.ok) {
-    throw new Error(`archive_missing:${url.toString()}`);
+      if (response.ok) {
+        return (await response.json()) as T;
+      }
+    } catch {
+      // Fall through to filesystem read
+    }
   }
 
-  return (await response.json()) as T;
+  // Fallback: read from filesystem (for static builds)
+  if (typeof window === 'undefined') {
+    try {
+      const { readFile } = await import('fs/promises');
+      const { join } = await import('path');
+      const filePath = join(process.cwd(), 'public', 'data', fileName);
+      const fileContent = await readFile(filePath, 'utf-8');
+      return JSON.parse(fileContent) as T;
+    } catch {
+      // If filesystem read also fails, throw error
+      throw new Error(`archive_missing:${fileName} - Failed to read from both URL and filesystem`);
+    }
+  }
+
+  throw new Error(`archive_missing:${fileName} - No ARCHIVE_BASE_URL set and not in Node.js environment`);
 }
 
 export async function fetchArchiveJson<T, P>(

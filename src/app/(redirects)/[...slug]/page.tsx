@@ -1,25 +1,81 @@
-import nextConfig from '../../../../next.config';
 import { notFound } from 'next/navigation';
 import PageHeader from '@/app/components/page-header';
 import HighlightedHeading from '@/app/components/highlighted-heading';
 import React from 'react';
+import mainConfig from '@config/main-config';
+import qrRedirectsConfig from '@config/qr-redirects-config';
 
 export const dynamicParams = false;
 export const dynamic = 'force-static';
 
-async function getRedirects() {
-  if (!nextConfig.redirects) return [];
-  const redirects = await nextConfig.redirects();
+function getRedirects() {
+  // Build redirects from config directly to ensure static analysis during export
+  const baseRedirects = [
+    {
+      source: '/instagram',
+      destination: `https://www.instagram.com/${mainConfig.socials.instagram}/`,
+    },
+    {
+      source: '/discord',
+      destination: mainConfig.socials.discordInvite,
+    },
+    {
+      source: '/youtube',
+      destination: `https://www.youtube.com/@${mainConfig.socials.youtubeHandle}`,
+    },
+    {
+      source: '/stream',
+      destination: `https://www.youtube.com/@${mainConfig.socials.youtubeHandle}`,
+    },
+    {
+      source: '/feedback',
+      destination: mainConfig.feedback.url,
+    },
+    {
+      source: '/volunteer',
+      destination: mainConfig.crew.signupUrl,
+    },
+    {
+      source: '/schedule',
+      destination: '/events?timeline=',
+    },
+    {
+      source: '/submit',
+      destination: mainConfig.submissions.submitUrl,
+    },
+    {
+      source: '/performers-portal',
+      destination: mainConfig.submissions.submitUrl,
+    },
+  ];
 
-  return redirects.map(({ source, destination }) => ({
+  const qrRedirects = qrRedirectsConfig.redirects.map((redirect) => {
+    const destination = new URL(redirect.destination);
+    if (redirect.campaign) {
+      destination.searchParams.set('utm_campaign', redirect.campaign);
+    }
+    if (redirect.medium) {
+      destination.searchParams.set('utm_medium', redirect.medium);
+    }
+    if (redirect.source) {
+      destination.searchParams.set('utm_source', redirect.source);
+    }
+
+    return {
+      source: redirect.shortlink,
+      destination: destination.toString(),
+    };
+  });
+
+  return [...baseRedirects, ...qrRedirects].map(({ source, destination }) => ({
     path: source.slice(1),
     destination,
   }));
 }
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   try {
-    const redirects = await getRedirects();
+    const redirects = getRedirects();
 
     return redirects.map(({ path }) => {
       // Filter out empty strings from split (in case of leading/trailing slashes)

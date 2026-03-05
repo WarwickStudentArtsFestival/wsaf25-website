@@ -66,7 +66,7 @@ export default function FinalYearsSection() {
             2015
           </a>{' '}
           are the last festivals we can find. Although we are unable to find
-          much information about these or WSAF stopped, WSAF 2014 started using
+          much information about these or why WSAF stopped, WSAF 2014 started using
           a{' '}
           <a
             href="https://www.facebook.com/warwickstudentartsfest/"

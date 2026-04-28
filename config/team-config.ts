@@ -17,6 +17,7 @@ import MattAdcock from '@/assets/team/matt-adcock.jpg';
 import MaximusKaiusLeighton from '@/assets/team/maximus-kaius-leighton.jpg';
 import KitCalvert from '@/assets/team/kit-calvert.jpg';
 import JoelCoulon from '@/assets/team/joel-coulon.jpg';
+import JonathanOrd from '@/assets/team/jonathan-ord.jpg';
 import GeorgeParrett from '@/assets/team/george-parrett.jpg';
 import RowanMcAlpine from '@/assets/team/rowan-mcalpine.jpg';
 import AliceRobson from '@/assets/team/alice-robson.jpg';
@@ -291,6 +292,13 @@ const teamConfig: TeamConfig = {
       year: '2nd Year',
       course: 'English Literature and Creative Writing',
       image: NaomiPandey,
+    },
+
+    { name: 'Jonathan Ord', 
+      roles: ['Stream', 'Tech'], 
+      course: 'Computer Science', 
+      year: '2nd Year', 
+      image: JonathanOrd 
     },
   ],
 };
